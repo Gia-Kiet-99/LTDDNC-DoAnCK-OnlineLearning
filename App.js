@@ -4,7 +4,6 @@ import {
     View,
     StatusBar
 } from 'react-native';
-import Register from "./src/components/Authentication/Register/register";
 import Login from "./src/components/Authentication/Login/login";
 
 export default function App() {
