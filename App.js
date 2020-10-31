@@ -1,9 +1,7 @@
 import React from 'react';
 import {
     StyleSheet,
-    Text,
     View,
-    SafeAreaView,
     StatusBar
 } from 'react-native';
 import Register from "./src/components/Authentication/Register/register";
