@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         height: 25,
     },
     listSection: {
-        backgroundColor: '#eee'
+        backgroundColor: '#f5f5f5'
     },
 })
 

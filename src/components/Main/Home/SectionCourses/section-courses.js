@@ -32,7 +32,7 @@ const SectionCourses = (props) => {
     ]
 
     const renderListItem = (courses) => {
-         return courses.map(item => <SectionCoursesItem item={item}/>)
+         return courses.map(item => <SectionCoursesItem key={item.id} item={item}/>)
     }
 
     return (
