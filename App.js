@@ -1,21 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    SafeAreaView,
+    StatusBar
+} from 'react-native';
+import Register from "./src/components/Authentication/Register/register";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <StatusBar backgroundColor="white" barStyle="dark-content" translucent={true}/>
+      <Register/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+    },
+
+    title: {
+        textAlign: 'center',
+        marginVertical: 8,
+        // backgroundColor: 'beige'
+    },
+    fixToText: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    separator: {
+        marginVertical: 8,
+        borderBottomColor: '#737373',
+        borderBottomWidth: StyleSheet.hairlineWidth,
+    }
 });
+
+
+
