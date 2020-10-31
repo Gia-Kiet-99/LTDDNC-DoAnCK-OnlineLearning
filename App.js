@@ -1,18 +1,17 @@
 import React from 'react';
 import {
     StyleSheet,
-    Text,
     View,
-    SafeAreaView,
     StatusBar
 } from 'react-native';
 import Register from "./src/components/Authentication/Register/register";
+import Login from "./src/components/Authentication/Login/login";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" translucent={true}/>
-      <Register/>
+      <StatusBar backgroundColor="white" barStyle="dark-content" translucent={false}/>
+      <Login/>
     </View>
   );
 }
