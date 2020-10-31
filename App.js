@@ -6,12 +6,13 @@ import {
 } from 'react-native';
 import Register from "./src/components/Authentication/Register/register";
 import Login from "./src/components/Authentication/Login/login";
+import Home from "./src/components/Main/Home/home";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" translucent={false}/>
-      <Login/>
+      <Home/>
     </View>
   );
 }
@@ -19,17 +20,9 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // backgroundColor: '#333'
     },
 
-    title: {
-        textAlign: 'center',
-        marginVertical: 8,
-        // backgroundColor: 'beige'
-    },
-    fixToText: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
     separator: {
         marginVertical: 8,
         borderBottomColor: '#737373',
