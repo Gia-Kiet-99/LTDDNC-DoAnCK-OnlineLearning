@@ -12,7 +12,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" translucent={false}/>
-      <Home/>
+      <Login/>
     </View>
   );
 }
