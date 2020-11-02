@@ -7,8 +7,8 @@ const textStyles = StyleSheet.create({
         fontWeight: 'bold'
     },
     labelText: {
-        fontSize: 16,
-        color: '#4884be',
+        fontSize: 14,
+        color: '#3d719f',
 
     }
 })
