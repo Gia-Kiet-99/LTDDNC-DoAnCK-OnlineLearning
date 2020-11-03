@@ -10,12 +10,14 @@ import Home from "./src/components/Main/Home/home";
 import Browse from "./src/components/Main/Browse/browse";
 import ForgetPassword from "./src/components/Authentication/ForgetPassword/forget-password";
 import VerifyPassword from "./src/components/Authentication/VerifyPassword/verify-password";
+import Profile from "./src/components/AccountManagement/Profile/profile";
+import Setting from "./src/components/AccountManagement/Setting/setting";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" translucent={false}/>
-      <Home/>
+      <StatusBar backgroundColor="white" barStyle="dark-content"/>
+      <Setting/>
     </View>
   );
 }
@@ -23,7 +25,6 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: '#333'
     },
 
     separator: {

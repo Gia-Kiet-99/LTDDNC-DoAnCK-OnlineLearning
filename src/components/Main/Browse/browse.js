@@ -2,7 +2,7 @@ import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import ImageButton from "../../Common/image-button";
 import Session from "../../Common/session";
-import ActionBar from "../../Common/ActionBar";
+import ActionBar from "../../Common/action-bar";
 
 const titles = [
     {

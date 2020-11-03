@@ -1,9 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, Image, Text, View, ScrollView, StyleSheet} from 'react-native';
-import SectionCourses from "./SectionCourses/section-courses";
+import {Image, View, ScrollView, StyleSheet} from 'react-native';
 import Session from "../../Common/session";
-import ActionBar from "../../Common/ActionBar";
-import {ImageBackground} from "react-native-web";
+import ActionBar from "../../Common/action-bar";
 
 const channels = [
     {
@@ -64,7 +62,6 @@ const courses = [
 ]
 
 const Home = () => {
-    let channelSession = 1;
     return (
         <View style={styles.container}>
             <ActionBar title='Home'/>
