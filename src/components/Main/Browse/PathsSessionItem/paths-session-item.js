@@ -29,8 +29,8 @@ const PathsSessionItem = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 20,
-        paddingLeft: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
         // backgroundColor: "lightblue"
     },
     item: {
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
-        elevation: 10,
+        elevation: 5,
     },
     description: {
         flex: 1,

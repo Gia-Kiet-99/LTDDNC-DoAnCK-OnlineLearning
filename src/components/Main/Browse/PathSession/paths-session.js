@@ -1,12 +1,11 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View, Text, ScrollView} from 'react-native';
-import SectionCoursesItem from "../../Home/SectionCoursesItem/section-courses-item";
 import PathsSessionItem from "../PathsSessionItem/paths-session-item";
 
 const PathsSession = (props) => {
 
     const renderListItem = (courses) => {
-        return courses.map((item) => <PathsSessionItem item={item}/>)
+        return courses.map((item) => <PathsSessionItem key={item.id} item={item}/>)
     }
 
     return (

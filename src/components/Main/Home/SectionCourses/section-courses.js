@@ -32,6 +32,7 @@ const SectionCourses = (props) => {
     ]
 
     const renderListItem = (courses) => {
+        if(props.title === '')
         return courses.map(item => <SectionCoursesItem key={item.id} item={item}/>)
     }
 

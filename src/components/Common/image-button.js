@@ -14,7 +14,9 @@ const ImageButton = (props) => {
 const styles = StyleSheet.create({
     button: {
         height: 100,
-
+        // marginHorizontal: 5,
+        marginTop: 5,
+        overflow: 'hidden'
     },
     touch: {
         flex: 1,
