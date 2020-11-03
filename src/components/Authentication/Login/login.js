@@ -1,12 +1,15 @@
 import React from 'react';
-import {Text, View, TextInput, StyleSheet, TouchableHighlight} from 'react-native';
-import buttonStyles from "../../../global/button-styles";
-import textStyles from "../../../global/text-styles";
-import textInputStyles from "../../../global/text-input-styles";
+import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import buttonStyles from "../styles/button-styles";
+import textStyles from "../styles/text-styles";
+import textInputStyles from "../styles/text-input-styles";
 
 const Login = () => {
     return (
         <View style={styles.container}>
+            <View style={styles.imageWrapper}>
+                <Image style={styles.image} source={require('../../../../assets/Pluralsight.png')}/>
+            </View>
             <View style={{marginBottom: 10}}>
                 <Text style={textStyles.labelText}>Username (or email)</Text>
                 <TextInput  selectionColor={'#888'} style={textInputStyles.textInput}/>
@@ -17,21 +20,21 @@ const Login = () => {
                 <TextInput selectionColor={'#888'} style={textInputStyles.textInput} secure={true} secureTextEntry={true}/>
             </View>
 
-            <TouchableHighlight activeOpacity={0.5} style={[buttonStyles.button, buttonStyles.loginButton]}>
+            <TouchableOpacity activeOpacity={0.5} style={[buttonStyles.button, buttonStyles.loginButton]}>
                 <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
-            <TouchableHighlight>
+            <TouchableOpacity>
                 <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
-            <TouchableHighlight style={[buttonStyles.button, buttonStyles.transparentButton]}>
+            <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
                 <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
 
-            <TouchableHighlight style={[buttonStyles.button, buttonStyles.transparentButton]}>
+            <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
                 <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
-            </TouchableHighlight>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -42,7 +45,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: "5%",
     },
-
+    imageWrapper: {
+        alignItems: 'center',
+    },
+    image: {
+        height: 150,
+        width: 250,
+    },
 
 })
 

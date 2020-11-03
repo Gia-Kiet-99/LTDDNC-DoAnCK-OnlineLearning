@@ -1,30 +1,80 @@
 import React from 'react';
 import {TouchableOpacity, Image, Text, View, ScrollView, StyleSheet} from 'react-native';
 import SectionCourses from "./SectionCourses/section-courses";
+import Session from "../../Common/session";
+import ActionBar from "../../Common/ActionBar";
+import {ImageBackground} from "react-native-web";
 
-const Bar = () => {
-    return (
-        <View style={styles.bar}>
-            <TouchableOpacity style={styles.imageWrapper}>
-                <Image style={styles.settingIcon} source={require('../../../../assets/setting2.png')}/>
-            </TouchableOpacity>
-            <Text style={styles.textBar}>Home</Text>
-            <TouchableOpacity style={styles.imageWrapper}>
-                <Image style={styles.settingIcon} source={require('../../../../assets/avatar.jpg')}/>
-            </TouchableOpacity>
-        </View>
-    );
-}
+const channels = [
+    {
+        id: 1,
+        image: require('../../../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+    {
+        id: 2,
+        image: require('../../../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+    {
+        id: 3,
+        image: require('../../../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+    {
+        id: 4,
+        image: require('../../../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+]
+
+const courses = [
+    {
+        id: 1,
+        title: 'Leadership for Non-managers',
+        author: 'Gia Kiet',
+        level: 'Advance',
+        released: 'May 2020',
+        duration: '30 h'
+    },
+    {
+        id: 2,
+        title: 'iOS',
+        author: 'Gia Kiet',
+        level: 'Beginner',
+        released: 'Aug 2020',
+        duration: '25 h'
+    },
+    {
+        id: 3,
+        title: 'Android',
+        author: 'Gia Kiet',
+        level: 'Immediate',
+        released: 'Jan 2019',
+        duration: '28 h'
+    }
+]
 
 const Home = () => {
+    let channelSession = 1;
     return (
         <View style={styles.container}>
-            <Bar/>
+            <ActionBar title='Home'/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.listSection}>
-                <SectionCourses title='Continue learning'/>
-                <SectionCourses title='Path'/>
-                <SectionCourses title='Channel'/>
-                <SectionCourses title='Bookmarks'/>
+                <View style={styles.imageWrapper}>
+                    <Image style={styles.image} source={require('../../../../assets/ROG_G14.jpg')}/>
+                </View>
+                <Session kind={'channel-session'} title={'Channels'} list={channels} showSeeAllButton={true}/>
+                <Session kind={'course-session'} title={'Course list'} list={courses} showSeeAllButton={true}/>
+                <Session kind={'channel-session'} title={'My Channels'} list={channels} showSeeAllButton={true}/>
             </ScrollView>
         </View>
     );
@@ -32,7 +82,7 @@ const Home = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     bar: {
         padding: 15,
@@ -48,7 +98,11 @@ const styles = StyleSheet.create({
         color: '#333'
     },
     imageWrapper: {
-
+        height: 200,
+    },
+    image: {
+        height: '100%',
+        width: '100%',
     },
     settingIcon: {
         width: 25,

@@ -7,10 +7,23 @@ const Separator = () => {
     )
 }
 
+const Rating = () => {
+    return (
+        <View style={{flex: 1, flexDirection: 'row',paddingVertical: 5}}>
+            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
+            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
+            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
+            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
+            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
+        </View>
+    )
+
+}
+
 const SectionCoursesItem = (props) => {
     return (
         <TouchableOpacity style={styles.container}>
-            <View style={styles.item}>
+            <View style={styles.content}>
                 <Image style={styles.image} source={require('../../../../../assets/image.jpg')}/>
                 <Separator/>
                 <View style={styles.description}>
@@ -25,7 +38,14 @@ const SectionCoursesItem = (props) => {
                     <Text style={styles.darkText}>
                         {`${props.item.level} . ${props.item.released} . ${props.item.duration}`}
                     </Text>
+                    <View style={styles.rating}>
+                        <Rating/>
+                    </View>
                 </View>
+
+
+
+
             </View>
         </TouchableOpacity>
     );
@@ -33,11 +53,11 @@ const SectionCoursesItem = (props) => {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: 20,
-        paddingLeft: 15,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
         // backgroundColor: "lightblue"
     },
-    item: {
+    content: {
         width: 200,
         height: 200,
         borderRadius: 5,
@@ -51,7 +71,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
-        elevation: 10,
+        elevation: 5,
     },
     description: {
         flex: 1,

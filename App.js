@@ -8,12 +8,14 @@ import Register from "./src/components/Authentication/Register/register";
 import Login from "./src/components/Authentication/Login/login";
 import Home from "./src/components/Main/Home/home";
 import Browse from "./src/components/Main/Browse/browse";
+import ForgetPassword from "./src/components/Authentication/ForgetPassword/forget-password";
+import VerifyPassword from "./src/components/Authentication/VerifyPassword/verify-password";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content" translucent={false}/>
-      <Browse/>
+      <Home/>
     </View>
   );
 }

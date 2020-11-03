@@ -3,6 +3,7 @@ import {StyleSheet, ScrollView, View, Text, TouchableOpacity} from 'react-native
 import PathsSessionItem from "../Main/Browse/PathsSessionItem/paths-session-item";
 import SectionCoursesItem from "../Main/Home/SectionCoursesItem/section-courses-item";
 import AuthorSessionItem from "../Main/Browse/AuthorSessionItem/author-session-item";
+import ChannelSessionItem from "../Main/Home/channel-session-item";
 
 const SessionList = (props) => {
 
@@ -18,6 +19,8 @@ const SessionList = (props) => {
                 return list.map(item => <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>{item.skill}</Text>
                 </TouchableOpacity>)
+            case 'channel-session':
+                return list.map(item => <ChannelSessionItem key={item.id} item={item}/>)
         }
     }
 

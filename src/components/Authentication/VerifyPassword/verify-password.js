@@ -1,25 +1,25 @@
-import React from 'react'
-import {TouchableOpacity, Image, Text, View, StyleSheet} from "react-native"
+import React from 'react';
+import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import textInputStyles from "../../../global/text-input-styles";
 
-const Register = () => {
+const VerifyPassword = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={require('../../../../assets/Pluralsight.png')}/>
             </View>
+            <View>
+                <TextInput secureTextEntry={true} placeholder='New password' selectionColor={'#888'} style={textInputStyles.textInput}/>
+            </View>
+            <View>
+                <TextInput secureTextEntry={true} placeholder='Confirm new password' selectionColor={'#888'} style={textInputStyles.textInput}/>
+            </View>
             <TouchableOpacity style={[styles.button,styles.loginButton]}>
-                <Text style={styles.buttonText}>Sign in</Text>
+                <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.transparentButton]}>
-                <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Subscribe to Pluralsight</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.transparentButton]}>
-                <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Explore without a subscription</Text>
-            </TouchableOpacity>
-
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Register;
+export default VerifyPassword;
