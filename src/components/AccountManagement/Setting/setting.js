@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TouchableHighlight, Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
+import {Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
 
 const AccountInfo = () => {
     return (
@@ -118,6 +118,14 @@ const Options = () => {
                 </View>
             </Pressable>
 
+
+        </View>
+    )
+}
+
+const Detail = () => {
+    return (
+        <View>
             <TouchableOpacity style={styles.button}>
                 <Text style={styles.buttonText}>Captions</Text>
             </TouchableOpacity>
@@ -140,13 +148,13 @@ const Options = () => {
     )
 }
 
-const Setting = (props) => {
+const Setting = () => {
     return (
         <View>
             <ScrollView>
                 <AccountInfo/>
                 <Options/>
-                {/*<Bottom/>*/}
+                <Detail/>
             </ScrollView>
         </View>
     );
@@ -181,7 +189,6 @@ const styles = StyleSheet.create({
     signOutButton: {
         padding: 10,
         borderRadius: 5,
-        // backgroundColor: '#2e97ff',
         marginVertical: 20,
         marginHorizontal: 10,
         borderWidth: 1,

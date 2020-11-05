@@ -1,23 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, View, StyleSheet} from 'react-native';
+import Rating from "../../../Common/rating";
 
 const Separator = () => {
     return (
         <View style={{borderBottomColor: 'pink', borderBottomWidth: 3}} />
     )
-}
-
-const Rating = () => {
-    return (
-        <View style={{flex: 1, flexDirection: 'row',paddingVertical: 5}}>
-            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
-            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
-            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
-            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
-            <Image style={{height:10,width:10,marginRight:2}} source={require('../../../../../assets/rating-full.png')}/>
-        </View>
-    )
-
 }
 
 const SectionCoursesItem = (props) => {
@@ -38,7 +26,7 @@ const SectionCoursesItem = (props) => {
                     <Text style={styles.darkText}>
                         {`${props.item.level} . ${props.item.released} . ${props.item.duration}`}
                     </Text>
-                    <View style={styles.rating}>
+                    <View>
                         <Rating/>
                     </View>
                 </View>
@@ -82,11 +70,9 @@ const styles = StyleSheet.create({
         height: 100,
         width: '100%'
     },
-
     text: {
         fontSize: 14
     },
-
     darkText: {
         fontSize: 12,
         color: 'gray'
