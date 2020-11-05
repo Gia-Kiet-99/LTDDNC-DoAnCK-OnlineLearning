@@ -5,11 +5,11 @@ const ActionBar = (props) => {
     return (
         <View style={styles.bar}>
             <TouchableOpacity style={styles.imageWrapper}>
-                <Image style={styles.settingIcon} source={require('../../../assets/setting2.png')}/>
+                <Image style={styles.settingIcon} source={require('../../../assets/setting.png')}/>
             </TouchableOpacity>
             <Text style={styles.textBar}>{props.title}</Text>
             <TouchableOpacity style={styles.imageWrapper}>
-                <Image style={styles.settingIcon} source={require('../../../assets/avatar.jpg')}/>
+                <Image style={styles.icon} source={require('../../../assets/user-blue.png')}/>
             </TouchableOpacity>
         </View>
     );
@@ -32,10 +32,14 @@ const styles = StyleSheet.create({
     imageWrapper: {
 
     },
-    settingIcon: {
-        width: 25,
-        height: 25,
+    icon: {
+        width: 30,
+        height: 30,
     },
+    settingIcon: {
+        height: 24,
+        width: 24,
+    }
 })
 
 export default ActionBar;

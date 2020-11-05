@@ -6,7 +6,7 @@ import ActionBar from "../../Common/action-bar";
 const Download = (props) => {
     return (
         <View style={styles.container}>
-            <ActionBar title='Download'/>
+            <ActionBar title='Downloads'/>
             <View style={styles.content}>
                 <View style={styles.overView}>
                     <Text style={styles.text}>9 courses (123 MB)</Text>
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     content: {
+        flex: 1,
         padding: 15,
     },
     overView: {

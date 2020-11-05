@@ -1,5 +1,6 @@
 import React from 'react';
-import {FlatList,ScrollView, SafeAreaView} from 'react-native';
+import {StyleSheet, FlatList, SafeAreaView} from 'react-native';
+import DownloadListItem from "../ListCourseItem/download-list-item";
 import CourseListItem from "../ListCourseItem/course-list-item";
 
 const courses = [
@@ -117,11 +118,10 @@ const CourseList = (props) => {
 
 };
 
-import {StyleSheet} from 'react-native'
-import DownloadListItem from "../ListCourseItem/download-list-item";
+
 const styles = StyleSheet.create({
     container: {
-
+        // flex: 1
     }
 })
 
