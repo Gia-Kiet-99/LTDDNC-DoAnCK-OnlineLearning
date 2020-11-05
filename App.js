@@ -12,13 +12,14 @@ import ForgetPassword from "./src/components/Authentication/ForgetPassword/forge
 import VerifyPassword from "./src/components/Authentication/VerifyPassword/verify-password";
 import Profile from "./src/components/AccountManagement/Profile/profile";
 import Setting from "./src/components/AccountManagement/Setting/setting";
-import CourseList from "./src/components/Common/course-list";
+import CourseList from "./src/components/Courses/ListCourses/course-list";
+import Download from "./src/components/Main/Download/download";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="white" barStyle="dark-content"/>
-      <CourseList/>
+      <Download/>
     </View>
   );
 }

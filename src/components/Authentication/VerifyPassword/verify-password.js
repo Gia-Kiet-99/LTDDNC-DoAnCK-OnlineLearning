@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import textInputStyles from "../../../global/text-input-styles";
+import textInputStyles from "../styles/text-input-styles";
 
 const VerifyPassword = (props) => {
     return (

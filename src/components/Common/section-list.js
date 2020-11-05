@@ -1,26 +1,26 @@
 import React from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity} from 'react-native';
-import PathsSessionItem from "../Main/Browse/PathsSessionItem/paths-session-item";
+import PathsSectionItem from "../Main/Browse/PathsSectionItem/paths-section-item";
 import SectionCoursesItem from "../Main/Home/SectionCoursesItem/section-courses-item";
-import AuthorSessionItem from "../Main/Browse/AuthorSessionItem/author-session-item";
-import ChannelSessionItem from "../Main/Home/channel-session-item";
+import AuthorSectionItem from "../Main/Browse/AuthorSectionItem/author-section-item";
+import ChannelSectionItem from "../Main/Home/ChannelSectionItem/channel-section-item";
 
-const SessionList = (props) => {
+const SectionList = (props) => {
 
     const renderListItem = (list) => {
         switch (props.kind) {
             case 'path-session':
-                return list.map(item => <PathsSessionItem key={item.id} item={item}/>);
+                return list.map(item => <PathsSectionItem key={item.id} item={item}/>);
             case 'course-session':
                 return list.map(item => <SectionCoursesItem key={item.id} item={item}/>);
             case 'author-session':
-                return list.map(item => <AuthorSessionItem key={item.id} item={item}/>);
+                return list.map(item => <AuthorSectionItem key={item.id} item={item}/>);
             case 'popular-skill':
                 return list.map(item => <TouchableOpacity style={styles.button}>
                     <Text style={styles.buttonText}>{item.skill}</Text>
                 </TouchableOpacity>)
             case 'channel-session':
-                return list.map(item => <ChannelSessionItem key={item.id} item={item}/>)
+                return list.map(item => <ChannelSectionItem key={item.id} item={item}/>)
         }
     }
 
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SessionList;
+export default SectionList;

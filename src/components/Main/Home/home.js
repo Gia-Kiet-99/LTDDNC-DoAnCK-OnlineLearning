@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, View, ScrollView, StyleSheet} from 'react-native';
-import Session from "../../Common/session";
+import Section from "../../Common/section";
 import ActionBar from "../../Common/action-bar";
 
 const channels = [
@@ -69,9 +69,9 @@ const Home = () => {
                 <View style={styles.imageWrapper}>
                     <Image style={styles.image} source={require('../../../../assets/ROG_G14.jpg')}/>
                 </View>
-                <Session kind={'channel-session'} title={'Channels'} list={channels} showSeeAllButton={true}/>
-                <Session kind={'course-session'} title={'Course list'} list={courses} showSeeAllButton={true}/>
-                <Session kind={'channel-session'} title={'My Channels'} list={channels} showSeeAllButton={true}/>
+                <Section kind={'channel-session'} title={'Channels'} list={channels} showSeeAllButton={true}/>
+                <Section kind={'course-session'} title={'Course list'} list={courses} showSeeAllButton={true}/>
+                <Section kind={'channel-session'} title={'My Channels'} list={channels} showSeeAllButton={true}/>
             </ScrollView>
         </View>
     );

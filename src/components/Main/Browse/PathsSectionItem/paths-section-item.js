@@ -7,7 +7,7 @@ const Separator = () => {
     )
 }
 
-const PathsSessionItem = (props) => {
+const PathsSectionItem = (props) => {
     return (
         <TouchableOpacity style={styles.container}>
             <View style={styles.item}>
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PathsSessionItem;
+export default PathsSectionItem;

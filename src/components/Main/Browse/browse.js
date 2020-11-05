@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import ImageButton from "../../Common/image-button";
-import Session from "../../Common/session";
+import Section from "../../Common/section";
 import ActionBar from "../../Common/action-bar";
 
 const titles = [
@@ -146,11 +146,11 @@ const Browse = (props) => {
                     </ScrollView>
                 </View>
 
-                <Session kind='popular-skill' title={'Popular Skills'} list={skills}/>
+                <Section kind='popular-skill' title={'Popular Skills'} list={skills}/>
 
-                <Session kind='path-session' title='Paths' list={paths} showSeeAllButton={true}/>
+                <Section kind='path-session' title='Paths' list={paths} showSeeAllButton={true}/>
 
-                <Session kind='author-session' title='Top authors' list={authors}/>
+                <Section kind='author-session' title='Top authors' list={authors}/>
             </ScrollView>
         </View>
     );

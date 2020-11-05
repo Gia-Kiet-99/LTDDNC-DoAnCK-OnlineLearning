@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity,StyleSheet,Text, View,Image} from 'react-native';
 
-const AuthorSessionItem = (props) => {
+const AuthorSectionItem = (props) => {
     return (
         <TouchableOpacity style={styles.container}>
             <View style={styles.content}>
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AuthorSessionItem;
+export default AuthorSectionItem;

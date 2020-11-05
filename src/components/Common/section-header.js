@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-const SessionHeader = (props) => {
+const SectionHeader = (props) => {
     return (
         <View style={styles.headerWrapper}>
             <Text style={styles.header}>
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SessionHeader;
+export default SectionHeader;

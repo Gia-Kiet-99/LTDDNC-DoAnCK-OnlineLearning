@@ -7,11 +7,11 @@ const Separator = () => {
     )
 }
 
-const ChannelSessionItem = (props) => {
+const ChannelSectionItem = (props) => {
     return (
             <TouchableOpacity style={styles.container}>
                 <View style={styles.content}>
-                    <Image style={styles.image} source={require('../../../../assets/image-1.jpg')}/>
+                    <Image style={styles.image} source={require('../../../../../assets/image-1.jpg')}/>
                     <Separator/>
                     <View style={styles.description}>
                         <Text style={styles.text}>
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ChannelSessionItem;
+export default ChannelSectionItem;

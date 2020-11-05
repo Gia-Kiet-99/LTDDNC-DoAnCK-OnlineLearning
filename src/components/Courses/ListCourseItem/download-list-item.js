@@ -1,18 +1,17 @@
 import React, {useState} from 'react';
 import {StyleSheet,Image, View,Text, TouchableOpacity} from 'react-native';
-import Menu, {MenuItem, MenuDivider} from "react-native-material-menu";
-import Rating from "./rating";
+import Rating from "../../Common/rating";
+import Menu, {MenuItem} from "react-native-material-menu";
 
-const CourseListItem = (props) => {
+const DownloadListItem = (props) => {
     const data = props.item;
     const [menu,setMenu] = useState(null);
 
     const showMenu = () => {
         menu.show();
     }
+    const doNothing = () => {
 
-    const hideMenu = () => {
-        menu.hide();
     }
 
     return (
@@ -40,12 +39,11 @@ const CourseListItem = (props) => {
                 <Menu
                     ref={ref => setMenu(ref)}
                     button={
-                        <Image style={{height: 24,width: 24}} source={require('../../../assets/icon-menu-vertical.png')}/>
+                        <Image style={{height: 24,width: 24}} source={require('../../../../assets/icon-menu-vertical.png')}/>
                     }>
-                    <MenuItem onPress={hideMenu}>Bookmark</MenuItem>
-                    <MenuItem onPress={hideMenu}>Add to channel</MenuItem>
-                    <MenuDivider/>
-                    <MenuItem onPress={hideMenu}>Download</MenuItem>
+                    <MenuItem onPress={doNothing}>Bookmark</MenuItem>
+                    <MenuItem onPress={doNothing}>Add to channel</MenuItem>
+                    <MenuItem onPress={doNothing}>Remove Download</MenuItem>
                 </Menu>
             </TouchableOpacity>
         </TouchableOpacity>
@@ -57,12 +55,12 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         paddingVertical: 15,
-        marginHorizontal: 15,
+        // marginHorizontal: 15,
         borderBottomWidth: 1,
         borderBottomColor: 'lightgray',
     },
     imageWrapper: {
-        flex: 4,
+        flex: 3,
         height: 64,
     },
     image: {
@@ -71,7 +69,7 @@ const styles = StyleSheet.create({
     },
     description: {
         flex: 8,
-        paddingHorizontal: 20,
+        paddingLeft: 10,
     },
     title: {
         fontSize: 16
@@ -86,4 +84,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CourseListItem;
+export default DownloadListItem;
