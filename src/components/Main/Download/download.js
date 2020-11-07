@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import CourseList from "../../Courses/ListCourses/course-list";
+import StudyList from "../../Courses/StudyList/study-list";
 import ActionBar from "../../Common/action-bar";
 
 const Download = (props) => {
@@ -15,7 +15,7 @@ const Download = (props) => {
                     </TouchableOpacity>
                 </View>
 
-                <CourseList kind='download' style={styles.courseList}/>
+                <StudyList kind='course-list' style={styles.courseList}/>
             </View>
         </View>
     );
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         paddingHorizontal: 15,
+        backgroundColor: '#f5f5f5'
     },
     overView: {
         marginTop: 25,

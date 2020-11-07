@@ -6,42 +6,52 @@ import ActionBar from "../../Common/action-bar";
 
 const titles = [
     {
+        id: 1,
         title: 'CONFERENCES',
         source: '../../../../assets/image.jpg'
     },
     {
+        id: 2,
         title: 'CERTIFICATION',
         source: '../../../../assets/image1.jpg'
     },
     {
+        id: 3,
         title: 'Software\nDEVELOPMENT',
         source: '../../../../assets/background-image-5.jpg'
     },
     {
+        id: 4,
         title: 'IT\nOPS',
         source: '../../../../assets/background-image-2.jpg'
     },
     {
+        id: 5,
         title: 'Information\nAND\nCYBER SECURITY',
         source: '../../../../assets/image1.jpg'
     },
     {
+        id: 6,
         title: 'DATA\nPROFESSIONAL',
         source: '../../../../assets/image1.jpg'
     },
     {
+        id: 7,
         title: 'BUSINESS\nPROFESSIONAL',
         source: '../../../../assets/image1.jpg'
     },
     {
+        id: 8,
         title: 'Creative\nPROFESSIONAL',
         source: '../../../../assets/image1.jpg'
     },
     {
+        id: 9,
         title: 'MANUFACTURING\nAND\nDESIGN',
         source: '../../../../assets/image1.jpg'
     },
     {
+        id: 10,
         title: 'ARCHITECTURE\nAND\nCONSTRUCTION',
         source: '../../../../assets/image1.jpg'
     }
@@ -126,7 +136,7 @@ const authors = [
 
 const renderImageButton = (titles) => {
     return titles.map((item) => <View style={{width:200}}>
-        <ImageButton title={item.title} source={require('../../../../assets/background-image-3.jpg')}/>
+        <ImageButton key={item.id} title={item.title} source={require('../../../../assets/background-image-3.jpg')}/>
     </View>)
 }
 

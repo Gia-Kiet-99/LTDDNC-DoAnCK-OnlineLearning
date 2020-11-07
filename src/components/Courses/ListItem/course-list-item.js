@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet,Image, View,Text, TouchableOpacity} from 'react-native';
-import Rating from "../../Common/rating";
 import Menu, {MenuItem} from "react-native-material-menu";
 import CourseInfo from "../../Common/course-info";
 
 const CourseListItem = (props) => {
-    const data = props.item;
     const [menu,setMenu] = useState(null);
 
     const showMenu = () => {
@@ -17,24 +15,8 @@ const CourseListItem = (props) => {
     return (
         <TouchableOpacity style={styles.container}>
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={data.image}/>
+                <Image style={styles.image} source={props.item.image}/>
             </View>
-            {/*<View style={styles.description}>*/}
-            {/*    <Text style={styles.title}>*/}
-            {/*        {data.title}*/}
-            {/*    </Text>*/}
-            {/*    <Text style={styles.darkText}>*/}
-            {/*        {data.author}*/}
-            {/*    </Text>*/}
-
-            {/*    <Text style={styles.darkText}>*/}
-            {/*        {`${data.level} . ${data.released} . ${data.duration}`}*/}
-            {/*    </Text>*/}
-
-            {/*    <View>*/}
-            {/*        <Rating/>*/}
-            {/*    </View>*/}
-            {/*</View>*/}
             <CourseInfo
                 containerStyle={courseInfoStyle.container}
                 titleStyle={courseInfoStyle.largerTitle}
@@ -74,8 +56,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         paddingVertical: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: 'lightgray',
     },
     imageWrapper: {
         // flex: 3,

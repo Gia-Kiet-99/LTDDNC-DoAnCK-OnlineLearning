@@ -16,7 +16,7 @@ const SectionList = (props) => {
             case 'author-session':
                 return list.map(item => <AuthorSectionItem key={item.id} item={item}/>);
             case 'popular-skill':
-                return list.map(item => <TouchableOpacity style={styles.button}>
+                return list.map(item => <TouchableOpacity key={item.id} style={styles.button}>
                     <Text style={styles.buttonText}>{item.skill}</Text>
                 </TouchableOpacity>)
             case 'channel-session':

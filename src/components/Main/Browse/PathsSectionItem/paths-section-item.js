@@ -1,5 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, View, StyleSheet} from 'react-native';
+import PathInfo from "../../../Common/path-info";
 
 const Separator = () => {
     return (
@@ -13,15 +14,11 @@ const PathsSectionItem = (props) => {
             <View style={styles.item}>
                 <Image style={styles.image} source={require('../../../../../assets/image.jpg')}/>
                 <Separator/>
-                <View style={styles.description}>
-                    <Text style={styles.text}>
-                        {props.item.title}
-                    </Text>
-
-                    <Text style={styles.darkText}>
-                        {props.item.count}
-                    </Text>
-                </View>
+                <PathInfo
+                    containerStyle={{padding: 10}}
+                    title={props.item.title}
+                    count={props.item.count}
+                />
             </View>
         </TouchableOpacity>
     );
@@ -49,23 +46,9 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
         elevation: 5,
     },
-    description: {
-        flex: 1,
-        padding: 10,
-        justifyContent: 'center'
-    },
     image: {
         height: 100,
         width: '100%'
-    },
-
-    text: {
-        fontSize: 14
-    },
-
-    darkText: {
-        fontSize: 12,
-        color: 'gray'
     }
 })
 

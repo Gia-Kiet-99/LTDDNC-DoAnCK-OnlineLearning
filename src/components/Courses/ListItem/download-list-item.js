@@ -75,8 +75,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         paddingVertical: 15,
-        borderBottomWidth: 1,
-        borderBottomColor: 'lightgray',
     },
     imageWrapper: {
         // flex: 3,

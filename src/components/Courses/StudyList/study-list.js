@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, FlatList, SafeAreaView} from 'react-native';
-import DownloadListItem from "../ListCourseItem/download-list-item";
-import CourseListItem from "../ListCourseItem/course-list-item";
+import DownloadListItem from "../ListItem/download-list-item";
+import CourseListItem from "../ListItem/course-list-item";
+import ListItemSeparator from "../../Common/list-item-separator";
 
 const courses = [
     {
@@ -87,7 +88,7 @@ const courses = [
     },
 ]
 
-const CourseList = (props) => {
+const StudyList = (props) => {
 
     const renderCourseItem = ({item}) => (
         <CourseListItem key={item.id} item={item}/>
@@ -95,12 +96,17 @@ const CourseList = (props) => {
     const renderDownloadItem = ({item}) => (
         <DownloadListItem key={item.id} item={item}/>
     )
+    // const renderPathItem = (item) => (
+    //     <PathListItem key={item.id} item={item}/>
+    // )
     const renderListItem = (item) => {
         switch (props.kind){
-            case 'course':
+            case 'course-list':
                 return renderCourseItem(item);
-            case 'download':
+            case 'download-list':
                 return renderDownloadItem(item);
+            // case 'path-list':
+            //     return renderPathItem(item);
             default:
                 return renderCourseItem(item);
         }
@@ -112,6 +118,7 @@ const CourseList = (props) => {
                 data={courses}
                 renderItem={renderListItem}
                 keyExtractor={item => item.id}
+                ItemSeparatorComponent={() => <ListItemSeparator/>}
             />
         </SafeAreaView>
     );
@@ -124,4 +131,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CourseList;
+export default StudyList;
