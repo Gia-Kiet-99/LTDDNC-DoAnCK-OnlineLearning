@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet,Image, View,Text, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
 import Menu, {MenuItem} from "react-native-material-menu";
+import CourseInfo from "../../Common/course-info";
 
 const CourseListItem = (props) => {
     const data = props.item;
@@ -10,12 +11,7 @@ const CourseListItem = (props) => {
     const showMenu = () => {
         menu.show();
     }
-
-    // const hideMenu = () => {
-    //     menu.hide();
-    // }
     const doNothing = () => {
-
     }
 
     return (
@@ -23,22 +19,32 @@ const CourseListItem = (props) => {
             <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={data.image}/>
             </View>
-            <View style={styles.description}>
-                <Text style={styles.title}>
-                    {data.title}
-                </Text>
-                <Text style={styles.darkText}>
-                    {data.author}
-                </Text>
+            {/*<View style={styles.description}>*/}
+            {/*    <Text style={styles.title}>*/}
+            {/*        {data.title}*/}
+            {/*    </Text>*/}
+            {/*    <Text style={styles.darkText}>*/}
+            {/*        {data.author}*/}
+            {/*    </Text>*/}
 
-                <Text style={styles.darkText}>
-                    {`${data.level} . ${data.released} . ${data.duration}`}
-                </Text>
+            {/*    <Text style={styles.darkText}>*/}
+            {/*        {`${data.level} . ${data.released} . ${data.duration}`}*/}
+            {/*    </Text>*/}
 
-                <View>
-                    <Rating/>
-                </View>
-            </View>
+            {/*    <View>*/}
+            {/*        <Rating/>*/}
+            {/*    </View>*/}
+            {/*</View>*/}
+            <CourseInfo
+                containerStyle={courseInfoStyle.container}
+                titleStyle={courseInfoStyle.largerTitle}
+                title={props.item.title}
+                author={props.item.author}
+                level={props.item.level}
+                released={props.item.released}
+                duration={props.item.duration}
+                style={{fontSize: 16}}
+            />
             <TouchableOpacity style={styles.menuWrapper} onPress={showMenu}>
                 <Menu
                     ref={ref => setMenu(ref)}
@@ -54,36 +60,33 @@ const CourseListItem = (props) => {
     );
 };
 
+const courseInfoStyle = StyleSheet.create({
+    container: {
+        marginLeft: 10,
+    },
+    largerTitle: {
+        fontSize: 16,
+    }
+})
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
         paddingVertical: 15,
-        // marginHorizontal: 15,
         borderBottomWidth: 1,
         borderBottomColor: 'lightgray',
     },
     imageWrapper: {
-        flex: 3,
+        // flex: 3,
+        width: 80,
         height: 64,
     },
     image: {
         height: '100%',
         width: '100%',
     },
-    description: {
-        flex: 8,
-        paddingLeft: 10,
-    },
-    title: {
-        fontSize: 16
-    },
-    darkText: {
-        fontSize: 12,
-        color: 'gray'
-    },
     menuWrapper: {
-        // flex: 1,
         justifyContent: 'center',
     }
 })

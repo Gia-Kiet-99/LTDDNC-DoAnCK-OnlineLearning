@@ -1,6 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, View, StyleSheet} from 'react-native';
 import Rating from "../../../Common/rating";
+import CourseInfo from "../../../Common/course-info";
 
 const Separator = () => {
     return (
@@ -14,36 +15,50 @@ const SectionCoursesItem = (props) => {
             <View style={styles.content}>
                 <Image style={styles.image} source={require('../../../../../assets/image.jpg')}/>
                 <Separator/>
-                <View style={styles.description}>
-                    <Text style={styles.text}>
-                        {props.item.title}
-                    </Text>
+                {/*<View style={styles.description}>*/}
+                {/*    <Text style={styles.text}>*/}
+                {/*        {props.item.title}*/}
+                {/*    </Text>*/}
 
-                    <Text style={styles.darkText}>
-                        {props.item.author}
-                    </Text>
+                {/*    <Text style={styles.darkText}>*/}
+                {/*        {props.item.author}*/}
+                {/*    </Text>*/}
 
-                    <Text style={styles.darkText}>
-                        {`${props.item.level} . ${props.item.released} . ${props.item.duration}`}
-                    </Text>
-                    <View>
-                        <Rating/>
-                    </View>
-                </View>
+                {/*    <Text style={styles.darkText}>*/}
+                {/*        {`${props.item.level} . ${props.item.released} . ${props.item.duration}`}*/}
+                {/*    </Text>*/}
+                {/*    <View>*/}
+                {/*        <Rating/>*/}
+                {/*    </View>*/}
+                {/*</View>*/}
 
-
-
+                <CourseInfo containerStyle={courseInfoStyle.container}
+                    title={props.item.title}
+                    author={props.item.author}
+                    level={props.item.level}
+                    released={props.item.released}
+                    duration={props.item.duration}
+                />
 
             </View>
         </TouchableOpacity>
     );
 };
 
+const courseInfoStyle = StyleSheet.create({
+    container: {
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    },
+    largerTitle: {
+        fontSize: 16,
+    }
+})
+
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
         paddingHorizontal: 10,
-        // backgroundColor: "lightblue"
     },
     content: {
         width: 200,
@@ -61,21 +76,13 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
         elevation: 5,
     },
-    description: {
-        flex: 1,
-        padding: 10,
-        justifyContent: 'center'
-    },
     image: {
         height: 100,
         width: '100%'
     },
-    text: {
-        fontSize: 14
-    },
-    darkText: {
-        fontSize: 12,
-        color: 'gray'
+    courseInfo: {
+        paddingHorizontal: 10,
+        paddingVertical: 5,
     }
 })
 

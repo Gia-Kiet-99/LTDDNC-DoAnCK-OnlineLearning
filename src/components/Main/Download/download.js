@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        padding: 15,
+        paddingHorizontal: 15,
     },
     overView: {
+        marginTop: 25,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
 
     },
     courseList: {
-        marginTop: 15,
+        marginTop: 25,
     }
 })
 

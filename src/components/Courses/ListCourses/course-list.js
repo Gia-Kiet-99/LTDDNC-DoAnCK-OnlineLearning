@@ -5,85 +5,85 @@ import CourseListItem from "../ListCourseItem/course-list-item";
 
 const courses = [
     {
-        id: 1,
+        id: '1',
         title: 'Leadership for Non-managers',
         author: 'Gia Kiet',
         level: 'Advance',
         released: 'May 2020',
         duration: '30 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 2,
+        id: '2',
         title: 'iOS',
         author: 'Gia Kiet',
         level: 'Beginner',
         released: 'Aug 2020',
         duration: '25 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 3,
+        id: '3',
         title: 'Android',
         author: 'Gia Kiet',
         level: 'Intermediate',
         released: 'Jan 2019',
         duration: '28 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 4,
+        id: '4',
         title: 'Leadership for Non-managers',
         author: 'Gia Kiet',
         level: 'Advance',
         released: 'May 2020',
         duration: '30 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 5,
+        id: '5',
         title: 'iOS',
         author: 'Gia Kiet',
         level: 'Beginner',
         released: 'Aug 2020',
         duration: '25 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 6,
+        id: '6',
         title: 'Android',
         author: 'Gia Kiet',
         level: 'Intermediate',
         released: 'Jan 2019',
         duration: '28 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 7,
+        id: '7',
         title: 'Leadership for Non-managers',
         author: 'Gia Kiet',
         level: 'Advance',
         released: 'May 2020',
         duration: '30 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 8,
+        id: '8',
         title: 'iOS',
         author: 'Gia Kiet',
         level: 'Beginner',
         released: 'Aug 2020',
         duration: '25 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
     {
-        id: 9,
+        id: '9',
         title: 'Android',
         author: 'Gia Kiet',
         level: 'Intermediate',
         released: 'Jan 2019',
         duration: '28 h',
-        image: require('../../../../assets/background4.jpg')
+        image: require('../../../../assets/girl.jpg')
     },
 ]
 
@@ -118,10 +118,9 @@ const CourseList = (props) => {
 
 };
 
-
 const styles = StyleSheet.create({
     container: {
-        // flex: 1
+        flex: 1,
     }
 })
 
