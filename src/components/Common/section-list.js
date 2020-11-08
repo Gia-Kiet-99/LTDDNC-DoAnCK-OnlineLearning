@@ -15,12 +15,12 @@ const SectionList = (props) => {
                 return list.map(item => <SectionCoursesItem key={item.id} item={item}/>);
             case 'author-session':
                 return list.map(item => <AuthorSectionItem key={item.id} item={item}/>);
+            case 'channel-session':
+                return list.map(item => <ChannelSectionItem key={item.id} item={item}/>)
             case 'popular-skill':
                 return list.map(item => <TouchableOpacity key={item.id} style={styles.button}>
                     <Text style={styles.buttonText}>{item.skill}</Text>
                 </TouchableOpacity>)
-            case 'channel-session':
-                return list.map(item => <ChannelSectionItem key={item.id} item={item}/>)
         }
     }
 
