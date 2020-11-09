@@ -1,35 +1,66 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {
+    Image,
+    StyleSheet,
+    View,
+    Text,
+    Alert,
+    ScrollView,
+    TouchableOpacity} from 'react-native';
 import Rating from "../Common/rating";
 
 const info = {
     title: 'C# Fundamentals',
-    authorName: 'Scott Allen',
-    authorAvatar: require('../../../assets/girl.jpg'),
+    author: [
+        {
+            authorName: 'Scott Allen',
+            authorAvatar: require('../../../assets/girl.jpg'),
+        },
+        {
+            authorName: 'Gia Kiet',
+            authorAvatar: require('../../../assets/girl.jpg'),
+        },
+    ],
     level: 'Beginner',
     released: 'Apr 16 2019',
     duration: '6h 10m',
     rating: 5,
 }
 
+const AuthorButton = (props) => {
+    return <TouchableOpacity style={styles.authorWrapper}>
+        <Image style={styles.avatar} source={props.item.authorAvatar}/>
+        <Text>{props.item.authorName}</Text>
+    </TouchableOpacity>
+}
+
+const renderAuthorButton = (author) => {
+    return author.map(item => <AuthorButton item={item}/>)
+}
+
 const CourseDetail = (props) => {
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(false);
     const CourseInfo = () => (
-        <View>
-            <Text style={{fontSize: 22}}>{info.title}</Text>
-            <TouchableOpacity style={styles.authorWrapper}>
-                <Image style={styles.avatar} source={info.authorAvatar}/>
-                <Text>{info.authorName}</Text>
-            </TouchableOpacity>
+        <View style={styles.courseInfo}>
+            <Text style={{fontSize: 24}}>{info.title}</Text>
+
+            <ScrollView style={{marginTop: 5}} horizontal={true} showsHorizontalScrollIndicator={false}>
+                {renderAuthorButton(info.author)}
+            </ScrollView>
+
             <View style={{flexDirection: 'row', marginTop: 10}}>
-                <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>{`${info.level} . ${info.released} . ${info.duration}`}</Text>
+                <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>
+                    {`${info.level} . ${info.released} . ${info.duration}`}
+                </Text>
                 <Rating/>
             </View>
         </View>
     )
+    const showAlert = () => Alert.alert('Add to channel')
 
-    const CourseButton = () => (
-        <View style={styles.buttonViewGroup}>
+    const CourseButton = () => {
+        return <View style={styles.buttonViewGroup}>
             <TouchableOpacity style={styles.button} onPress={() => setIsBookmarked(!isBookmarked)}>
                 <View style={styles.imageWrapper}>
                     <Image
@@ -38,7 +69,9 @@ const CourseDetail = (props) => {
                 </View>
                 <Text style={styles.buttonText}>{(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, {marginHorizontal: 10}]}>
+            <TouchableOpacity
+                onPress={showAlert}
+                style={[styles.button, {marginHorizontal: 10}]}>
                 <View style={styles.imageWrapper}>
                     <Image style={styles.buttonImage} source={require('../../../assets/channel-icon.png')}/>
                 </View>
@@ -51,19 +84,47 @@ const CourseDetail = (props) => {
                 <Text style={styles.buttonText}>Download</Text>
             </TouchableOpacity>
         </View>
-    )
-    const CourseDetailInfo = () => (
-        <View style={styles.courseDetailInfo}>
+    }
+    const CourseDescription = () => {
+        return <View>
+            <View style={(isExpanded === true) ? styles.courseDescription : styles.briefCourseDescription}>
+                <View style={styles.desWrapper}>
+                    <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam vero vel
+                        ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat saepe
+                        temporibus perspiciatis.</Text>
+                </View>
+                <TouchableOpacity
+                    activeOpacity={0.5}
+                    style={styles.expandButton}
+                    onPress={() => setIsExpanded(!isExpanded)}>
+                    <Image style={styles.expandImage}
+                           source={(isExpanded === true) ? require('../../../assets/up-arrow.png') : require('../../../assets/down-arrow.png')}
+                    />
+                </TouchableOpacity>
+            </View>
+        </View>
+    }
+    const CourseIntro = () => {
+        return <View style={styles.courseIntro}>
             <CourseInfo/>
             <CourseButton/>
+            <CourseDescription/>
 
+            <TouchableOpacity style={styles.largeButton}>
+                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../assets/check.png')}/>
+                <Text>Take a learning check</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.largeButton}>
+                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../assets/folder.png')}/>
+                <Text>View related paths & courses</Text>
+            </TouchableOpacity>
         </View>
-    )
+    }
 
 
     return (
         <View style={styles.container}>
-            <CourseDetailInfo/>
+            <CourseIntro/>
         </View>
     );
 };
@@ -73,8 +134,20 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 15,
     },
-    courseDetailInfo: {
-
+    courseIntro: {
+        flexDirection: 'column'
+    },
+    largeButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ddd',
+        marginTop: 10,
+        paddingVertical: 10,
+        borderRadius: 5,
+    },
+    courseInfo: {
+        // backgroundColor: 'pink'
     },
     authorWrapper: {
         flexDirection: 'row',
@@ -82,7 +155,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgray',
         padding: 3,
         paddingRight: 15,
-        marginTop: 8,
+        marginRight: 8,
         borderRadius: 36/2,
         alignSelf: 'baseline'
     },
@@ -96,6 +169,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 20,
+        // backgroundColor: 'lightblue'
     },
     button: {
         flex: 1,
@@ -118,7 +192,32 @@ const styles = StyleSheet.create({
     buttonText: {
         fontWeight: 'bold',
         color: '#555'
-    }
+    },
+    courseDescription: {
+        flexDirection: 'row',
+        marginTop: 20,
+        // backgroundColor: 'beige'
+    },
+    briefCourseDescription: {
+        height: 50,
+        flexDirection: 'row',
+        marginTop: 20,
+        // backgroundColor: 'beige',
+        overflow: 'hidden',
+    },
+    desWrapper: {
+        flex: 1,
+    },
+    expandButton: {
+        backgroundColor: '#ddd',
+        padding: 8,
+        borderRadius: 5,
+        justifyContent: 'center'
+    },
+    expandImage: {
+        height: 12,
+        width: 12
+    },
 })
 
 export default CourseDetail;
