@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
 
-const AccountInfo = () => {
+const AccountInfo = (props) => {
     return (
         <View style={styles.accountInfoContainer}>
-            <TouchableOpacity style={[styles.button, {flexDirection: 'row', alignItems:'center'}]}>
+            <TouchableOpacity style={[styles.button, {flexDirection: 'row', alignItems:'center'}]}
+                onPress={() => (props.navigation.navigate("Profile"))}>
                 <Image style={styles.image} source={require('../../../../assets/avatar.jpg')}/>
                 <View style={{paddingLeft: 15}}>
                     <Text>Kiet Dinh</Text>
@@ -148,11 +149,11 @@ const Detail = () => {
     )
 }
 
-const Setting = () => {
+const Setting = (props) => {
     return (
         <View>
             <ScrollView>
-                <AccountInfo/>
+                <AccountInfo navigation={props.navigation}/>
                 <Options/>
                 <Detail/>
             </ScrollView>

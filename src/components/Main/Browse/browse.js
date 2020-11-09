@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet, StatusBar} from 'react-native';
 import ImageButton from "../../Common/image-button";
 import Section from "../../Common/section";
 import ActionBar from "../../Common/action-bar";
+// import {StatusBar} from "expo-status-bar";
 
 const titles = [
     {
@@ -143,6 +144,7 @@ const renderImageButton = (titles) => {
 const Browse = (props) => {
     return (
         <View style={styles.container}>
+            {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content'/>*/}
             <ActionBar title={'Browse'}/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
                 <View style={styles.recommend}>

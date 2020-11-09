@@ -11,9 +11,15 @@ const CourseListItem = (props) => {
     }
     const doNothing = () => {
     }
+    const onPressListItem = () => (
+        props.navigation.navigate("CourseDetail", {item: props.item})
+    )
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onPressListItem}
+        >
             <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={props.item.image}/>
             </View>
@@ -21,7 +27,7 @@ const CourseListItem = (props) => {
                 containerStyle={courseInfoStyle.container}
                 titleStyle={courseInfoStyle.largerTitle}
                 title={props.item.title}
-                author={props.item.author}
+                author={props.item.authorName}
                 level={props.item.level}
                 released={props.item.released}
                 duration={props.item.duration}

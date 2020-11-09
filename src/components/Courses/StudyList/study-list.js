@@ -5,88 +5,107 @@ import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
 import PathListItem from "../ListItem/path-list-item";
 import AuthorListItem from "../ListItem/author-list-item";
+import HeaderRightButtons from "../../Common/header-right-buttons";
 
 const courses = [
     {
         id: '1',
         title: 'Leadership for Non-managers',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Advance',
         released: 'May 2020',
         duration: '30 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '2',
         title: 'iOS',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Beginner',
         released: 'Aug 2020',
         duration: '25 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '3',
         title: 'Android',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Intermediate',
         released: 'Jan 2019',
         duration: '28 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '4',
         title: 'Leadership for Non-managers',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Advance',
         released: 'May 2020',
         duration: '30 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '5',
         title: 'iOS',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Beginner',
         released: 'Aug 2020',
         duration: '25 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '6',
         title: 'Android',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Intermediate',
         released: 'Jan 2019',
         duration: '28 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '7',
         title: 'Leadership for Non-managers',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Advance',
         released: 'May 2020',
         duration: '30 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '8',
         title: 'iOS',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Beginner',
         released: 'Aug 2020',
         duration: '25 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
     {
         id: '9',
         title: 'Android',
-        author: 'Gia Kiet',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../../../assets/girl.jpg'),
         level: 'Intermediate',
         released: 'Jan 2019',
         duration: '28 h',
-        image: require('../../../../assets/girl.jpg')
+        image: require('../../../../assets/girl.jpg'),
+        rating: 5,
     },
 ]
 const downloads = [
@@ -202,9 +221,10 @@ const authors = [
 ]
 
 const StudyList = (props) => {
+    props.navigation.setOptions({headerRight: () => (<HeaderRightButtons navigation={props.navigation}/>)})
 
     const renderCourseItem = ({item}) => (
-        <CourseListItem key={item.id} item={item}/>
+        <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
     )
     const renderDownloadItem = ({item}) => (
         <DownloadListItem key={item.id} item={item}/>
@@ -262,6 +282,7 @@ const StudyList = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal: 16,
     }
 })
 

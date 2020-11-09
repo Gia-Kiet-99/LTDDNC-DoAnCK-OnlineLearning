@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-    Image,
-    StyleSheet,
-    View,
-    Text,
-    Alert,
-    ScrollView,
-    TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
 import Rating from "../Common/rating";
 
 const info = {
@@ -29,36 +22,40 @@ const info = {
 
 const AuthorButton = (props) => {
     return <TouchableOpacity style={styles.authorWrapper}>
-        <Image style={styles.avatar} source={props.item.authorAvatar}/>
-        <Text>{props.item.authorName}</Text>
+        <Image style={styles.avatar} source={props.avatar}/>
+        <Text>{props.name}</Text>
     </TouchableOpacity>
 }
 
 const renderAuthorButton = (author) => {
-    return author.map(item => <AuthorButton item={item}/>)
+    return author.map(item => <AuthorButton author={item}/>)
 }
 
 const CourseDetail = (props) => {
+    const item = props.route.params.item;
+    // console.log(props);
+    // props.navigation.setOptions({title: item.title})
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
-    const CourseInfo = () => (
-        <View style={styles.courseInfo}>
-            <Text style={{fontSize: 24}}>{info.title}</Text>
 
-            <ScrollView style={{marginTop: 5}} horizontal={true} showsHorizontalScrollIndicator={false}>
-                {renderAuthorButton(info.author)}
-            </ScrollView>
+    const showAlert = () => Alert.alert('Add to channel')
+    const CourseInfo = () => {
+        return <View style={styles.courseInfo}>
+            <Text style={{fontSize: 24}}>{item.title}</Text>
+
+            <AuthorButton name={item.authorName} avatar={item.authorAvatar}/>
+            {/*<ScrollView style={{marginTop: 5}} horizontal={true} showsHorizontalScrollIndicator={false}>*/}
+            {/*    {renderAuthorButton(item.author)}*/}
+            {/*</ScrollView>*/}
 
             <View style={{flexDirection: 'row', marginTop: 10}}>
                 <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>
-                    {`${info.level} . ${info.released} . ${info.duration}`}
+                    {`${item.level} . ${item.released} . ${item.duration}`}
                 </Text>
                 <Rating/>
             </View>
         </View>
-    )
-    const showAlert = () => Alert.alert('Add to channel')
-
+    }
     const CourseButton = () => {
         return <View style={styles.buttonViewGroup}>
             <TouchableOpacity style={styles.button} onPress={() => setIsBookmarked(!isBookmarked)}>
@@ -106,7 +103,7 @@ const CourseDetail = (props) => {
     }
     const CourseIntro = () => {
         return <View style={styles.courseIntro}>
-            <CourseInfo/>
+            <CourseInfo item={props.item}/>
             <CourseButton/>
             <CourseDescription/>
 
@@ -114,7 +111,11 @@ const CourseDetail = (props) => {
                 <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../assets/check.png')}/>
                 <Text>Take a learning check</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.largeButton}>
+
+            <TouchableOpacity
+                style={styles.largeButton}
+                onPress={() => props.navigation.push("CourseDetail", {item: item})}
+            >
                 <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../assets/folder.png')}/>
                 <Text>View related paths & courses</Text>
             </TouchableOpacity>
@@ -155,6 +156,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgray',
         padding: 3,
         paddingRight: 15,
+        marginTop: 8,
         marginRight: 8,
         borderRadius: 36/2,
         alignSelf: 'baseline'

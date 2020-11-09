@@ -64,7 +64,7 @@ const courses = [
 const Home = () => {
     return (
         <View style={styles.container}>
-            <ActionBar title='Home'/>
+            {/*<ActionBar title='Home'/>*/}
             <ScrollView showsVerticalScrollIndicator={false} style={styles.listSection}>
                 <View style={styles.imageWrapper}>
                     <Image style={styles.image} source={require('../../../../assets/ROG_G14.jpg')}/>
