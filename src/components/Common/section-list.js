@@ -7,21 +7,24 @@ import ChannelSectionItem from "../Main/Home/ChannelSectionItem/channel-section-
 import {listName} from "../../globals/constants";
 
 const SectionList = (props) => {
+    const Skill = (props) => {
+        return <TouchableOpacity key={props.item.id} style={styles.button}>
+            <Text style={styles.buttonText}>{props.item.skill}</Text>
+        </TouchableOpacity>
+    }
 
     const renderListItem = (list) => {
         switch (props.kind) {
             case listName.path:
-                return list.map(item => <PathsSectionItem key={item.id} item={item}/>);
+                return list.map(item => <PathsSectionItem key={item.id} item={item} navigation={props.navigation}/>);
             case listName.course:
-                return list.map(item => <SectionCoursesItem navigation={props.navigation} key={item.id} item={item}/>);
+                return list.map(item => <SectionCoursesItem key={item.id} item={item} navigation={props.navigation}/>);
             case listName.author:
-                return list.map(item => <AuthorSectionItem key={item.id} item={item}/>);
+                return list.map(item => <AuthorSectionItem key={item.id} item={item} navigation={props.navigation}/>);
             case listName.channel:
-                return list.map(item => <ChannelSectionItem key={item.id} item={item}/>)
+                return list.map(item => <ChannelSectionItem key={item.id} item={item} navigation={props.navigation}/>)
             case listName.popularSkill:
-                return list.map(item => <TouchableOpacity key={item.id} style={styles.button}>
-                    <Text style={styles.buttonText}>{item.skill}</Text>
-                </TouchableOpacity>)
+                return list.map(item => <Skill key={item.id} item={item} navigation={props.navigation}/>)
         }
     }
 

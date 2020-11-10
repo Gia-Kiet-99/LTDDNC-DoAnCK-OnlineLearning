@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
+import {Alert, Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
 
 const AccountInfo = (props) => {
     return (
@@ -122,7 +122,23 @@ const Options = () => {
     )
 }
 
-const Detail = () => {
+const Detail = (props) => {
+    const onSignOut = () => (
+        Alert.alert(
+            "Sign out",
+            "Are you sure?",
+            [
+                {
+                    text: 'Ok',
+                    onPress: () => props.navigation.navigate("Authentication")
+                },
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                }
+            ]
+        )
+    )
     return (
         <View>
             <TouchableOpacity style={styles.button}>
@@ -140,7 +156,7 @@ const Detail = () => {
                 <Text style={{fontSize: 13}}>2.38.0</Text>
             </View>
 
-            <TouchableOpacity style={styles.signOutButton}>
+            <TouchableOpacity onPress={onSignOut} style={styles.signOutButton}>
                 <Text style={styles.signOutText}>SIGN OUT</Text>
             </TouchableOpacity>
         </View>
@@ -153,7 +169,7 @@ const Setting = (props) => {
             <ScrollView>
                 <AccountInfo navigation={props.navigation}/>
                 <Options/>
-                <Detail/>
+                <Detail navigation={props.navigation}/>
             </ScrollView>
         </View>
     );

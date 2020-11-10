@@ -9,15 +9,15 @@ const Home = (props) => {
     return (
         <View style={styles.container}>
             <StatusBar translucent={false} backgroundColor="white" barStyle='dark-content'/>
-            <ActionBar title={titleName.home}/>
+            <ActionBar title={titleName.home} navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.listSection}>
                 <View style={styles.imageWrapper}>
                     <Image style={styles.image} source={require('../../../../assets/background-image-3.jpg')}/>
                 </View>
                 <Section navigation={props.navigation} kind={listName.course} title={'Continue learning'} list={courses} showSeeAllButton={true}/>
-                <Section kind={listName.channel} title={'Channels'} list={channels} showSeeAllButton={true}/>
+                <Section navigation={props.navigation} kind={listName.channel} title={'Channels'} list={channels} showSeeAllButton={true}/>
                 <Section navigation={props.navigation} kind={listName.course} title={'Course list'} list={courses} showSeeAllButton={true}/>
-                <Section kind={listName.channel} title={'My Channels'} list={channels} showSeeAllButton={true}/>
+                <Section navigation={props.navigation} kind={listName.channel} title={'My Channels'} list={channels} showSeeAllButton={true}/>
             </ScrollView>
         </View>
     );

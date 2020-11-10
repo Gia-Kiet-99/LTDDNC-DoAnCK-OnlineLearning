@@ -7,163 +7,164 @@ import {
     SectionList,
     TouchableOpacity
 } from "react-native";
-import CourseListItem from "../../../Courses/ListItem/course-list-item";
-import PathListItem from "../../../Courses/ListItem/path-list-item";
-import AuthorListItem from "../../../Courses/ListItem/author-list-item";
+import CourseListItem from "../../../List/ListItem/course-list-item";
+import PathListItem from "../../../List/ListItem/path-list-item";
+import AuthorListItem from "../../../List/ListItem/author-list-item";
 import ListItemSeparator from "../../../Common/list-item-separator";
+import {results} from "../../../../localize/data";
 
-const results = [
-    {
-        title: "Courses",
-        count: 9,
-        data: [
-            {
-                id: '1',
-                title: 'Leadership for Non-managers',
-                author: 'Gia Kiet',
-                level: 'Advance',
-                released: 'May 2020',
-                duration: '30 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '2',
-                title: 'iOS',
-                author: 'Gia Kiet',
-                level: 'Beginner',
-                released: 'Aug 2020',
-                duration: '25 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '3',
-                title: 'Android',
-                author: 'Gia Kiet',
-                level: 'Intermediate',
-                released: 'Jan 2019',
-                duration: '28 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '4',
-                title: 'Leadership for Non-managers',
-                author: 'Gia Kiet',
-                level: 'Advance',
-                released: 'May 2020',
-                duration: '30 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '5',
-                title: 'iOS',
-                author: 'Gia Kiet',
-                level: 'Beginner',
-                released: 'Aug 2020',
-                duration: '25 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '6',
-                title: 'Android',
-                author: 'Gia Kiet',
-                level: 'Intermediate',
-                released: 'Jan 2019',
-                duration: '28 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '7',
-                title: 'Leadership for Non-managers',
-                author: 'Gia Kiet',
-                level: 'Advance',
-                released: 'May 2020',
-                duration: '30 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '8',
-                title: 'iOS',
-                author: 'Gia Kiet',
-                level: 'Beginner',
-                released: 'Aug 2020',
-                duration: '25 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-            {
-                id: '9',
-                title: 'Android',
-                author: 'Gia Kiet',
-                level: 'Intermediate',
-                released: 'Jan 2019',
-                duration: '28 h',
-                image: require('../../../../../assets/girl.jpg')
-            },
-        ]
-    },
-    {
-        title: "Paths",
-        count: 3,
-        data: [
-            {
-                id: 1,
-                title: 'AWS Certified Database - Specialty (DBS-C01)',
-                count: '3 courses'
-            },
-            {
-                id: 2,
-                title: 'Big Data LDN 2020',
-                count: '44 courses'
-            },
-            {
-                id: 3,
-                title: 'Securing ASP.NET and ASP.NET Core Applications',
-                count: '14 courses'
-            }
-        ]
-    },
-    {
-        title: "Authors",
-        count: 6,
-        data: [
-            {
-                id: 1,
-                avatar: require('../../../../../assets/avatar.png'),
-                name: 'Gia Kiet',
-                numberOfCourses: 4
-            },
-            {
-                id: 2,
-                avatar: require('../../../../../assets/avatar.png'),
-                name: 'Simon',
-                numberOfCourses: 5
-            },
-            {
-                id: 3,
-                avatar: require('../../../../../assets/avatar.png'),
-                name: 'Cristiano Ronaldo',
-                numberOfCourses: 6
-            },
-            {
-                id: 4,
-                avatar: require('../../../../../assets/avatar.png'),
-                name: 'Lionel Messi',
-                numberOfCourses: 13
-            },
-            {
-                id: 5,
-                avatar: require('../../../../../assets/avatar.png'),
-                name: 'Bailey Newton',
-                numberOfCourses: 9
-            },
-            {
-                id: 6,
-                avatar: require('../../../../../assets/avatar.png'),
-                name: 'Gerry Burns',
-                numberOfCourses: 4
-            }
-        ]
-    }
-];
+// const results = [
+//     {
+//         title: "Courses",
+//         count: 9,
+//         data: [
+//             {
+//                 id: '1',
+//                 title: 'Leadership for Non-managers',
+//                 author: 'Gia Kiet',
+//                 level: 'Advance',
+//                 released: 'May 2020',
+//                 duration: '30 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '2',
+//                 title: 'iOS',
+//                 author: 'Gia Kiet',
+//                 level: 'Beginner',
+//                 released: 'Aug 2020',
+//                 duration: '25 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '3',
+//                 title: 'Android',
+//                 author: 'Gia Kiet',
+//                 level: 'Intermediate',
+//                 released: 'Jan 2019',
+//                 duration: '28 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '4',
+//                 title: 'Leadership for Non-managers',
+//                 author: 'Gia Kiet',
+//                 level: 'Advance',
+//                 released: 'May 2020',
+//                 duration: '30 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '5',
+//                 title: 'iOS',
+//                 author: 'Gia Kiet',
+//                 level: 'Beginner',
+//                 released: 'Aug 2020',
+//                 duration: '25 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '6',
+//                 title: 'Android',
+//                 author: 'Gia Kiet',
+//                 level: 'Intermediate',
+//                 released: 'Jan 2019',
+//                 duration: '28 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '7',
+//                 title: 'Leadership for Non-managers',
+//                 author: 'Gia Kiet',
+//                 level: 'Advance',
+//                 released: 'May 2020',
+//                 duration: '30 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '8',
+//                 title: 'iOS',
+//                 author: 'Gia Kiet',
+//                 level: 'Beginner',
+//                 released: 'Aug 2020',
+//                 duration: '25 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//             {
+//                 id: '9',
+//                 title: 'Android',
+//                 author: 'Gia Kiet',
+//                 level: 'Intermediate',
+//                 released: 'Jan 2019',
+//                 duration: '28 h',
+//                 image: require('../../../../../assets/girl.jpg')
+//             },
+//         ]
+//     },
+//     {
+//         title: "Paths",
+//         count: 3,
+//         data: [
+//             {
+//                 id: 1,
+//                 title: 'AWS Certified Database - Specialty (DBS-C01)',
+//                 count: '3 courses'
+//             },
+//             {
+//                 id: 2,
+//                 title: 'Big Data LDN 2020',
+//                 count: '44 courses'
+//             },
+//             {
+//                 id: 3,
+//                 title: 'Securing ASP.NET and ASP.NET Core Applications',
+//                 count: '14 courses'
+//             }
+//         ]
+//     },
+//     {
+//         title: "Authors",
+//         count: 6,
+//         data: [
+//             {
+//                 id: 1,
+//                 avatar: require('../../../../../assets/avatar.png'),
+//                 name: 'Gia Kiet',
+//                 numberOfCourses: 4
+//             },
+//             {
+//                 id: 2,
+//                 avatar: require('../../../../../assets/avatar.png'),
+//                 name: 'Simon',
+//                 numberOfCourses: 5
+//             },
+//             {
+//                 id: 3,
+//                 avatar: require('../../../../../assets/avatar.png'),
+//                 name: 'Cristiano Ronaldo',
+//                 numberOfCourses: 6
+//             },
+//             {
+//                 id: 4,
+//                 avatar: require('../../../../../assets/avatar.png'),
+//                 name: 'Lionel Messi',
+//                 numberOfCourses: 13
+//             },
+//             {
+//                 id: 5,
+//                 avatar: require('../../../../../assets/avatar.png'),
+//                 name: 'Bailey Newton',
+//                 numberOfCourses: 9
+//             },
+//             {
+//                 id: 6,
+//                 avatar: require('../../../../../assets/avatar.png'),
+//                 name: 'Gerry Burns',
+//                 numberOfCourses: 4
+//             }
+//         ]
+//     }
+// ];
 
 // const SectionListHeader = (props) => {
 //     return <View style={styles.header}>

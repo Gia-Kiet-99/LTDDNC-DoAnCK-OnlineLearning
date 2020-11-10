@@ -1,0 +1,76 @@
+import React, {useState} from 'react';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import Menu, {MenuItem} from "react-native-material-menu";
+import ChannelInfo from "../../Common/channel-info";
+
+const ChannelListItem = (props) => {
+    const item = props.item;
+    const [menu,setMenu] = useState(null);
+
+    const doNothing = () => {
+    }
+    const showMenu = () => {
+        menu.show();
+    }
+    const onItemPressed = () => {
+        return props.navigation.navigate("ChannelDetail", {item: item})
+    }
+
+    return (
+        <TouchableOpacity style={styles.container}
+            onPress={onItemPressed}
+        >
+            <View style={styles.imageWrapper}>
+                <Image style={styles.image} source={item.image}/>
+            </View>
+            <ChannelInfo
+                title={item.title}
+                level={item.level}
+                follow={item.follow}
+                style={{fontSize: 16}}
+                containerStyle={channelInfoStyle.container}
+                titleStyle={channelInfoStyle.largerTitle}
+            />
+            <TouchableOpacity style={styles.menuWrapper} onPress={showMenu}>
+                <Menu
+                    ref={ref => setMenu(ref)}
+                    button={
+                        <Image style={{height: 24,width: 24}} source={require('../../../../assets/icon-menu-vertical.png')}/>
+                    }>
+                    <MenuItem onPress={doNothing}>Share</MenuItem>
+                </Menu>
+            </TouchableOpacity>
+        </TouchableOpacity>
+    );
+};
+
+const channelInfoStyle = StyleSheet.create({
+    container: {
+        marginLeft: 10,
+    },
+    largerTitle: {
+        fontSize: 16,
+    }
+})
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingVertical: 15,
+    },
+    imageWrapper: {
+        // flex: 3,
+        width: 80,
+        height: 64,
+    },
+    image: {
+        height: '100%',
+        width: '100%',
+    },
+    menuWrapper: {
+        justifyContent: 'center',
+    }
+})
+
+export default ChannelListItem;

@@ -17,7 +17,6 @@ const renderImageButton = (titles) => {
 const Browse = (props) => {
     return (
         <View style={styles.container}>
-            {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content'/>*/}
             <ActionBar title={titleName.browse}/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
                 <View style={styles.recommend}>

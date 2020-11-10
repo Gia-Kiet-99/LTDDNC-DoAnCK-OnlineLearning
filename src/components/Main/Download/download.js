@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import StudyList from "../../Courses/StudyList/study-list";
+import StudyList from "../../List/StudyList/study-list";
 import ActionBar from "../../Common/action-bar";
 import {listName, titleName} from "../../../globals/constants";
 

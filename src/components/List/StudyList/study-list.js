@@ -5,13 +5,18 @@ import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
 import PathListItem from "../ListItem/path-list-item";
 import AuthorListItem from "../ListItem/author-list-item";
-import HeaderRightButtons from "../../Common/header-right-buttons";
 import {listName} from "../../../globals/constants";
-import {authors, courses, downloads, paths} from "../../../localize/data";
+import {authors, channels, courses, downloads, paths} from "../../../localize/data";
+import ChannelSectionItem from "../../Main/Home/ChannelSectionItem/channel-section-item";
+import ChannelListItem from "../ListItem/channel-list-item";
 
 
 const StudyList = (props) => {
-    props.navigation?.setOptions({headerRight: () => (<HeaderRightButtons navigation={props.navigation}/>)})
+    // console.log("StudyList", props)
+
+    /*value passing when you click See all button*/
+    const listType = (props.route?.params?.kind === undefined) ? props.kind : props.route.params.kind;
+    const listStyle = props.route?.params?.style;
 
     const renderCourseItem = ({item}) => (
         <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
@@ -25,9 +30,12 @@ const StudyList = (props) => {
     const renderAuthorItem = ({item}) => (
         <AuthorListItem key={item.id} item={item} navigation={props.navigation}/>
     )
+    const renderChannelIem = ({item}) => (
+        <ChannelListItem key={item.id} item={item} navigation={props.navigation}/>
+    )
 
     const renderList = (kind) => {
-        switch (kind) {
+        switch (listType) {
             case listName.course:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={courses}
@@ -52,6 +60,12 @@ const StudyList = (props) => {
                                  renderItem={renderAuthorItem}
                                  keyExtractor={item => item.id}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
+            case listName.channel:
+                return <FlatList showsVerticalScrollIndicator={false}
+                                 data={channels}
+                                 renderItem={renderChannelIem}
+                                 keyExtractor={item => item.id}
+                                 ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             default:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={courses}
@@ -62,7 +76,7 @@ const StudyList = (props) => {
     }
 
     return (
-        <SafeAreaView style={[styles.container, props.style]}>
+        <SafeAreaView style={[styles.container, listStyle]}>
             {renderList(props.kind)}
         </SafeAreaView>
     );

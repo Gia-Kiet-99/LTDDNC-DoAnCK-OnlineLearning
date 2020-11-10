@@ -1,24 +1,6 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
-import Rating from "../Common/rating";
-
-const info = {
-    title: 'C# Fundamentals',
-    author: [
-        {
-            authorName: 'Scott Allen',
-            authorAvatar: require('../../../assets/girl.jpg'),
-        },
-        {
-            authorName: 'Gia Kiet',
-            authorAvatar: require('../../../assets/girl.jpg'),
-        },
-    ],
-    level: 'Beginner',
-    released: 'Apr 16 2019',
-    duration: '6h 10m',
-    rating: 5,
-}
+import Rating from "../../Common/rating";
 
 const AuthorButton = (props) => {
     return <TouchableOpacity style={styles.authorWrapper}>
@@ -62,7 +44,7 @@ const CourseDetail = (props) => {
                 <View style={styles.imageWrapper}>
                     <Image
                         style={styles.buttonImage}
-                        source={(isBookmarked === true) ? require('../../../assets/bookmarked-icon.png') : require('../../../assets/bookmark-icon.png')}/>
+                        source={(isBookmarked === true) ? require('../../../../assets/bookmarked-icon.png') : require('../../../../assets/bookmark-icon.png')}/>
                 </View>
                 <Text style={styles.buttonText}>{(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}</Text>
             </TouchableOpacity>
@@ -70,13 +52,13 @@ const CourseDetail = (props) => {
                 onPress={showAlert}
                 style={[styles.button, {marginHorizontal: 10}]}>
                 <View style={styles.imageWrapper}>
-                    <Image style={styles.buttonImage} source={require('../../../assets/channel-icon.png')}/>
+                    <Image style={styles.buttonImage} source={require('../../../../assets/channel-icon.png')}/>
                 </View>
                 <Text style={[styles.buttonText, {textAlign: 'center'}]}>Add to Channel</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <View style={styles.imageWrapper}>
-                    <Image style={styles.buttonImage} source={require('../../../assets/download-icon.png')}/>
+                    <Image style={styles.buttonImage} source={require('../../../../assets/download-icon.png')}/>
                 </View>
                 <Text style={styles.buttonText}>Download</Text>
             </TouchableOpacity>
@@ -95,7 +77,7 @@ const CourseDetail = (props) => {
                     style={styles.expandButton}
                     onPress={() => setIsExpanded(!isExpanded)}>
                     <Image style={styles.expandImage}
-                           source={(isExpanded === true) ? require('../../../assets/up-arrow.png') : require('../../../assets/down-arrow.png')}
+                           source={(isExpanded === true) ? require('../../../../assets/up-arrow.png') : require('../../../../assets/down-arrow.png')}
                     />
                 </TouchableOpacity>
             </View>
@@ -108,7 +90,7 @@ const CourseDetail = (props) => {
             <CourseDescription/>
 
             <TouchableOpacity style={styles.largeButton}>
-                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../assets/check.png')}/>
+                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../../assets/check.png')}/>
                 <Text>Take a learning check</Text>
             </TouchableOpacity>
 
@@ -116,7 +98,7 @@ const CourseDetail = (props) => {
                 style={styles.largeButton}
                 onPress={() => props.navigation.push("CourseDetail", {item: item})}
             >
-                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../assets/folder.png')}/>
+                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../../assets/folder.png')}/>
                 <Text>View related paths & courses</Text>
             </TouchableOpacity>
         </View>

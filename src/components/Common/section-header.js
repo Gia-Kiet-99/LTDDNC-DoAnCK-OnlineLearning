@@ -2,13 +2,25 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 const SectionHeader = (props) => {
+    const onSeeAllPressed = () => (
+        props.navigation.navigate("ListCourseStack",
+            {
+                screen: "StudyList",
+                params: {
+                    kind: props.kind,
+                    style: {
+                        marginHorizontal: 15
+                    }
+                }
+            })
+    )
     return (
         <View style={styles.headerWrapper}>
             <Text style={styles.header}>
                 {props.title}
             </Text>
             {props.showButton === true &&
-                <TouchableOpacity style={styles.detailButton}>
+                <TouchableOpacity onPress={onSeeAllPressed} style={styles.detailButton}>
                     <Text style={styles.text}>See all ></Text>
                 </TouchableOpacity>
             }

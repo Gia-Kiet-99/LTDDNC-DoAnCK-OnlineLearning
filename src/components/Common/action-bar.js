@@ -2,13 +2,24 @@ import React from 'react';
 import {StyleSheet, Image, Text, TouchableOpacity, View} from 'react-native';
 
 const ActionBar = (props) => {
+    const onSettingPressed = () => {
+        return props.navigation.navigate("Setting")
+    }
+    const onAccountPressed = () => {
+        return props.navigation.navigate("Profile")
+    }
+
     return (
         <View style={styles.bar}>
-            <TouchableOpacity style={styles.imageWrapper}>
+            <TouchableOpacity
+                style={styles.imageWrapper}
+                onPress={onSettingPressed}>
                 <Image style={styles.settingIcon} source={require('../../../assets/setting.png')}/>
             </TouchableOpacity>
             <Text style={styles.textBar}>{props.title}</Text>
-            <TouchableOpacity style={styles.imageWrapper}>
+            <TouchableOpacity
+                style={styles.imageWrapper}
+                onPress={onAccountPressed}>
                 <Image style={styles.icon} source={require('../../../assets/user-blue.png')}/>
             </TouchableOpacity>
         </View>

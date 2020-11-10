@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import ChannelInfo from "../../../Common/channel-info";
 
 const Separator = () => {
     return (
@@ -8,20 +9,28 @@ const Separator = () => {
 }
 
 const ChannelSectionItem = (props) => {
+    const item = props.item;
+
+    const onItemPressed = () => {
+        return props.navigation.navigate("ChannelDetail", {item: item})
+    }
+
     return (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={onItemPressed}>
                 <View style={styles.content}>
                     <Image style={styles.image} source={require('../../../../../assets/image-1.jpg')}/>
                     <Separator/>
-                    <View style={styles.description}>
-                        <Text style={styles.text}>
-                            {props.item.title}
-                        </Text>
-
-                        <Text style={styles.darkText}>
-                            {`${props.item.level} . ${props.item.follow}`}
-                        </Text>
-                    </View>
+                    <ChannelInfo
+                        title={item.title}
+                        level={item.level}
+                        follow={item.follow}
+                        style={{fontSize: 16}}
+                        containerStyle={{
+                            paddingHorizontal: 10,
+                            paddingVertical: 5,
+                        }}
+                        // titleStyle={channelInfoStyle.largerTitle}
+                    />
                 </View>
             </TouchableOpacity>
     );
