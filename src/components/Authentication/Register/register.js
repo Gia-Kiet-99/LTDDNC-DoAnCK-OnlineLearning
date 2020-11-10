@@ -1,31 +1,60 @@
 import React from 'react'
-import {TouchableOpacity, Image, Text, View, StyleSheet} from "react-native"
+import {TouchableOpacity, Image, Text, View, StyleSheet, TextInput} from "react-native"
+import textStyles from "../styles/text-styles";
+import textInputStyles from "../styles/text-input-styles";
+import buttonStyles from "../styles/button-styles";
 
-const Register = () => {
+const Register = (props) => {
+    const onSubscribe = () => {
+        return props.navigation.navigate("Login")
+    }
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={require('../../../../assets/Pluralsight.png')}/>
             </View>
-            <TouchableOpacity style={[styles.button,styles.loginButton]}>
-                <Text style={styles.buttonText}>Sign in</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.transparentButton]}>
-                <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Subscribe to Pluralsight</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.transparentButton]}>
-                <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Explore without a subscription</Text>
+            <View style={{marginBottom: 10}}>
+                <Text style={textStyles.labelText}>Username (or email)</Text>
+                <TextInput  selectionColor={'#888'} style={textInputStyles.textInput}/>
+            </View>
+
+            <View>
+                <Text style={textStyles.labelText}>Password</Text>
+                <TextInput selectionColor={'#888'} style={textInputStyles.textInput} secure={true} secureTextEntry={true}/>
+            </View>
+
+            <View>
+                <Text style={textStyles.labelText}>Confirm password</Text>
+                <TextInput selectionColor={'#888'} style={textInputStyles.textInput} secure={true} secureTextEntry={true}/>
+            </View>
+
+            <TouchableOpacity activeOpacity={0.5}
+                              style={[buttonStyles.button, buttonStyles.loginButton]}
+                              onPress={onSubscribe}
+            >
+                <Text style={[textStyles.buttonText, {color: '#fff'}]}>Subscribe</Text>
             </TouchableOpacity>
 
+            {/*<TouchableOpacity>*/}
+            {/*    <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>*/}
+            {/*</TouchableOpacity>*/}
+
+            {/*<TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>*/}
+            {/*    <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>*/}
+            {/*</TouchableOpacity>*/}
+
+            {/*<TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>*/}
+            {/*    <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>*/}
+            {/*</TouchableOpacity>*/}
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        padding: '5%'
+        padding: "5%",
     },
     imageWrapper: {
         alignItems: 'center',
@@ -34,35 +63,6 @@ const styles = StyleSheet.create({
         height: 150,
         width: 250,
     },
-    button: {
-        marginTop: 10,
-        padding: 10,
-        borderRadius: 3,
-
-    },
-
-    loginButton: {
-        backgroundColor: '#2e97ff',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 1,
-        },
-        shadowOpacity: 0.22,
-        shadowRadius: 2.22,
-
-        elevation: 3,
-    },
-
-    transparentButton: {
-        borderWidth: 0.5,
-        borderColor: "#2e97ff",
-    },
-    buttonText: {
-        color: '#fff',
-        textAlign: 'center',
-        fontWeight: 'bold'
-    }
 
 })
 

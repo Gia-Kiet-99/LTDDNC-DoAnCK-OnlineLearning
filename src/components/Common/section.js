@@ -10,7 +10,7 @@ const Section = (props) => {
     return (
         <View style={styles.container}>
             <SectionHeader title={props.title} showButton={props.showSeeAllButton}/>
-            <SectionList kind={props.kind} list={props.list}/>
+            <SectionList navigation={props.navigation} kind={props.kind} list={props.list}/>
         </View>
     );
 };

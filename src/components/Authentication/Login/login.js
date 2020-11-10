@@ -9,6 +9,13 @@ const Login = (props) => {
     const onLogin = () => {
         return props.navigation.navigate("MainTabNavigator")
     }
+    const onForgetPasswordPressed = () => {
+        return props.navigation.navigate("ForgetPassword")
+    }
+    const onSubscribePressed = () => {
+        return props.navigation.navigate("Register")
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
@@ -28,7 +35,7 @@ const Login = (props) => {
                 <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onForgetPasswordPressed}>
                 <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
             </TouchableOpacity>
 
@@ -36,7 +43,7 @@ const Login = (props) => {
                 <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
+            <TouchableOpacity onPress={onSubscribePressed} style={[buttonStyles.button, buttonStyles.transparentButton]}>
                 <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
             </TouchableOpacity>
         </View>

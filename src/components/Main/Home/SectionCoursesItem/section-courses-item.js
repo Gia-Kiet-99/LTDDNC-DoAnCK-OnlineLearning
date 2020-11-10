@@ -9,8 +9,14 @@ const Separator = () => {
 }
 
 const SectionCoursesItem = (props) => {
+    const ItemPressed = () => {
+        return props.navigation.navigate("CourseDetail", {item: props.item})
+    }
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={ItemPressed}>
             <View style={styles.content}>
                 <Image style={styles.image} source={props.item.image}/>
                 <Separator/>

@@ -5,18 +5,18 @@ import {listName, titleName} from "../../../globals/constants";
 import {channels, courses} from "../../../localize/data";
 import ActionBar from "../../Common/action-bar";
 
-const Home = () => {
+const Home = (props) => {
     return (
         <View style={styles.container}>
+            <StatusBar translucent={false} backgroundColor="white" barStyle='dark-content'/>
             <ActionBar title={titleName.home}/>
-            {/*<StatusBar/>*/}
             <ScrollView showsVerticalScrollIndicator={false} style={styles.listSection}>
                 <View style={styles.imageWrapper}>
                     <Image style={styles.image} source={require('../../../../assets/background-image-3.jpg')}/>
                 </View>
-                <Section kind={listName.course} title={'Continue learning'} list={courses} showSeeAllButton={true}/>
+                <Section navigation={props.navigation} kind={listName.course} title={'Continue learning'} list={courses} showSeeAllButton={true}/>
                 <Section kind={listName.channel} title={'Channels'} list={channels} showSeeAllButton={true}/>
-                <Section kind={listName.course} title={'Course list'} list={courses} showSeeAllButton={true}/>
+                <Section navigation={props.navigation} kind={listName.course} title={'Course list'} list={courses} showSeeAllButton={true}/>
                 <Section kind={listName.channel} title={'My Channels'} list={channels} showSeeAllButton={true}/>
             </ScrollView>
         </View>

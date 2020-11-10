@@ -13,7 +13,7 @@ const SectionList = (props) => {
             case listName.path:
                 return list.map(item => <PathsSectionItem key={item.id} item={item}/>);
             case listName.course:
-                return list.map(item => <SectionCoursesItem key={item.id} item={item}/>);
+                return list.map(item => <SectionCoursesItem navigation={props.navigation} key={item.id} item={item}/>);
             case listName.author:
                 return list.map(item => <AuthorSectionItem key={item.id} item={item}/>);
             case listName.channel:
