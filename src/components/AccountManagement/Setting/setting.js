@@ -118,8 +118,6 @@ const Options = () => {
                     />
                 </View>
             </Pressable>
-
-
         </View>
     )
 }

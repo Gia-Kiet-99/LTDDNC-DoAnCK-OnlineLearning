@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import StudyList from "../../Courses/StudyList/study-list";
 import ActionBar from "../../Common/action-bar";
+import {listName, titleName} from "../../../globals/constants";
 
 const DownloadHeader = () => (
     <View style={styles.overView}>
@@ -15,10 +16,10 @@ const DownloadHeader = () => (
 const Download = (props) => {
     return (
         <View style={styles.container}>
-            <ActionBar title='Downloads'/>
+            <ActionBar title={titleName.download}/>
             <View style={styles.content}>
                 <DownloadHeader/>
-                <StudyList kind='course-list' style={styles.courseList}/>
+                <StudyList kind={listName.download} style={styles.courseList}/>
             </View>
         </View>
     );

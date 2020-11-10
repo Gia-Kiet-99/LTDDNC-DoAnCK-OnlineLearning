@@ -1,6 +1,5 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, View, StyleSheet} from 'react-native';
-import Rating from "../../../Common/rating";
 import CourseInfo from "../../../Common/course-info";
 
 const Separator = () => {
@@ -13,28 +12,11 @@ const SectionCoursesItem = (props) => {
     return (
         <TouchableOpacity style={styles.container}>
             <View style={styles.content}>
-                <Image style={styles.image} source={require('../../../../../assets/image.jpg')}/>
+                <Image style={styles.image} source={props.item.image}/>
                 <Separator/>
-                {/*<View style={styles.description}>*/}
-                {/*    <Text style={styles.text}>*/}
-                {/*        {props.item.title}*/}
-                {/*    </Text>*/}
-
-                {/*    <Text style={styles.darkText}>*/}
-                {/*        {props.item.author}*/}
-                {/*    </Text>*/}
-
-                {/*    <Text style={styles.darkText}>*/}
-                {/*        {`${props.item.level} . ${props.item.released} . ${props.item.duration}`}*/}
-                {/*    </Text>*/}
-                {/*    <View>*/}
-                {/*        <Rating/>*/}
-                {/*    </View>*/}
-                {/*</View>*/}
-
                 <CourseInfo containerStyle={courseInfoStyle.container}
                     title={props.item.title}
-                    author={props.item.author}
+                    author={props.item.authorName}
                     level={props.item.level}
                     released={props.item.released}
                     duration={props.item.duration}

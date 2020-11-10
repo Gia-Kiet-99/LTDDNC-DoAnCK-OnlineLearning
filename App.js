@@ -13,6 +13,8 @@ import CourseDetail from "./src/components/CourseDetail/course-detail";
 import HeaderRightButtons from "./src/components/Common/header-right-buttons";
 import Setting from "./src/components/AccountManagement/Setting/setting";
 import Profile from "./src/components/AccountManagement/Profile/profile";
+import Login from "./src/components/Authentication/Login/login";
+import Register from "./src/components/Authentication/Register/register";
 
 
 const Stack = createStackNavigator();
@@ -47,51 +49,27 @@ const ListCourseStack = () => (
     </Stack.Navigator>
 )
 
+const MainTabNavigator = () => (
+    <Tab.Navigator initialRouteName="Download">
+        <Tab.Screen name="Home" component={Home}/>
+        <Tab.Screen name="Download" component={Download}/>
+        <Tab.Screen name="Browse" component={Browse}/>
+        <Tab.Screen name="Search" component={Search}/>
+        <Tab.Screen name="Course" component={ListCourseStack}/>
+    </Tab.Navigator>
+)
+
+
 export default function App() {
   return (
-      // <NavigationContainer>
-      //     <Stack.Navigator
-      //         // mode="modal"
-      //         initialRouteName="ListCourse"
-      //         screenOptions={{
-      //             headerStyle: {
-      //                 backgroundColor: "#ff884d",
-      //             },
-      //             headerTintColor: '#fff',
-      //             headerTitleStyle: {
-      //
-      //             },
-      //         }}>
-      //         <Stack.Screen name="ListCourse" component={StudyList}
-      //                       options={{
-      //                           title: "List Course",
-      //                       }}/>
-      //         <Stack.Screen name="CourseDetail" component={CourseDetail}
-      //                       options={{
-      //                           title: "Course Detail",
-      //                           headerShown: false
-      //                       }}
-      //         />
-      //         <Stack.Screen name="Setting" component={Setting} options={{title: "Setting",}}/>
-      //         <Stack.Screen name="Profile" component={Profile} options={{title: "Profile",}}/>
-      //
-      //     </Stack.Navigator>
-      // </NavigationContainer>
-
       <NavigationContainer>
-          <Tab.Navigator>
-              <Tab.Screen name="Home" component={Home}/>
-              <Tab.Screen name="Download" component={Download}/>
-              <Tab.Screen name="Browse" component={Browse}/>
-              <Tab.Screen name="Search" component={Search}/>
-              <Tab.Screen name="Course" component={ListCourseStack}/>
-          </Tab.Navigator>
+          <Stack.Navigator>
+              <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+              <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+              <Stack.Screen name="MainTabNavigator" component={MainTabNavigator} options={{headerShown: false}}/>
+          </Stack.Navigator>
       </NavigationContainer>
 
-    // <View style={styles.container}>
-    //   <StatusBar backgroundColor="white" barStyle="dark-content"/>
-    //   <CourseDetail/>
-    // </View>
   );
 }
 

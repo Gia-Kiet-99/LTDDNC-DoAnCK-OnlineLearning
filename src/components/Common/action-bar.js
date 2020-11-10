@@ -17,7 +17,7 @@ const ActionBar = (props) => {
 
 const styles = StyleSheet.create({
     bar: {
-        padding: 15,
+        padding: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

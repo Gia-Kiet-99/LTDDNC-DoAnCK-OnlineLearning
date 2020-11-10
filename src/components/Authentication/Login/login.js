@@ -4,7 +4,11 @@ import buttonStyles from "../styles/button-styles";
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
 
-const Login = () => {
+
+const Login = (props) => {
+    const onLogin = () => {
+        return props.navigation.navigate("MainTabNavigator")
+    }
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
@@ -20,7 +24,7 @@ const Login = () => {
                 <TextInput selectionColor={'#888'} style={textInputStyles.textInput} secure={true} secureTextEntry={true}/>
             </View>
 
-            <TouchableOpacity activeOpacity={0.5} style={[buttonStyles.button, buttonStyles.loginButton]}>
+            <TouchableOpacity onPress={onLogin} activeOpacity={0.5} style={[buttonStyles.button, buttonStyles.loginButton]}>
                 <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
             </TouchableOpacity>
 
