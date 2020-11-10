@@ -4,9 +4,10 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 const SectionHeader = (props) => {
     const onSeeAllPressed = () => (
         props.navigation.navigate("ListCourseStack",
-            {
+            { //data pass to StudyList
                 screen: "StudyList",
                 params: {
+                    barTitle: props.title,
                     kind: props.kind,
                     style: {
                         marginHorizontal: 15

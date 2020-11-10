@@ -21,25 +21,20 @@ import ChannelDetail from "./src/components/DetailScreen/ChannelDetail/channel-d
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-
+//({ route }) => ({ title: route.params.barTitle })
 const ListCourseStack = (props) => (
     <Stack.Navigator
         initialRouteName="StudyList"
         screenOptions={{headerShown: true}}>
         <Stack.Screen name="StudyList" component={StudyList}
-                      options={{
-                          title: "Study list",
-                      }}/>
+                      options={({route}) => ({ title: route.params.barTitle })}/>
         <Stack.Screen name="CourseDetail" component={CourseDetail}
                       options={{
                           title: "Course Detail",
                           headerShown: false
                       }}/>
         <Stack.Screen name="ChannelDetail" component={ChannelDetail}
-                      options={{
-                          title: "Channel Detail",
-                          headerShown: true,
-                      }}/>
+                      options={({route}) => ({ title: route.params.item.title })}/>
     </Stack.Navigator>
 )
 
@@ -47,7 +42,7 @@ const HomeStackNavigator = () => (
     <Stack.Navigator initalRouteName={Home}>
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
         <Stack.Screen name="CourseDetail" component={CourseDetail} options={{headerShown: false}}/>
-        <Stack.Screen name="ChannelDetail" component={ChannelDetail} options={{headerShown: true}}/>
+        <Stack.Screen name="ChannelDetail" component={ChannelDetail} options={({route}) => ({ title: route.params.item.title })}/>
         <Stack.Screen name="Setting" component={Setting}/>
         <Stack.Screen name="Profile" component={Profile}/>
         <Stack.Screen name="ListCourseStack" component={ListCourseStack} options={{headerShown: false}}/>
@@ -83,7 +78,7 @@ const MainTabNavigator = () => (
                        activeTintColor: '#3498db',
                        inactiveTintColor: 'gray',
                        labelStyle: {
-                           fontSize: 14,
+                           fontSize: 12,
                        },
                        style: {
                            height: 50

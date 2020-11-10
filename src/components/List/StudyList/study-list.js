@@ -7,12 +7,12 @@ import PathListItem from "../ListItem/path-list-item";
 import AuthorListItem from "../ListItem/author-list-item";
 import {listName} from "../../../globals/constants";
 import {authors, channels, courses, downloads, paths} from "../../../localize/data";
-import ChannelSectionItem from "../../Main/Home/ChannelSectionItem/channel-section-item";
 import ChannelListItem from "../ListItem/channel-list-item";
 
 
 const StudyList = (props) => {
     // console.log("StudyList", props)
+    // props.navigation.setOptions({title: props.route.params.barTitle})
 
     /*value passing when you click See all button*/
     const listType = (props.route?.params?.kind === undefined) ? props.kind : props.route.params.kind;
