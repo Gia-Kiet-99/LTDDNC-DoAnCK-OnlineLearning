@@ -5,15 +5,18 @@ import CourseInfo from "../../Common/course-info";
 
 const CourseListItem = (props) => {
     const [menu,setMenu] = useState(null);
+    // const navigation = props.navigation;
 
     const showMenu = () => {
         menu.show();
     }
     const doNothing = () => {
     }
-    const onPressListItem = () => (
-        props.navigation.navigate("CourseDetail", {item: props.item})
-    )
+    const onPressListItem = () => {
+        if (props.navigation !== undefined) {
+            props.navigation.navigate("CourseDetail", {item: props.item})
+        }
+    }
 
     return (
         <TouchableOpacity

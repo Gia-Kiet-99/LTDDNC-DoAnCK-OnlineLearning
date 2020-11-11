@@ -4,7 +4,7 @@ import Menu, {MenuItem} from "react-native-material-menu";
 import CourseInfo from "../../Common/course-info";
 
 const DownloadListItem = (props) => {
-    const data = props.item;
+    const item = props.item;
     const [menu,setMenu] = useState(null);
 
     const showMenu = () => {
@@ -13,20 +13,31 @@ const DownloadListItem = (props) => {
     const doNothing = () => {
 
     }
+    const onItemPressed = () => {
+        if(props.navigation !== undefined) {
+            props.navigation.navigate("CourseDetail",
+                {
+                    item: item
+                })
+        }
+    }
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onItemPressed}
+        >
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={data.image}/>
+                <Image style={styles.image} source={item.image}/>
             </View>
             <CourseInfo
                 containerStyle={courseInfoStyle.container}
                 titleStyle={courseInfoStyle.largerTitle}
-                title={props.item.title}
-                author={props.item.authorName}
-                level={props.item.level}
-                released={props.item.released}
-                duration={props.item.duration}
+                title={item.title}
+                author={item.authorName}
+                level={item.level}
+                released={item.released}
+                duration={item.duration}
                 style={{fontSize: 16}}
             />
             <TouchableOpacity style={styles.menuWrapper} onPress={showMenu}>

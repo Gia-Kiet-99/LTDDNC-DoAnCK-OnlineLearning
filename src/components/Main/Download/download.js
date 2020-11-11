@@ -16,10 +16,10 @@ const DownloadHeader = () => (
 const Download = (props) => {
     return (
         <View style={styles.container}>
-            <ActionBar title={titleName.download}/>
+            <ActionBar title={titleName.download} navigation={props.navigation}/>
             <View style={styles.content}>
                 <DownloadHeader/>
-                <StudyList kind={listName.download} style={styles.courseList}/>
+                <StudyList kind={listName.download} style={styles.courseList} navigation={props.navigation}/>
             </View>
         </View>
     );

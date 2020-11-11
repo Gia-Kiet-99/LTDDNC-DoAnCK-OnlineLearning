@@ -3,10 +3,15 @@ import {StyleSheet, Image, Text, TouchableOpacity, View} from 'react-native';
 
 const ActionBar = (props) => {
     const onSettingPressed = () => {
-        return props.navigation.navigate("Setting")
+        if(props.navigation !== undefined) {
+            props.navigation.navigate("Setting")
+        }
     }
     const onAccountPressed = () => {
-        return props.navigation.navigate("Profile")
+        if(props.navigation !== undefined) {
+            // props.navigation.navigate("Profile")
+            props.navigation.navigate("Profile")
+        }
     }
 
     return (

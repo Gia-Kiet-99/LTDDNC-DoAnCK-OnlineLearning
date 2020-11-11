@@ -2,10 +2,15 @@ import React, {useState} from 'react';
 import {Alert, Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
 
 const AccountInfo = (props) => {
+    const onProfilePress = () => {
+        if(props.navigation !== undefined) {
+            props.navigation.navigate("Profile");
+        }
+    }
     return (
         <View style={styles.accountInfoContainer}>
             <TouchableOpacity style={[styles.button, {flexDirection: 'row', alignItems:'center'}]}
-                onPress={() => (props.navigation.navigate("Profile"))}>
+                onPress={onProfilePress}>
                 <Image style={styles.image} source={require('../../../../assets/avatar.jpg')}/>
                 <View style={{paddingLeft: 15}}>
                     <Text>Kiet Dinh</Text>

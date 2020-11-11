@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ChannelInfo from "../../Common/channel-info";
+import StudyList from "../../List/StudyList/study-list";
+import {listName} from "../../../globals/constants";
+import {channels} from "../../../localize/data";
 
 const ChannelDetail = (props) => {
     const item = props.route.params.item;
@@ -38,6 +41,7 @@ const ChannelDetail = (props) => {
                 titleStyle={{fontSize: 24}}
             />
             <ChannelDescription/>
+            <StudyList kind={listName.channel} style={{marginTop: 25}}/>
         </View>
     );
 };

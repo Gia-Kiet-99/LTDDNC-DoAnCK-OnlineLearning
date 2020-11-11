@@ -20,7 +20,6 @@ const renderAuthorButton = (author) => {
 const CourseDetail = (props) => {
     const item = props.route.params.item;
     // console.log(props);
-    // props.navigation.setOptions({title: item.title})
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -110,7 +109,7 @@ const CourseDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar translucent={true} animated={true} hidden={false}/>
+            {/*<StatusBar translucent={true}/>*/}
             <VideoPlayer/>
             <ScrollView>
                 <CourseIntro/>

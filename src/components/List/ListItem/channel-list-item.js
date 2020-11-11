@@ -13,7 +13,8 @@ const ChannelListItem = (props) => {
         menu.show();
     }
     const onItemPressed = () => {
-        return props.navigation.navigate("ChannelDetail", {item: item})
+        if(props.navigation !== undefined)
+            props.navigation.navigate("ChannelDetail", {item: item});
     }
 
     return (
@@ -46,6 +47,7 @@ const ChannelListItem = (props) => {
 
 const channelInfoStyle = StyleSheet.create({
     container: {
+        flex: 1,
         marginLeft: 10,
     },
     largerTitle: {

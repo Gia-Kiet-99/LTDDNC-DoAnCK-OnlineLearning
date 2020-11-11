@@ -17,6 +17,7 @@ import Register from "./src/components/Authentication/Register/register";
 import Authentication from "./src/components/Authentication/authentication";
 import ForgetPassword from "./src/components/Authentication/ForgetPassword/forget-password";
 import ChannelDetail from "./src/components/DetailScreen/ChannelDetail/channel-detail";
+import DownloadStackNavigator from "./src/components/Navigators/DownloadStackNavigator/download-stack-navigator";
 
 
 const Stack = createStackNavigator();
@@ -25,14 +26,17 @@ const ListCourseStack = (props) => (
     <Stack.Navigator
         initialRouteName="StudyList"
         screenOptions={{headerShown: true}}>
-        <Stack.Screen name="StudyList" component={StudyList}
+        <Stack.Screen name="StudyList"
+                      component={StudyList}
                       options={({route}) => ({ title: route.params.barTitle })}/>
-        <Stack.Screen name="CourseDetail" component={CourseDetail}
+        <Stack.Screen name="CourseDetail"
+                      component={CourseDetail}
                       options={{
                           title: "Course Detail",
                           headerShown: false
                       }}/>
-        <Stack.Screen name="ChannelDetail" component={ChannelDetail}
+        <Stack.Screen name="ChannelDetail"
+                      component={ChannelDetail}
                       options={({route}) => ({ title: route.params.item.title })}/>
     </Stack.Navigator>
 )
@@ -55,7 +59,7 @@ const MainTabNavigatorScreenOptions = ({ route }) => ({
             case 'HomeStackNavigator':
                 iconName = 'md-home';
                 break;
-            case 'Download':
+            case 'DownloadStackNavigator':
                 iconName = 'md-cloud-download';
                 break;
             case 'Browse':
@@ -71,7 +75,7 @@ const MainTabNavigatorScreenOptions = ({ route }) => ({
 })
 
 const MainTabNavigator = () => (
-    <Tab.Navigator initialRouteName="Home"
+    <Tab.Navigator initialRouteName="HomeStackNavigator"
                    screenOptions={MainTabNavigatorScreenOptions}
                    tabBarOptions={{
                        activeTintColor: '#3498db',
@@ -84,7 +88,7 @@ const MainTabNavigator = () => (
                        },
                    }}>
         <Tab.Screen name="HomeStackNavigator" component={HomeStackNavigator} options={{title: "Home"}}/>
-        <Tab.Screen name="Download" component={Download}/>
+        <Tab.Screen name="DownloadStackNavigator" component={DownloadStackNavigator} options={{title: "Download"}}/>
         <Tab.Screen name="Browse" component={Browse}/>
         <Tab.Screen name="Search" component={Search}/>
     </Tab.Navigator>
