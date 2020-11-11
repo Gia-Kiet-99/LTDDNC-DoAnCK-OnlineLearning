@@ -8,7 +8,7 @@ import {listName} from "../../globals/constants";
 
 const SectionList = (props) => {
     const Skill = (props) => {
-        return <TouchableOpacity key={props.item.id} style={styles.button}>
+        return <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>{props.item.skill}</Text>
         </TouchableOpacity>
     }
@@ -16,15 +16,15 @@ const SectionList = (props) => {
     const renderListItem = (list) => {
         switch (props.kind) {
             case listName.path:
-                return list.map(item => <PathsSectionItem key={item.id} item={item} navigation={props.navigation}/>);
+                return list.map((item) => <PathsSectionItem key={item.id} item={item} navigation={props.navigation}/>);
             case listName.course:
-                return list.map(item => <SectionCoursesItem key={item.id} item={item} navigation={props.navigation}/>);
+                return list.map((item) => <SectionCoursesItem key={item.id} item={item} navigation={props.navigation}/>);
             case listName.author:
-                return list.map(item => <AuthorSectionItem key={item.id} item={item} navigation={props.navigation}/>);
+                return list.map((item) => <AuthorSectionItem key={item.id} item={item} navigation={props.navigation}/>);
             case listName.channel:
-                return list.map(item => <ChannelSectionItem key={item.id} item={item} navigation={props.navigation}/>)
+                return list.map((item) => <ChannelSectionItem key={item.id} item={item} navigation={props.navigation}/>)
             case listName.popularSkill:
-                return list.map(item => <Skill key={item.id} item={item} navigation={props.navigation}/>)
+                return list.map((item) => <Skill key={item.id} item={item} navigation={props.navigation}/>)
         }
     }
 

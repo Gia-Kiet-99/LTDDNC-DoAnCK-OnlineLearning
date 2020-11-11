@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import {Text} from "react-native";
-import LessonList from "../../DetailScreen/CourseDetail/ListLesson/lesson-list";
+import LessonList from "../../../DetailScreen/CourseDetail/ListLesson/lesson-list";
 
 const Tab = createMaterialTopTabNavigator();
 

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, View, Text, Alert, ScrollView,StatusBar, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
-import LessonNavigator from "../../Navigators/LessonNavigator/lesson-navigator";
+import LessonNavigator from "../../Navigators/MainTabNavigator/LessonNavigator/lesson-navigator";
 import {NavigationContainer} from "@react-navigation/native";
 import LessonList from "./ListLesson/lesson-list";
 

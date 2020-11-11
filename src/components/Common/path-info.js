@@ -17,7 +17,7 @@ const PathInfo = (props) => {
 
 const styles = StyleSheet.create({
     description: {
-        flex: 1,
+        // flex: 1,
     },
     title: {
         fontSize: 14

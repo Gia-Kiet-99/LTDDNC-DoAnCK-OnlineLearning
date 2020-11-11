@@ -3,11 +3,11 @@ import {SafeAreaView, Text, SectionList, StyleSheet} from 'react-native';
 import {lessons} from "../../../../localize/data";
 import ListLessonItem from "../ListLessonItem/list-lesson-item";
 import ListItemSeparator from "../../../Common/list-item-separator";
-import LessonSectionHeader from "../LessonSectionHeader/lesson-section-header";
+import SectionListHeader from "../SectionListHeader/section-list-header";
 
 const LessonList = (props) => {
     const renderSectionHeader = ({section: {title, totalDuration}}) => {
-        return <LessonSectionHeader title={title} totalDuration={totalDuration}/>
+        return <SectionListHeader title={title} totalDuration={totalDuration}/>
     }
     const renderLessonItem = ({item}) => {
         return <ListLessonItem key={item.id} item={item}/>

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Image, Text, TouchableOpacity, View} from 'react-native';
 import Menu, {MenuItem} from "react-native-material-menu";
 
-const LessonSectionHeader = (props) => {
+const SectionListHeader = (props) => {
     const header = props.section;
     const [menu,setMenu] = useState(null);
 
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default LessonSectionHeader;
+export default SectionListHeader;

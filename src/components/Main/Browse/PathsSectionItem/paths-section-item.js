@@ -9,8 +9,20 @@ const Separator = () => {
 }
 
 const PathsSectionItem = (props) => {
+    const onItemPressed = () => {
+        if(props.navigation !== undefined) {
+            props.navigation.navigate("PathDetail",
+                {
+                    item: props.item,
+                })
+        }
+    }
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onItemPressed}
+        >
             <View style={styles.item}>
                 <Image style={styles.image} source={require('../../../../../assets/image.jpg')}/>
                 <Separator/>

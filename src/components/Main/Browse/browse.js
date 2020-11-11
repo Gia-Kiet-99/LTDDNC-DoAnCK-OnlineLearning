@@ -30,9 +30,22 @@ const Browse = (props) => {
                     </ScrollView>
                 </View>
 
-                <Section kind={listName.popularSkill} title={'Popular Skills'} list={skills}/>
-                <Section kind={listName.path} title='Paths' list={paths} showSeeAllButton={true}/>
-                <Section kind={listName.author} title='Top authors' list={authors}/>
+                <Section
+                    kind={listName.popularSkill}
+                    title={'Popular Skills'}
+                    list={skills}
+                    navigation={props.navigation}/>
+                <Section
+                    kind={listName.path}
+                    title='Paths'
+                    list={paths}
+                    showSeeAllButton={true}
+                    navigation={props.navigation}/>
+                <Section
+                    kind={listName.author}
+                    title='Top authors'
+                    list={authors}
+                    navigation={props.navigation}/>
 
             </ScrollView>
         </View>
