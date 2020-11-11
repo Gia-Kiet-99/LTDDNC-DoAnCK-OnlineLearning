@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, Text, Alert, ScrollView,StatusBar, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
+import VideoPlayer from "./VideoPlayer/video-player";
+import LessonNavigator from "../../Navigators/LessonNavigator/lesson-navigator";
+import {NavigationContainer} from "@react-navigation/native";
+import LessonList from "./ListLesson/lesson-list";
 
 const AuthorButton = (props) => {
     return <TouchableOpacity style={styles.authorWrapper}>
@@ -104,10 +108,16 @@ const CourseDetail = (props) => {
         </View>
     }
 
-
     return (
         <View style={styles.container}>
-            <CourseIntro/>
+            <StatusBar translucent={true} animated={true} hidden={false}/>
+            <VideoPlayer/>
+            <ScrollView>
+                <CourseIntro/>
+                <View>
+                    <LessonNavigator/>
+                </View>
+            </ScrollView>
         </View>
     );
 };
@@ -115,10 +125,11 @@ const CourseDetail = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 15,
     },
     courseIntro: {
-        flexDirection: 'column'
+        // flex: 1,
+        padding: 15,
+        backgroundColor: '#fff'
     },
     largeButton: {
         flexDirection: 'row',

@@ -108,52 +108,52 @@ export const titles = [
     {
         id: 1,
         title: 'CONFERENCES',
-        source: require('../../assets/image.jpg'
-        )    },
+        source: require('../../assets/background-image-3.jpg')
+    },
     {
         id: 2,
         title: 'CERTIFICATION',
-        source: require('../../assets/image-1.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 3,
         title: 'Software\nDEVELOPMENT',
-        source: require('../../assets/background-image-5.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 4,
         title: 'IT\nOPS',
-        source: require('../../assets/background-image-2.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 5,
         title: 'Information\nAND\nCYBER SECURITY',
-        source: require('../../assets/image-1.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 6,
         title: 'DATA\nPROFESSIONAL',
-        source: require('../../assets/image-1.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 7,
         title: 'BUSINESS\nPROFESSIONAL',
-        source: require('../../assets/image-1.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 8,
         title: 'Creative\nPROFESSIONAL',
-        source: require('../../assets/image-1.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 9,
         title: 'MANUFACTURING\nAND\nDESIGN',
-        source: require('../../assets/image-1.jpg')
+        source: require('../../assets/background-image-3.jpg')
     },
     {
         id: 10,
         title: 'ARCHITECTURE\nAND\nCONSTRUCTION',
-        source: require('../../assets/image-1.jpg')
+        source: require('../../assets/background-image-3.jpg')
     }
 ]
 export const results = [
@@ -260,7 +260,7 @@ export const results = [
                 image: require('../../assets/image.jpg'),
                 rating: 5,
             },
-        ]
+        ],
     },
     {
         title: "Paths",
@@ -495,4 +495,113 @@ export const downloads = [
         rating: 5,
     },
 ]
-
+export const lessons = [
+    {
+        id: "1",
+        title: "Building a simple app",
+        totalDuration: "33:43",
+        data: [
+            {
+                id: "1.1",
+                title: "Introduction",
+                duration: "4:05"
+            },
+            {
+                id: "1.2",
+                title: "Downloading and Installing Android Studio",
+                duration: "0:57"
+            },
+            {
+                id: "1.3",
+                title: "Creating the Android Project",
+                duration: "3:01"
+            },
+            {
+                id: "1.4",
+                title: "Review the App Layout in Android Studio",
+                duration: "2:35"
+            }
+        ]
+    },
+    {
+        id: "2",
+        title: "Designing and Planning Our App",
+        totalDuration: "33:43",
+        data: [
+            {
+                id: "2.1",
+                title: "Introduction",
+                duration: "4:05"
+            },
+            {
+                id: "2.2",
+                title: "Our App - The high-level view",
+                duration: "0:57"
+            },
+            {
+                id: "2.3",
+                title: "Our App - Some long-term plans",
+                duration: "3:01"
+            },
+            {
+                id: "2.4",
+                title: "Rough design of our app starting point",
+                duration: "2:35"
+            }
+        ]
+    },
+    {
+        id: "3",
+        title: "Understanding Activities and Activity Layout Interface",
+        totalDuration: "33:43",
+        data: [
+            {
+                id: "3.1",
+                title: "Introduction",
+                duration: "4:05"
+            },
+            {
+                id: "3.2",
+                title: "What is an Activity?",
+                duration: "0:57"
+            },
+            {
+                id: "3.3",
+                title: "Activity UI",
+                duration: "3:01"
+            },
+            {
+                id: "3.4",
+                title: "Layout Classes",
+                duration: "2:35"
+            }
+        ]
+    },
+    {
+        id: "4",
+        title: "Working with Activities",
+        totalDuration: "33:43",
+        data: [
+            {
+                id: "4.1",
+                title: "Introduction",
+                duration: "4:05"
+            },
+            {
+                id: "4.2",
+                title: "Activity Interaction",
+                duration: "0:57"
+            },
+            {
+                id: "4.3",
+                title: "Creating the NoteListActivity",
+                duration: "3:01"
+            },
+            {
+                id: "4.4",
+                title: "Handling ListView Selection with an Anonymous Class",
+                duration: "2:35"
+            }
+        ]
+    },
+]

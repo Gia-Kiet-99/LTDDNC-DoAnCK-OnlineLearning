@@ -21,7 +21,6 @@ import ChannelDetail from "./src/components/DetailScreen/ChannelDetail/channel-d
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-//({ route }) => ({ title: route.params.barTitle })
 const ListCourseStack = (props) => (
     <Stack.Navigator
         initialRouteName="StudyList"
@@ -111,19 +110,6 @@ export default function App() {
 
   );
 }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         padding: 10
-//     },
-//
-//     separator: {
-//         marginVertical: 8,
-//         borderBottomColor: '#737373',
-//         borderBottomWidth: StyleSheet.hairlineWidth,
-//     }
-// });
 
 
 

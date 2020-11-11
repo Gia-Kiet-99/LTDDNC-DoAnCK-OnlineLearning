@@ -10,7 +10,7 @@ import {authors, paths, skills, titles} from "../../../localize/data";
 
 const renderImageButton = (titles) => {
     return titles.map((item) => <View style={{width:200}}>
-        <ImageButton key={item.id} title={item.title} source={require('../../../../assets/background-image-3.jpg')}/>
+        <ImageButton key={item.id} title={item.title} source={item.source}/>
     </View>)
 }
 

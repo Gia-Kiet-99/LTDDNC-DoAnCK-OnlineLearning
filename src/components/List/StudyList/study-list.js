@@ -34,7 +34,7 @@ const StudyList = (props) => {
         <ChannelListItem key={item.id} item={item} navigation={props.navigation}/>
     )
 
-    const renderList = (kind) => {
+    const renderList = (listType) => {
         switch (listType) {
             case listName.course:
                 return <FlatList showsVerticalScrollIndicator={false}
@@ -77,7 +77,7 @@ const StudyList = (props) => {
 
     return (
         <SafeAreaView style={[styles.container, listStyle]}>
-            {renderList(props.kind)}
+            {renderList(listType)}
         </SafeAreaView>
     );
 };

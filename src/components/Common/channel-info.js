@@ -4,7 +4,7 @@ import {StyleSheet, Text, View} from 'react-native';
 
 const ChannelInfo = (props) => {
     return (
-        <View style={[styles.description, props.containerStyle]}>
+        <View style={[styles.channelInfo, props.containerStyle]}>
             <Text style={props.titleStyle}>
                 {props.title}
             </Text>
@@ -16,8 +16,8 @@ const ChannelInfo = (props) => {
 };
 
 const styles = StyleSheet.create({
-    description: {
-        flex: 1,
+    channelInfo: {
+        // flex: 1,
         // backgroundColor: 'pink'
     },
     title: {
