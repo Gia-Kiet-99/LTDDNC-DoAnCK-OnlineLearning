@@ -11,9 +11,6 @@ import {authors, channels, courses, downloads, paths} from "../../../localize/da
 
 
 const StudyList = (props) => {
-    // console.log("StudyList", props)
-    // props.navigation.setOptions({title: props.route.params.barTitle})
-
     /* value passing when you click See all button */
     const listType = (props.route?.params?.kind === undefined) ? props.kind : props.route?.params?.kind;
     const listStyle = (props.route?.params?.style === undefined) ? props.style : props.route?.params?.style;
@@ -59,13 +56,14 @@ const StudyList = (props) => {
             case listName.author:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={authors}
-                                 ListHeaderComponent={props.listHeaderComponent}
                                  renderItem={renderAuthorItem}
                                  keyExtractor={item => item.id}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.channel:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={channels}
+                                 ListHeaderComponent={props.listHeaderComponent}
+                                 ListHeaderComponentStyle={props.listHeaderComponentStyle}
                                  renderItem={renderChannelIem}
                                  keyExtractor={item => item.id}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>

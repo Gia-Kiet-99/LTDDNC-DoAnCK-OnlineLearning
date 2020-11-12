@@ -13,8 +13,10 @@ const ChannelDetail = (props) => {
         return <View>
             <View style={(isExpanded === true) ? styles.channelDescription : styles.briefChannelDescription}>
                 <View style={styles.desWrapper}>
-                    <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam vero vel
-                        ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat saepe
+                    <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam
+                        vero vel
+                        ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat
+                        saepe
                         temporibus perspiciatis.</Text>
                 </View>
                 <TouchableOpacity
@@ -31,17 +33,25 @@ const ChannelDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            <ChannelInfo
-                title={item.title}
-                level={item.level}
-                follow={item.follow}
-                containerStyle={{
-                    paddingVertical: 5,
-                }}
-                titleStyle={{fontSize: 24}}
+            <StudyList
+                kind={listName.channel}
+                style={{marginTop: 0}}
+                listHeaderComponent={
+                    <>
+                        <ChannelInfo
+                            title={item.title}
+                            level={item.level}
+                            follow={item.follow}
+                            containerStyle={{
+                                marginTop: 10,
+                            }}
+                            titleStyle={{fontSize: 24}}
+                        />
+                        <ChannelDescription/>
+                    </>
+                }
+                listHeaderComponentStyle={{marginBottom: 25}}
             />
-            <ChannelDescription/>
-            <StudyList kind={listName.channel} style={{marginTop: 25}}/>
         </View>
     );
 };

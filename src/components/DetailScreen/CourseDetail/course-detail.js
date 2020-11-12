@@ -109,9 +109,9 @@ const CourseDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            {/*<StatusBar translucent={true}/>*/}
-            <VideoPlayer/>
-            <ScrollView>
+            <StatusBar translucent={true} hidden={true}/>
+            <VideoPlayer navigation={props.navigation}/>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <CourseIntro/>
                 <View>
                     <LessonNavigator/>

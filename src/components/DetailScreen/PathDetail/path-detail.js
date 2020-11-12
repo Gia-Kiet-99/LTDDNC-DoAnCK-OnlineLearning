@@ -35,14 +35,22 @@ const PathDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            <PathInfo
-                title={item.title}
-                count={item.count}
-                containerStyle={{marginTop: 10}}
-                titleStyle={{fontSize: 24}}
+            <StudyList
+                kind={listName.course}
+                style={{marginTop: 0}}
+                navigation={props.navigation}
+                listHeaderComponent={
+                    <>
+                        <PathInfo
+                            title={item.title}
+                            count={item.count}
+                            containerStyle={{marginTop: 10}}
+                            titleStyle={{fontSize: 24}}
+                        />
+                        <PathDescription/>
+                    </>
+                }
             />
-            <PathDescription/>
-            <StudyList kind={listName.course} style={{marginTop: 15}} navigation={props.navigation}/>
         </View>
     );
 };

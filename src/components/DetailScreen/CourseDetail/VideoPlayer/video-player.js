@@ -1,14 +1,18 @@
 import React, {useState} from 'react';
 import {Video} from "expo-av";
-import {View, StyleSheet} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const VideoPlayer = (props) => {
     const [player, setPlayer] = useState(null)
+    const goBack = () => {
+        props.navigation.goBack();
+    }
     return (
         <View style={styles.container}>
             <Video
                 // ref={(ref) => setPlayer(ref)}
-                source={{ uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }}
+                source={{uri: 'https://www.w3schools.com/html/mov_bbb.mp4'}}
                 rate={1.0}
                 volume={1.0}
                 isMuted={false}
@@ -20,19 +24,38 @@ const VideoPlayer = (props) => {
                 isLooping={false}
                 style={styles.player}
             />
-
-
+            <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => props.navigation.goBack()}
+            >
+                <MaterialIcons name="keyboard-arrow-down" size={50} color="#95a5a6" />
+            </TouchableOpacity>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        height: 250,
+        // flex: 1,
+        position: 'relative',
+        height: 200,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+        elevation: 24,
     },
     player: {
         flex: 1,
     },
+    closeButton: {
+        position: "absolute",
+        top: 30,
+        left: 15
+    }
 });
 
 export default VideoPlayer;
