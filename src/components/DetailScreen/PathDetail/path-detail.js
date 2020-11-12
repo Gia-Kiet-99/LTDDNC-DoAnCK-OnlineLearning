@@ -12,8 +12,10 @@ const PathDetail = (props) => {
         return <View>
             <View style={(isExpanded === true) ? styles.pathDescription : styles.briefPathDescription}>
                 <View style={styles.desWrapper}>
-                    <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam vero vel
-                        ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat saepe
+                    <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam
+                        vero vel
+                        ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat
+                        saepe
                         temporibus perspiciatis.</Text>
                 </View>
                 <TouchableOpacity
@@ -24,7 +26,10 @@ const PathDetail = (props) => {
                            source={(isExpanded === true) ? require('../../../../assets/up-arrow.png') : require('../../../../assets/down-arrow.png')}
                     />
                 </TouchableOpacity>
+
+
             </View>
+            <Text style={styles.text}>Course</Text>
         </View>
     }
 
@@ -33,10 +38,11 @@ const PathDetail = (props) => {
             <PathInfo
                 title={item.title}
                 count={item.count}
+                containerStyle={{marginTop: 10}}
                 titleStyle={{fontSize: 24}}
             />
             <PathDescription/>
-            <StudyList kind={listName.course} style={{marginTop: 15}}/>
+            <StudyList kind={listName.course} style={{marginTop: 15}} navigation={props.navigation}/>
         </View>
     );
 };
@@ -44,7 +50,7 @@ const PathDetail = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 15,
+        paddingHorizontal: 15,
         // backgroundColor: 'pink'
 
     },
@@ -73,6 +79,11 @@ const styles = StyleSheet.create({
         height: 12,
         width: 12
     },
+    text: {
+        fontSize: 18,
+        marginTop: 20,
+        // backgroundColor: 'pink'
+    }
 })
 
 export default PathDetail;

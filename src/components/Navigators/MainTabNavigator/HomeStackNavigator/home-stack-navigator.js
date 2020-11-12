@@ -16,7 +16,7 @@ const HomeStackNavigator = (props) => {
             <Stack.Screen name="ChannelDetail" component={ChannelDetail} options={({route}) => ({ title: route.params.item.title })}/>
             <Stack.Screen name="Setting" component={Setting}/>
             <Stack.Screen name="Profile" component={Profile}/>
-            <Stack.Screen name="ListCourseStack" component={ListStack} options={{headerShown: false}}/>
+            <Stack.Screen name="ListStack" component={ListStack} options={{headerShown: false}}/>
         </Stack.Navigator>
     );
 };

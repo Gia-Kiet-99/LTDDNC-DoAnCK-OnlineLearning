@@ -2,8 +2,22 @@ import React from 'react';
 import {TouchableOpacity,StyleSheet,Text, View,Image} from 'react-native';
 
 const AuthorSectionItem = (props) => {
+
+    const onItemPressed = () => {
+        return props.navigation?.navigate("AuthorDetailStackNavigator",
+            {
+                screen: "AuthorDetail",
+                params: {
+                    data: props.item
+                }
+            })
+    }
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onItemPressed}
+        >
             <View style={styles.content}>
                 <Image style={styles.image} source={require('../../../../../assets/avatar.png')}/>
                 <View style={styles.description}>

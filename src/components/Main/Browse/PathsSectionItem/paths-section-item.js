@@ -4,16 +4,19 @@ import PathInfo from "../../../Common/path-info";
 
 const Separator = () => {
     return (
-        <View style={{borderBottomColor: 'pink', borderBottomWidth: 3}} />
+        <View style={{borderBottomColor: 'lightblue', borderBottomWidth: 3}}/>
     )
 }
 
 const PathsSectionItem = (props) => {
     const onItemPressed = () => {
-        if(props.navigation !== undefined) {
-            props.navigation.navigate("PathDetail",
+        if (props.navigation !== undefined) {
+            props.navigation.navigate("PathDetailStackNavigator",
                 {
-                    item: props.item,
+                    screen: "PathDetail",
+                    params: {
+                        item: props.item
+                    }
                 })
         }
     }
@@ -24,7 +27,7 @@ const PathsSectionItem = (props) => {
             onPress={onItemPressed}
         >
             <View style={styles.item}>
-                <Image style={styles.image} source={require('../../../../../assets/image.jpg')}/>
+                <Image style={styles.image} source={require('../../../../../assets/react.png')}/>
                 <Separator/>
                 <PathInfo
                     containerStyle={{padding: 10}}
@@ -38,11 +41,13 @@ const PathsSectionItem = (props) => {
 
 const styles = StyleSheet.create({
     container: {
+        // flex: 1,
         paddingVertical: 10,
         paddingHorizontal: 10,
         // backgroundColor: "lightblue"
     },
     item: {
+        // flex: 1,
         width: 200,
         height: 200,
         borderRadius: 5,

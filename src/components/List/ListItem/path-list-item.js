@@ -3,8 +3,23 @@ import {Image,TouchableOpacity,StyleSheet} from 'react-native';
 import PathInfo from "../../Common/path-info";
 
 const PathListItem = (props) => {
+    const onItemPressed = () => {
+        if(props.navigation !== undefined) {
+            props.navigation.navigate("PathDetailStackNavigator",
+                {
+                    screen: "PathDetail",
+                    params: {
+                        item: props.item
+                    }
+                })
+        }
+    }
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onItemPressed}
+        >
             <Image style={styles.image} source={require('../../../../assets/react.png')}/>
             <PathInfo
                 containerStyle={styles.pathInfo}
@@ -24,6 +39,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     pathInfo: {
+        flex: 1,
         marginLeft: 10,
     },
     pathInfoTitle: {

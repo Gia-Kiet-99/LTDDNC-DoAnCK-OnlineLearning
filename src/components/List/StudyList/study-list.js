@@ -34,13 +34,15 @@ const StudyList = (props) => {
         <ChannelListItem key={item.id} item={item} navigation={props.navigation}/>
     )
 
+    /* render list base on "listType" */
     const renderList = (listType) => {
         switch (listType) {
             case listName.course:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={courses}
+                                 ListHeaderComponent={props.listHeaderComponent}
                                  renderItem={renderCourseItem}
-                                 keyExtractor={item => item.id}
+                                 keyExtractor={(item) => (item.id)}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.download:
                 return <FlatList showsVerticalScrollIndicator={false}
@@ -57,6 +59,7 @@ const StudyList = (props) => {
             case listName.author:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={authors}
+                                 ListHeaderComponent={props.listHeaderComponent}
                                  renderItem={renderAuthorItem}
                                  keyExtractor={item => item.id}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>

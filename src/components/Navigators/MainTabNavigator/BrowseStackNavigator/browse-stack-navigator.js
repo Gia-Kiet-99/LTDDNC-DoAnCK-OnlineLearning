@@ -1,15 +1,25 @@
 import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
 import Browse from "../../../Main/Browse/browse";
-import PathDetail from "../../../DetailScreen/PathDetail/path-detail";
+import Setting from "../../../AccountManagement/Setting/setting";
+import Profile from "../../../AccountManagement/Profile/profile";
+import ListStack from "../ListStack/list-stack";
+import PathDetailStackNavigator from "../PathDetailStackNavigator/path-detail-stack-navigator";
+import AuthorDetailStackNavigator from "../AuthorDetailStackNavigator/author-detail-stack-navigator";
 
 const Stack = createStackNavigator()
 
 const BrowseStackNavigator = (props) => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Browse">
             <Stack.Screen name="Browse" component={Browse} options={{headerShown: false}}/>
-            <Stack.Screen name="PathDetail" component={PathDetail} options={({route}) => ({title: route.params?.item?.title})}/>
+            <Stack.Screen name="Setting" component={Setting}/>
+            <Stack.Screen name="Profile" component={Profile}/>
+            <Stack.Screen name="PathDetailStackNavigator" component={PathDetailStackNavigator}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="AuthorDetailStackNavigator" component={AuthorDetailStackNavigator}
+                          options={{headerShown: false}}/>
+            <Stack.Screen name="ListStack" component={ListStack} options={{headerShown: false}}/>
         </Stack.Navigator>
     );
 };

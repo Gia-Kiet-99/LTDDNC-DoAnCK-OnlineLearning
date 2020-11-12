@@ -1,33 +1,43 @@
 import React from 'react';
-import {View, ScrollView, StyleSheet, StatusBar} from 'react-native';
+import {View, Text, ScrollView, StyleSheet, StatusBar, FlatList} from 'react-native';
 import ImageButton from "../../Common/image-button";
 import Section from "../../Common/section";
 import ActionBar from "../../Common/action-bar";
 import {listName, titleName} from "../../../globals/constants";
 import {authors, paths, skills, titles} from "../../../localize/data";
 
+const renderImageButton = ({item}) => {
+    return <ImageButton key={item.id} item={item} style={{width: 200}}/>
 
-
-const renderImageButton = (titles) => {
-    return titles.map((item) => <View style={{width:200}}>
-        <ImageButton key={item.id} title={item.title} source={item.source}/>
-    </View>)
 }
 
 const Browse = (props) => {
     return (
         <View style={styles.container}>
-            <ActionBar title={titleName.browse}/>
+            <ActionBar title={titleName.browse} navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
                 <View style={styles.recommend}>
-                    <ImageButton title={'NEW\nRELEASE'} source={require('../../../../assets/background-image.jpg')}/>
+                    <ImageButton item={
+                        {
+                            title: 'NEW\nRELEASE',
+                            source: require('../../../../assets/background-image.jpg')
+                        }
 
-                    <ImageButton title={'RECOMMENDED\nFOR YOU'}
-                                 source={require('../../../../assets/background4.jpg')}/>
+                    }/>
 
-                    <ScrollView style={styles.buttonList} horizontal={true} showsHorizontalScrollIndicator={false}>
-                        {renderImageButton(titles)}
-                    </ScrollView>
+                    <ImageButton item={
+                        {
+                            title: 'RECOMMENDED\nFOR YOU',
+                            source: require('../../../../assets/background4.jpg')
+                        }
+                    }/>
+
+                    <FlatList horizontal={true}
+                              data={titles}
+                              renderItem={renderImageButton}
+                              keyExtractor={item => item.id}
+                              ItemSeparatorComponent={()=> (<View style={{padding: 2.5}}/>)}
+                    />
                 </View>
 
                 <Section
@@ -59,7 +69,7 @@ const styles = StyleSheet.create({
     content: {
         backgroundColor: '#f5f5f5'
     },
-    recommend:{
+    recommend: {
         marginHorizontal: 5,
     },
     buttonList: {

@@ -3,9 +3,9 @@ import {StyleSheet, Text, TouchableOpacity, ImageBackground, View} from 'react-n
 
 const ImageButton = (props) => {
     return (
-        <ImageBackground style={styles.button} source={props.source}>
+        <ImageBackground style={[styles.button, props.style]} source={props.item.source}>
             <TouchableOpacity style={styles.touch}>
-                <Text style={styles.text}>{props.title}</Text>
+                <Text style={styles.text}>{props.item.title}</Text>
             </TouchableOpacity>
         </ImageBackground>
     );

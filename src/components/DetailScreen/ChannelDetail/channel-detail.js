@@ -49,7 +49,7 @@ const ChannelDetail = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 15,
+        paddingHorizontal: 15,
     },
     channelDescription: {
         flexDirection: 'row',
