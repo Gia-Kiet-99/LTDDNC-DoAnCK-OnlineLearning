@@ -1,9 +1,38 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, ImageBackground, View} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import {listName} from "../../globals/constants";
 
 const ImageButton = (props) => {
+
+    // const onButtonPressed = () => {
+    //     if (props.navigation !== undefined) {
+    //         props.navigation.navigate("ListStack",
+    //             {
+    //                 screen: "StudyList",
+    //                 params: {
+    //                     item: props.item,
+    //                     kind: listName.course,
+    //                     listHeaderComponent: (
+    //                         <View style={{position: 'relative'}}>
+    //                             <ImageBackground style={[styles.button, props.style]}
+    //                                              source={props.item.source}>
+    //                                 <Text>{props.title}</Text>
+    //                             </ImageBackground>
+    //                             <MaterialIcons name="arrow-back" size={24} color="black" />
+    //                         </View>
+    //                     )
+    //                 }
+    //             })
+    //     }
+    // }
+
     return (
-        <ImageBackground style={[styles.button, props.style]} source={props.item.source}>
+        <ImageBackground
+            style={[styles.button, props.style]}
+            source={props.item.source}
+            // onPress={onButtonPressed}
+        >
             <TouchableOpacity style={styles.touch}>
                 <Text style={styles.text}>{props.item.title}</Text>
             </TouchableOpacity>

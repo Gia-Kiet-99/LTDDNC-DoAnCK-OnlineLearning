@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import {Image, StyleSheet, View, Text, Alert, ScrollView,StatusBar, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, Text, Alert, ScrollView, StatusBar, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonNavigator from "../../Navigators/MainTabNavigator/LessonNavigator/lesson-navigator";
-import {NavigationContainer} from "@react-navigation/native";
-import LessonList from "./ListLesson/lesson-list";
 
 const AuthorButton = (props) => {
     return <TouchableOpacity style={styles.authorWrapper}>
@@ -71,8 +69,10 @@ const CourseDetail = (props) => {
         return <View>
             <View style={(isExpanded === true) ? styles.courseDescription : styles.briefCourseDescription}>
                 <View style={styles.desWrapper}>
-                    <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam vero vel
-                        ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat saepe
+                    <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam
+                        vero vel
+                        ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat
+                        saepe
                         temporibus perspiciatis.</Text>
                 </View>
                 <TouchableOpacity
@@ -93,7 +93,8 @@ const CourseDetail = (props) => {
             <CourseDescription/>
 
             <TouchableOpacity style={styles.largeButton}>
-                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../../assets/check.png')}/>
+                <Image style={{height: 25, width: 25, marginRight: 8}}
+                       source={require('../../../../assets/check.png')}/>
                 <Text>Take a learning check</Text>
             </TouchableOpacity>
 
@@ -101,7 +102,8 @@ const CourseDetail = (props) => {
                 style={styles.largeButton}
                 onPress={() => props.navigation.push("CourseDetail", {item: item})}
             >
-                <Image style={{height: 25, width: 25, marginRight: 8}} source={require('../../../../assets/folder.png')}/>
+                <Image style={{height: 25, width: 25, marginRight: 8}}
+                       source={require('../../../../assets/folder.png')}/>
                 <Text>View related paths & courses</Text>
             </TouchableOpacity>
         </View>
@@ -113,10 +115,10 @@ const CourseDetail = (props) => {
             <VideoPlayer navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <CourseIntro/>
-                <View>
-                    <LessonNavigator/>
-                </View>
+                <LessonNavigator/>
             </ScrollView>
+
+
         </View>
     );
 };
@@ -150,14 +152,14 @@ const styles = StyleSheet.create({
         paddingRight: 15,
         marginTop: 8,
         marginRight: 8,
-        borderRadius: 36/2,
+        borderRadius: 36 / 2,
         alignSelf: 'baseline'
     },
     avatar: {
         height: 25,
         width: 25,
         marginRight: 5,
-        borderRadius: 30/2,
+        borderRadius: 30 / 2,
     },
     buttonViewGroup: {
         flexDirection: 'row',
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgray',
         width: 40,
         height: 40,
-        borderRadius: 40/2,
+        borderRadius: 40 / 2,
         justifyContent: 'center',
         alignItems: 'center'
     },

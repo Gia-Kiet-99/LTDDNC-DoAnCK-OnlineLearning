@@ -8,7 +8,6 @@ import {authors, paths, skills, titles} from "../../../localize/data";
 
 const renderImageButton = ({item}) => {
     return <ImageButton key={item.id} item={item} style={{width: 200}}/>
-
 }
 
 const Browse = (props) => {

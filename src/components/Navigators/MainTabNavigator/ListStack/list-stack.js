@@ -3,8 +3,7 @@ import StudyList from "../../../List/StudyList/study-list";
 import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import ChannelDetail from "../../../DetailScreen/ChannelDetail/channel-detail";
 import {createStackNavigator} from "@react-navigation/stack";
-import PathDetail from "../../../DetailScreen/PathDetail/path-detail";
-import PathDetailStackNavigator from "../PathDetailStackNavigator/path-detail-stack-navigator";
+import PathDetailStackNavigator from "../BrowseStackNavigator/PathDetailStackNavigator/path-detail-stack-navigator";
 
 const Stack = createStackNavigator();
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
-import PathDetail from "../../../DetailScreen/PathDetail/path-detail";
-import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
+import PathDetail from "../../../../DetailScreen/PathDetail/path-detail";
+import CourseDetail from "../../../../DetailScreen/CourseDetail/course-detail";
 
 const Stack = createStackNavigator();
 

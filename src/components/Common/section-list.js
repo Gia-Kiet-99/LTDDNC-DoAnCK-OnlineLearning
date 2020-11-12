@@ -5,13 +5,9 @@ import SectionCoursesItem from "../Main/Home/SectionCoursesItem/section-courses-
 import AuthorSectionItem from "../Main/Browse/AuthorSectionItem/author-section-item";
 import ChannelSectionItem from "../Main/Home/ChannelSectionItem/channel-section-item";
 import {listName} from "../../globals/constants";
+import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item";
 
 const SectionList = (props) => {
-    const Skill = (props) => {
-        return <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>{props.item.skill}</Text>
-        </TouchableOpacity>
-    }
 
     const renderListItem = (list) => {
         switch (props.kind) {
@@ -24,7 +20,7 @@ const SectionList = (props) => {
             case listName.channel:
                 return list.map((item) => <ChannelSectionItem key={item.id} item={item} navigation={props.navigation}/>)
             case listName.popularSkill:
-                return list.map((item) => <Skill key={item.id} item={item} navigation={props.navigation}/>)
+                return list.map((item) => <SkillSectionItem key={item.id} item={item} navigation={props.navigation}/>)
         }
     }
 
@@ -40,18 +36,6 @@ const SectionList = (props) => {
 const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 5
-    },
-    button: {
-        paddingTop: 6,
-        paddingBottom: 8,
-        paddingHorizontal: 15,
-        backgroundColor: 'lightgray',
-        borderRadius: 18,
-        marginLeft: 5,
-        marginVertical: 10
-    },
-    buttonText: {
-        justifyContent: 'center',
     }
 })
 
