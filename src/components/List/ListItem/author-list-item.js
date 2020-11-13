@@ -1,9 +1,24 @@
 import React from 'react';
-import {View, TouchableOpacity, Text, Image} from 'react-native';
+import {View, TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 
 const AuthorListItem = (props) => {
+    const onItemPressed = () => {
+        if(props.navigation !== undefined) {
+            props.navigation.navigate("AuthorDetailStackNavigator",
+                {
+                    screen: "AuthorDetail",
+                    params: {
+                        data: props.item
+                    }
+                })
+        }
+    }
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onItemPressed}
+        >
             <Image style={styles.avatar} source={props.item.avatar}/>
             <View style={styles.description}>
                 <Text style={styles.name}>{props.item.name}</Text>
@@ -13,7 +28,6 @@ const AuthorListItem = (props) => {
     );
 };
 
-import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
     container: {
         flex: 1,

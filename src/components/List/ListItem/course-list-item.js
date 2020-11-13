@@ -20,7 +20,7 @@ const CourseListItem = (props) => {
 
     return (
         <TouchableOpacity
-            style={styles.container}
+            style={[styles.container, props.style]}
             onPress={onPressListItem}
         >
             <View style={styles.imageWrapper}>

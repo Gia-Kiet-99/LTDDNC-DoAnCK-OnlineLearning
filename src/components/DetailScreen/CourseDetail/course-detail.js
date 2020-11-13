@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, View, Text, Alert, ScrollView, StatusBar, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
-import LessonNavigator from "../../Navigators/MainTabNavigator/LessonNavigator/lesson-navigator";
+import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
 
 const AuthorButton = (props) => {
     return <TouchableOpacity style={styles.authorWrapper}>
@@ -111,11 +111,11 @@ const CourseDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar translucent={true} hidden={true}/>
+            {/*<StatusBar translucent={true}/>*/}
             <VideoPlayer navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <CourseIntro/>
-                <LessonNavigator/>
+                <LessonTabNavigator/>
             </ScrollView>
 
 

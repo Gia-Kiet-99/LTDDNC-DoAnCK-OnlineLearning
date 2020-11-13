@@ -16,7 +16,7 @@ const Transcript = () => {
     </Text>
 }
 
-const LessonNavigator = (props) => {
+const LessonTabNavigator = (props) => {
     return (
         <Tab.Navigator>
             <Tab.Screen name="Contents" component={LessonList}/>
@@ -25,4 +25,4 @@ const LessonNavigator = (props) => {
     )
 };
 
-export default LessonNavigator;
+export default LessonTabNavigator;

@@ -1,198 +1,50 @@
 import React from "react";
-import {
-    StyleSheet,
-    Text,
-    View,
-    SafeAreaView,
-    SectionList,
-    TouchableOpacity
-} from "react-native";
+import {StyleSheet, Text, View, SafeAreaView, SectionList, TouchableOpacity} from "react-native";
 import CourseListItem from "../../../List/ListItem/course-list-item";
 import PathListItem from "../../../List/ListItem/path-list-item";
 import AuthorListItem from "../../../List/ListItem/author-list-item";
 import ListItemSeparator from "../../../Common/list-item-separator";
 import {results} from "../../../../localize/data";
 
-// const results = [
-//     {
-//         title: "Courses",
-//         count: 9,
-//         data: [
-//             {
-//                 id: '1',
-//                 title: 'Leadership for Non-managers',
-//                 author: 'Gia Kiet',
-//                 level: 'Advance',
-//                 released: 'May 2020',
-//                 duration: '30 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '2',
-//                 title: 'iOS',
-//                 author: 'Gia Kiet',
-//                 level: 'Beginner',
-//                 released: 'Aug 2020',
-//                 duration: '25 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '3',
-//                 title: 'Android',
-//                 author: 'Gia Kiet',
-//                 level: 'Intermediate',
-//                 released: 'Jan 2019',
-//                 duration: '28 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '4',
-//                 title: 'Leadership for Non-managers',
-//                 author: 'Gia Kiet',
-//                 level: 'Advance',
-//                 released: 'May 2020',
-//                 duration: '30 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '5',
-//                 title: 'iOS',
-//                 author: 'Gia Kiet',
-//                 level: 'Beginner',
-//                 released: 'Aug 2020',
-//                 duration: '25 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '6',
-//                 title: 'Android',
-//                 author: 'Gia Kiet',
-//                 level: 'Intermediate',
-//                 released: 'Jan 2019',
-//                 duration: '28 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '7',
-//                 title: 'Leadership for Non-managers',
-//                 author: 'Gia Kiet',
-//                 level: 'Advance',
-//                 released: 'May 2020',
-//                 duration: '30 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '8',
-//                 title: 'iOS',
-//                 author: 'Gia Kiet',
-//                 level: 'Beginner',
-//                 released: 'Aug 2020',
-//                 duration: '25 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//             {
-//                 id: '9',
-//                 title: 'Android',
-//                 author: 'Gia Kiet',
-//                 level: 'Intermediate',
-//                 released: 'Jan 2019',
-//                 duration: '28 h',
-//                 image: require('../../../../../assets/girl.jpg')
-//             },
-//         ]
-//     },
-//     {
-//         title: "Paths",
-//         count: 3,
-//         data: [
-//             {
-//                 id: 1,
-//                 title: 'AWS Certified Database - Specialty (DBS-C01)',
-//                 count: '3 courses'
-//             },
-//             {
-//                 id: 2,
-//                 title: 'Big Data LDN 2020',
-//                 count: '44 courses'
-//             },
-//             {
-//                 id: 3,
-//                 title: 'Securing ASP.NET and ASP.NET Core Applications',
-//                 count: '14 courses'
-//             }
-//         ]
-//     },
-//     {
-//         title: "Authors",
-//         count: 6,
-//         data: [
-//             {
-//                 id: 1,
-//                 avatar: require('../../../../../assets/avatar.png'),
-//                 name: 'Gia Kiet',
-//                 numberOfCourses: 4
-//             },
-//             {
-//                 id: 2,
-//                 avatar: require('../../../../../assets/avatar.png'),
-//                 name: 'Simon',
-//                 numberOfCourses: 5
-//             },
-//             {
-//                 id: 3,
-//                 avatar: require('../../../../../assets/avatar.png'),
-//                 name: 'Cristiano Ronaldo',
-//                 numberOfCourses: 6
-//             },
-//             {
-//                 id: 4,
-//                 avatar: require('../../../../../assets/avatar.png'),
-//                 name: 'Lionel Messi',
-//                 numberOfCourses: 13
-//             },
-//             {
-//                 id: 5,
-//                 avatar: require('../../../../../assets/avatar.png'),
-//                 name: 'Bailey Newton',
-//                 numberOfCourses: 9
-//             },
-//             {
-//                 id: 6,
-//                 avatar: require('../../../../../assets/avatar.png'),
-//                 name: 'Gerry Burns',
-//                 numberOfCourses: 4
-//             }
-//         ]
-//     }
-// ];
+const SearchResultList = (props) => {
 
-// const SectionListHeader = (props) => {
-//     return <View style={styles.header}>
-//         <Text style={{fontSize: 20}}>{title}</Text>
-//         <Text style={styles.header}>{title}</Text>
-//     </View>
-// }
+    const showResultDetail = (title) => {
+        if (props.navigation !== undefined) {
+            switch (title) {
+                case 'Courses':
+                    return props.navigation.navigate("CourseResult");
+                case 'Paths':
+                    return props.navigation.navigate("PathResult");
+                case 'Authors':
+                    return props.navigation.navigate("AuthorResult");
+                default:
+                    return props.navigation.navigate("AuthorResult");
+            }
+        }
+    }
 
-const SearchResultList = () => {
-
-    const renderSectionHeader = ({section: {title, count}}) => {
-        return <View style={styles.header}>
-            <Text style={{fontSize: 22}}>{title}</Text>
-            <TouchableOpacity>
-                <Text style={styles.header}>{`${count} Results >`}</Text>
+    const SectionHeader = (props) => (
+        <View style={styles.header}>
+            <Text style={{fontSize: 22}}>{props.title}</Text>
+            <TouchableOpacity onPress={() => showResultDetail(props.title)}>
+                <Text style={styles.header}>{`${props.count} Results >`}</Text>
             </TouchableOpacity>
         </View>
+    )
+
+    const renderSectionHeader = ({section: {title, count}}) => {
+        return <SectionHeader title={title} count={count}/>
     }
     const renderSectionListItem = ({item, section: {title}}) => {
-        switch (title){
+        switch (title) {
             case 'Courses':
-                return <CourseListItem item={item}/>;
+                return <CourseListItem item={item} navigation={props.navigation}/>
             case 'Paths':
-                return <PathListItem item={item}/>;
+                return <PathListItem item={item} navigation={props.navigation}/>
             case 'Authors':
-                return <AuthorListItem item={item} />
+                return <AuthorListItem item={item} navigation={props.navigation}/>
             default:
-                return <CourseListItem item={item}/>;
+                return <CourseListItem item={item} navigation={props.navigation} style={{paddingHorizontal: 15}}/>
         }
     }
 
@@ -205,7 +57,8 @@ const SearchResultList = () => {
                 renderSectionHeader={renderSectionHeader}
                 showsVerticalScrollIndicator={false}
                 ItemSeparatorComponent={() => <ListItemSeparator/>}
-                // SectionSeparatorComponent={() => <ListItemSeparator/>}
+                SectionSeparatorComponent={() => <ListItemSeparator/>}
+                // stickySectionHeadersEnabled={true}
             />
         </SafeAreaView>
     );
@@ -214,8 +67,9 @@ const SearchResultList = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 15,
-        marginHorizontal: 16
+        // marginTop: 15,
+        // marginHorizontal: 15,
+        paddingHorizontal: 15
     },
     item: {
         backgroundColor: "#f9c2ff",
@@ -227,7 +81,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // backgroundColor: 'pink'
+        // backgroundColor: 'white'
     },
 });
 

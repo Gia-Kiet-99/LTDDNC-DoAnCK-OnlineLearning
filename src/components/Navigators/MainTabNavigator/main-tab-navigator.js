@@ -6,6 +6,8 @@ import Search from "../../Main/Search/search";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Ionicons} from "@expo/vector-icons";
 import BrowseStackNavigator from "./BrowseStackNavigator/browse-stack-navigator";
+import SearchTabNavigator from "../SearchStackNavigator/SearchTabNavigator/search-tab-navigator";
+import SearchStackNavigator from "../SearchStackNavigator/search-stack-navigator";
 
 const Tab = createBottomTabNavigator()
 
@@ -22,7 +24,7 @@ const MainTabNavigatorScreenOptions = ({ route }) => ({
             case 'BrowseStackNavigator':
                 iconName = 'ios-browsers';
                 break;
-            case 'Search':
+            case 'SearchStackNavigator':
                 iconName = 'ios-search';
                 break;
         }
@@ -35,6 +37,7 @@ const MainTabNavigator = (props) => {
     return (
         <Tab.Navigator initialRouteName="HomeStackNavigator"
                        screenOptions={MainTabNavigatorScreenOptions}
+                       backBehavior="initialRoute"
                        tabBarOptions={{
                            activeTintColor: '#3498db',
                            inactiveTintColor: 'gray',
@@ -48,7 +51,7 @@ const MainTabNavigator = (props) => {
             <Tab.Screen name="HomeStackNavigator" component={HomeStackNavigator} options={{title: "Home"}}/>
             <Tab.Screen name="DownloadStackNavigator" component={DownloadStackNavigator} options={{title: "Download"}}/>
             <Tab.Screen name="BrowseStackNavigator" component={BrowseStackNavigator} options={{title: "Browse"}}/>
-            <Tab.Screen name="Search" component={Search}/>
+            <Tab.Screen name="SearchStackNavigator" component={SearchStackNavigator} options={{title: "Search"}}/>
         </Tab.Navigator>
     );
 };

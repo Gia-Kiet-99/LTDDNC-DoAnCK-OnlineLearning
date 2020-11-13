@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import StudyList from "../../List/StudyList/study-list";
 import ActionBar from "../../Common/action-bar";
 import {listName, titleName} from "../../../globals/constants";
@@ -16,6 +16,7 @@ const DownloadHeader = () => (
 const Download = (props) => {
     return (
         <View style={styles.container}>
+            {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content' animated={true}/>*/}
             <ActionBar title={titleName.download} navigation={props.navigation}/>
             <View style={styles.content}>
                 <DownloadHeader/>
