@@ -19,9 +19,9 @@ const AuthorListItem = (props) => {
             style={styles.container}
             onPress={onItemPressed}
         >
-            <Image style={styles.avatar} source={props.item.avatar}/>
+            <Image style={styles.avatar} source={props.item.authorAvatar}/>
             <View style={styles.description}>
-                <Text style={styles.name}>{props.item.name}</Text>
+                <Text style={styles.name}>{props.item.authorName}</Text>
                 <Text style={styles.courseNumber}>{props.item.numberOfCourses} Courses</Text>
             </View>
         </TouchableOpacity>

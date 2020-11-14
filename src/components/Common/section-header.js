@@ -21,9 +21,9 @@ const SectionHeader = (props) => {
                 {props.title}
             </Text>
             {props.showButton === true &&
-                <TouchableOpacity onPress={onSeeAllPressed} style={styles.detailButton}>
-                    <Text style={styles.text}>See all ></Text>
-                </TouchableOpacity>
+            <TouchableOpacity onPress={onSeeAllPressed} style={styles.detailButton}>
+                <Text style={styles.text}>See all ></Text>
+            </TouchableOpacity>
             }
         </View>
     )
@@ -31,6 +31,7 @@ const SectionHeader = (props) => {
 
 const styles = StyleSheet.create({
     headerWrapper: {
+        flex: 1,
         paddingHorizontal: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -38,9 +39,11 @@ const styles = StyleSheet.create({
         // marginBottom: 10,
     },
     header: {
+        flex: 1,
         color: '#444',
         fontWeight: 'bold',
-        fontSize: 18
+        fontSize: 18,
+        // marginRight: 10
     },
     detailButton: {
         backgroundColor: 'lightgray',

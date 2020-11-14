@@ -1,61 +1,76 @@
 import React from 'react';
-import {View, Text, ScrollView, StyleSheet, StatusBar, FlatList} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import ImageButton from "../../Common/image-button";
 import Section from "../../Common/section";
 import ActionBar from "../../Common/action-bar";
-import {listName, titleName} from "../../../globals/constants";
+import {ImageButtonType, listName, titleName} from "../../../globals/constants";
 import {authors, paths, skills, titles} from "../../../localize/data";
 
-const renderImageButton = ({item}) => {
-    return <ImageButton key={item.id} item={item} style={{width: 200}}/>
-}
 
 const Browse = (props) => {
+    const renderImageButtonList = (list) => {
+        return list.map((item) => (
+            <ImageButton key={item.id} data={item}
+                         navigation={props.navigation}
+                         type={ImageButtonType.general}
+                         titleStyle={{fontSize: 20}}
+                         style={{
+                             width: 175,
+                             height: 80,
+                             marginRight: 5,
+                         }}
+
+            />
+        ))
+    }
+
     return (
         <View style={styles.container}>
             {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content' animated={true}/>*/}
             <ActionBar title={titleName.browse} navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
                 <View style={styles.recommend}>
-                    <ImageButton item={
-                        {
-                            title: 'NEW\nRELEASE',
-                            source: require('../../../../assets/background-image.jpg')
-                        }
+                    <ImageButton type={ImageButtonType.course}
+                                 navigation={props.navigation}
+                                 data={{
+                                     title: 'New\nRelease',
+                                     source: require('../../../../assets/background-image.jpg')
+                                 }}
+                                 style={{
+                                     marginTop: 10,
+                                     marginHorizontal: 10,
+                                 }}/>
 
-                    }/>
+                    <ImageButton type={ImageButtonType.course}
+                                 navigation={props.navigation}
+                                 data={{
+                                     title: 'Recommended\nfor you',
+                                     source: require('../../../../assets/background4.jpg')
+                                 }}
+                                 style={{
+                                     marginTop: 10,
+                                     marginHorizontal: 10
+                                 }}/>
 
-                    <ImageButton item={
-                        {
-                            title: 'RECOMMENDED\nFOR YOU',
-                            source: require('../../../../assets/background4.jpg')
-                        }
-                    }/>
-
-                    <FlatList horizontal={true}
-                              data={titles}
-                              renderItem={renderImageButton}
-                              keyExtractor={item => item.id}
-                              ItemSeparatorComponent={()=> (<View style={{padding: 2.5}}/>)}
-                    />
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}
+                                style={{marginTop: 10, marginHorizontal: 10}}>
+                        <View>
+                            <View style={{flexDirection: 'row'}}>
+                                {renderImageButtonList(titles.slice(0, titles.length / 2))}
+                            </View>
+                            <View style={{flexDirection: 'row', marginTop: 5}}>
+                                {renderImageButtonList(titles.slice(titles.length / 2, titles.length))}
+                            </View>
+                        </View>
+                    </ScrollView>
                 </View>
 
-                <Section
-                    kind={listName.popularSkill}
-                    title={'Popular Skills'}
-                    list={skills}
-                    navigation={props.navigation}/>
-                <Section
-                    kind={listName.path}
-                    title='Paths'
-                    list={paths}
-                    showSeeAllButton={true}
-                    navigation={props.navigation}/>
-                <Section
-                    kind={listName.author}
-                    title='Top authors'
-                    list={authors}
-                    navigation={props.navigation}/>
+                <Section kind={listName.popularSkill} title={'Popular Skills'} list={skills}
+                         navigation={props.navigation}/>
+                <Section kind={listName.path} title='Paths' list={paths} showSeeAllButton={true}
+                         navigation={props.navigation}/>
+                <Section kind={listName.author} title='Top authors' list={authors}
+                         navigation={props.navigation}/>
 
             </ScrollView>
         </View>
@@ -70,7 +85,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5'
     },
     recommend: {
-        marginHorizontal: 5,
+        // marginHorizontal: 15,
     },
     buttonList: {
         // marginRight: 5

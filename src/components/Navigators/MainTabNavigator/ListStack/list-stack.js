@@ -1,9 +1,9 @@
 import React from 'react';
 import StudyList from "../../../List/StudyList/study-list";
-import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import ChannelDetail from "../../../DetailScreen/ChannelDetail/channel-detail";
 import {createStackNavigator} from "@react-navigation/stack";
 import PathDetailStackNavigator from "../BrowseStackNavigator/PathDetailStackNavigator/path-detail-stack-navigator";
+import CourseDetailStackNavigator from "../CourseDetailStackNavigator/course-detail-stack-navigator";
 
 const Stack = createStackNavigator();
 
@@ -15,8 +15,8 @@ const ListStack = (props) => {
             <Stack.Screen name="StudyList"
                           component={StudyList}
                           options={({route}) => ({ title: route.params.title })}/>
-            <Stack.Screen name="CourseDetail"
-                          component={CourseDetail}
+            <Stack.Screen name="CourseDetailStackNavigator"
+                          component={CourseDetailStackNavigator}
                           options={{headerShown: false}}/>
             <Stack.Screen name="ChannelDetail"
                           component={ChannelDetail}

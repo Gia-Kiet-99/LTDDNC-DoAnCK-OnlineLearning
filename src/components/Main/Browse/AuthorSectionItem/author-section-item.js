@@ -22,7 +22,7 @@ const AuthorSectionItem = (props) => {
                 <Image style={styles.image} source={require('../../../../../assets/avatar.png')}/>
                 <View style={styles.description}>
                     <Text style={styles.text}>
-                        {props.item.name}
+                        {props.item.authorName}
                     </Text>
                 </View>
             </View>

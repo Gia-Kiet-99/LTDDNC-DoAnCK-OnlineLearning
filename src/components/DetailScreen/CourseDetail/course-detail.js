@@ -4,29 +4,42 @@ import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
 
-const AuthorButton = (props) => {
-    return <TouchableOpacity style={styles.authorWrapper}>
-        <Image style={styles.avatar} source={props.avatar}/>
-        <Text>{props.name}</Text>
-    </TouchableOpacity>
-}
 
-const renderAuthorButton = (author) => {
-    return author.map(item => <AuthorButton author={item}/>)
-}
 
 const CourseDetail = (props) => {
+    // const renderAuthorButton = (author) => {
+    //     return author.map(item => <AuthorButton author={item}/>)
+    // }
     const item = props.route.params.item;
-    // console.log(props);
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isExpanded, setIsExpanded] = useState(false);
 
+    const onAuthorButtonPressed = () => {
+        if(props.navigation !==undefined) {
+            props.navigation.navigate("AuthorDetailStackNavigator",
+                {
+                    screen: "AuthorDetail",
+                    params: {
+                        data: item
+                    }
+                })
+        }
+    }
+    const AuthorButton = (props) => {
+        return <TouchableOpacity
+            style={styles.authorWrapper}
+            onPress={onAuthorButtonPressed}
+        >
+            <Image style={styles.avatar} source={item.authorAvatar}/>
+            <Text>{item.authorName}</Text>
+        </TouchableOpacity>
+    }
     const showAlert = () => Alert.alert('Add to channel')
     const CourseInfo = () => {
         return <View style={styles.courseInfo}>
             <Text style={{fontSize: 24}}>{item.title}</Text>
 
-            <AuthorButton name={item.authorName} avatar={item.authorAvatar}/>
+            <AuthorButton/>
             {/*<ScrollView style={{marginTop: 5}} horizontal={true} showsHorizontalScrollIndicator={false}>*/}
             {/*    {renderAuthorButton(item.author)}*/}
             {/*</ScrollView>*/}
@@ -111,7 +124,7 @@ const CourseDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            {/*<StatusBar translucent={true}/>*/}
+            <StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>
             <VideoPlayer navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <CourseIntro/>

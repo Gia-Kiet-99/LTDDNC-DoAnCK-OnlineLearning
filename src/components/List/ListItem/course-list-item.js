@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import {StyleSheet,Image, View,Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Image, View, Text, TouchableOpacity} from 'react-native';
 import Menu, {MenuItem} from "react-native-material-menu";
 import CourseInfo from "../../Common/course-info";
 
 const CourseListItem = (props) => {
-    const [menu,setMenu] = useState(null);
+    const [menu, setMenu] = useState(null);
     // const navigation = props.navigation;
 
     const showMenu = () => {
@@ -14,7 +14,13 @@ const CourseListItem = (props) => {
     }
     const onPressListItem = () => {
         if (props.navigation !== undefined) {
-            props.navigation.navigate("CourseDetail", {item: props.item})
+            props.navigation.navigate("CourseDetailStackNavigator",
+                {
+                    screen: "CourseDetail",
+                    params: {
+                        item: props.item
+                    }
+                })
         }
     }
 
@@ -40,7 +46,8 @@ const CourseListItem = (props) => {
                 <Menu
                     ref={ref => setMenu(ref)}
                     button={
-                        <Image style={{height: 24,width: 24}} source={require('../../../../assets/icon-menu-vertical.png')}/>
+                        <Image style={{height: 24, width: 24}}
+                               source={require('../../../../assets/icon-menu-vertical.png')}/>
                     }>
                     <MenuItem onPress={doNothing}>Bookmark</MenuItem>
                     <MenuItem onPress={doNothing}>Add to channel</MenuItem>

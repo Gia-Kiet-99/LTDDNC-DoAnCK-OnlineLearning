@@ -14,6 +14,7 @@ const StudyList = (props) => {
     /* value passing when you click See all button */
     const listType = (props.route?.params?.kind === undefined) ? props.kind : props.route?.params?.kind;
     const listStyle = (props.route?.params?.style === undefined) ? props.style : props.route?.params?.style;
+    const listHeaderComponent = (props.route?.params?.listHeaderComponent) ? props.route?.params?.listHeaderComponent : props.listHeaderComponent;
 
     const renderCourseItem = ({item}) => (
         <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
@@ -37,7 +38,7 @@ const StudyList = (props) => {
             case listName.course:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={courses}
-                                 ListHeaderComponent={props.listHeaderComponent}
+                                 ListHeaderComponent={listHeaderComponent}
                                  renderItem={renderCourseItem}
                                  keyExtractor={(item) => (item.id)}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>

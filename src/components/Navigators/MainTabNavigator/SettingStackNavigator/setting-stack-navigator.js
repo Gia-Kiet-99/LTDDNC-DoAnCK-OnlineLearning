@@ -1,8 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
 import {createStackNavigator} from "@react-navigation/stack";
-import Setting from "../../AccountManagement/Setting/setting";
-import Profile from "../../AccountManagement/Profile/profile";
+import Setting from "../../../AccountManagement/Setting/setting";
+import Profile from "../../../AccountManagement/Profile/profile";
 
 const Stack = createStackNavigator();
 

@@ -15,3 +15,22 @@ export const titleName = {
     search: "Search",
     download: "Download"
 }
+
+export const ScreenName = {
+    studyList: "StudyList",
+    fieldDetail: "FieldDetail",
+}
+
+export const NavigatorName = {
+    listStack: 'ListStack',
+    skillStack: 'SkillStackNavigator',
+    pathDetailStack: 'PathDetailStackNavigator',
+    courseDetailStack: 'CourseDetailStackNavigator',
+    authorDetailStack: 'AuthorDetailStackNavigator',
+    fieldDetailStack: 'FieldDetailStackNavigator',
+}
+
+export const ImageButtonType = {
+    course: "course-list",
+    general: "all-list"
+}

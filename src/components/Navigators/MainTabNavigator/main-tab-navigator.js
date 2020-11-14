@@ -6,8 +6,8 @@ import Search from "../../Main/Search/search";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Ionicons} from "@expo/vector-icons";
 import BrowseStackNavigator from "./BrowseStackNavigator/browse-stack-navigator";
-import SearchTabNavigator from "../SearchStackNavigator/SearchTabNavigator/search-tab-navigator";
-import SearchStackNavigator from "../SearchStackNavigator/search-stack-navigator";
+import SearchTabNavigator from "./SearchStackNavigator/SearchTabNavigator/search-tab-navigator";
+import SearchStackNavigator from "./SearchStackNavigator/search-stack-navigator";
 
 const Tab = createBottomTabNavigator()
 

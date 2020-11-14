@@ -4,13 +4,19 @@ import CourseInfo from "../../../Common/course-info";
 
 const Separator = () => {
     return (
-        <View style={{borderBottomColor: 'pink', borderBottomWidth: 3}} />
+        <View style={{borderBottomColor: 'pink', borderBottomWidth: 3}}/>
     )
 }
 
 const SectionCoursesItem = (props) => {
     const ItemPressed = () => {
-        return props.navigation.navigate("CourseDetail", {item: props.item})
+        return props.navigation.navigate("CourseDetailStackNavigator",
+            {
+                screen: "CourseDetail",
+                params: {
+                    item: props.item
+                }
+            })
     }
 
     return (
@@ -21,11 +27,11 @@ const SectionCoursesItem = (props) => {
                 <Image style={styles.image} source={props.item.image}/>
                 <Separator/>
                 <CourseInfo containerStyle={courseInfoStyle.container}
-                    title={props.item.title}
-                    author={props.item.authorName}
-                    level={props.item.level}
-                    released={props.item.released}
-                    duration={props.item.duration}
+                            title={props.item.title}
+                            author={props.item.authorName}
+                            level={props.item.level}
+                            released={props.item.released}
+                            duration={props.item.duration}
                 />
 
             </View>

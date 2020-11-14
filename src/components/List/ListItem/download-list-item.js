@@ -15,10 +15,12 @@ const DownloadListItem = (props) => {
     }
     const onItemPressed = () => {
         if(props.navigation !== undefined) {
-            props.navigation.navigate("CourseDetail",
-                {
-                    item: item
-                })
+            props.navigation.navigate("CourseDetailStackNavigator", {
+                screen: "CourseDetail",
+                params: {
+                    item: props.item
+                }
+            })
         }
     }
 

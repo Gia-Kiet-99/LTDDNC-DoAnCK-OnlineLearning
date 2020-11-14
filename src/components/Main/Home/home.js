@@ -8,7 +8,7 @@ import ActionBar from "../../Common/action-bar";
 const Home = (props) => {
     return (
         <View style={styles.container}>
-            {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content' animated={true}/>*/}
+            <StatusBar translucent={false} backgroundColor="transparent" barStyle="dark-content"/>
             <ActionBar title={titleName.home} navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.listSection}>
                 <View style={styles.imageWrapper}>
@@ -26,6 +26,7 @@ const Home = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'beige'
     },
     bar: {
         padding: 15,

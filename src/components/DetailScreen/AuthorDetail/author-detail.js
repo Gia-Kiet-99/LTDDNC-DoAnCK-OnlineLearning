@@ -7,12 +7,12 @@ import {listName} from "../../../globals/constants";
 import {FlatList} from "react-native-web";
 
 const AuthorDetail = (props) => {
-    const data = props.route.params.data;
+    const data = props.route?.params?.data;
 
     const AuthorInfo = () => (
         <View style={styles.authorInfo}>
-            <Image style={styles.avatar} source={data.avatar}/>
-            <Text style={styles.authorName}>{data.name}</Text>
+            <Image style={styles.avatar} source={data.authorAvatar}/>
+            <Text style={styles.authorName}>{data.authorName}</Text>
             <Text style={{marginTop: 5}}>Pluralsight Author</Text>
         </View>
     )
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     avatar: {
         marginTop: 10,
         height: 80,
-        width: 80
+        width: 80,
+        borderRadius: 80/2,
     },
     authorName: {
         fontSize: 20,

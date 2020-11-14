@@ -25,7 +25,7 @@ const Section = (props) => {
 const styles = StyleSheet.create({
     container: {
         marginTop: 30,
-        // backgroundColor: 'beige'
+        backgroundColor: 'transparent'
     }
 })
 

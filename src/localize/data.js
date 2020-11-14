@@ -57,33 +57,33 @@ export const channels = [
 export const authors = [
     {
         id: "1",
-        avatar: require('../../assets/avatar.png'),
-        name: 'Gia Kiet'
+        authorAvatar: require('../../assets/avatar.png'),
+        authorName: 'Gia Kiet'
     },
     {
         id: "2",
-        avatar: require('../../assets/avatar.png'),
-        name: 'Simon'
+        authorAvatar: require('../../assets/avatar.png'),
+        authorName: 'Simon'
     },
     {
         id: "3",
-        avatar: require('../../assets/avatar.png'),
-        name: 'Cristiano Ronaldo'
+        authorAvatar: require('../../assets/avatar.png'),
+        authorName: 'Cristiano Ronaldo'
     },
     {
         id: "4",
-        avatar: require('../../assets/avatar.png'),
-        name: 'Lionel Messi'
+        authorAvatar: require('../../assets/avatar.png'),
+        authorName: 'Lionel Messi'
     },
     {
         id: "5",
-        avatar: require('../../assets/avatar.png'),
-        name: 'Bailey Newton'
+        authorAvatar: require('../../assets/avatar.png'),
+        authorName: 'Bailey Newton'
     },
     {
         id: "6",
-        avatar: require('../../assets/avatar.png'),
-        name: 'Gerry Burns'
+        authorAvatar: require('../../assets/avatar.png'),
+        authorName: 'Gerry Burns'
     },
 ]
 export const paths = [
@@ -106,52 +106,52 @@ export const paths = [
 export const titles = [
     {
         id: "1",
-        title: 'CONFERENCES',
+        title: 'Conferences',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "2",
-        title: 'CERTIFICATION',
+        title: 'Certification',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "3",
-        title: 'Software\nDEVELOPMENT',
+        title: 'Software Development',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "4",
-        title: 'IT\nOPS',
+        title: 'IT ops',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "5",
-        title: 'Information\nAND\nCYBER SECURITY',
+        title: 'Information and Cyber Security',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "6",
-        title: 'DATA\nPROFESSIONAL',
+        title: 'Data Professional',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "7",
-        title: 'BUSINESS\nPROFESSIONAL',
+        title: 'Business Professional',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "8",
-        title: 'Creative\nPROFESSIONAL',
+        title: 'Creative Professional',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "9",
-        title: 'MANUFACTURING\nAND\nDESIGN',
+        title: 'Manufacturing and Design',
         source: require('../../assets/background-image-3.jpg')
     },
     {
         id: "10",
-        title: 'ARCHITECTURE\nAND\nCONSTRUCTION',
+        title: 'Architecture and Construction',
         source: require('../../assets/background-image-3.jpg')
     }
 ]
@@ -259,7 +259,7 @@ export const results = [
                 image: require('../../assets/image.jpg'),
                 rating: 5,
             },
-        ],
+        ]
     },
     {
         title: "Paths",
@@ -288,38 +288,38 @@ export const results = [
         data: [
             {
                 id: "1",
-                avatar: require('../../assets/avatar.png'),
-                name: 'Gia Kiet',
+                authorAvatar: require('../../assets/avatar.png'),
+                authorName: 'Gia Kiet',
                 numberOfCourses: 4
             },
             {
                 id: "2",
-                avatar: require('../../assets/avatar.png'),
-                name: 'Simon',
+                authorAvatar: require('../../assets/avatar.png'),
+                authorName: 'Simon',
                 numberOfCourses: 5
             },
             {
                 id: "3",
-                avatar: require('../../assets/avatar.png'),
-                name: 'Cristiano Ronaldo',
+                authorAvatar: require('../../assets/avatar.png'),
+                authorName: 'Cristiano Ronaldo',
                 numberOfCourses: 6
             },
             {
                 id: "4",
-                avatar: require('../../assets/avatar.png'),
-                name: 'Lionel Messi',
+                authorAvatar: require('../../assets/avatar.png'),
+                authorName: 'Lionel Messi',
                 numberOfCourses: 13
             },
             {
                 id: "5",
-                avatar: require('../../assets/avatar.png'),
-                name: 'Bailey Newton',
+                authorAvatar: require('../../assets/avatar.png'),
+                authorName: 'Bailey Newton',
                 numberOfCourses: 9
             },
             {
                 id: "6",
-                avatar: require('../../assets/avatar.png'),
-                name: 'Gerry Burns',
+                authorAvatar: require('../../assets/avatar.png'),
+                authorName: 'Gerry Burns',
                 numberOfCourses: 4
             }
         ]
