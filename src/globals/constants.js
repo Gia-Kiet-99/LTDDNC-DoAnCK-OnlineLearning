@@ -26,7 +26,7 @@ export const ScreenName = {
     forgetPassword: "ForgetPassword",
     authorDetail: "AuthorDetail",
     splash: "SplashScreen",
-
+    courseDetail: "CourseDetail",
 }
 
 export const NavigatorName = {

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View,Image,Text,StyleSheet} from 'react-native';
+import {AuthenticationContext} from "../../../provider/authentication-provider";
 
 const Profile = (props) => {
-
+    const {authentication} = useContext(AuthenticationContext)
     const info = {
         username: 'Kiet Dinh',
         avatar: require('../../../../assets/avatar.png'),
@@ -16,7 +17,7 @@ const Profile = (props) => {
         <View style={styles.container}>
             <View style={styles.mainInfo}>
                 <Image style={styles.image} source={info.avatar}/>
-                <Text style={styles.username}>{info.username}</Text>
+                <Text style={styles.username}>{authentication.user.username}</Text>
             </View>
 
             <View style={styles.activityInsight}>

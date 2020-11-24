@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Alert, Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
+import {AuthenticationContext} from "../../../provider/authentication-provider";
 
 const AccountInfo = (props) => {
+    const {authentication} = useContext(AuthenticationContext)
+
     const onProfilePress = () => {
         if(props.navigation !== undefined) {
             props.navigation.navigate("Profile");
@@ -13,8 +16,8 @@ const AccountInfo = (props) => {
                 onPress={onProfilePress}>
                 <Image style={styles.image} source={require('../../../../assets/avatar.jpg')}/>
                 <View style={{paddingLeft: 15}}>
-                    <Text>Kiet Dinh</Text>
-                    <Text style={{fontSize: 12}}>kiet-dinh</Text>
+                    <Text>{authentication.user.username}</Text>
+                    <Text style={{fontSize: 12}}>{authentication.user.username}</Text>
                 </View>
             </TouchableOpacity>
 

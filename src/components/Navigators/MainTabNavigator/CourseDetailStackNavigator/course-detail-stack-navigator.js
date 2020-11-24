@@ -1,16 +1,16 @@
 import React from 'react';
-import {View} from 'react-native';
 import {createStackNavigator} from "@react-navigation/stack";
 import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import AuthorDetailStackNavigator from "../AuthorDetailStackNavigator/author-detail-stack-navigator";
+import {NavigatorName, ScreenName} from "../../../../globals/constants";
 
 const Stack = createStackNavigator();
 
 const CourseDetailStackNavigator = (props) => {
     return (
-        <Stack.Navigator initialRouteName="CourseDetail">
-            <Stack.Screen name="CourseDetail" component={CourseDetail} options={{headerShown: false}}/>
-            <Stack.Screen name="AuthorDetailStackNavigator" component={AuthorDetailStackNavigator}
+        <Stack.Navigator initialRouteName={ScreenName.courseDetail}>
+            <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
+            <Stack.Screen name={NavigatorName.authorDetailStack} component={AuthorDetailStackNavigator}
                           options={{headerShown: false}}/>
         </Stack.Navigator>
     );

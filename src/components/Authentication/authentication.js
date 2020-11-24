@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ScreenName} from "../../globals/constants";
+import {AuthenticationContext} from "../../provider/authentication-provider";
 
 
 const Authentication = (props) => {
-    // console.log(props.navigation)
+    // const {authentication, updateAuthenticationValue} = useContext(AuthenticationContext)
+    // console.log(authentication)
 
     const onSignInPressed = () => {
         return props.navigation.navigate(ScreenName.login)
@@ -20,7 +22,7 @@ const Authentication = (props) => {
             </View>
             <TouchableOpacity
                 onPress={onSignInPressed}
-                style={[styles.button,styles.loginButton]}
+                style={[styles.button, styles.loginButton]}
                 activeOpacity={0.5}
             >
                 <Text style={styles.buttonText}>Sign in</Text>
@@ -28,7 +30,9 @@ const Authentication = (props) => {
             <TouchableOpacity onPress={onSubscribePressed} style={[styles.button, styles.transparentButton]}>
                 <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Subscribe to Pluralsight</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={[styles.button, styles.transparentButton]}>
+            <TouchableOpacity style={[styles.button, styles.transparentButton]}
+                              // onPress={() => updateAuthenticationValue({status: 123, user: {token: "abcxyz"}})}
+            >
                 <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Explore without a subscription</Text>
             </TouchableOpacity>
 

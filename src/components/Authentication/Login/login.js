@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import buttonStyles from "../styles/button-styles";
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
 import {NavigatorName, ScreenName} from "../../../globals/constants";
+import {AuthenticationContext} from "../../../provider/authentication-provider";
+import checkLogin from "../../../core/services/authentication-service";
 
 
 const Login = (props) => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const {authentication, updateAuthenticationValue} = useContext(AuthenticationContext)
+
+    useEffect(() => {
+        if(authentication && authentication.status === 200) {
+            props.navigation.navigate(NavigatorName.mainTab)
+        }
+    }, [authentication])
+
     const onLogin = () => {
-        return props.navigation.navigate(NavigatorName.mainTab)
+        // return props.navigation.navigate(NavigatorName.mainTab)
+        updateAuthenticationValue(checkLogin(username, password))
     }
     const onForgetPasswordPressed = () => {
         return props.navigation.navigate(ScreenName.forgetPassword)
@@ -24,15 +37,25 @@ const Login = (props) => {
             </View>
             <View style={{marginBottom: 10}}>
                 <Text style={textStyles.labelText}>Username (or email)</Text>
-                <TextInput  selectionColor={'#888'} style={textInputStyles.textInput}/>
+                <TextInput selectionColor={'#888'}
+                           style={textInputStyles.textInput}
+                           onChangeText={(text) => setUsername(text)}
+                           defaultValue={username}/>
             </View>
 
             <View>
                 <Text style={textStyles.labelText}>Password</Text>
-                <TextInput selectionColor={'#888'} style={textInputStyles.textInput} secure={true} secureTextEntry={true}/>
+                <TextInput selectionColor={'#888'} style={textInputStyles.textInput}
+                           secure={true}
+                           secureTextEntry={true}
+                           onChangeText={(text) => setPassword(text)}
+                           defaultValue={password}
+                />
             </View>
 
-            <TouchableOpacity onPress={onLogin} activeOpacity={0.5} style={[buttonStyles.button, buttonStyles.loginButton]}>
+            <TouchableOpacity onPress={onLogin} activeOpacity={0.5}
+                              style={[buttonStyles.button, buttonStyles.loginButton]}>
+
                 <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
             </TouchableOpacity>
 
@@ -44,7 +67,8 @@ const Login = (props) => {
                 <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={onSubscribePressed} style={[buttonStyles.button, buttonStyles.transparentButton]}>
+            <TouchableOpacity onPress={onSubscribePressed}
+                              style={[buttonStyles.button, buttonStyles.transparentButton]}>
                 <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
             </TouchableOpacity>
         </View>
