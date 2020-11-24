@@ -1,3 +1,4 @@
+
 export const listName = {
     course: "course-list",
     path: "path-list",
@@ -19,15 +20,24 @@ export const titleName = {
 export const ScreenName = {
     studyList: "StudyList",
     fieldDetail: "FieldDetail",
+    authentication: "Authentication",
+    register: "Register",
+    login: "Login",
+    forgetPassword: "ForgetPassword",
+    authorDetail: "AuthorDetail",
+    splash: "SplashScreen",
+
 }
 
 export const NavigatorName = {
+    mainTab: "MainTabNavigator",
     listStack: 'ListStack',
     skillStack: 'SkillStackNavigator',
     pathDetailStack: 'PathDetailStackNavigator',
     courseDetailStack: 'CourseDetailStackNavigator',
     authorDetailStack: 'AuthorDetailStackNavigator',
     fieldDetailStack: 'FieldDetailStackNavigator',
+    authenticationStack: "AuthenticationStackNavigator",
 }
 
 export const ImageButtonType = {

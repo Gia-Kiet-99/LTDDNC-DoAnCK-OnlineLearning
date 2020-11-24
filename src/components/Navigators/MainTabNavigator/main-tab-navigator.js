@@ -6,13 +6,12 @@ import Search from "../../Main/Search/search";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Ionicons} from "@expo/vector-icons";
 import BrowseStackNavigator from "./BrowseStackNavigator/browse-stack-navigator";
-import SearchTabNavigator from "./SearchStackNavigator/SearchTabNavigator/search-tab-navigator";
 import SearchStackNavigator from "./SearchStackNavigator/search-stack-navigator";
 
 const Tab = createBottomTabNavigator()
 
-const MainTabNavigatorScreenOptions = ({ route }) => ({
-    tabBarIcon: ({ focused, color, size }) => {
+const MainTabNavigatorScreenOptions = ({route}) => ({
+    tabBarIcon: ({focused, color, size}) => {
         let iconName;
         switch (route.name) {
             case 'HomeStackNavigator':
@@ -29,7 +28,7 @@ const MainTabNavigatorScreenOptions = ({ route }) => ({
                 break;
         }
         // You can return any component that you like here!
-        return <Ionicons name={iconName} size={size} color={color} />;
+        return <Ionicons name={iconName} size={size} color={color}/>;
     },
 })
 

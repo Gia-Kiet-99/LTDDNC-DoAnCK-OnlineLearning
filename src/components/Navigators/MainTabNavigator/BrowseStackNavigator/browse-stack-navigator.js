@@ -7,7 +7,6 @@ import ListStack from "../ListStack/list-stack";
 import PathDetailStackNavigator from "./PathDetailStackNavigator/path-detail-stack-navigator";
 import AuthorDetailStackNavigator from "../AuthorDetailStackNavigator/author-detail-stack-navigator";
 import SkillStackNavigator from "./SkillStackNavigator/skill-stack-navigator";
-import {NavigatorName} from "../../../../globals/constants";
 import FieldDetailStackNavigator from "./FieldDetailStackNavigator/field-detail-stack-navigator";
 
 const Stack = createStackNavigator()
@@ -18,23 +17,13 @@ const BrowseStackNavigator = (props) => {
             <Stack.Screen name="Browse" component={Browse} options={{headerShown: false}}/>
             <Stack.Screen name="Setting" component={Setting}/>
             <Stack.Screen name="Profile" component={Profile}/>
-
-            <Stack.Screen name="PathDetailStackNavigator"
-                          component={PathDetailStackNavigator}
+            <Stack.Screen name="PathDetailStackNavigator" component={PathDetailStackNavigator}
                           options={{headerShown: false}}/>
-
-            <Stack.Screen name="AuthorDetailStackNavigator"
-                          component={AuthorDetailStackNavigator}
+            <Stack.Screen name="AuthorDetailStackNavigator" component={AuthorDetailStackNavigator}
                           options={{headerShown: false}}/>
-
-            <Stack.Screen name="SkillStackNavigator"
-                          component={SkillStackNavigator}
+            <Stack.Screen name="SkillStackNavigator" component={SkillStackNavigator} options={{headerShown: false}}/>
+            <Stack.Screen name="FieldDetailStackNavigator" component={FieldDetailStackNavigator}
                           options={{headerShown: false}}/>
-
-            <Stack.Screen name={NavigatorName.fieldDetailStack}
-                          component={FieldDetailStackNavigator}
-                          options={{headerShown: false}}/>
-
             <Stack.Screen name="ListStack" component={ListStack} options={{headerShown: false}}/>
         </Stack.Navigator>
     );

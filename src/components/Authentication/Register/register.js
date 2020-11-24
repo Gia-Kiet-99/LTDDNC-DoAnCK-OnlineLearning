@@ -3,10 +3,11 @@ import {TouchableOpacity, Image, Text, View, StyleSheet, TextInput} from "react-
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
 import buttonStyles from "../styles/button-styles";
+import {ScreenName} from "../../../globals/constants";
 
 const Register = (props) => {
     const onSubscribe = () => {
-        return props.navigation.navigate("Login")
+        return props.navigation.navigate(ScreenName.login)
     }
     return (
         <View style={styles.container}>
@@ -30,22 +31,9 @@ const Register = (props) => {
 
             <TouchableOpacity activeOpacity={0.5}
                               style={[buttonStyles.button, buttonStyles.loginButton]}
-                              onPress={onSubscribe}
-            >
+                              onPress={onSubscribe}>
                 <Text style={[textStyles.buttonText, {color: '#fff'}]}>Subscribe</Text>
             </TouchableOpacity>
-
-            {/*<TouchableOpacity>*/}
-            {/*    <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>*/}
-            {/*</TouchableOpacity>*/}
-
-            {/*<TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>*/}
-            {/*    <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>*/}
-            {/*</TouchableOpacity>*/}
-
-            {/*<TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>*/}
-            {/*    <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>*/}
-            {/*</TouchableOpacity>*/}
         </View>
     );
 };

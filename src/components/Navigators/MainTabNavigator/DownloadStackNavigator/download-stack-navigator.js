@@ -11,7 +11,8 @@ const DownloadStackNavigator = (props) => {
     return (
         <Stack.Navigator initialRouteName="Download">
             <Stack.Screen name="Download" component={Download} options={{headerShown: false}}/>
-            <Stack.Screen name="CourseDetailStackNavigator" component={CourseDetailStackNavigator} options={{headerShown: false}}/>
+            <Stack.Screen name="CourseDetailStackNavigator" component={CourseDetailStackNavigator}
+                          options={{headerShown: false}}/>
             <Stack.Screen name="Setting" component={Setting}/>
             <Stack.Screen name="Profile" component={Profile}/>
         </Stack.Navigator>

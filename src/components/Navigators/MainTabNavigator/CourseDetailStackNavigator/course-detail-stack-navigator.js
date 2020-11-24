@@ -9,11 +9,8 @@ const Stack = createStackNavigator();
 const CourseDetailStackNavigator = (props) => {
     return (
         <Stack.Navigator initialRouteName="CourseDetail">
-            <Stack.Screen name="CourseDetail"
-                          component={CourseDetail}
-                          options={{headerShown: false}}/>
-            <Stack.Screen name="AuthorDetailStackNavigator"
-                          component={AuthorDetailStackNavigator}
+            <Stack.Screen name="CourseDetail" component={CourseDetail} options={{headerShown: false}}/>
+            <Stack.Screen name="AuthorDetailStackNavigator" component={AuthorDetailStackNavigator}
                           options={{headerShown: false}}/>
         </Stack.Navigator>
     );

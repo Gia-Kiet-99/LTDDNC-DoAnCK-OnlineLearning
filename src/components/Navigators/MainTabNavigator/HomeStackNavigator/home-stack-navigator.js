@@ -13,11 +13,10 @@ const HomeStackNavigator = (props) => {
     return (
         <Stack.Navigator initalRouteName={Home}>
             <Stack.Screen name="Home" component={Home} options={{headerShown: false}}/>
-            {/*<Stack.Screen name="CourseDetail" component={CourseDetail} options={{headerShown: false}}/>*/}
-            <Stack.Screen name="CourseDetailStackNavigator"
-                          component={CourseDetailStackNavigator}
+            <Stack.Screen name="CourseDetailStackNavigator" component={CourseDetailStackNavigator}
                           options={{headerShown: false}}/>
-            <Stack.Screen name="ChannelDetail" component={ChannelDetail} options={({route}) => ({ title: route.params.item.title })}/>
+            <Stack.Screen name="ChannelDetail" component={ChannelDetail}
+                          options={({route}) => ({title: route.params.item.title})}/>
             <Stack.Screen name="Setting" component={Setting}/>
             <Stack.Screen name="Profile" component={Profile}/>
             <Stack.Screen name="ListStack" component={ListStack} options={{headerShown: false}}/>

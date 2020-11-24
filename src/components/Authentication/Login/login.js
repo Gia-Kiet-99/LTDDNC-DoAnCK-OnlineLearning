@@ -3,17 +3,18 @@ import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-
 import buttonStyles from "../styles/button-styles";
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
+import {NavigatorName, ScreenName} from "../../../globals/constants";
 
 
 const Login = (props) => {
     const onLogin = () => {
-        return props.navigation.navigate("MainTabNavigator")
+        return props.navigation.navigate(NavigatorName.mainTab)
     }
     const onForgetPasswordPressed = () => {
-        return props.navigation.navigate("ForgetPassword")
+        return props.navigation.navigate(ScreenName.forgetPassword)
     }
     const onSubscribePressed = () => {
-        return props.navigation.navigate("Register")
+        return props.navigation.navigate(ScreenName.register)
     }
 
     return (
@@ -35,7 +36,7 @@ const Login = (props) => {
                 <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={onForgetPasswordPressed}>
+            <TouchableOpacity onPress={onForgetPasswordPressed} style={styles.forgotButton}>
                 <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
             </TouchableOpacity>
 
@@ -63,6 +64,10 @@ const styles = StyleSheet.create({
         height: 150,
         width: 250,
     },
+    forgotButton: {
+        // alignSelf: 'baseline',
+
+    }
 
 })
 

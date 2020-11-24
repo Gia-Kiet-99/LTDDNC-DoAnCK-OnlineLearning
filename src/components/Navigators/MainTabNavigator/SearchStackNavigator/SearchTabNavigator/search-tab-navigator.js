@@ -20,11 +20,8 @@ const SearchTabNavigator = (props) => {
                 value={searchValue}
             />
             <Tab.Navigator initialRouteName="AllResult" keyboardDismissMode={'on-drag'}>
-                <Tab.Screen name="AllResult"
-                            component={SearchResultList}
-                            options={{title: "ALL"}}/>
-                <Tab.Screen name="CourseResult"
-                            component={StudyList}
+                <Tab.Screen name="AllResult" component={SearchResultList} options={{title: "ALL"}}/>
+                <Tab.Screen name="CourseResult" component={StudyList}
                             initialParams={{
                                 kind: listName.course,
                                 style: {
@@ -32,8 +29,7 @@ const SearchTabNavigator = (props) => {
                                 },
                             }}
                             options={{title: "COURSES"}}/>
-                <Tab.Screen name="PathResult"
-                            component={StudyList}
+                <Tab.Screen name="PathResult" component={StudyList}
                             initialParams={{
                                 kind: listName.path,
                                 style: {
@@ -41,8 +37,7 @@ const SearchTabNavigator = (props) => {
                                 },
                             }}
                             options={{title: "PATHS"}}/>
-                <Tab.Screen name="AuthorResult"
-                            component={StudyList}
+                <Tab.Screen name="AuthorResult" component={StudyList}
                             initialParams={{
                                 kind: listName.author,
                                 style: {

@@ -1,13 +1,16 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ScreenName} from "../../globals/constants";
 
 
 const Authentication = (props) => {
+    // console.log(props.navigation)
+
     const onSignInPressed = () => {
-        return props.navigation.navigate("Login")
+        return props.navigation.navigate(ScreenName.login)
     }
     const onSubscribePressed = () => {
-        return props.navigation.navigate("Register")
+        return props.navigation.navigate(ScreenName.register)
     }
 
     return (

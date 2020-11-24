@@ -9,20 +9,13 @@ const Stack = createStackNavigator();
 
 const ListStack = (props) => {
     return (
-        <Stack.Navigator
-            initialRouteName="StudyList"
-            screenOptions={{headerShown: true}}>
-            <Stack.Screen name="StudyList"
-                          component={StudyList}
-                          options={({route}) => ({ title: route.params.title })}/>
-            <Stack.Screen name="CourseDetailStackNavigator"
-                          component={CourseDetailStackNavigator}
+        <Stack.Navigator initialRouteName="StudyList" screenOptions={{headerShown: true}}>
+            <Stack.Screen name="StudyList" component={StudyList} options={({route}) => ({title: route.params.title})}/>
+            <Stack.Screen name="CourseDetailStackNavigator" component={CourseDetailStackNavigator}
                           options={{headerShown: false}}/>
-            <Stack.Screen name="ChannelDetail"
-                          component={ChannelDetail}
-                          options={({route}) => ({ title: route.params.item.title })}/>
-            <Stack.Screen name="PathDetailStackNavigator"
-                          component={PathDetailStackNavigator}
+            <Stack.Screen name="ChannelDetail" component={ChannelDetail}
+                          options={({route}) => ({title: route.params.item.title})}/>
+            <Stack.Screen name="PathDetailStackNavigator" component={PathDetailStackNavigator}
                           options={{headerShown: false}}/>
         </Stack.Navigator>
     );
