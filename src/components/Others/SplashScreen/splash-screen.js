@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet, Text} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import {NavigatorName} from "../../../globals/constants";
 
 class SplashScreen extends React.Component {
@@ -20,7 +20,6 @@ class SplashScreen extends React.Component {
         // console.log("didUpdate")
         if(this.state.loading >= 100) {
             clearInterval(this.timer)
-            // this.props.navigation.navigate(NavigatorName.authenticationStack)
             this.props.navigation.reset({
                 index: 0,
                 routes: [{ name: NavigatorName.authenticationStack }],
@@ -29,14 +28,17 @@ class SplashScreen extends React.Component {
     }
 
     componentWillUnmount() {
-        // console.log("willUnmount")
         clearInterval(this.timer);
     }
 
     render() {
         return <View style={styles.container}>
-            <Image style={styles.logo} source={require('../../../../assets/pluralsight-icon.png')}/>
-            <Text>{this.state.loading}</Text>
+            <View style={{flex: 1, justifyContent: 'center'}}>
+                <Image style={styles.logo} source={require('../../../../assets/logo-without-name.png')}/>
+            </View>
+            <View>
+                <Image style={styles.appNameImage} source={require('../../../../assets/app-name.png')}/>
+            </View>
         </View>
     }
 }
@@ -48,8 +50,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     logo: {
-        height: 100,
-        width: 100,
+        height: 200,
+        width: 300,
+
+    },
+    appNameImage: {
+        height: 50,
+        width: 150
     }
 })
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, View, ScrollView, StyleSheet, StatusBar} from 'react-native';
+import {Image, View, ScrollView, StyleSheet, StatusBar, Text} from 'react-native';
 import Section from "../../Common/section";
 import {listName, titleName} from "../../../globals/constants";
 import {channels, courses} from "../../../localize/data";
@@ -12,8 +12,18 @@ const Home = (props) => {
             <ActionBar title={titleName.home} navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false} style={styles.listSection}>
                 <View style={styles.imageWrapper}>
-                    <Image style={styles.image} source={require('../../../../assets/background-image-3.jpg')}/>
+                    <Image style={styles.image} source={require('../../../../assets/image-online-education.jpg')}/>
                 </View>
+                {/*<View style={{height: 0.2,*/}
+                {/*    shadowColor: "#fff",*/}
+                {/*    shadowOffset: {*/}
+                {/*        width: 0,*/}
+                {/*        height: 2,*/}
+                {/*    },*/}
+                {/*    shadowOpacity: 0.25,*/}
+                {/*    shadowRadius: 3.84,*/}
+
+                {/*    elevation: 30,}}/>*/}
                 <Section navigation={props.navigation} kind={listName.course} title={'Continue learning'} list={courses} showSeeAllButton={true}/>
                 <Section navigation={props.navigation} kind={listName.channel} title={'Channels'} list={channels} showSeeAllButton={true}/>
                 <Section navigation={props.navigation} kind={listName.course} title={'Course list'} list={courses} showSeeAllButton={true}/>

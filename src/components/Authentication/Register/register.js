@@ -12,7 +12,7 @@ const Register = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={require('../../../../assets/Pluralsight.png')}/>
+                <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
             </View>
             <View style={{marginBottom: 10}}>
                 <Text style={textStyles.labelText}>Username (or email)</Text>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 150,
-        width: 250,
+        width: 200,
     },
 
 })

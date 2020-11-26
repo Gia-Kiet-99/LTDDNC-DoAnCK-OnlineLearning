@@ -33,9 +33,9 @@ const Login = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={require('../../../../assets/Pluralsight.png')}/>
+                <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
             </View>
-            <View style={{marginBottom: 10}}>
+            <View style={{marginTop: 10}}>
                 <Text style={textStyles.labelText}>Username (or email)</Text>
                 <TextInput selectionColor={'#888'}
                            style={textInputStyles.textInput}
@@ -44,7 +44,7 @@ const Login = (props) => {
             </View>
 
             <View>
-                <Text style={textStyles.labelText}>Password</Text>
+                <Text style={[textStyles.labelText, {marginTop: 10}]}>Password</Text>
                 <TextInput selectionColor={'#888'} style={textInputStyles.textInput}
                            secure={true}
                            secureTextEntry={true}
@@ -80,13 +80,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         padding: "5%",
+        // backgroundColor: '#222'
     },
     imageWrapper: {
-        alignItems: 'center',
+        alignSelf: 'center',
+        height: 150,
+        width: 200,
+        // backgroundColor: 'pink'
     },
     image: {
-        height: 150,
-        width: 250,
+        height: "100%",
+        width: "100%",
     },
     forgotButton: {
         // alignSelf: 'baseline',

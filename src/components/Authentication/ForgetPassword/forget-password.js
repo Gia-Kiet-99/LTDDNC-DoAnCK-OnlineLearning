@@ -6,7 +6,7 @@ const ForgetPassword = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={require('../../../../assets/Pluralsight.png')}/>
+                <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
             </View>
             <View>
                 <TextInput placeholder='Enter your email' selectionColor={'#888'} style={textInputStyles.textInput}/>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     },
     image: {
         height: 150,
-        width: 250,
+        width: 200,
     },
     button: {
         marginTop: 10,

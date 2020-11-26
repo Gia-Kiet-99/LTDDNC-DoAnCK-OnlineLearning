@@ -18,7 +18,7 @@ const Authentication = (props) => {
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={require('../../../assets/Pluralsight.png')}/>
+                <Image style={styles.image} source={require('../../../assets/logo-with-name.png')}/>
             </View>
             <TouchableOpacity
                 onPress={onSignInPressed}
@@ -48,9 +48,10 @@ const styles = StyleSheet.create({
     },
     imageWrapper: {
         alignItems: 'center',
+        marginBottom: 15
     },
     image: {
-        height: 150,
+        height: 200,
         width: 250,
     },
     button: {
