@@ -14,16 +14,6 @@ const Home = (props) => {
                 <View style={styles.imageWrapper}>
                     <Image style={styles.image} source={require('../../../../assets/image-online-education.jpg')}/>
                 </View>
-                {/*<View style={{height: 0.2,*/}
-                {/*    shadowColor: "#fff",*/}
-                {/*    shadowOffset: {*/}
-                {/*        width: 0,*/}
-                {/*        height: 2,*/}
-                {/*    },*/}
-                {/*    shadowOpacity: 0.25,*/}
-                {/*    shadowRadius: 3.84,*/}
-
-                {/*    elevation: 30,}}/>*/}
                 <Section navigation={props.navigation} kind={listName.course} title={'Continue learning'} list={courses} showSeeAllButton={true}/>
                 <Section navigation={props.navigation} kind={listName.channel} title={'Channels'} list={channels} showSeeAllButton={true}/>
                 <Section navigation={props.navigation} kind={listName.course} title={'Course list'} list={courses} showSeeAllButton={true}/>
@@ -36,7 +26,7 @@ const Home = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'beige'
+        // backgroundColor: 'beige'
     },
     bar: {
         padding: 15,

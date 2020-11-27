@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Alert, Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 
@@ -131,6 +131,11 @@ const Options = () => {
 }
 
 const Detail = (props) => {
+    const {signOut} = useContext(AuthenticationContext)
+    const onOkClicked = () => {
+        signOut()
+    }
+
     const onSignOut = () => (
         Alert.alert(
             "Sign out",
@@ -138,7 +143,7 @@ const Detail = (props) => {
             [
                 {
                     text: 'Ok',
-                    onPress: () => props.navigation.navigate("Authentication")
+                    onPress: onOkClicked
                 },
                 {
                     text: 'Cancel',

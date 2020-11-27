@@ -30,6 +30,7 @@ export const ScreenName = {
 }
 
 export const NavigatorName = {
+    appStack: "AppNavigator",
     mainTab: "MainTabNavigator",
     listStack: 'ListStack',
     skillStack: 'SkillStackNavigator',

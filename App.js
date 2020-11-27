@@ -1,29 +1,26 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {NavigationContainer} from "@react-navigation/native";
+import {DarkTheme, DefaultTheme, NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-import AuthenticationStackNavigator
-    from "./src/components/Navigators/AuthenticationNavigator/authentication-stack-navigator";
-import MainTabNavigator from "./src/components/Navigators/MainTabNavigator/main-tab-navigator";
 import {NavigatorName, ScreenName} from "./src/globals/constants";
-import SplashScreen from "./src/components/Others/SplashScreen/splash-screen";
 import {AuthenticationProvider} from "./src/provider/authentication-provider";
+import {AppThemeProvider} from "./src/provider/theme-provider"
+import AppNavigator from "./src/components/Navigators/AppNavigator/app-navigator";
 
 const Stack = createStackNavigator();
 
 export default function App() {
     return (
-        <AuthenticationProvider>
-            <NavigationContainer>
-                <Stack.Navigator initialRouteName={ScreenName.splash}>
-                    <Stack.Screen name={ScreenName.splash} component={SplashScreen} options={{headerShown: false}}/>
-                    <Stack.Screen name={NavigatorName.authenticationStack} component={AuthenticationStackNavigator}
-                                  options={{headerShown: false}}/>
-                    <Stack.Screen name={NavigatorName.mainTab} component={MainTabNavigator}
-                                  options={{headerShown: false}}/>
-                </Stack.Navigator>
-            </NavigationContainer>
-        </AuthenticationProvider>
+        <AppThemeProvider>
+            <AuthenticationProvider>
+                <NavigationContainer theme={DefaultTheme}>
+                    <Stack.Navigator>
+                        <Stack.Screen name={NavigatorName.appStack} component={AppNavigator}
+                                      options={{headerShown: false}}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </AuthenticationProvider>
+        </AppThemeProvider>
     );
 }
 

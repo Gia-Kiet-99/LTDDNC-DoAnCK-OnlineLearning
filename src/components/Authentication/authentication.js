@@ -1,12 +1,11 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ScreenName} from "../../globals/constants";
-import {AuthenticationContext} from "../../provider/authentication-provider";
-
+import {AppThemeContext, themes} from "../../provider/theme-provider";
 
 const Authentication = (props) => {
-    // const {authentication, updateAuthenticationValue} = useContext(AuthenticationContext)
-    // console.log(authentication)
+    const {theme, toggleTheme} = useContext(AppThemeContext)
+    // console.log('Authentication', theme)
 
     const onSignInPressed = () => {
         return props.navigation.navigate(ScreenName.login)
@@ -16,7 +15,7 @@ const Authentication = (props) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, theme]}>
             <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={require('../../../assets/logo-with-name.png')}/>
             </View>
@@ -31,7 +30,7 @@ const Authentication = (props) => {
                 <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Subscribe to Pluralsight</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.transparentButton]}
-                              // onPress={() => updateAuthenticationValue({status: 123, user: {token: "abcxyz"}})}
+                              onPress={() => toggleTheme()}
             >
                 <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Explore without a subscription</Text>
             </TouchableOpacity>
@@ -44,7 +43,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        padding: '5%'
+        padding: '5%',
+        // backgroundColor: '#222'
     },
     imageWrapper: {
         alignItems: 'center',

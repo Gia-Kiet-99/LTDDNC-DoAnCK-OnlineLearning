@@ -20,6 +20,7 @@ class SplashScreen extends React.Component {
         // console.log("didUpdate")
         if(this.state.loading >= 100) {
             clearInterval(this.timer)
+            // this.props.navigation.navigate(NavigatorName.authenticationStack)
             this.props.navigation.reset({
                 index: 0,
                 routes: [{ name: NavigatorName.authenticationStack }],
