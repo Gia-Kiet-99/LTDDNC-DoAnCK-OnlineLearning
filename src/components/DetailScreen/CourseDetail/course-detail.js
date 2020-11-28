@@ -4,7 +4,6 @@ import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
 import {CourseContext} from "../../../provider/course-provider";
-import {MaterialIcons} from '@expo/vector-icons';
 
 
 const CourseDetail = (props) => {
@@ -12,16 +11,24 @@ const CourseDetail = (props) => {
     //     return author.map(item => <AuthorButton author={item}/>)
     // }
 
-    const {updateCourseList, getCourseFromId} = useContext(CourseContext)
+    const {
+        updateCourseList,
+        getCourseFromId,
+        addItemToDownloadList,
+        removeItemFromDownloadList,
+        downloadListContain
+    } = useContext(CourseContext)
+
     /* get course id */
     const courseId = props.route.params.courseId
     /* get course data from id */
     const item = getCourseFromId(courseId)
     // console.log("CourseDetail", item)
 
-    const [isBookmarked, setIsBookmarked] = useState(item.isFavorite);
+    console.log(downloadListContain(item.id))
     const [isExpanded, setIsExpanded] = useState(false);
-    const [isDownloaded, setIsDownloaded] = useState(item.isDownload);
+    const [isBookmarked, setIsBookmarked] = useState(item.isFavorite);
+    const [isDownloaded, setIsDownloaded] = useState(downloadListContain(item.id));
 
     const onAuthorButtonPressed = () => {
         if (props.navigation !== undefined) {
@@ -44,11 +51,32 @@ const CourseDetail = (props) => {
     }, [isBookmarked])
 
     const onDownloadButtonPressed = () => {
-        setIsDownloaded(!isDownloaded)
+        if (isDownloaded === true) {
+            Alert.alert("Remove download", "Are you sure you want to remove downloaded course?",
+                [
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    {text: "Remove", onPress: () => setIsDownloaded(false)}
+                ],
+                {cancelable: false}
+            );
+        } else {
+            setIsDownloaded(true)
+        }
     }
     useEffect(() => {
-        item.isDownload = isDownloaded
-        updateCourseList(item.id, item)
+        if (isDownloaded) {
+            addItemToDownloadList(item)
+        } else {
+            removeItemFromDownloadList(item.id)
+        }
+
+
+        // item.isDownload = isDownloaded
+        // updateCourseList(item.id, item)
     }, [isDownloaded])
 
     const AuthorButton = (props) => {
@@ -156,7 +184,7 @@ const CourseDetail = (props) => {
 
     return (
         <View style={styles.container}>
-            <StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>
+            {/*<StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>*/}
             <VideoPlayer navigation={props.navigation}/>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <CourseIntro/>

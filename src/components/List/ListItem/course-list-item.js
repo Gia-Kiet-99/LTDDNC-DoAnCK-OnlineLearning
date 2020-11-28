@@ -1,24 +1,54 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, Image, View, Text, TouchableOpacity} from 'react-native';
 import Menu, {MenuItem} from "react-native-material-menu";
 import CourseInfo from "../../Common/course-info";
+import {CourseContext} from "../../../provider/course-provider";
 
 const CourseListItem = (props) => {
+    const {
+        updateCourseList,
+        downloadListContain,
+        addItemToDownloadList,
+        removeItemFromDownloadList
+    } = useContext(CourseContext)
+
+    const item = props.item
+
     const [menu, setMenu] = useState(null);
-    // const navigation = props.navigation;
+    const [isDownloaded, setIsDownloaded] = useState(downloadListContain(item.id));
 
     const showMenu = () => {
         menu.show();
     }
     const doNothing = () => {
+        menu.hide();
     }
+    // const onBookmarkPressed = () => {
+    //     item.isFavorite = !item.isFavorite
+    //     menu.hide()
+    // }
+    const onDownloadMenuItemPressed = () => {
+        setIsDownloaded(!isDownloaded)
+    }
+    useEffect(() => {
+        if (isDownloaded) {
+            addItemToDownloadList(item)
+        } else {
+            removeItemFromDownloadList(item.id)
+        }
+    }, [isDownloaded])
+
+    // useEffect(() => {
+    //     updateCourseList(item.id, item)
+    // }, [item.isFavorite])
+
     const onPressListItem = () => {
         if (props.navigation !== undefined) {
             props.navigation.navigate("CourseDetailStackNavigator",
                 {
                     screen: "CourseDetail",
                     params: {
-                        courseId: props.item.id
+                        courseId: item.id
                     }
                 })
         }
@@ -27,19 +57,19 @@ const CourseListItem = (props) => {
     return (
         <TouchableOpacity
             style={[styles.container, props.style]}
-            onPress={onPressListItem}
-        >
+            onPress={onPressListItem}>
+
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={props.item.image}/>
+                <Image style={styles.image} source={item.image}/>
             </View>
             <CourseInfo
                 containerStyle={courseInfoStyle.container}
                 titleStyle={courseInfoStyle.largerTitle}
-                title={props.item.title}
-                author={props.item.authorName}
-                level={props.item.level}
-                released={props.item.released}
-                duration={props.item.duration}
+                title={item.title}
+                author={item.authorName}
+                level={item.level}
+                released={item.released}
+                duration={item.duration}
                 style={{fontSize: 16}}
             />
             <TouchableOpacity style={styles.menuWrapper} onPress={showMenu}>
@@ -49,9 +79,9 @@ const CourseListItem = (props) => {
                         <Image style={{height: 24, width: 24}}
                                source={require('../../../../assets/icon-menu-vertical.png')}/>
                     }>
-                    <MenuItem onPress={doNothing}>Bookmark</MenuItem>
+                    <MenuItem onPress={doNothing}>{item.isFavorite ? "UnBookmark" : "Bookmark"}</MenuItem>
                     <MenuItem onPress={doNothing}>Add to channel</MenuItem>
-                    <MenuItem onPress={doNothing}>Download</MenuItem>
+                    <MenuItem onPress={onDownloadMenuItemPressed}>{isDownloaded ? "Remove download" : "Download"}</MenuItem>
                 </Menu>
             </TouchableOpacity>
         </TouchableOpacity>

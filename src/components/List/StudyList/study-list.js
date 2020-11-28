@@ -12,7 +12,7 @@ import {CourseContext} from "../../../provider/course-provider";
 
 
 const StudyList = (props) => {
-    const {courseList, getFavoriteCourses} = useContext(CourseContext)
+    const {courseList, downloadedList, getFavoriteCourses, getDownloadedCourses} = useContext(CourseContext)
 
     /* value passing when you click See all button */
     const listType = (props.route?.params?.kind === undefined) ? props.kind : props.route?.params?.kind;
@@ -55,8 +55,9 @@ const StudyList = (props) => {
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.download:
                 return <FlatList showsVerticalScrollIndicator={false}
-                                 data={props.data}
-                                 renderItem={renderDownloadItem}
+                                 data={downloadedList}
+                                 // extraData={downloadedList}
+                                 renderItem={renderCourseItem}
                                  keyExtractor={item => item.id}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.path:
@@ -81,7 +82,7 @@ const StudyList = (props) => {
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             default:
                 return <FlatList showsVerticalScrollIndicator={false}
-                                 data={courses}
+                                 data={courseList}
                                  renderItem={renderCourseItem}
                                  keyExtractor={item => item.id}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>

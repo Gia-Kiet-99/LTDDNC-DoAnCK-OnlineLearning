@@ -24,36 +24,6 @@ export const skills = [
         skill:'Node.js'
     },
 ]
-export const channels = [
-    {
-        id: "1",
-        image: require('../../assets/image-1.jpg'),
-        title: 'CS Principles - Technology Career Overview',
-        level: 'Professional Services',
-        follow: '62 follow',
-    },
-    {
-        id: "2",
-        image: require('../../assets/image-1.jpg'),
-        title: 'CS Principles - Technology Career Overview',
-        level: 'Professional Services',
-        follow: '62 follow',
-    },
-    {
-        id: "3",
-        image: require('../../assets/image-1.jpg'),
-        title: 'CS Principles - Technology Career Overview',
-        level: 'Professional Services',
-        follow: '62 follow',
-    },
-    {
-        id: "4",
-        image: require('../../assets/image-1.jpg'),
-        title: 'CS Principles - Technology Career Overview',
-        level: 'Professional Services',
-        follow: '62 follow',
-    },
-]
 export const authors = [
     {
         id: "1",
@@ -324,74 +294,6 @@ export const results = [
             }
         ]
     }
-]
-export const downloads = [
-    {
-        id: '1',
-        title: 'Leadership for Non-managers',
-        authorName: 'Gia Kiet',
-        authorAvatar: require('../../assets/girl.jpg'),
-        level: 'Advance',
-        released: 'May 2020',
-        duration: '30 h',
-        image: require('../../assets/image-1.jpg'),
-        rating: 5,
-    },
-    {
-        id: '2',
-        title: 'iOS',
-        authorName: 'Gia Kiet',
-        authorAvatar: require('../../assets/girl.jpg'),
-        level: 'Beginner',
-        released: 'Aug 2020',
-        duration: '25 h',
-        image: require('../../assets/image-1.jpg'),
-        rating: 5,
-    },
-    {
-        id: '3',
-        title: 'Android',
-        authorName: 'Gia Kiet',
-        authorAvatar: require('../../assets/girl.jpg'),
-        level: 'Intermediate',
-        released: 'Jan 2019',
-        duration: '28 h',
-        image: require('../../assets/image-1.jpg'),
-        rating: 5,
-    },
-    {
-        id: '4',
-        title: 'Leadership for Non-managers',
-        authorName: 'Gia Kiet',
-        authorAvatar: require('../../assets/girl.jpg'),
-        level: 'Advance',
-        released: 'May 2020',
-        duration: '30 h',
-        image: require('../../assets/image-1.jpg'),
-        rating: 5,
-    },
-    {
-        id: '5',
-        title: 'iOS',
-        authorName: 'Gia Kiet',
-        authorAvatar: require('../../assets/girl.jpg'),
-        level: 'Beginner',
-        released: 'Aug 2020',
-        duration: '25 h',
-        image: require('../../assets/image-1.jpg'),
-        rating: 5,
-    },
-    {
-        id: '6',
-        title: 'Android',
-        authorName: 'Gia Kiet',
-        authorAvatar: require('../../assets/girl.jpg'),
-        level: 'Intermediate',
-        released: 'Jan 2019',
-        duration: '28 h',
-        image: require('../../assets/image-1.jpg'),
-        rating: 5,
-    },
 ]
 export const lessons = [
     {
@@ -675,4 +577,62 @@ export const courses = [
         isFavorite: false
     },
 ]
+export const downloads = [
+    {
+        id: 'course#1',
+        title: 'Java',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../assets/girl.jpg'),
+        level: 'Advance',
+        released: 'May 2020',
+        duration: '30 h',
+        image: require('../../assets/java.jpg'),
+        rating: 5,
+        isDownload: false,
+        isFavorite: true,
 
+    },
+    {
+        id: 'course#2',
+        title: 'iOS',
+        authorName: 'Gia Kiet',
+        authorAvatar: require('../../assets/girl.jpg'),
+        level: 'Beginner',
+        released: 'Aug 2020',
+        duration: '25 h',
+        image: require('../../assets/ios.jpg'),
+        rating: 4,
+        isDownload: false,
+        isFavorite: false
+    },
+]
+export const channels = [
+    {
+        id: "1",
+        image: require('../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+    {
+        id: "2",
+        image: require('../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+    {
+        id: "3",
+        image: require('../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+    {
+        id: "4",
+        image: require('../../assets/image-1.jpg'),
+        title: 'CS Principles - Technology Career Overview',
+        level: 'Professional Services',
+        follow: '62 follow',
+    },
+]

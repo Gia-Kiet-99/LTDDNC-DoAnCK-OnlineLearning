@@ -6,19 +6,25 @@ import {listName, titleName} from "../../../globals/constants";
 import {courses} from "../../../localize/data";
 import {CourseContext} from "../../../provider/course-provider";
 
-const DownloadHeader = () => (
-    <View style={styles.overView}>
-        <Text style={styles.text}>9 courses (123 MB)</Text>
-        <TouchableOpacity style={styles.button}>
-            <Text style={[styles.text, {color: '#2e97ff'}]}>REMOVE ALL</Text>
-        </TouchableOpacity>
-    </View>
-)
 
 const Download = (props) => {
-    const {getDownloadedCourses} = useContext(CourseContext)
+    const {courseList, downloadedList, getDownloadedCourses, removeAllDownloadedCourses} = useContext(CourseContext)
     const data = getDownloadedCourses()
 
+    const onRemoveAllButtonClick = () => {
+        removeAllDownloadedCourses()
+    }
+
+    const DownloadHeader = () => {
+        return (
+            <View style={styles.overView}>
+                <Text style={styles.text}>{`${downloadedList.length} courses`}</Text>
+                <TouchableOpacity style={styles.button} onPress={onRemoveAllButtonClick}>
+                    <Text style={[styles.text, {color: '#2e97ff'}]}>REMOVE ALL</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
     return (
         <View style={styles.container}>
             {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content' animated={true}/>*/}
@@ -27,8 +33,7 @@ const Download = (props) => {
                 <DownloadHeader/>
                 <StudyList kind={listName.download}
                            style={styles.courseList}
-                           navigation={props.navigation}
-                           data={data}/>
+                           navigation={props.navigation}/>
             </View>
         </View>
     );
