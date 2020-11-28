@@ -6,7 +6,8 @@ export const listName = {
     author: "author-list",
     popularSkill: "skill-list",
     channel: "channel-list",
-    download: "download-list"
+    download: "download-list",
+    channelCourse: "channel-course-list"
 }
 
 export const titleName = {
@@ -30,6 +31,7 @@ export const ScreenName = {
     authorDetail: "AuthorDetail",
     splash: "SplashScreen",
     courseDetail: "CourseDetail",
+    channelDetail: "ChannelDetail",
 }
 
 export const NavigatorName = {
@@ -42,6 +44,7 @@ export const NavigatorName = {
     authorDetailStack: 'AuthorDetailStackNavigator',
     fieldDetailStack: 'FieldDetailStackNavigator',
     authenticationStack: "AuthenticationStackNavigator",
+    channelDetailStack: "ChannelDetailStackNavigator",
 }
 
 export const ImageButtonType = {

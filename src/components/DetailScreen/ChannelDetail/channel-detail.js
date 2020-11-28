@@ -1,13 +1,21 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ChannelInfo from "../../Common/channel-info";
 import StudyList from "../../List/StudyList/study-list";
 import {listName} from "../../../globals/constants";
 import {channels} from "../../../localize/data";
+import {ChannelContext} from "../../../provider/channel-context";
 
 const ChannelDetail = (props) => {
-    const item = props.route.params.item;
     const [isExpanded, setIsExpanded] = useState(false);
+    const {getChannelById} = useContext(ChannelContext)
+
+    const channelId = props.route.params.channelId
+    const item = getChannelById(channelId)
+
+    useEffect(() => {
+        props.navigation.setOptions({ title: item.title })
+    }, [item.title])
 
     const ChannelDescription = () => {
         return <View>
@@ -31,25 +39,41 @@ const ChannelDetail = (props) => {
         </View>
     }
 
+    const renderListHeaderComponent = () => {
+        if(item.type === "public") {
+            return <>
+                <ChannelInfo
+                    title={item.title}
+                    level={item.level}
+                    follow={item.follow}
+                    containerStyle={{
+                        marginTop: 10,
+                    }}
+                    titleStyle={{fontSize: 24}}
+                />
+                <ChannelDescription/>
+            </>
+        } else if (item.type === "private") {
+            return (
+                <ChannelInfo
+                    title={item.title}
+                    containerStyle={{
+                        marginTop: 10,
+                    }}
+                    titleStyle={{fontSize: 24}}
+                />
+            )
+        }
+    }
+
     return (
         <View style={styles.container}>
             <StudyList
-                kind={listName.channel}
+                navigation={props.navigation}
+                kind={listName.channelCourse}
                 style={{marginTop: 0}}
-                listHeaderComponent={
-                    <>
-                        <ChannelInfo
-                            title={item.title}
-                            level={item.level}
-                            follow={item.follow}
-                            containerStyle={{
-                                marginTop: 10,
-                            }}
-                            titleStyle={{fontSize: 24}}
-                        />
-                        <ChannelDescription/>
-                    </>
-                }
+                data={item.courses}
+                listHeaderComponent={renderListHeaderComponent}
                 listHeaderComponentStyle={{marginBottom: 25}}
             />
         </View>

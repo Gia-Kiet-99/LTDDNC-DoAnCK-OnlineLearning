@@ -3,14 +3,19 @@ import {StyleSheet, Text, View} from 'react-native';
 
 
 const ChannelInfo = (props) => {
+    const renderInfo = () => {
+        if (props.level && props.follow)
+            return <Text style={styles.darkText}>
+                {`${props.level} . ${props.follow}`}
+            </Text>
+    }
+
     return (
         <View style={[styles.channelInfo, props.containerStyle]}>
             <Text style={props.titleStyle}>
                 {props.title}
             </Text>
-            <Text style={styles.darkText}>
-                {`${props.level} . ${props.follow}`}
-            </Text>
+            {renderInfo()}
         </View>
     );
 };

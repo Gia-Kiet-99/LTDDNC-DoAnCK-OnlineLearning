@@ -1,9 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import {Image, StyleSheet, View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
 import {CourseContext} from "../../../provider/course-provider";
+import {exp} from "react-native-reanimated";
 
 
 const CourseDetail = (props) => {
@@ -168,17 +169,28 @@ const CourseDetail = (props) => {
         </View>
     }
 
+    const [scrollView, setScrollView] = useState(null)
+    const onLessonItemPressed = () => {
+        scrollView.scrollTo({x: 0, y: 0, animated: true})
+    }
+
     return (
-        <View style={styles.container}>
-            {/*<StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>*/}
-            <VideoPlayer navigation={props.navigation}/>
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <CourseIntro/>
-                <LessonTabNavigator/>
-            </ScrollView>
-        </View>
-    );
-};
+        <CourseDetailContext.Provider value={{item, onLessonItemPressed}}>
+            <View style={styles.container}>
+                {/*<StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>*/}
+                <VideoPlayer navigation={props.navigation}/>
+                <ScrollView ref={ref => setScrollView(ref)}
+                            showsVerticalScrollIndicator={false}>
+                    <CourseIntro/>
+                    <LessonTabNavigator />
+                </ScrollView>
+            </View>
+        </CourseDetailContext.Provider>
+    )
+}
+
+export const CourseDetailContext = createContext()
+
 
 const styles = StyleSheet.create({
     container: {

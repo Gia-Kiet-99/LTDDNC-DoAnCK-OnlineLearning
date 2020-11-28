@@ -10,6 +10,7 @@ const SectionHeader = (props) => {
                 params: {
                     title: props.title,
                     kind: props.kind,
+                    data: props.list,
                     style: {
                         marginHorizontal: 15
                     }

@@ -27,7 +27,8 @@ const SectionList = (props) => {
 
     return (
         <View style={styles.container}>
-            <FlatList data={props.list} renderItem={renderListItem}
+            <FlatList data={props.list}
+                      renderItem={renderListItem}
                       horizontal={true}
                       keyExtractor={item => item.id}
                       showsHorizontalScrollIndicator={false}/>

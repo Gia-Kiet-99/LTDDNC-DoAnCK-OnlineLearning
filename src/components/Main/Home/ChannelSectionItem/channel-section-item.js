@@ -1,10 +1,11 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ChannelInfo from "../../../Common/channel-info";
+import {NavigatorName, ScreenName} from "../../../../globals/constants";
 
 const Separator = () => {
     return (
-        <View style={{borderBottomColor: 'pink', borderBottomWidth: 3}} />
+        <View style={{borderBottomColor: 'pink', borderBottomWidth: 3}}/>
     )
 }
 
@@ -12,27 +13,35 @@ const ChannelSectionItem = (props) => {
     const item = props.item;
 
     const onItemPressed = () => {
-        return props.navigation.navigate("ChannelDetail", {item: item})
+        return props.navigation.navigate(NavigatorName.channelDetailStack,
+            {
+                screen: ScreenName.channelDetail,
+                params: {
+                    channelId: item.id
+                }
+            })
     }
 
     return (
-            <TouchableOpacity style={styles.container} onPress={onItemPressed}>
-                <View style={styles.content}>
-                    <Image style={styles.image} source={require('../../../../../assets/image-1.jpg')}/>
-                    <Separator/>
-                    <ChannelInfo
-                        title={item.title}
-                        level={item.level}
-                        follow={item.follow}
-                        style={{fontSize: 16}}
-                        containerStyle={{
-                            paddingHorizontal: 10,
-                            paddingVertical: 5,
-                        }}
-                        // titleStyle={channelInfoStyle.largerTitle}
-                    />
+        <TouchableOpacity style={styles.container} onPress={onItemPressed}>
+            <View style={styles.content}>
+                <View style={{backgroundColor: '#34495e'}}>
+                    <Image style={styles.image} source={item.image}/>
                 </View>
-            </TouchableOpacity>
+                <Separator/>
+                <ChannelInfo
+                    title={item.title}
+                    level={item.level}
+                    follow={item.follow}
+                    style={{fontSize: 16}}
+                    containerStyle={{
+                        paddingHorizontal: 10,
+                        paddingVertical: 5,
+                    }}
+                    // titleStyle={channelInfoStyle.largerTitle}
+                />
+            </View>
+        </TouchableOpacity>
     );
 };
 

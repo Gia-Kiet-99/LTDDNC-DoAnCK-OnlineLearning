@@ -1,20 +1,35 @@
 import React, {useContext} from 'react';
-import {Image, View, ScrollView, StyleSheet, StatusBar, Text} from 'react-native';
+import {Image, View, ScrollView, StyleSheet, StatusBar} from 'react-native';
 import Section from "../../Common/section";
 import {listName, titleName} from "../../../globals/constants";
-import {channels, courses} from "../../../localize/data";
 import ActionBar from "../../Common/action-bar";
 import {CourseContext} from "../../../provider/course-provider";
-
+import {ChannelContext} from "../../../provider/channel-context";
 
 const Home = (props) => {
     const {getFavoriteCourses} = useContext(CourseContext)
     const favoriteCourses = getFavoriteCourses();
+    const {channelList, getPublicChannels, getPrivateChannels} = useContext(ChannelContext)
+    const {courseList} = useContext(CourseContext)
 
     const renderContinueLearningSection = (favoriteCourses) => {
-        if (favoriteCourses.length > 0) {
+        if (favoriteCourses && favoriteCourses.length > 0) {
             return <Section navigation={props.navigation} kind={listName.favoriteCourse}
                             title={titleName.continueLearning} list={favoriteCourses}
+                            showSeeAllButton={true}/>
+        }
+    }
+    const renderChannelsSection = (channels, title) => {
+        if(channels && channels.length > 0) {
+            return <Section navigation={props.navigation} kind={listName.channel}
+                            title={title} list={channels}
+                            showSeeAllButton={true}/>
+        }
+    }
+    const renderCourseListSection = (list) => {
+        if(list && list.length > 0) {
+            return <Section navigation={props.navigation} kind={listName.course}
+                            title={'Course list'} list={list}
                             showSeeAllButton={true}/>
         }
     }
@@ -29,16 +44,13 @@ const Home = (props) => {
                 </View>
 
                 {renderContinueLearningSection(favoriteCourses)}
+                {renderChannelsSection(getPublicChannels(), "Channels")}
+                {renderCourseListSection(courseList)}
+                {renderChannelsSection(getPrivateChannels(), "My Channels")}
 
-                <Section navigation={props.navigation} kind={listName.channel} title={'Channels'} list={channels}
-                         showSeeAllButton={true}/>
-                <Section navigation={props.navigation} kind={listName.course} title={'Course list'} list={courses}
-                         showSeeAllButton={true}/>
-                <Section navigation={props.navigation} kind={listName.channel} title={'My Channels'} list={channels}
-                         showSeeAllButton={true}/>
             </ScrollView>
         </View>
-    );
+    )
 };
 
 const styles = StyleSheet.create({

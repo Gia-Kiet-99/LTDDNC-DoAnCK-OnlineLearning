@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import Menu, {MenuItem} from "react-native-material-menu";
 import ChannelInfo from "../../Common/channel-info";
+import {NavigatorName, ScreenName} from "../../../globals/constants";
 
 const ChannelListItem = (props) => {
     const item = props.item;
@@ -14,7 +15,13 @@ const ChannelListItem = (props) => {
     }
     const onItemPressed = () => {
         if(props.navigation !== undefined)
-            props.navigation.navigate("ChannelDetail", {item: item});
+            return props.navigation.navigate(NavigatorName.channelDetailStack,
+                {
+                    screen: ScreenName.channelDetail,
+                    params: {
+                        channelId: item.id
+                    }
+                })
     }
 
     return (
@@ -65,6 +72,7 @@ const styles = StyleSheet.create({
         // flex: 3,
         width: 80,
         height: 64,
+        backgroundColor: '#34495e'
     },
     image: {
         height: '100%',

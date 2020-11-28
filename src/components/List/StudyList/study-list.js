@@ -6,7 +6,7 @@ import PathListItem from "../ListItem/path-list-item";
 import AuthorListItem from "../ListItem/author-list-item";
 import ChannelListItem from "../ListItem/channel-list-item";
 import {listName} from "../../../globals/constants";
-import {authors, channels, courses, downloads, paths} from "../../../localize/data";
+import {authors, channels, paths} from "../../../localize/data";
 import {CourseContext} from "../../../provider/course-provider";
 
 
@@ -44,6 +44,13 @@ const StudyList = (props) => {
                                  renderItem={renderCourseItem}
                                  keyExtractor={(item) => (item.id)}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
+            case listName.channelCourse:
+                return <FlatList showsVerticalScrollIndicator={false}
+                                 data={props.data}
+                                 ListHeaderComponent={listHeaderComponent}
+                                 renderItem={renderCourseItem}
+                                 keyExtractor={(item) => (item.id)}
+                                 ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.favoriteCourse:
                 let favoriteCourses = getFavoriteCourses()
                 return <FlatList showsVerticalScrollIndicator={false}
@@ -73,7 +80,7 @@ const StudyList = (props) => {
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.channel:
                 return <FlatList showsVerticalScrollIndicator={false}
-                                 data={channels}
+                                 data={props.route.params.data}
                                  ListHeaderComponent={props.listHeaderComponent}
                                  ListHeaderComponentStyle={props.listHeaderComponentStyle}
                                  renderItem={renderChannelIem}

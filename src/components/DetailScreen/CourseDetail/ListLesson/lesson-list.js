@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {SafeAreaView, Text, SectionList, StyleSheet} from 'react-native';
 import {lessons} from "../../../../localize/data";
 import ListLessonItem from "../ListLessonItem/list-lesson-item";
 import ListItemSeparator from "../../../Common/list-item-separator";
 import SectionListHeader from "../SectionListHeader/section-list-header";
+import {CourseDetailContext} from "../course-detail";
 
 const LessonList = (props) => {
+    const {item} = useContext(CourseDetailContext)
+    console.log("LessonList", item)
+
     const renderSectionHeader = ({section: {title, totalDuration}}) => {
         return <SectionListHeader title={title} totalDuration={totalDuration}/>
     }
@@ -16,7 +20,7 @@ const LessonList = (props) => {
     return (
         <SafeAreaView style={styles.lessonList}>
             <SectionList
-                sections={lessons}
+                sections={item.lessons}
                 keyExtractor={(item, index) => item + index}
                 renderItem={renderLessonItem}
                 renderSectionHeader={renderSectionHeader}

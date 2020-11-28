@@ -418,7 +418,7 @@ export const courses = [
         rating: 5,
         isDownload: false,
         isFavorite: true,
-
+        lessons: lessons
     },
     {
         id: 'course#2',
@@ -431,7 +431,8 @@ export const courses = [
         image: require('../../assets/ios.jpg'),
         rating: 4,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#3',
@@ -444,7 +445,8 @@ export const courses = [
         image: require('../../assets/android.jpg'),
         rating: 4,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#4',
@@ -457,7 +459,8 @@ export const courses = [
         image: require('../../assets/react-native.jpg'),
         rating: 5,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#5',
@@ -470,7 +473,8 @@ export const courses = [
         image: require('../../assets/html-css.png'),
         rating: 3,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#6',
@@ -483,7 +487,8 @@ export const courses = [
         image: require('../../assets/javascript.jpg'),
         rating: 4,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#7',
@@ -496,7 +501,8 @@ export const courses = [
         image: require('../../assets/Nodejs.png'),
         rating: 5,
         isDownload: true,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#8',
@@ -509,7 +515,8 @@ export const courses = [
         image: require('../../assets/c-plus.jpg'),
         rating: 5,
         isDownload: true,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#9',
@@ -522,7 +529,8 @@ export const courses = [
         image: require('../../assets/c-sharp.jpg'),
         rating: 4,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#10',
@@ -535,7 +543,8 @@ export const courses = [
         image: require('../../assets/python.png'),
         rating: 4,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#11',
@@ -548,7 +557,8 @@ export const courses = [
         image: require('../../assets/bootstrap.jpg'),
         rating: 5,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#12',
@@ -561,7 +571,8 @@ export const courses = [
         image: require('../../assets/jQuery.jpg'),
         rating: 4,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
     },
     {
         id: 'course#13',
@@ -574,7 +585,22 @@ export const courses = [
         image: require('../../assets/mongo.png'),
         rating: 4,
         isDownload: false,
-        isFavorite: false
+        isFavorite: false,
+        lessons: lessons,
+    },
+    {
+        id: 'course#14',
+        title: 'Express js',
+        authorName: 'Tieu Long Nu',
+        authorAvatar: require('../../assets/girl.jpg'),
+        level: 'Beginner',
+        released: 'Oct 2025',
+        duration: '19 h',
+        image: require('../../assets/expressjs.jpg'),
+        rating: 4,
+        isDownload: false,
+        isFavorite: false,
+        lessons: lessons,
     },
 ]
 export const downloads = [
@@ -608,31 +634,72 @@ export const downloads = [
 ]
 export const channels = [
     {
-        id: "1",
+        id: "channel#1",
         image: require('../../assets/image-1.jpg'),
         title: 'CS Principles - Technology Career Overview',
         level: 'Professional Services',
         follow: '62 follow',
+        type: "public",
     },
     {
-        id: "2",
+        id: "channel#2",
         image: require('../../assets/image-1.jpg'),
-        title: 'CS Principles - Technology Career Overview',
+        title: 'CS Principles - Major Areas',
         level: 'Professional Services',
-        follow: '62 follow',
+        follow: '50 follow',
+        type: "public",
     },
     {
-        id: "3",
+        id: "channel#3",
         image: require('../../assets/image-1.jpg'),
-        title: 'CS Principles - Technology Career Overview',
+        title: 'CS Principles - Design / Creative',
         level: 'Professional Services',
-        follow: '62 follow',
+        follow: '48 follow',
+        type: "public",
     },
     {
-        id: "4",
+        id: "channel#4",
         image: require('../../assets/image-1.jpg'),
-        title: 'CS Principles - Technology Career Overview',
+        title: 'CS Principles - IT / Ops',
         level: 'Professional Services',
         follow: '62 follow',
+        type: "public",
+    },
+    {
+        id: 'channel#5',
+        image: require('../../assets/channel-image.png'),
+        title: 'Nodejs',
+        owner: 'admin',
+        type: "private",
+        courses: [
+            {
+                id: 'course#7',
+                title: 'Nodejs',
+                authorName: 'Vong Ngu',
+                authorAvatar: require('../../assets/girl.jpg'),
+                level: 'Advance',
+                released: 'May 2020',
+                duration: '30 h',
+                image: require('../../assets/Nodejs.png'),
+                rating: 5,
+                isDownload: true,
+                isFavorite: false,
+                lessons: lessons,
+            },
+            {
+                id: 'course#14',
+                title: 'Express js',
+                authorName: 'Tieu Long Nu',
+                authorAvatar: require('../../assets/girl.jpg'),
+                level: 'Beginner',
+                released: 'Oct 2025',
+                duration: '19 h',
+                image: require('../../assets/expressjs.jpg'),
+                rating: 4,
+                isDownload: false,
+                isFavorite: false,
+                lessons: lessons,
+            },
+        ]
     },
 ]
