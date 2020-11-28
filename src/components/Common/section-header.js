@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {NavigatorName, ScreenName} from "../../globals/constants";
 
 const SectionHeader = (props) => {
     const onSeeAllPressed = () => (
-        props.navigation?.navigate("ListStack",
+        props.navigation.navigate(NavigatorName.listStack,
             { //data pass to StudyList
-                screen: "StudyList",
+                screen: ScreenName.studyList,
                 params: {
                     title: props.title,
                     kind: props.kind,

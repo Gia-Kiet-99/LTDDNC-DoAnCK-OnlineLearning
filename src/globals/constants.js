@@ -1,6 +1,7 @@
 
 export const listName = {
     course: "course-list",
+    favoriteCourse: "favorite-course-list",
     path: "path-list",
     author: "author-list",
     popularSkill: "skill-list",
@@ -14,7 +15,9 @@ export const titleName = {
     setting: "Setting",
     profile: "Profile",
     search: "Search",
-    download: "Download"
+    download: "Download",
+    continueLearning: "Continue learning",
+
 }
 
 export const ScreenName = {

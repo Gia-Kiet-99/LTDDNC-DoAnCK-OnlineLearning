@@ -1,19 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Alert, Pressable, Switch, ScrollView, TouchableOpacity, Text, Image ,View,StyleSheet} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {Alert, Pressable, Switch, ScrollView, TouchableOpacity, Text, Image, View, StyleSheet} from 'react-native';
 import {AuthenticationContext} from "../../../provider/authentication-provider";
+import {AppThemeContext} from "../../../provider/theme-provider";
 
 const AccountInfo = (props) => {
     const {authentication} = useContext(AuthenticationContext)
 
     const onProfilePress = () => {
-        if(props.navigation !== undefined) {
+        if (props.navigation !== undefined) {
             props.navigation.navigate("Profile");
         }
     }
     return (
         <View style={styles.accountInfoContainer}>
-            <TouchableOpacity style={[styles.button, {flexDirection: 'row', alignItems:'center'}]}
-                onPress={onProfilePress}>
+            <TouchableOpacity style={[styles.button, {flexDirection: 'row', alignItems: 'center'}]}
+                              onPress={onProfilePress}>
                 <Image style={styles.image} source={require('../../../../assets/avatar.jpg')}/>
                 <View style={{paddingLeft: 15}}>
                     <Text>{authentication.user.username}</Text>
@@ -38,6 +39,9 @@ const AccountInfo = (props) => {
 }
 
 const Options = () => {
+    //use theme context
+    const {isDark, toggleTheme} = useContext(AppThemeContext)
+
     const [isEnabled1, setIsEnabled1] = useState(false);
     const [isEnabled2, setIsEnabled2] = useState(false);
     const [isEnabled3, setIsEnabled3] = useState(false);
@@ -60,7 +64,7 @@ const Options = () => {
                 <View style={styles.switchWrapper}>
                     <Text style={styles.buttonText}>Require Wi-Fi for streaming</Text>
                     <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
+                        trackColor={{false: "#767577", true: "#81b0ff"}}
                         thumbColor={isEnabled1 ? "#f5dd4b" : "#f4f3f4"}
                         onValueChange={toggleSwitch1}
                         value={isEnabled1}
@@ -72,7 +76,7 @@ const Options = () => {
                 <View style={styles.switchWrapper}>
                     <Text style={styles.buttonText}>Require Wi-Fi for downloading</Text>
                     <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
+                        trackColor={{false: "#767577", true: "#81b0ff"}}
                         thumbColor={isEnabled2 ? "#f5dd4b" : "#f4f3f4"}
                         onValueChange={toggleSwitch2}
                         value={isEnabled2}
@@ -84,7 +88,7 @@ const Options = () => {
                 <View style={styles.switchWrapper}>
                     <Text style={styles.buttonText}>Show quiz at the end of video</Text>
                     <Switch
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
+                        trackColor={{false: "#767577", true: "#81b0ff"}}
                         thumbColor={isEnabled3 ? "#f5dd4b" : "#f4f3f4"}
                         onValueChange={toggleSwitch3}
                         value={isEnabled3}
@@ -99,30 +103,42 @@ const Options = () => {
 
             <Pressable style={styles.button} onPress={toggleSwitch4}>
                 <View style={styles.switchWrapper}>
-                    <View style={{flex:6}}>
+                    <View style={{flex: 6}}>
                         <Text style={styles.buttonText}>Recommended content push notifications</Text>
-                        <Text >Receive notification about recommended content</Text>
+                        <Text>Receive notification about recommended content</Text>
                     </View>
-                    <Switch style={{flex:1}}
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={isEnabled4 ? "#f5dd4b" : "#f4f3f4"}
-                        onValueChange={toggleSwitch4}
-                        value={isEnabled4}
+                    <Switch style={{flex: 1}}
+                            trackColor={{false: "#767577", true: "#81b0ff"}}
+                            thumbColor={isEnabled4 ? "#f5dd4b" : "#f4f3f4"}
+                            onValueChange={toggleSwitch4}
+                            value={isEnabled4}
                     />
                 </View>
             </Pressable>
 
             <Pressable style={styles.button} onPress={toggleSwitch5}>
                 <View style={styles.switchWrapper}>
-                    <View style={{flex:6}}>
+                    <View style={{flex: 6}}>
                         <Text style={styles.buttonText}>Reminder to learn notifications</Text>
                         <Text>Schedule the app to remind you to learn to skill up faster and conquer your goals</Text>
                     </View>
-                    <Switch style={{flex:1}}
-                        trackColor={{ false: "#767577", true: "#81b0ff" }}
-                        thumbColor={isEnabled5 ? "#f5dd4b" : "#f4f3f4"}
-                        onValueChange={toggleSwitch5}
-                        value={isEnabled5}
+                    <Switch style={{flex: 1}}
+                            trackColor={{false: "#767577", true: "#81b0ff"}}
+                            thumbColor={isEnabled5 ? "#f5dd4b" : "#f4f3f4"}
+                            onValueChange={toggleSwitch5}
+                            value={isEnabled5}
+                    />
+                </View>
+            </Pressable>
+
+            <Pressable style={styles.button} onPress={toggleTheme}>
+                <View style={styles.switchWrapper}>
+                    <Text style={styles.buttonText}>Dark mode</Text>
+                    <Switch
+                        trackColor={{false: "#767577", true: "#81b0ff"}}
+                        thumbColor={isDark ? "#f5dd4b" : "#f4f3f4"}
+                        onValueChange={toggleTheme}
+                        value={isDark}
                     />
                 </View>
             </Pressable>
@@ -177,8 +193,9 @@ const Detail = (props) => {
 }
 
 const Setting = (props) => {
+    const {theme} = useContext(AppThemeContext)
     return (
-        <View>
+        <View style={[styles.container, theme]}>
             <ScrollView>
                 <AccountInfo navigation={props.navigation}/>
                 <Options/>
@@ -191,11 +208,8 @@ const Setting = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
-    accountInfoContainer: {
-
-    },
+    accountInfoContainer: {},
     button: {
         padding: 15,
         borderBottomWidth: 0.3,

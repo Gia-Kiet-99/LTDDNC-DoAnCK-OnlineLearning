@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image, StyleSheet, View, Text, Alert, ScrollView, StatusBar, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
+import {CourseContext} from "../../../provider/course-provider";
 
 
 
@@ -10,8 +11,16 @@ const CourseDetail = (props) => {
     // const renderAuthorButton = (author) => {
     //     return author.map(item => <AuthorButton author={item}/>)
     // }
-    const item = props.route.params.item;
-    const [isBookmarked, setIsBookmarked] = useState(false);
+
+    const {updateCourseList, getCourseFromId} = useContext(CourseContext)
+
+    /* get course id */
+    const courseId = props.route.params.courseId
+    /* get course data from id */
+    const item = getCourseFromId(courseId)
+    console.log("CourseDetail", item)
+
+    const [isBookmarked, setIsBookmarked] = useState(item.isFavorite);
     const [isExpanded, setIsExpanded] = useState(false);
 
     const onAuthorButtonPressed = () => {
@@ -25,6 +34,15 @@ const CourseDetail = (props) => {
                 })
         }
     }
+    const onBookmarkButtonPressed = () => {
+        setIsBookmarked(!isBookmarked)
+    }
+
+    useEffect(() => {
+        item.isFavorite = isBookmarked
+        updateCourseList(item.id, item)
+    }, [isBookmarked])
+
     const AuthorButton = (props) => {
         return <TouchableOpacity
             style={styles.authorWrapper}
@@ -34,7 +52,9 @@ const CourseDetail = (props) => {
             <Text>{item.authorName}</Text>
         </TouchableOpacity>
     }
+
     const showAlert = () => Alert.alert('Add to channel')
+
     const CourseInfo = () => {
         return <View style={styles.courseInfo}>
             <Text style={{fontSize: 24}}>{item.title}</Text>
@@ -54,7 +74,7 @@ const CourseDetail = (props) => {
     }
     const CourseButton = () => {
         return <View style={styles.buttonViewGroup}>
-            <TouchableOpacity style={styles.button} onPress={() => setIsBookmarked(!isBookmarked)}>
+            <TouchableOpacity style={styles.button} onPress={onBookmarkButtonPressed}>
                 <View style={styles.imageWrapper}>
                     <Image
                         style={styles.buttonImage}
@@ -62,6 +82,7 @@ const CourseDetail = (props) => {
                 </View>
                 <Text style={styles.buttonText}>{(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}</Text>
             </TouchableOpacity>
+
             <TouchableOpacity
                 onPress={showAlert}
                 style={[styles.button, {marginHorizontal: 10}]}>
@@ -70,6 +91,7 @@ const CourseDetail = (props) => {
                 </View>
                 <Text style={[styles.buttonText, {textAlign: 'center'}]}>Add to Channel</Text>
             </TouchableOpacity>
+
             <TouchableOpacity style={styles.button}>
                 <View style={styles.imageWrapper}>
                     <Image style={styles.buttonImage} source={require('../../../../assets/download-icon.png')}/>
@@ -130,8 +152,6 @@ const CourseDetail = (props) => {
                 <CourseIntro/>
                 <LessonTabNavigator/>
             </ScrollView>
-
-
         </View>
     );
 };

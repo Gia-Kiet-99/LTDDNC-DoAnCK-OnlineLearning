@@ -7,6 +7,7 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Ionicons} from "@expo/vector-icons";
 import BrowseStackNavigator from "./BrowseStackNavigator/browse-stack-navigator";
 import SearchStackNavigator from "./SearchStackNavigator/search-stack-navigator";
+import CourseProvider from "../../../provider/course-provider";
 
 const Tab = createBottomTabNavigator()
 
@@ -34,24 +35,26 @@ const MainTabNavigatorScreenOptions = ({route}) => ({
 
 const MainTabNavigator = (props) => {
     return (
-        <Tab.Navigator initialRouteName="HomeStackNavigator"
-                       screenOptions={MainTabNavigatorScreenOptions}
-                       backBehavior="initialRoute"
-                       tabBarOptions={{
-                           activeTintColor: '#3498db',
-                           inactiveTintColor: 'gray',
-                           labelStyle: {
-                               fontSize: 12,
-                           },
-                           style: {
-                               height: 50
-                           },
-                       }}>
-            <Tab.Screen name="HomeStackNavigator" component={HomeStackNavigator} options={{title: "Home"}}/>
-            <Tab.Screen name="DownloadStackNavigator" component={DownloadStackNavigator} options={{title: "Download"}}/>
-            <Tab.Screen name="BrowseStackNavigator" component={BrowseStackNavigator} options={{title: "Browse"}}/>
-            <Tab.Screen name="SearchStackNavigator" component={SearchStackNavigator} options={{title: "Search"}}/>
-        </Tab.Navigator>
+        <CourseProvider>
+            <Tab.Navigator initialRouteName="HomeStackNavigator"
+                           screenOptions={MainTabNavigatorScreenOptions}
+                           backBehavior="initialRoute"
+                           tabBarOptions={{
+                               activeTintColor: '#3498db',
+                               inactiveTintColor: 'gray',
+                               labelStyle: {
+                                   fontSize: 12,
+                               },
+                               style: {
+                                   height: 50
+                               },
+                           }}>
+                <Tab.Screen name="HomeStackNavigator" component={HomeStackNavigator} options={{title: "Home"}}/>
+                <Tab.Screen name="DownloadStackNavigator" component={DownloadStackNavigator} options={{title: "Download"}}/>
+                <Tab.Screen name="BrowseStackNavigator" component={BrowseStackNavigator} options={{title: "Browse"}}/>
+                <Tab.Screen name="SearchStackNavigator" component={SearchStackNavigator} options={{title: "Search"}}/>
+            </Tab.Navigator>
+        </CourseProvider>
     );
 };
 

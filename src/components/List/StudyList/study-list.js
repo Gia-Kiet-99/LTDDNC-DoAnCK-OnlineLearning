@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {StyleSheet, FlatList, SafeAreaView} from 'react-native';
 import DownloadListItem from "../ListItem/download-list-item";
 import CourseListItem from "../ListItem/course-list-item";
@@ -8,9 +8,12 @@ import AuthorListItem from "../ListItem/author-list-item";
 import ChannelListItem from "../ListItem/channel-list-item";
 import {listName} from "../../../globals/constants";
 import {authors, channels, courses, downloads, paths} from "../../../localize/data";
+import {CourseContext} from "../../../provider/course-provider";
 
 
 const StudyList = (props) => {
+    const {courseList, getFavoriteCourses} = useContext(CourseContext)
+
     /* value passing when you click See all button */
     const listType = (props.route?.params?.kind === undefined) ? props.kind : props.route?.params?.kind;
     const listStyle = (props.route?.params?.style === undefined) ? props.style : props.route?.params?.style;
@@ -19,9 +22,11 @@ const StudyList = (props) => {
     const renderCourseItem = ({item}) => (
         <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
     )
-    const renderDownloadItem = ({item}) => (
-        <DownloadListItem key={item.id} item={item} navigation={props.navigation}/>
-    )
+    const renderDownloadItem = ({item}) => {
+        if (item.isDownload === true) {
+            return <DownloadListItem key={item.id} item={item} navigation={props.navigation}/>
+        }
+    }
     const renderPathItem = ({item}) => (
         <PathListItem key={item.id} item={item} navigation={props.navigation}/>
     )
@@ -37,14 +42,22 @@ const StudyList = (props) => {
         switch (listType) {
             case listName.course:
                 return <FlatList showsVerticalScrollIndicator={false}
-                                 data={courses}
+                                 data={courseList}
                                  ListHeaderComponent={listHeaderComponent}
                                  renderItem={renderCourseItem}
                                  keyExtractor={(item) => (item.id)}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
+            case listName.favoriteCourse:
+                let favoriteCourses = getFavoriteCourses()
+                return <FlatList showsVerticalScrollIndicator={false}
+                                 data={favoriteCourses}
+                                 renderItem={renderCourseItem}
+                                 ListHeaderComponent={listHeaderComponent}
+                                 keyExtractor={(item) => (item.id)}
+                                 ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.download:
                 return <FlatList showsVerticalScrollIndicator={false}
-                                 data={downloads}
+                                 data={props.data}
                                  renderItem={renderDownloadItem}
                                  keyExtractor={item => item.id}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>

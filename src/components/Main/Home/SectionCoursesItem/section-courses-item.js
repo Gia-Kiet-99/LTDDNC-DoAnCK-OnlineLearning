@@ -14,7 +14,7 @@ const SectionCoursesItem = (props) => {
             {
                 screen: "CourseDetail",
                 params: {
-                    item: props.item
+                    courseId: props.item.id
                 }
             })
     }

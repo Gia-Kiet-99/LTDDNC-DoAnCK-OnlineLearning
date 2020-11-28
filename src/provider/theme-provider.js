@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 
 export const themes = {
     light: {
@@ -14,18 +14,19 @@ export const themes = {
 const AppThemeContext = createContext();
 
 const AppThemeProvider = (props) => {
+    const [isDark, setIsDark] = useState(false)
     const [theme, setTheme] = useState(themes.light);
 
     const toggleTheme = () => {
-        if(theme === themes.light) {
-            setTheme(themes.dark)
-        } else {
-            setTheme(themes.light)
-        }
+        setIsDark(!isDark)
     }
 
+    useEffect(() => {
+        isDark ? setTheme(themes.dark) : setTheme(themes.light)
+    }, [isDark])
+
     return (
-        <AppThemeContext.Provider value={{theme, toggleTheme}}>
+        <AppThemeContext.Provider value={{theme,isDark, toggleTheme}}>
             {props.children}
         </AppThemeContext.Provider>
     );
