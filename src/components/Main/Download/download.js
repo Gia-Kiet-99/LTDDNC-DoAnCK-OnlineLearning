@@ -8,7 +8,7 @@ import {CourseContext} from "../../../provider/course-provider";
 
 
 const Download = (props) => {
-    const {courseList, downloadedList, getDownloadedCourses, removeAllDownloadedCourses} = useContext(CourseContext)
+    const {getDownloadedCourses, removeAllDownloadedCourses} = useContext(CourseContext)
     const data = getDownloadedCourses()
 
     const onRemoveAllButtonClick = () => {
@@ -18,7 +18,7 @@ const Download = (props) => {
     const DownloadHeader = () => {
         return (
             <View style={styles.overView}>
-                <Text style={styles.text}>{`${downloadedList.length} courses`}</Text>
+                <Text style={styles.text}>{`${data.length} courses`}</Text>
                 <TouchableOpacity style={styles.button} onPress={onRemoveAllButtonClick}>
                     <Text style={[styles.text, {color: '#2e97ff'}]}>REMOVE ALL</Text>
                 </TouchableOpacity>
@@ -33,7 +33,8 @@ const Download = (props) => {
                 <DownloadHeader/>
                 <StudyList kind={listName.download}
                            style={styles.courseList}
-                           navigation={props.navigation}/>
+                           navigation={props.navigation}
+                           data={data}/>
             </View>
         </View>
     );

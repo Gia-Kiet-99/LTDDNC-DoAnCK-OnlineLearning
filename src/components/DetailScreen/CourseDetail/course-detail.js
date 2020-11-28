@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Image, StyleSheet, View, Text, Alert, ScrollView, StatusBar, TouchableOpacity} from 'react-native';
+import {Image, StyleSheet, View, Text, Alert, ScrollView, TouchableOpacity} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
@@ -11,13 +11,7 @@ const CourseDetail = (props) => {
     //     return author.map(item => <AuthorButton author={item}/>)
     // }
 
-    const {
-        updateCourseList,
-        getCourseFromId,
-        addItemToDownloadList,
-        removeItemFromDownloadList,
-        downloadListContain
-    } = useContext(CourseContext)
+    const {updateCourseList, getCourseFromId} = useContext(CourseContext)
 
     /* get course id */
     const courseId = props.route.params.courseId
@@ -25,10 +19,9 @@ const CourseDetail = (props) => {
     const item = getCourseFromId(courseId)
     // console.log("CourseDetail", item)
 
-    console.log(downloadListContain(item.id))
     const [isExpanded, setIsExpanded] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(item.isFavorite);
-    const [isDownloaded, setIsDownloaded] = useState(downloadListContain(item.id));
+    const [isDownloaded, setIsDownloaded] = useState(item.isDownload);
 
     const onAuthorButtonPressed = () => {
         if (props.navigation !== undefined) {
@@ -68,18 +61,11 @@ const CourseDetail = (props) => {
         }
     }
     useEffect(() => {
-        if (isDownloaded) {
-            addItemToDownloadList(item)
-        } else {
-            removeItemFromDownloadList(item.id)
-        }
-
-
-        // item.isDownload = isDownloaded
-        // updateCourseList(item.id, item)
+        item.isDownload = isDownloaded
+        updateCourseList(item.id, item)
     }, [isDownloaded])
 
-    const AuthorButton = (props) => {
+    const AuthorButton = () => {
         return <TouchableOpacity
             style={styles.authorWrapper}
             onPress={onAuthorButtonPressed}

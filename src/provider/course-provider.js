@@ -1,11 +1,10 @@
 import React, {createContext, useState} from 'react';
-import {courses, downloads} from "../localize/data";
+import {courses} from "../localize/data";
 
 export const CourseContext = createContext();
 
 const CourseProvider = (props) => {
     const [courseList, setCourseList] = useState(courses)
-    const [downloadedList, setDownloadedList] = useState(downloads)
 
     /* Function: Update courses list value */
     const updateCourseList = (id, newValue) => {
@@ -13,10 +12,10 @@ const CourseProvider = (props) => {
             if (courseList[i].id === id) {
                 /* update new value for array element */
                 courseList[i] = newValue
-                setCourseList([...courseList])
                 break;
             }
         }
+        setCourseList([...courseList])
     }
 
     /* Function: get course from id */
@@ -36,46 +35,21 @@ const CourseProvider = (props) => {
 
     /* Function: remove all downloaded courses*/
     const removeAllDownloadedCourses = () => {
-        setDownloadedList([])
-    }
-
-    const addItemToDownloadList = (newItem) => {
-        if (downloadListContain(newItem.id) === false) {
-            downloadedList.push(newItem)
+        // setDownloadedList([])
+        for (let i = 0; i < courseList.length; i++) {
+            courseList[i].isDownload = false;
         }
-    }
-    const removeItemFromDownloadList = (id) => {
-        for (let i = 0; i < downloadedList.length; i++) {
-            if (downloadedList[i].id === id) {
-                /* delete item from array */
-                downloadedList.splice(i, 1)
-                setDownloadedList([...downloadedList])
-                break;
-            }
-        }
-    }
-
-    const downloadListContain = (id) => {
-        for (let i = 0; i < downloadedList.length; i++) {
-            if (downloadedList[i].id === id) {
-                return true;
-            }
-        }
-        return false;
+        setCourseList([...courseList])
     }
 
     return (
         <CourseContext.Provider
             value={{
                 courseList,
-                downloadedList,
                 updateCourseList,
                 getCourseFromId,
                 getFavoriteCourses,
                 getDownloadedCourses,
-                addItemToDownloadList,
-                removeItemFromDownloadList,
-                downloadListContain,
                 removeAllDownloadedCourses
             }}>
             {props.children}

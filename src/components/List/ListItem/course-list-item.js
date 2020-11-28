@@ -5,42 +5,37 @@ import CourseInfo from "../../Common/course-info";
 import {CourseContext} from "../../../provider/course-provider";
 
 const CourseListItem = (props) => {
-    const {
-        updateCourseList,
-        downloadListContain,
-        addItemToDownloadList,
-        removeItemFromDownloadList
-    } = useContext(CourseContext)
+    const {updateCourseList} = useContext(CourseContext)
 
     const item = props.item
-
     const [menu, setMenu] = useState(null);
-    const [isDownloaded, setIsDownloaded] = useState(downloadListContain(item.id));
+    const [isFavorite, setIsFavorite] = useState(item.isFavorite)
+    const [isDownloaded, setIsDownloaded] = useState(item.isDownload)
 
-    const showMenu = () => {
-        menu.show();
-    }
-    const doNothing = () => {
-        menu.hide();
-    }
-    // const onBookmarkPressed = () => {
-    //     item.isFavorite = !item.isFavorite
-    //     menu.hide()
-    // }
-    const onDownloadMenuItemPressed = () => {
-        setIsDownloaded(!isDownloaded)
+    const showMenu = () => menu.show()
+    const hideMenu = () => menu.hide()
+
+    const onBookmarkPressed = () => {
+        setIsFavorite(!isFavorite)
+        hideMenu()
     }
     useEffect(() => {
-        if (isDownloaded) {
-            addItemToDownloadList(item)
-        } else {
-            removeItemFromDownloadList(item.id)
-        }
+        item.isFavorite = isFavorite
+        updateCourseList(item.id, item)
+    }, [isFavorite])
+
+    const onDownloadMenuItemPressed = () => {
+        setIsDownloaded(!isDownloaded)
+        hideMenu()
+    }
+    useEffect(() => {
+        item.isDownload = isDownloaded;
+        updateCourseList(item.id, item)
     }, [isDownloaded])
 
-    // useEffect(() => {
-    //     updateCourseList(item.id, item)
-    // }, [item.isFavorite])
+    const doNothing = () => {
+
+    }
 
     const onPressListItem = () => {
         if (props.navigation !== undefined) {
@@ -79,7 +74,7 @@ const CourseListItem = (props) => {
                         <Image style={{height: 24, width: 24}}
                                source={require('../../../../assets/icon-menu-vertical.png')}/>
                     }>
-                    <MenuItem onPress={doNothing}>{item.isFavorite ? "UnBookmark" : "Bookmark"}</MenuItem>
+                    <MenuItem onPress={onBookmarkPressed}>{isFavorite ? "UnBookmark" : "Bookmark"}</MenuItem>
                     <MenuItem onPress={doNothing}>Add to channel</MenuItem>
                     <MenuItem onPress={onDownloadMenuItemPressed}>{isDownloaded ? "Remove download" : "Download"}</MenuItem>
                 </Menu>
