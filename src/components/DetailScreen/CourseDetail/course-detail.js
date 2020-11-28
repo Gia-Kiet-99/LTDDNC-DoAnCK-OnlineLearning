@@ -4,7 +4,7 @@ import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
 import {CourseContext} from "../../../provider/course-provider";
-
+import {MaterialIcons} from '@expo/vector-icons';
 
 
 const CourseDetail = (props) => {
@@ -13,18 +13,18 @@ const CourseDetail = (props) => {
     // }
 
     const {updateCourseList, getCourseFromId} = useContext(CourseContext)
-
     /* get course id */
     const courseId = props.route.params.courseId
     /* get course data from id */
     const item = getCourseFromId(courseId)
-    console.log("CourseDetail", item)
+    // console.log("CourseDetail", item)
 
     const [isBookmarked, setIsBookmarked] = useState(item.isFavorite);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [isDownloaded, setIsDownloaded] = useState(item.isDownload);
 
     const onAuthorButtonPressed = () => {
-        if(props.navigation !==undefined) {
+        if (props.navigation !== undefined) {
             props.navigation.navigate("AuthorDetailStackNavigator",
                 {
                     screen: "AuthorDetail",
@@ -34,14 +34,22 @@ const CourseDetail = (props) => {
                 })
         }
     }
+
     const onBookmarkButtonPressed = () => {
         setIsBookmarked(!isBookmarked)
     }
-
     useEffect(() => {
         item.isFavorite = isBookmarked
         updateCourseList(item.id, item)
     }, [isBookmarked])
+
+    const onDownloadButtonPressed = () => {
+        setIsDownloaded(!isDownloaded)
+    }
+    useEffect(() => {
+        item.isDownload = isDownloaded
+        updateCourseList(item.id, item)
+    }, [isDownloaded])
 
     const AuthorButton = (props) => {
         return <TouchableOpacity
@@ -52,7 +60,6 @@ const CourseDetail = (props) => {
             <Text>{item.authorName}</Text>
         </TouchableOpacity>
     }
-
     const showAlert = () => Alert.alert('Add to channel')
 
     const CourseInfo = () => {
@@ -83,20 +90,23 @@ const CourseDetail = (props) => {
                 <Text style={styles.buttonText}>{(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={showAlert}
-                style={[styles.button, {marginHorizontal: 10}]}>
+            <TouchableOpacity onPress={showAlert} style={[styles.button, {marginHorizontal: 10}]}>
                 <View style={styles.imageWrapper}>
                     <Image style={styles.buttonImage} source={require('../../../../assets/channel-icon.png')}/>
                 </View>
                 <Text style={[styles.buttonText, {textAlign: 'center'}]}>Add to Channel</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={onDownloadButtonPressed}>
                 <View style={styles.imageWrapper}>
-                    <Image style={styles.buttonImage} source={require('../../../../assets/download-icon.png')}/>
+                    {
+                        isDownloaded ?
+                            <Image style={styles.buttonImage} source={require('../../../../assets/downloaded.png')}/>
+                            :
+                            <Image style={styles.buttonImage} source={require('../../../../assets/download.png')}/>
+                    }
                 </View>
-                <Text style={styles.buttonText}>Download</Text>
+                <Text style={styles.buttonText}>{isDownloaded ? "Downloaded" : "Download"}</Text>
             </TouchableOpacity>
         </View>
     }

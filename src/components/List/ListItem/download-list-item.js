@@ -18,7 +18,7 @@ const DownloadListItem = (props) => {
             props.navigation.navigate("CourseDetailStackNavigator", {
                 screen: "CourseDetail",
                 params: {
-                    item: props.item
+                    courseId: props.item.id
                 }
             })
         }

@@ -23,9 +23,7 @@ const StudyList = (props) => {
         <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
     )
     const renderDownloadItem = ({item}) => {
-        if (item.isDownload === true) {
-            return <DownloadListItem key={item.id} item={item} navigation={props.navigation}/>
-        }
+        return <DownloadListItem key={item.id} item={item} navigation={props.navigation}/>
     }
     const renderPathItem = ({item}) => (
         <PathListItem key={item.id} item={item} navigation={props.navigation}/>

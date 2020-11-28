@@ -27,8 +27,20 @@ const CourseProvider = (props) => {
         return courseList.filter(obj => obj.isFavorite === true)
     }
 
+    /* Function: get all downloaded course*/
+    const getDownloadedCourses = () => {
+        return courseList.filter(obj => obj.isDownload === true)
+    }
+
     return (
-        <CourseContext.Provider value={{courseList, updateCourseList, getCourseFromId, getFavoriteCourses}}>
+        <CourseContext.Provider
+            value={{
+                courseList,
+                updateCourseList,
+                getCourseFromId,
+                getFavoriteCourses,
+                getDownloadedCourses
+            }}>
             {props.children}
         </CourseContext.Provider>
     );
