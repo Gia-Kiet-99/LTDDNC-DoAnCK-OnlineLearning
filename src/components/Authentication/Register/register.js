@@ -6,6 +6,7 @@ import buttonStyles from "../styles/button-styles";
 import {ScreenName} from "../../../globals/constants";
 
 const Register = (props) => {
+    console.log("Register")
     const onSubscribe = () => {
         return props.navigation.navigate(ScreenName.login)
     }

@@ -6,6 +6,7 @@ import {listName} from "../../../globals/constants";
 import {ChannelContext} from "../../../provider/channel-provider";
 
 const ChannelDetail = (props) => {
+    console.log("ChannelDetail")
     const [isExpanded, setIsExpanded] = useState(false);
     const {getChannelById} = useContext(ChannelContext)
 

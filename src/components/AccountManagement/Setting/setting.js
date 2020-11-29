@@ -193,6 +193,7 @@ const Detail = (props) => {
 }
 
 const Setting = (props) => {
+    console.log("Setting")
     const {theme} = useContext(AppThemeContext)
     return (
         <View style={[styles.container, theme]}>

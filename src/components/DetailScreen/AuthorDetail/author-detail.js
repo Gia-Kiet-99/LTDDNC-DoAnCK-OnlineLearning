@@ -4,9 +4,9 @@ import Description from "../../Common/description";
 import {FontAwesome} from '@expo/vector-icons';
 import StudyList from "../../List/StudyList/study-list";
 import {listName} from "../../../globals/constants";
-import {FlatList} from "react-native-web";
 
 const AuthorDetail = (props) => {
+    console.log("AuthorDetail")
     const data = props.route?.params?.data;
 
     const AuthorInfo = () => (

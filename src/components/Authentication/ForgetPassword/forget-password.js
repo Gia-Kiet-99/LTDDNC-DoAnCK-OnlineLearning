@@ -3,6 +3,7 @@ import {Text, StyleSheet, TouchableOpacity, View, TextInput, Image} from 'react-
 import textInputStyles from "../styles/text-input-styles";
 
 const ForgetPassword = (props) => {
+    console.log("ForgetPassword")
     return (
         <View style={styles.container}>
             <View style={styles.imageWrapper}>

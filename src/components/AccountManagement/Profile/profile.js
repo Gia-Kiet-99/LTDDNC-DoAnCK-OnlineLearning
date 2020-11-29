@@ -3,6 +3,7 @@ import {View,Image,Text,StyleSheet} from 'react-native';
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 
 const Profile = (props) => {
+    console.log("Profile")
     const {authentication} = useContext(AuthenticationContext)
     const info = {
         username: 'Kiet Dinh',

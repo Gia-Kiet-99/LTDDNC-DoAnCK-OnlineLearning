@@ -7,9 +7,10 @@ import {CourseContext} from "../../../provider/course-provider";
 import {ChannelContext} from "../../../provider/channel-provider";
 
 const Home = (props) => {
+    console.log("Home")
     const {getFavoriteCourses} = useContext(CourseContext)
     const favoriteCourses = getFavoriteCourses();
-    const {channelList, getPublicChannels, getPrivateChannels} = useContext(ChannelContext)
+    const {getPublicChannels, getPrivateChannels} = useContext(ChannelContext)
     const {courseList} = useContext(CourseContext)
 
     const renderContinueLearningSection = (favoriteCourses) => {

@@ -9,7 +9,7 @@ const PathInfo = (props) => {
             </Text>
 
             <Text style={styles.darkText}>
-                {props.count}
+              {`${props.count} courses`}
             </Text>
         </View>
     );

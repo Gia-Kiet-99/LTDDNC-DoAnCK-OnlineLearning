@@ -1,126 +1,109 @@
 export const skills = [
     {
-        id: "1",
+        id: "skill#1",
         skill: 'Angular'
     },
     {
-        id: "2",
+        id: "skill#2",
         skill:'JavaScript'
     },
     {
-        id: "3",
+        id: "skill#3",
         skill:'C# '
     },
     {
-        id: "4",
+        id: "skill#4",
         skill:'Java',
     },
     {
-        id: "5",
+        id: "skill#5",
         skill:'ASP.NET'
     },
     {
-        id: "6",
+        id: "skill#6",
         skill:'Node.js'
     },
 ]
 export const authors = [
     {
-        id: "1",
+        id: "author#1",
         authorAvatar: require('../../assets/avatar.png'),
         authorName: 'Gia Kiet'
     },
     {
-        id: "2",
+        id: "author#2",
         authorAvatar: require('../../assets/avatar.png'),
         authorName: 'Simon'
     },
     {
-        id: "3",
+        id: "author#3",
         authorAvatar: require('../../assets/avatar.png'),
         authorName: 'Cristiano Ronaldo'
     },
     {
-        id: "4",
+        id: "author#4",
         authorAvatar: require('../../assets/avatar.png'),
         authorName: 'Lionel Messi'
     },
     {
-        id: "5",
+        id: "author#5",
         authorAvatar: require('../../assets/avatar.png'),
         authorName: 'Bailey Newton'
     },
     {
-        id: "6",
+        id: "author#6",
         authorAvatar: require('../../assets/avatar.png'),
         authorName: 'Gerry Burns'
     },
 ]
-export const paths = [
-    {
-        id: "1",
-        title: 'AWS Certified Database - Specialty (DBS-C01)',
-        count: '3 courses'
-    },
-    {
-        id: "2",
-        title: 'Big Data LDN 2020',
-        count: '44 courses'
-    },
-    {
-        id: "3",
-        title: 'Securing ASP.NET and ASP.NET Core Applications',
-        count: '14 courses'
-    }
-]
 export const titles = [
     {
-        id: "1",
+        id: "title#1",
         title: 'Conferences',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "2",
+        id: "title#2",
         title: 'Certification',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "3",
+        id: "title#3",
         title: 'Software Development',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "4",
+        id: "title#4",
         title: 'IT ops',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "5",
+        id: "title#5",
         title: 'Information and Cyber Security',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "6",
+        id: "title#6",
         title: 'Data Professional',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "7",
+        id: "title#7",
         title: 'Business Professional',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "8",
+        id: "title#8",
         title: 'Creative Professional',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "9",
+        id: "title#9",
         title: 'Manufacturing and Design',
         source: require('../../assets/background-image-3.jpg')
     },
     {
-        id: "10",
+        id: "title#10",
         title: 'Architecture and Construction',
         source: require('../../assets/background-image-3.jpg')
     }
@@ -702,4 +685,41 @@ export const channels = [
             },
         ]
     },
+]
+export const paths = [
+    {
+        id: "path#1",
+        title: 'Web development',
+        count: '7',
+        courseIds: [
+          "course#5",
+          "course#6",
+          "course#7",
+          "course#11",
+          "course#12",
+          "course#13",
+          "course#14",
+        ]
+    },
+    {
+        id: "path#2",
+        title: 'Mobile development',
+        count: '3',
+        courseIds: [
+          "course#2",
+          "course#3",
+          "course#4",
+        ]
+    },
+    {
+        id: "path#3",
+        title: 'Other programming language',
+        count: '4',
+        courseIds: [
+          "course#1",
+          "course#8",
+          "course#9",
+          "course#10",
+        ]
+    }
 ]

@@ -102,7 +102,7 @@ const CourseDetail = (props) => {
     setCreationModalVisible(false)
   }
   const renderCurrentChannel = (channelNames) => {
-    return channelNames.map(item => <ModalButtonItem item={item}/>)
+    return channelNames.map(item => <ModalButtonItem key={item.id} item={item}/>)
   }
   const onCreateChannelPressed = () => {
     hideListChannelModal()
@@ -231,7 +231,7 @@ const CourseDetail = (props) => {
     )
   }
 
-  console.log("Course Detail", channelNames)
+  console.log("Course Detail")
   return (
     <CourseDetailContext.Provider value={{item, onLessonItemPressed}}>
       {/*<StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>*/}

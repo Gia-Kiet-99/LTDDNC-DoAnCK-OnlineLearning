@@ -6,11 +6,13 @@ import PathListItem from "../ListItem/path-list-item";
 import AuthorListItem from "../ListItem/author-list-item";
 import ChannelListItem from "../ListItem/channel-list-item";
 import {listName} from "../../../globals/constants";
-import {authors, channels, paths} from "../../../localize/data";
+import {authors, paths} from "../../../localize/data";
 import {CourseContext} from "../../../provider/course-provider";
+import {PathContext} from "../../../provider/path-provider";
 
 
 const StudyList = (props) => {
+    console.log("StudyList")
     const {courseList, getFavoriteCourses} = useContext(CourseContext)
 
     /* value passing when you click See all button */
@@ -21,9 +23,6 @@ const StudyList = (props) => {
     const renderCourseItem = ({item}) => (
         <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
     )
-    // const renderDownloadItem = ({item}) => {
-    //     return <DownloadListItem key={item.id} item={item} navigation={props.navigation}/>
-    // }
     const renderPathItem = ({item}) => (
         <PathListItem key={item.id} item={item} navigation={props.navigation}/>
     )
@@ -55,6 +54,13 @@ const StudyList = (props) => {
                 let favoriteCourses = getFavoriteCourses()
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={favoriteCourses}
+                                 renderItem={renderCourseItem}
+                                 ListHeaderComponent={listHeaderComponent}
+                                 keyExtractor={(item) => (item.id)}
+                                 ItemSeparatorComponent={() => <ListItemSeparator/>}/>
+            case listName.pathCourse:
+                return <FlatList showsVerticalScrollIndicator={false}
+                                 data={props.data}
                                  renderItem={renderCourseItem}
                                  ListHeaderComponent={listHeaderComponent}
                                  keyExtractor={(item) => (item.id)}

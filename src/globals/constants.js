@@ -7,7 +7,8 @@ export const listName = {
     popularSkill: "skill-list",
     channel: "channel-list",
     download: "download-list",
-    channelCourse: "channel-course-list"
+    channelCourse: "channel-course-list",
+    pathCourse: "path-course-list",
 }
 
 export const titleName = {
@@ -33,6 +34,7 @@ export const ScreenName = {
     courseDetail: "CourseDetail",
     channelDetail: "ChannelDetail",
     home: "Home",
+    browse: "Browse",
     setting: "Setting",
     profile: "Profile",
     pathDetail: "PathDetail",

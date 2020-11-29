@@ -4,8 +4,8 @@ import {ScreenName} from "../../globals/constants";
 import {AppThemeContext, themes} from "../../provider/theme-provider";
 
 const Authentication = (props) => {
+    console.log("Authentication")
     const {theme, toggleTheme} = useContext(AppThemeContext)
-    // console.log('Authentication', theme)
 
     const onSignInPressed = () => {
         return props.navigation.navigate(ScreenName.login)

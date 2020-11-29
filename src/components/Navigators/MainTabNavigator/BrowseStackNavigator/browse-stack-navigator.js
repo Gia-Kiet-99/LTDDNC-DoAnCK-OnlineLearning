@@ -8,25 +8,46 @@ import PathDetailStackNavigator from "./PathDetailStackNavigator/path-detail-sta
 import AuthorDetailStackNavigator from "../AuthorDetailStackNavigator/author-detail-stack-navigator";
 import SkillStackNavigator from "./SkillStackNavigator/skill-stack-navigator";
 import FieldDetailStackNavigator from "./FieldDetailStackNavigator/field-detail-stack-navigator";
+import PathProvider from "../../../../provider/path-provider";
+import {NavigatorName, ScreenName} from "../../../../globals/constants";
 
 const Stack = createStackNavigator()
 
 const BrowseStackNavigator = (props) => {
-    return (
-        <Stack.Navigator initialRouteName="Browse">
-            <Stack.Screen name="Browse" component={Browse} options={{headerShown: false}}/>
-            <Stack.Screen name="Setting" component={Setting}/>
-            <Stack.Screen name="Profile" component={Profile}/>
-            <Stack.Screen name="PathDetailStackNavigator" component={PathDetailStackNavigator}
-                          options={{headerShown: false}}/>
-            <Stack.Screen name="AuthorDetailStackNavigator" component={AuthorDetailStackNavigator}
-                          options={{headerShown: false}}/>
-            <Stack.Screen name="SkillStackNavigator" component={SkillStackNavigator} options={{headerShown: false}}/>
-            <Stack.Screen name="FieldDetailStackNavigator" component={FieldDetailStackNavigator}
-                          options={{headerShown: false}}/>
-            <Stack.Screen name="ListStack" component={ListStack} options={{headerShown: false}}/>
-        </Stack.Navigator>
-    );
+  return (
+    <PathProvider>
+      <Stack.Navigator initialRouteName={ScreenName.browse}>
+        <Stack.Screen
+          name={ScreenName.browse}
+          component={Browse}
+          options={{headerShown: false}}/>
+        <Stack.Screen name={ScreenName.setting} component={Setting}/>
+        <Stack.Screen name={ScreenName.profile} component={Profile}/>
+        <Stack.Screen
+          name={NavigatorName.pathDetailStack}
+          component={PathDetailStackNavigator}
+          options={{headerShown: false}}/>
+        <Stack.Screen
+          name={NavigatorName.authorDetailStack}
+          component={AuthorDetailStackNavigator}
+          options={{headerShown: false}}/>
+        <Stack.Screen
+          name={NavigatorName.skillStack}
+          component={SkillStackNavigator}
+          options={{headerShown: false}}/>
+        <Stack.Screen
+          name={NavigatorName.fieldDetailStack}
+          component={FieldDetailStackNavigator}
+          options={{headerShown: false}}/>
+        <Stack.Screen
+          name={NavigatorName.listStack}
+          component={ListStack}
+          options={{
+            headerShown: false
+          }}/>
+      </Stack.Navigator>
+    </PathProvider>
+  );
 };
 
 export default BrowseStackNavigator;
