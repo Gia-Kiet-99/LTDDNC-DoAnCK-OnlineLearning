@@ -32,6 +32,10 @@ export const ScreenName = {
     splash: "SplashScreen",
     courseDetail: "CourseDetail",
     channelDetail: "ChannelDetail",
+    home: "Home",
+    setting: "Setting",
+    profile: "Profile",
+    pathDetail: "PathDetail",
 }
 
 export const NavigatorName = {

@@ -8,7 +8,7 @@ import {Ionicons} from "@expo/vector-icons";
 import BrowseStackNavigator from "./BrowseStackNavigator/browse-stack-navigator";
 import SearchStackNavigator from "./SearchStackNavigator/search-stack-navigator";
 import CourseProvider from "../../../provider/course-provider";
-import ChannelProvider from "../../../provider/channel-context";
+import ChannelProvider from "../../../provider/channel-provider";
 
 const Tab = createBottomTabNavigator()
 

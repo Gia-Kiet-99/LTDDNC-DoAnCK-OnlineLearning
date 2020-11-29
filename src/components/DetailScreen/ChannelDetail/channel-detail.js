@@ -3,8 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ChannelInfo from "../../Common/channel-info";
 import StudyList from "../../List/StudyList/study-list";
 import {listName} from "../../../globals/constants";
-import {channels} from "../../../localize/data";
-import {ChannelContext} from "../../../provider/channel-context";
+import {ChannelContext} from "../../../provider/channel-provider";
 
 const ChannelDetail = (props) => {
     const [isExpanded, setIsExpanded] = useState(false);

@@ -4,7 +4,7 @@ import Section from "../../Common/section";
 import {listName, titleName} from "../../../globals/constants";
 import ActionBar from "../../Common/action-bar";
 import {CourseContext} from "../../../provider/course-provider";
-import {ChannelContext} from "../../../provider/channel-context";
+import {ChannelContext} from "../../../provider/channel-provider";
 
 const Home = (props) => {
     const {getFavoriteCourses} = useContext(CourseContext)
