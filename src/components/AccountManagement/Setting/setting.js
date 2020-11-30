@@ -15,7 +15,7 @@ const AccountInfo = (props) => {
         <View style={styles.accountInfoContainer}>
             <TouchableOpacity style={[styles.button, {flexDirection: 'row', alignItems: 'center'}]}
                               onPress={onProfilePress}>
-                <Image style={styles.image} source={require('../../../../assets/avatar.jpg')}/>
+                <Image style={styles.image} source={require('../../../../assets/avatar.png')}/>
                 <View style={{paddingLeft: 15}}>
                     <Text>{authentication.user.username}</Text>
                     <Text style={{fontSize: 12}}>{authentication.user.username}</Text>

@@ -44,7 +44,7 @@ const PathDetail = (props) => {
   }
 
   const courses = getCourseList()
-  console.log(courses)
+  // console.log(courses)
   return (
     <View style={styles.container}>
       <StudyList

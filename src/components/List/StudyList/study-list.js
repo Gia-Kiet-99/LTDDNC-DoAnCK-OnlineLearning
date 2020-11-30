@@ -65,6 +65,13 @@ const StudyList = (props) => {
                                  ListHeaderComponent={listHeaderComponent}
                                  keyExtractor={(item) => (item.id)}
                                  ItemSeparatorComponent={() => <ListItemSeparator/>}/>
+            case listName.authorCourse:
+                return <FlatList showsVerticalScrollIndicator={false}
+                                 data={props.data}
+                                 renderItem={renderCourseItem}
+                                 ListHeaderComponent={listHeaderComponent}
+                                 keyExtractor={(item) => (item.id)}
+                                 ItemSeparatorComponent={() => <ListItemSeparator/>}/>
             case listName.download:
                 return <FlatList showsVerticalScrollIndicator={false}
                                  data={props.data}

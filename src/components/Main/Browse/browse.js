@@ -39,7 +39,7 @@ const Browse = (props) => {
             navigation={props.navigation}/>
         case listName.author:
           return <Section
-            kind={kind} t
+            kind={kind}
             title={title}
             list={list}
             navigation={props.navigation}/>

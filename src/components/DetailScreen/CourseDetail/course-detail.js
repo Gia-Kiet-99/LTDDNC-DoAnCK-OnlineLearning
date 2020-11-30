@@ -1,10 +1,9 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import {
   Image,
   StyleSheet,
   View,
   Text,
-  Alert,
   ScrollView,
   TouchableOpacity,
   Modal, TextInput,
@@ -17,16 +16,18 @@ import {ChannelContext} from "../../../provider/channel-provider";
 import {Feather} from '@expo/vector-icons';
 import {Ionicons} from '@expo/vector-icons';
 import {AuthenticationContext} from "../../../provider/authentication-provider";
-
-// const renderAuthorButton = (author) => {
-//     return author.map(item => <AuthorButton author={item}/>)
-// }
+import Description from "../../Common/description";
+import CourseButton from "./CourseButton/course-button";
+import {NavigatorName, ScreenName} from "../../../globals/constants";
+import AuthorButton from "./AuthorButton/author-button";
+import {AuthorContext} from "../../../provider/author-provider";
 
 const CourseDetail = (props) => {
   /* use context */
-  const {updateCourseList, getCourseFromId} = useContext(CourseContext)
+  const {getCourseFromId} = useContext(CourseContext)
   const {addChannel, addCourseToChannel, getPrivateChannelNames} = useContext(ChannelContext)
   const {authentication} = useContext(AuthenticationContext)
+  const {getAuthorById} = useContext(AuthorContext)
 
   /* get course id */
   const courseId = props.route.params.courseId
@@ -35,59 +36,24 @@ const CourseDetail = (props) => {
   const channelNames = getPrivateChannelNames()
 
   /* use state */
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [isBookmarked, setIsBookmarked] = useState(item.isFavorite)
-  const [isDownloaded, setIsDownloaded] = useState(item.isDownload)
   const [scrollView, setScrollView] = useState(null)
   const [modalVisible, setModalVisible] = useState(false)
   const [creationModalVisible, setCreationModalVisible] = useState(false)
   const [newChannelName, setNewChannelName] = useState("")
-  const [opacityStyle, setOpacityStyle] = useState({})
-
-  /* use effect */
-  useEffect(() => {
-    item.isFavorite = isBookmarked
-    updateCourseList(item.id, item)
-  }, [isBookmarked])
-  useEffect(() => {
-    item.isDownload = isDownloaded
-    updateCourseList(item.id, item)
-  }, [isDownloaded])
 
   /* function */
   const onLessonItemPressed = () => {
     scrollView.scrollTo({x: 0, y: 0, animated: true})
   }
   const onAuthorButtonPressed = () => {
-    if (props.navigation !== undefined) {
-      props.navigation.navigate("AuthorDetailStackNavigator",
-        {
-          screen: "AuthorDetail",
-          params: {
-            data: item
-          }
-        })
-    }
-  }
-  const onBookmarkButtonPressed = () => {
-    setIsBookmarked(!isBookmarked)
-  }
-  const onDownloadButtonPressed = () => {
-    if (isDownloaded === true) {
-      Alert.alert("Remove download", "Are you sure you want to remove downloaded course?",
-        [
-          {
-            text: "Cancel",
-            onPress: () => console.log("Cancel Pressed"),
-            style: "cancel"
-          },
-          {text: "Remove", onPress: () => setIsDownloaded(false)}
-        ],
-        {cancelable: false}
-      );
-    } else {
-      setIsDownloaded(true)
-    }
+    let authorItem = getAuthorById(item.authorId)
+    props.navigation?.navigate(NavigatorName.authorDetailStack,
+      {
+        screen: ScreenName.authorDetail,
+        params: {
+          data: authorItem
+        }
+      })
   }
   const showListChannelModal = () => {
     setModalVisible(true)
@@ -120,24 +86,10 @@ const CourseDetail = (props) => {
   }
 
   /* internal component */
-  const AuthorButton = () => {
-    return <TouchableOpacity
-      style={styles.authorWrapper}
-      onPress={onAuthorButtonPressed}
-    >
-      <Image style={styles.avatar} source={item.authorAvatar}/>
-      <Text>{item.authorName}</Text>
-    </TouchableOpacity>
-  }
   const CourseInfo = () => {
     return <View style={styles.courseInfo}>
       <Text style={{fontSize: 24}}>{item.title}</Text>
-
-      <AuthorButton/>
-      {/*<ScrollView style={{marginTop: 5}} horizontal={true} showsHorizontalScrollIndicator={false}>*/}
-      {/*    {renderAuthorButton(item.author)}*/}
-      {/*</ScrollView>*/}
-
+      <AuthorButton data={item} onPress={onAuthorButtonPressed}/>
       <View style={{flexDirection: 'row', marginTop: 10}}>
         <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>
           {`${item.level} . ${item.released} . ${item.duration}`}
@@ -146,78 +98,25 @@ const CourseDetail = (props) => {
       </View>
     </View>
   }
-  const CourseButton = () => {
-    return <View style={styles.buttonViewGroup}>
-      <TouchableOpacity style={styles.button} onPress={onBookmarkButtonPressed}>
-        <View style={styles.imageWrapper}>
-          <Image
-            style={styles.buttonImage}
-            source={(isBookmarked === true) ? require('../../../../assets/bookmarked-icon.png') : require('../../../../assets/bookmark-icon.png')}/>
-        </View>
-        <Text style={styles.buttonText}>{(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={showListChannelModal} style={[styles.button, {marginHorizontal: 10}]}>
-        <View style={styles.imageWrapper}>
-          <Image style={styles.buttonImage} source={require('../../../../assets/channel-icon.png')}/>
-        </View>
-        <Text style={[styles.buttonText, {textAlign: 'center'}]}>Add to Channel</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={onDownloadButtonPressed}>
-        <View style={styles.imageWrapper}>
-          {
-            isDownloaded ?
-              <Image style={styles.buttonImage} source={require('../../../../assets/downloaded.png')}/>
-              :
-              <Image style={styles.buttonImage} source={require('../../../../assets/download.png')}/>
-          }
-        </View>
-        <Text style={styles.buttonText}>{isDownloaded ? "Downloaded" : "Download"}</Text>
-      </TouchableOpacity>
-    </View>
-  }
-  const CourseDescription = () => {
-    return <View>
-      <View style={(isExpanded === true) ? styles.courseDescription : styles.briefCourseDescription}>
-        <View style={styles.desWrapper}>
-          <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam
-            vero vel
-            ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat
-            saepe
-            temporibus perspiciatis.</Text>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.5}
-          style={styles.expandButton}
-          onPress={() => setIsExpanded(!isExpanded)}>
-          <Image style={styles.expandImage}
-                 source={(isExpanded === true) ? require('../../../../assets/up-arrow.png') : require('../../../../assets/down-arrow.png')}
-          />
-        </TouchableOpacity>
-      </View>
-    </View>
-  }
   const CourseIntro = () => {
     return <View style={styles.courseIntro}>
-      <CourseInfo item={props.item}/>
-      <CourseButton/>
-      <CourseDescription/>
+      <CourseInfo/>
+      <CourseButton item={item} showListChannelModal={showListChannelModal}/>
+      <Description/>
 
       <TouchableOpacity style={styles.largeButton}>
         <Image style={{height: 25, width: 25, marginRight: 8}}
                source={require('../../../../assets/check.png')}/>
         <Text>Take a learning check</Text>
       </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.largeButton}
-        onPress={() => props.navigation.push("CourseDetail", {item: item})}
-      >
+        onPress={() => props.navigation.push("CourseDetail", {item: item})}>
         <Image style={{height: 25, width: 25, marginRight: 8}}
                source={require('../../../../assets/folder.png')}/>
         <Text>View related paths & courses</Text>
       </TouchableOpacity>
+
     </View>
   }
   const ModalButtonItem = ({item}) => {

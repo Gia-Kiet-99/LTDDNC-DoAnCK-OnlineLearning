@@ -9,6 +9,7 @@ export const listName = {
     download: "download-list",
     channelCourse: "channel-course-list",
     pathCourse: "path-course-list",
+    authorCourse: "author-course-list",
 }
 
 export const titleName = {
