@@ -8,7 +8,6 @@ import ChannelListItem from "../ListItem/channel-list-item";
 import {listName} from "../../../globals/constants";
 import {authors, paths} from "../../../localize/data";
 import {CourseContext} from "../../../provider/course-provider";
-import {PathContext} from "../../../provider/path-provider";
 
 
 const StudyList = (props) => {

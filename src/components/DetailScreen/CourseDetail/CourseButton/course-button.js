@@ -4,25 +4,28 @@ import {CourseContext} from "../../../../provider/course-provider";
 
 function CourseButton(props) {
   const item = props.item
-  console.log("CourseButton", item)
+  // console.log("CourseButton", item)
 
   const {updateCourseList} = useContext(CourseContext)
   const [isBookmarked, setIsBookmarked] = useState(item.isFavorite)
   const [isDownloaded, setIsDownloaded] = useState(item.isDownload)
 
   useEffect(() => {
-    if(item.isFavorite !== isBookmarked) {
+    if (item.isFavorite !== isBookmarked) {
       item.isFavorite = isBookmarked
       updateCourseList(item.id, item)
     }
   }, [isBookmarked])
   useEffect(() => {
-    if(item.isDownload !== isDownloaded) {
+    if (item.isDownload !== isDownloaded) {
       item.isDownload = isDownloaded
       updateCourseList(item.id, item)
     }
   }, [isDownloaded])
 
+  const onBookmarkButtonPressed = () => {
+    setIsBookmarked(!isBookmarked)
+  }
   const onDownloadButtonPressed = () => {
     if (isDownloaded === true) {
       Alert.alert("Remove download", "Are you sure you want to remove downloaded course?",
@@ -32,10 +35,13 @@ function CourseButton(props) {
             onPress: () => console.log("Cancel Pressed"),
             style: "cancel"
           },
-          {text: "Remove", onPress: () => setIsDownloaded(false)}
+          {
+            text: "Remove",
+            onPress: () => setIsDownloaded(false)
+          }
         ],
         {cancelable: false}
-      );
+      )
     } else {
       setIsDownloaded(true)
     }
@@ -43,23 +49,37 @@ function CourseButton(props) {
 
   return (
     <View style={styles.buttonViewGroup}>
-      <TouchableOpacity style={styles.button} onPress={() => setIsBookmarked(!isBookmarked)}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onBookmarkButtonPressed}>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.buttonImage}
-            source={(isBookmarked === true) ? require('../../../../../assets/bookmarked-icon.png') : require('../../../../../assets/bookmark-icon.png')}/>
+            source={(isBookmarked === true) ?
+              require('../../../../../assets/bookmarked-icon.png') :
+              require('../../../../../assets/bookmark-icon.png')}/>
         </View>
-        <Text style={styles.buttonText}>{(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}</Text>
+        <Text style={styles.buttonText}>
+          {(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}
+        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={props.showListChannelModal} style={[styles.button, {marginHorizontal: 10}]}>
+      <TouchableOpacity
+        onPress={props.showListChannelModal}
+        style={[styles.button, {marginHorizontal: 10}]}>
         <View style={styles.imageWrapper}>
-          <Image style={styles.buttonImage} source={require('../../../../../assets/channel-icon.png')}/>
+          <Image
+            style={styles.buttonImage}
+            source={require('../../../../../assets/channel-icon.png')}/>
         </View>
-        <Text style={[styles.buttonText, {textAlign: 'center'}]}>Add to Channel</Text>
+        <Text style={[styles.buttonText, {textAlign: 'center'}]}>
+          Add to Channel
+        </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={onDownloadButtonPressed}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onDownloadButtonPressed}>
         <View style={styles.imageWrapper}>
           {
             isDownloaded ?
@@ -68,7 +88,9 @@ function CourseButton(props) {
               <Image style={styles.buttonImage} source={require('../../../../../assets/download.png')}/>
           }
         </View>
-        <Text style={styles.buttonText}>{isDownloaded ? "Downloaded" : "Download"}</Text>
+        <Text style={styles.buttonText}>
+          {isDownloaded ? "Downloaded" : "Download"}
+        </Text>
       </TouchableOpacity>
     </View>
   )

@@ -4,21 +4,31 @@ import SearchTabNavigator from "./SearchTabNavigator/search-tab-navigator";
 import PathDetailStackNavigator from "../BrowseStackNavigator/PathDetailStackNavigator/path-detail-stack-navigator";
 import AuthorDetailStackNavigator from "../AuthorDetailStackNavigator/author-detail-stack-navigator";
 import CourseDetailStackNavigator from "../CourseDetailStackNavigator/course-detail-stack-navigator";
+import {NavigatorName} from "../../../../globals/constants";
 
 const Stack = createStackNavigator();
 
 const SearchStackNavigator = (props) => {
-    return (
-        <Stack.Navigator initalRouteName="SearchTabNavigator">
-            <Stack.Screen name="SearchTabNavigator" component={SearchTabNavigator} options={{headerShown: false}}/>
-            <Stack.Screen name="CourseDetailStackNavigator" component={CourseDetailStackNavigator}
-                          options={{headerShown: false}}/>
-            <Stack.Screen name="PathDetailStackNavigator" component={PathDetailStackNavigator}
-                          options={{headerShown: false}}/>
-            <Stack.Screen name="AuthorDetailStackNavigator" component={AuthorDetailStackNavigator}
-                          options={{headerShown: false}}/>
-        </Stack.Navigator>
-    );
+  return (
+    <Stack.Navigator initalRouteName={NavigatorName.searchTab}>
+      <Stack.Screen
+        name={NavigatorName.searchTab}
+        component={SearchTabNavigator}
+        options={{headerShown: false}}/>
+      <Stack.Screen
+        name={NavigatorName.courseDetailStack}
+        component={CourseDetailStackNavigator}
+        options={{headerShown: false}}/>
+      <Stack.Screen
+        name={NavigatorName.pathDetailStack}
+        component={PathDetailStackNavigator}
+        options={{headerShown: false}}/>
+      <Stack.Screen
+        name={NavigatorName.authorDetailStack}
+        component={AuthorDetailStackNavigator}
+        options={{headerShown: false}}/>
+    </Stack.Navigator>
+  );
 };
 
 export default SearchStackNavigator;

@@ -8,51 +8,51 @@ import {listName} from "../../../globals/constants";
 {/*<SearchResultList/>*/
 }
 const Search = (props) => {
-    const [index, setIndex] = useState(0);
-    const [routes] = useState([
-        {key: "all", title: "ALL"},
-        {key: "courses", title: "COURSES"},
-        {key: "paths", title: "PATHS"},
-        {key: "authors", title: "AUTHORS"},
-    ])
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: "all", title: "ALL"},
+    {key: "courses", title: "COURSES"},
+    {key: "paths", title: "PATHS"},
+    {key: "authors", title: "AUTHORS"},
+  ])
 
-    const CourseRoute = () => {
-        return <StudyList kind={listName.course} style={{paddingHorizontal: 15}}/>
-    }
-    const PathRoute = () => {
-        return <StudyList kind={listName.path} style={{paddingHorizontal: 15}}/>
-    }
-    const AuthorRoute = () => {
-        return <StudyList kind={listName.author} style={{paddingHorizontal: 15}}/>
-    }
+  const CourseRoute = () => {
+    return <StudyList kind={listName.course} style={{paddingHorizontal: 15}}/>
+  }
+  const PathRoute = () => {
+    return <StudyList kind={listName.path} style={{paddingHorizontal: 15}}/>
+  }
+  const AuthorRoute = () => {
+    return <StudyList kind={listName.author} style={{paddingHorizontal: 15}}/>
+  }
 
-    return (
-        <View style={styles.container}>
-            <Text> aloalo</Text>
-            <TabView style={styles.tabView}
-                     navigationState={{index, routes}}
-                     onIndexChange={setIndex}
-                     renderScene={SceneMap({
-                         all: SearchResultList,
-                         courses: CourseRoute,
-                         paths: PathRoute,
-                         authors: AuthorRoute
-                     })}
-                     initialLayout={{width: Dimensions.get("window").width}}
-                     // tabBarPosition="bottom"
-            />
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      {/*<Text> aloalo</Text>*/}
+      <TabView style={styles.tabView}
+               navigationState={{index, routes}}
+               onIndexChange={setIndex}
+               renderScene={SceneMap({
+                 all: SearchResultList,
+                 courses: CourseRoute,
+                 paths: PathRoute,
+                 authors: AuthorRoute
+               })}
+               initialLayout={{width: Dimensions.get("window").width}}
+        // tabBarPosition="bottom"
+      />
+    </View>
+  )
 
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    tabView: {
-        // flex: 1,
-    }
+  container: {
+    flex: 1,
+  },
+  tabView: {
+    // flex: 1,
+  }
 })
 
 export default Search;

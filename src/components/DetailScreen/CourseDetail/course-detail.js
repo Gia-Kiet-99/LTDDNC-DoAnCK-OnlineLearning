@@ -21,6 +21,7 @@ import CourseButton from "./CourseButton/course-button";
 import {NavigatorName, ScreenName} from "../../../globals/constants";
 import AuthorButton from "./AuthorButton/author-button";
 import {AuthorContext} from "../../../provider/author-provider";
+import CourseInfo from "./CourseInfo/course-info";
 
 const CourseDetail = (props) => {
   /* use context */
@@ -86,21 +87,21 @@ const CourseDetail = (props) => {
   }
 
   /* internal component */
-  const CourseInfo = () => {
-    return <View style={styles.courseInfo}>
-      <Text style={{fontSize: 24}}>{item.title}</Text>
-      <AuthorButton data={item} onPress={onAuthorButtonPressed}/>
-      <View style={{flexDirection: 'row', marginTop: 10}}>
-        <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>
-          {`${item.level} . ${item.released} . ${item.duration}`}
-        </Text>
-        <Rating/>
-      </View>
-    </View>
-  }
+  // const CourseInfo = () => {
+  //   return <View style={styles.courseInfo}>
+  //     <Text style={{fontSize: 24}}>{item.title}</Text>
+  //     <AuthorButton data={item} onPress={onAuthorButtonPressed}/>
+  //     <View style={{flexDirection: 'row', marginTop: 10}}>
+  //       <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>
+  //         {`${item.level} . ${item.released} . ${item.duration}`}
+  //       </Text>
+  //       <Rating/>
+  //     </View>
+  //   </View>
+  // }
   const CourseIntro = () => {
     return <View style={styles.courseIntro}>
-      <CourseInfo/>
+      <CourseInfo data={item} onAuthorButtonPress={onAuthorButtonPressed}/>
       <CourseButton item={item} showListChannelModal={showListChannelModal}/>
       <Description/>
 

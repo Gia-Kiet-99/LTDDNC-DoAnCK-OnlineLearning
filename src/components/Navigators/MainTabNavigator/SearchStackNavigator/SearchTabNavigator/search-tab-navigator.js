@@ -9,51 +9,60 @@ import {View, StyleSheet} from "react-native";
 const Tab = createMaterialTopTabNavigator();
 
 const SearchTabNavigator = (props) => {
-    const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
-    return (
-        <View style={styles.container}>
-            <SearchBar
-                platform={"android"}
-                placeholder="Search..."
-                onChangeText={(search) => setSearchValue(search)}
-                value={searchValue}
-            />
-            <Tab.Navigator initialRouteName="AllResult" keyboardDismissMode={'on-drag'}>
-                <Tab.Screen name="AllResult" component={SearchResultList} options={{title: "ALL"}}/>
-                <Tab.Screen name="CourseResult" component={StudyList}
-                            initialParams={{
-                                kind: listName.course,
-                                style: {
-                                    paddingHorizontal: 15
-                                },
-                            }}
-                            options={{title: "COURSES"}}/>
-                <Tab.Screen name="PathResult" component={StudyList}
-                            initialParams={{
-                                kind: listName.path,
-                                style: {
-                                    paddingHorizontal: 15
-                                },
-                            }}
-                            options={{title: "PATHS"}}/>
-                <Tab.Screen name="AuthorResult" component={StudyList}
-                            initialParams={{
-                                kind: listName.author,
-                                style: {
-                                    paddingHorizontal: 15
-                                },
-                            }}
-                            options={{title: "AUTHORS"}}/>
-            </Tab.Navigator>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <SearchBar
+        platform={"android"}
+        placeholder="Search..."
+        onChangeText={(search) => setSearchValue(search)}
+        value={searchValue}
+      />
+      <Tab.Navigator initialRouteName="AllResult" keyboardDismissMode={'on-drag'}>
+        <Tab.Screen
+          name="AllResult"
+          component={SearchResultList}
+          options={{title: "ALL"}}/>
+        <Tab.Screen
+          name="CourseResult"
+          component={StudyList}
+          initialParams={{
+            kind: listName.course,
+            style: {
+              paddingHorizontal: 15
+            },
+          }}
+          options={{title: "COURSES"}}/>
+        <Tab.Screen
+          name="PathResult"
+          component={StudyList}
+          initialParams={{
+            kind: listName.path,
+            style: {
+              paddingHorizontal: 15
+            },
+          }}
+          options={{title: "PATHS"}}/>
+        <Tab.Screen
+          name="AuthorResult"
+          component={StudyList}
+          initialParams={{
+            kind: listName.author,
+            style: {
+              paddingHorizontal: 15
+            },
+          }}
+          options={{title: "AUTHORS"}}/>
+      </Tab.Navigator>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
+  container: {
+    flex: 1
+  }
 })
 
 export default SearchTabNavigator;

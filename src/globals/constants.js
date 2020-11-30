@@ -52,6 +52,7 @@ export const NavigatorName = {
     fieldDetailStack: 'FieldDetailStackNavigator',
     authenticationStack: "AuthenticationStackNavigator",
     channelDetailStack: "ChannelDetailStackNavigator",
+    searchTab: "SearchTabNavigator",
 }
 
 export const ImageButtonType = {
