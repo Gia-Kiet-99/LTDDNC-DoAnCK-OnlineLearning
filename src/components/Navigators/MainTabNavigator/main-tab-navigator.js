@@ -45,6 +45,7 @@ const MainTabNavigator = (props) => {
             screenOptions={MainTabNavigatorScreenOptions}
             backBehavior="initialRoute"
             tabBarOptions={{
+              keyboardHidesTabBar: true,
               activeTintColor: '#3498db',
               inactiveTintColor: 'gray',
               labelStyle: {
