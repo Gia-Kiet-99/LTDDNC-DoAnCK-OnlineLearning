@@ -9,10 +9,10 @@ import {AuthenticationContext} from "../../../provider/authentication-provider";
 const Stack = createStackNavigator()
 
 const AppNavigator = () => {
-  const {isSignIn} = useContext(AuthenticationContext)
+  const {state} = useContext(AuthenticationContext)
   return (
     <Stack.Navigator initialRouteName={ScreenName.splash}>
-      {isSignIn === false ? (
+      {state.isAuthenticated === false ? (
         <>
           <Stack.Screen name={ScreenName.splash} component={SplashScreen} options={{headerShown: false}}/>
           <Stack.Screen name={NavigatorName.authenticationStack} component={AuthenticationStackNavigator}

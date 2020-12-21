@@ -5,15 +5,19 @@ import {NavigatorName, ScreenName} from "../../../globals/constants";
 const AuthorListItem = (props) => {
 
   const onItemPressed = () => {
-    if (props.navigation !== undefined) {
-      props.navigation.navigate(NavigatorName.authorDetailStack,
-        {
-          screen: ScreenName.authorDetail,
-          params: {
-            data: props.item
-          }
-        })
-    }
+    // if (props.navigation !== undefined) {
+    //   props.navigation.navigate(NavigatorName.authorDetailStack,
+    //     {
+    //       screen: ScreenName.authorDetail,
+    //       params: {
+    //         data: props.item
+    //       }
+    //     })
+    // }
+    props.navigation.navigate(ScreenName.authorDetail,
+      {
+        data: props.item,
+      })
   }
 
   return (

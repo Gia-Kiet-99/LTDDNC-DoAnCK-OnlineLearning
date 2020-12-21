@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import buttonStyles from "../styles/button-styles";
 import textStyles from "../styles/text-styles";
@@ -17,11 +17,13 @@ const Login = (props) => {
   console.log("Login")
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const {authentication, signIn} = useContext(AuthenticationContext)
+  // const {authentication, signIn} = useContext(AuthenticationContext)
+  const authContext = useContext(AuthenticationContext)
+
   const {theme} = useContext(AppThemeContext)
 
   const onLogin = () => {
-    signIn(username, password)
+    authContext.login(username, password)
   }
   const onForgetPasswordPressed = () => {
     return props.navigation.navigate(ScreenName.forgetPassword)
@@ -61,7 +63,7 @@ const Login = (props) => {
       </View>
 
       <View style={{alignItems: 'center', marginVertical: 10}}>
-        {renderLoginStatus(authentication)}
+        {/*{renderLoginStatus(authentication)}*/}
       </View>
 
       <TouchableOpacity onPress={onLogin} activeOpacity={0.5}

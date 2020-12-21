@@ -1,13 +1,10 @@
-const checkLogin = (username, password) => {
-    if(username.toLowerCase() === "admin") {
-        if(password.toLowerCase() === "admin"){
-            return {status: 200, user: { token: "abc123xyz", username: username, fullName: "Đinh Gia Kiệt"}}
-        } else {
-            return {status: 404, errorString: "Username or password is not match"}
-        }
-    } else {
-        return {status: 404, errorString: "Username or password is not match"}
-    }
-}
+import axios from "axios";
+import instance from "../configuration/axios-config";
 
-export default checkLogin;
+export const requestLogin = async (username, password) => {
+  const response = await instance.post("/user/login", {
+    email: username,
+    password: password
+  })
+  return response;
+}

@@ -48,13 +48,16 @@ const CourseDetail = (props) => {
   }
   const onAuthorButtonPressed = () => {
     let authorItem = getAuthorById(item.authorId)
-    props.navigation?.navigate(NavigatorName.authorDetailStack,
-      {
-        screen: ScreenName.authorDetail,
-        params: {
-          data: authorItem
-        }
-      })
+    // props.navigation?.navigate(NavigatorName.authorDetailStack,
+    //   {
+    //     screen: ScreenName.authorDetail,
+    //     params: {
+    //       data: authorItem
+    //     }
+    //   })
+    props.navigation.navigate(ScreenName.authorDetail, {
+      data: authorItem,
+    })
   }
   const showListChannelModal = () => {
     setModalVisible(true)
@@ -87,18 +90,6 @@ const CourseDetail = (props) => {
   }
 
   /* internal component */
-  // const CourseInfo = () => {
-  //   return <View style={styles.courseInfo}>
-  //     <Text style={{fontSize: 24}}>{item.title}</Text>
-  //     <AuthorButton data={item} onPress={onAuthorButtonPressed}/>
-  //     <View style={{flexDirection: 'row', marginTop: 10}}>
-  //       <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>
-  //         {`${item.level} . ${item.released} . ${item.duration}`}
-  //       </Text>
-  //       <Rating/>
-  //     </View>
-  //   </View>
-  // }
   const CourseIntro = () => {
     return <View style={styles.courseIntro}>
       <CourseInfo data={item} onAuthorButtonPress={onAuthorButtonPressed}/>
@@ -123,8 +114,8 @@ const CourseDetail = (props) => {
   const ModalButtonItem = ({item}) => {
     return (
       <TouchableOpacity
-          style={styles.modalButton}
-          onPress={() => addCurrentCourseToChannel(item)}>
+        style={styles.modalButton}
+        onPress={() => addCurrentCourseToChannel(item)}>
         <Ionicons name="md-wifi" size={24} color="#34495e"/>
         <Text style={styles.modalText}>{item.name}</Text>
       </TouchableOpacity>
@@ -212,48 +203,48 @@ const styles = StyleSheet.create({
   content: {
     flex: 1
   },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // backgroundColor: 'beige',
-    // opacity: 0.5,
-  },
-  modalView: {
-    width: '95%',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    backgroundColor: 'white',
-    // opacity: 1,
-    borderRadius: 8,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  modalButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    // backgroundColor: 'pink',
-    padding: 10,
-  },
-  modalText: {
-    fontSize: 16,
-    marginLeft: 8
-  },
-  modalTitle: {
-    alignItems: 'center',
-    // backgroundColor: 'pink',
-    padding: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#444'
-  },
+  // centeredView: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   // backgroundColor: 'beige',
+  //   // opacity: 0.5,
+  // },
+  // modalView: {
+  //   width: '95%',
+  //   paddingHorizontal: 15,
+  //   paddingVertical: 10,
+  //   backgroundColor: 'white',
+  //   // opacity: 1,
+  //   borderRadius: 8,
+  //   overflow: 'hidden',
+  //   shadowColor: '#000',
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 2,
+  //   },
+  //   shadowOpacity: 0.25,
+  //   shadowRadius: 3.84,
+  //   elevation: 5,
+  // },
+  // modalButton: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  //   // backgroundColor: 'pink',
+  //   padding: 10,
+  // },
+  // modalText: {
+  //   fontSize: 16,
+  //   marginLeft: 8
+  // },
+  // modalTitle: {
+  //   alignItems: 'center',
+  //   // backgroundColor: 'pink',
+  //   padding: 10,
+  //   fontSize: 18,
+  //   fontWeight: 'bold',
+  //   color: '#444'
+  // },
   channelTextInput: {
     backgroundColor: '#ecf0f1',
     padding: 10,

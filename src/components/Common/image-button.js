@@ -1,29 +1,45 @@
 import React from 'react';
 import {StyleSheet, Text, ImageBackground, Pressable} from 'react-native';
 import {ImageButtonType, listName, ScreenName, NavigatorName} from "../../globals/constants";
+import {shouldUseNativeDriver} from "react-native-web/dist/vendor/react-native/Animated/NativeAnimatedHelper";
+import {useNavigation} from "@react-navigation/native";
 
 const ImageButton = (props) => {
+  const navigation = useNavigation()
+
   const onPressed = () => {
     switch (props.type) {
       case ImageButtonType.course:
-        return props.navigation.navigate(NavigatorName.listStack,
+        // return props.navigation.navigate(NavigatorName.listStack,
+        //   {
+        //     screen: ScreenName.studyList,
+        //     params: {
+        //       title: props.data.title,
+        //       kind: listName.course,
+        //       style: {
+        //         marginHorizontal: 15
+        //       },
+        //     }
+        //   })
+        return navigation.navigate(ScreenName.studyList,
           {
-            screen: ScreenName.studyList,
-            params: {
-              title: props.data.title,
-              kind: listName.course,
-              style: {
-                marginHorizontal: 15
-              },
-            }
+            title: props.data.title,
+            kind: listName.course,
+            style: {
+              marginHorizontal: 15
+            },
           })
       case ImageButtonType.general:
-        return props.navigation.navigate(NavigatorName.fieldDetailStack,
+        // return props.navigation.navigate(NavigatorName.fieldDetailStack,
+        //   {
+        //     screen: ScreenName.fieldDetail,
+        //     params: {
+        //       field: props.data.title
+        //     }
+        //   })
+        return navigation.navigate(ScreenName.fieldDetail,
           {
-            screen: ScreenName.fieldDetail,
-            params: {
-              field: props.data.title
-            }
+            field: props.data.title
           })
     }
   }

@@ -6,12 +6,16 @@ const AuthorSectionItem = (props) => {
   const item = props.item
 
   const onItemPressed = () => {
-    return props.navigation?.navigate(NavigatorName.authorDetailStack,
+    // return props.navigation?.navigate(NavigatorName.authorDetailStack,
+    //   {
+    //     screen: ScreenName.authorDetail,
+    //     params: {
+    //       data: item
+    //     }
+    //   })
+    props.navigation.navigate(ScreenName.authorDetail,
       {
-        screen: ScreenName.authorDetail,
-        params: {
-          data: item
-        }
+        data: item,
       })
   }
 

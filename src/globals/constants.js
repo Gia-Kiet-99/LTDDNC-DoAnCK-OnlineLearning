@@ -35,10 +35,12 @@ export const ScreenName = {
     courseDetail: "CourseDetail",
     channelDetail: "ChannelDetail",
     home: "Home",
+    download: "Download",
     browse: "Browse",
     setting: "Setting",
     profile: "Profile",
     pathDetail: "PathDetail",
+    skillDetail: "SkillDetail",
 }
 
 export const NavigatorName = {

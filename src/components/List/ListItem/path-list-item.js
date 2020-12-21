@@ -5,15 +5,19 @@ import {NavigatorName, ScreenName} from "../../../globals/constants";
 
 const PathListItem = (props) => {
   const onItemPressed = () => {
-    if (props.navigation !== undefined) {
-      props.navigation.navigate(NavigatorName.pathDetailStack,
-        {
-          screen: ScreenName.pathDetail,
-          params: {
-            item: props.item
-          }
-        })
-    }
+    // if (props.navigation !== undefined) {
+    //   props.navigation.navigate(NavigatorName.pathDetailStack,
+    //     {
+    //       screen: ScreenName.pathDetail,
+    //       params: {
+    //         item: props.item
+    //       }
+    //     })
+    // }
+    props.navigation.navigate(ScreenName.pathDetail,
+      {
+        item: props.item
+      })
   }
 
   return (

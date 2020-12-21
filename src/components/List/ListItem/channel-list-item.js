@@ -14,14 +14,17 @@ const ChannelListItem = (props) => {
     menu.show();
   }
   const onItemPressed = () => {
-    if (props.navigation !== undefined)
-      return props.navigation.navigate(NavigatorName.channelDetailStack,
-        {
-          screen: ScreenName.channelDetail,
-          params: {
-            channelId: item.id
-          }
-        })
+    // if (props.navigation !== undefined)
+    //   return props.navigation.navigate(NavigatorName.channelDetailStack,
+    //     {
+    //       screen: ScreenName.channelDetail,
+    //       params: {
+    //         channelId: item.id
+    //       }
+    //     })
+    props.navigation.navigate(ScreenName.channelDetail, {
+      channelId: item.id
+    })
   }
 
   return (

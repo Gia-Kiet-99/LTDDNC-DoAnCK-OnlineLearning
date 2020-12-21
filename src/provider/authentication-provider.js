@@ -1,51 +1,24 @@
-import React, {createContext, useEffect, useState} from 'react';
-import checkLogin from "../core/services/authentication-service";
+import React, {createContext, useReducer} from 'react';
+import {reducer} from "../reducer/authentication-reducer";
+import {login} from "../action/authentication-action";
 
 const AuthenticationContext = createContext();
 
-const defaultAuthentication = {
-    status: "",
-    user: {
-        token: "",
-        username: "",
-        fullName: ""
-    }
+const initialState = {
+    isAuthenticated: false,
+    isAuthenticating: false,
+    userInfo: null,
+    token: null,
+    errorMessage: null
 }
 
 const AuthenticationProvider = (props) => {
-    const [authentication, setAuthentication] = useState(defaultAuthentication)
-    const [isSignIn, setIsSignIn] = useState(false)
-
-    useEffect(() => {
-        console.log("useEffect: ", authentication)
-        if (authentication.status === 200) {
-            // toggleSignIn()
-            setIsSignIn(true)
-        } else {
-            setIsSignIn(false)
-        }
-    }, [authentication])
-
-    const toggleSignIn = () => {
-        if (isSignIn === false)
-            setIsSignIn(true)
-        else
-            setIsSignIn(false)
-    }
-
-    const signIn = (username, password) => {
-        setAuthentication(checkLogin(username, password))
-    }
-
-    const signOut = () => {
-        setAuthentication(defaultAuthentication)
-    }
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     return (
-        <AuthenticationContext.Provider
-            value={{authentication, setAuthentication, isSignIn, setIsSignIn, signIn, signOut}}>
-            {props.children}
-        </AuthenticationContext.Provider>
+      <AuthenticationContext.Provider value={{state, login: login(dispatch)}}>
+          {props.children}
+      </AuthenticationContext.Provider>
     );
 };
 

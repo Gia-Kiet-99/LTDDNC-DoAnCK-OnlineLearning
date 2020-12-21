@@ -1,24 +1,26 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {StyleSheet, Image, View, Text, TouchableOpacity} from 'react-native';
-import Menu, {MenuItem} from "react-native-material-menu";
+import React from 'react';
+import {StyleSheet, Image, View, TouchableOpacity} from 'react-native';
 import CourseInfo from "../../Common/course-info";
-import {CourseContext} from "../../../provider/course-provider";
-import {NavigatorName, ScreenName} from "../../../globals/constants";
+import {ScreenName} from "../../../globals/constants";
 import MenuButton from "./MenuButton/menu-button";
 
 const CourseListItem = (props) => {
   const item = props.item
 
   const onPressListItem = () => {
-    if (props.navigation !== undefined) {
-      props.navigation.navigate(NavigatorName.courseDetailStack,
-        {
-          screen: ScreenName.courseDetail,
-          params: {
-            courseId: item.id
-          }
-        })
-    }
+    // if (props.navigation !== undefined) {
+    //   props.navigation.navigate(NavigatorName.courseDetailStack,
+    //     {
+    //       screen: ScreenName.courseDetail,
+    //       params: {
+    //         courseId: item.id
+    //       }
+    //     })
+    // }
+
+    props.navigation.navigate(ScreenName.courseDetail, {
+      courseId: item.id
+    })
   }
 
   return (
@@ -68,9 +70,6 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
-  // menuWrapper: {
-  //   justifyContent: 'center',
-  // }
 })
 
 export default CourseListItem;
