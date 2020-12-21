@@ -4,19 +4,24 @@ import {login} from "../action/authentication-action";
 
 const AuthenticationContext = createContext();
 
-const initialState = {
+export const initialState = {
     isAuthenticated: false,
     isAuthenticating: false,
-    userInfo: null,
-    token: null,
-    errorMessage: null
+    userInfo: "",
+    token: "",
+    errorMessage: ""
 }
 
 const AuthenticationProvider = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const logOut = () => {
+        dispatch({type: "LOG_OUT"})
+    }
+
     return (
-      <AuthenticationContext.Provider value={{state, login: login(dispatch)}}>
+      <AuthenticationContext.Provider
+        value={{state, login: login(dispatch), logOut}}>
           {props.children}
       </AuthenticationContext.Provider>
     );
