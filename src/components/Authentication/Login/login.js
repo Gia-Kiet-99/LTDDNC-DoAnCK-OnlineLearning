@@ -15,14 +15,15 @@ import {AppThemeContext} from "../../../provider/theme-provider";
 
 const Login = (props) => {
   console.log("Login")
+  const authContext = useContext(AuthenticationContext)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const {authentication, signIn} = useContext(AuthenticationContext)
-  const authContext = useContext(AuthenticationContext)
+  const [isOnLogin, setOnLogin] = useState(false)
 
   const {theme} = useContext(AppThemeContext)
 
   const onLogin = () => {
+    setOnLogin(true)
     authContext.login(username, password)
   }
   const onForgetPasswordPressed = () => {
@@ -40,7 +41,7 @@ const Login = (props) => {
 
   return (
     <View style={[styles.container, theme]}>
-      {authContext.state.isAuthenticating ?
+      {isOnLogin ?
         (
           <ActivityIndicator size="large" color="#2980b9"/>
         ) :

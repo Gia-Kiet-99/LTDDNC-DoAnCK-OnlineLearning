@@ -13,6 +13,8 @@ const Home = (props) => {
   const {getPublicChannels, getPrivateChannels} = useContext(ChannelContext)
   const {courseList} = useContext(CourseContext)
 
+  // const authContext = useContext(AuthenticationContext)
+
   const renderContinueLearningSection = (favoriteCourses) => {
     if (favoriteCourses && favoriteCourses.length > 0) {
       return <Section navigation={props.navigation} kind={listName.favoriteCourse}
@@ -21,19 +23,31 @@ const Home = (props) => {
     }
   }
   const renderChannelsSection = (channels, title) => {
-    if(channels && channels.length > 0) {
+    if (channels && channels.length > 0) {
       return <Section navigation={props.navigation} kind={listName.channel}
                       title={title} list={channels}
                       showSeeAllButton={true}/>
     }
   }
   const renderCourseListSection = (list) => {
-    if(list && list.length > 0) {
+    if (list && list.length > 0) {
       return <Section navigation={props.navigation} kind={listName.course}
                       title={'Course list'} list={list}
                       showSeeAllButton={true}/>
     }
   }
+
+  // const onPressed = () => {
+  //   console.log("token: ", authContext.state.token)
+  //
+  //   apiGetFavoriteCourses(authContext.state.token)
+  //     .then((response) => {
+  //       console.log(response.data)
+  //     })
+  //     .catch((error) => {
+  //       throw new Error(error)
+  //     })
+  // }
 
   return (
     <View style={styles.container}>
@@ -57,7 +71,8 @@ const Home = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'beige'
+    // backgroundColor: 'beige',
+    // justifyContent: 'center'
   },
   bar: {
     padding: 15,
