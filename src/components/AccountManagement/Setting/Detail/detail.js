@@ -3,9 +3,9 @@ import {AuthenticationContext} from "../../../../provider/authentication-provide
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 const Detail = (props) => {
-  const {logOut} = useContext(AuthenticationContext)
+  const {logout} = useContext(AuthenticationContext)
   const onOkClicked = () => {
-    logOut();
+    logout();
   }
 
   const onSignOut = () => (

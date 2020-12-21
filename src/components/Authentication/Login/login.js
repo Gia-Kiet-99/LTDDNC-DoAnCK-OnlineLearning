@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
 import buttonStyles from "../styles/button-styles";
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
@@ -40,50 +40,58 @@ const Login = (props) => {
 
   return (
     <View style={[styles.container, theme]}>
-      <View style={styles.imageWrapper}>
-        <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
-      </View>
-      <View style={{marginTop: 10}}>
-        <Text style={textStyles.labelText}>Username (or email)</Text>
-        <TextInput
-          selectionColor={'#888'}
-          style={[textInputStyles.textInput, styles.username]}
-          onChangeText={(text) => setUsername(text)}
-          defaultValue={username}/>
-      </View>
+      {authContext.state.isAuthenticating ?
+        (
+          <ActivityIndicator size="large" color="#2980b9"/>
+        ) :
+        (
+          <View>
+            <View style={styles.imageWrapper}>
+              <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
+            </View>
+            <View style={{marginTop: 10}}>
+              <Text style={textStyles.labelText}>Username (or email)</Text>
+              <TextInput
+                selectionColor={'#888'}
+                style={[textInputStyles.textInput, styles.username]}
+                onChangeText={(text) => setUsername(text)}
+                defaultValue={username}/>
+            </View>
 
-      <View>
-        <Text style={[textStyles.labelText, {marginTop: 10}]}>Password</Text>
-        <TextInput selectionColor={'#888'} style={textInputStyles.textInput}
-                   secure={true}
-                   secureTextEntry={true}
-                   onChangeText={(text) => setPassword(text)}
-                   defaultValue={password}
-        />
-      </View>
+            <View>
+              <Text style={[textStyles.labelText, {marginTop: 10}]}>Password</Text>
+              <TextInput selectionColor={'#888'} style={textInputStyles.textInput}
+                         secure={true}
+                         secureTextEntry={true}
+                         onChangeText={(text) => setPassword(text)}
+                         defaultValue={password}
+              />
+            </View>
 
-      <View style={{alignItems: 'center', marginVertical: 10}}>
-        {/*{renderLoginStatus(authentication)}*/}
-      </View>
+            <View style={{alignItems: 'center', marginVertical: 10}}>
+              {/*{renderLoginStatus(authentication)}*/}
+            </View>
 
-      <TouchableOpacity onPress={onLogin} activeOpacity={0.5}
-                        style={[buttonStyles.button, buttonStyles.loginButton]}>
+            <TouchableOpacity onPress={onLogin} activeOpacity={0.5}
+                              style={[buttonStyles.button, buttonStyles.loginButton]}>
 
-        <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
-      </TouchableOpacity>
+              <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity onPress={onForgetPasswordPressed} style={styles.forgotButton}>
-        <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
-      </TouchableOpacity>
+            <TouchableOpacity onPress={onForgetPasswordPressed} style={styles.forgotButton}>
+              <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
-        <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
-      </TouchableOpacity>
+            <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
+              <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
+            </TouchableOpacity>
 
-      <TouchableOpacity onPress={onSubscribePressed}
-                        style={[buttonStyles.button, buttonStyles.transparentButton]}>
-        <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
-      </TouchableOpacity>
+            <TouchableOpacity onPress={onSubscribePressed}
+                              style={[buttonStyles.button, buttonStyles.transparentButton]}>
+              <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
+            </TouchableOpacity>
+          </View>
+        )}
     </View>
   );
 };
