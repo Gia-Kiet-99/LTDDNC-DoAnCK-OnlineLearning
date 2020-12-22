@@ -1,32 +1,36 @@
-import React, {createContext, useReducer, useState} from 'react';
+import React, {createContext, useEffect, useReducer, useState} from 'react';
 import {reducer} from "../reducer/authentication-reducer";
-import {forgotPassword, login, logOut} from "../action/authentication-action";
-import {requestSendEmail} from "../core/services/authentication-service";
+import {getUserInfo, login, logOut} from "../action/authentication-action";
+import {apiSendEmail} from "../core/services/authentication-service";
+import {removeAuthToken, saveAuthToken} from "../core/services/async-storage-service";
 
 const AuthenticationContext = createContext();
 
 export const initialState = {
   isAuthenticated: false,
-  isAuthenticating: false,
   userInfo: "",
   token: "",
   errorMessage: ""
 }
 
-// export const init = (initialState) => {
-//     return {...initialState}
-// }
+export const init = () => {
+    return {...initialState}
+}
 
 const AuthenticationProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, init);
   const [forgotPasswordState, setForgotPasswordState] = useState(false);
 
-  // const logOut = () => {
-  //     dispatch({type: "LOG_OUT"})
-  // }
+  // useEffect(() => {
+  //   if(state.isAuthenticated){
+  //     saveAuthToken(state.token).then()
+  //   } else {
+  //     removeAuthToken().then();
+  //   }
+  // }, [state.isAuthenticated])
 
   const forgotPassword = (email) => {
-    requestSendEmail(email).then((response) => {
+    apiSendEmail(email).then((response) => {
       if(response.status === 200){
         setForgotPasswordState(true)
       }
@@ -41,6 +45,7 @@ const AuthenticationProvider = (props) => {
         state,
         login: login(dispatch),
         logout: logOut(dispatch),
+        getUserInfo: getUserInfo(dispatch),
         forgotPassword
         /*forgotPassword: forgotPassword(dispatch)*/
       }}>

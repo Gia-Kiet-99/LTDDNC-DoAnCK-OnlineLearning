@@ -22,6 +22,8 @@ const Login = (props) => {
 
   const {theme} = useContext(AppThemeContext)
 
+  // console.log("InitialState", authContext.state)
+
   const onLogin = () => {
     setOnLogin(true)
     authContext.login(username, password)
@@ -32,7 +34,6 @@ const Login = (props) => {
   const onSubscribePressed = () => {
     return props.navigation.navigate(ScreenName.register)
   }
-
   const renderLoginStatus = (authentication) => {
     if (authentication && authentication.status === 404) {
       return <Text style={{fontWeight: 'bold', color: '#34495e'}}>{authentication.errorString}</Text>

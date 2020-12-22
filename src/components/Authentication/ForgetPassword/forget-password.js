@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, TouchableOpacity, View, TextInput, Image, Button, ActivityIndicator} from 'react-native';
 import textInputStyles from "../styles/text-input-styles";
-import {requestSendEmail} from "../../../core/services/authentication-service";
+import {apiSendEmail} from "../../../core/services/authentication-service";
 import {ScreenName} from "../../../globals/constants";
 
 const ForgetPassword = (props) => {
@@ -11,7 +11,7 @@ const ForgetPassword = (props) => {
   const sendEmail = () => {
     if (email !== "") {
       setStatus("EMAIL_SENDING")
-      requestSendEmail(email).then((response) => {
+      apiSendEmail(email).then((response) => {
         if (response.status === 200) {
           setStatus("EMAIL_SENT")
         } else {
