@@ -1,6 +1,7 @@
 import {apiGetUserInfo, apiLogin} from "../core/services/authentication-service";
 import {initialState} from "../provider/authentication-provider";
 import {removeAuthToken, saveAuthToken} from "../core/services/async-storage-service";
+import {setTokenToHeader} from "../core/configuration/axios-config";
 
 export const LOGIN_SUCCEEDED = "LOGIN_SUCCEEDED"
 export const LOGIN_FAILED = "LOGIN_FAILED"
@@ -15,7 +16,9 @@ export const login = (dispatch) => async (username, password) => {
     const response = await apiLogin(username, password);
     // console.log("AuthenticationLogin_response: ", response.data)
     if (response.status === 200) {
-      await saveAuthToken(response.data.token)
+      const token = response.data.token
+      // setTokenToHeader(token)
+      await saveAuthToken(token)
       dispatch({type: LOGIN_SUCCEEDED, data: response.data})
     } else {
       dispatch({type: LOGIN_FAILED})

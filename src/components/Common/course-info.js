@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import Moment from 'moment'
 import Rating from "./rating";
 
+const convertHour = (hours) => {
+  let hour = 0
+  while ((hours -= 1) >= 0) {
+    hour++
+  }
+  let minute = Math.floor((hours + 1) * 60);
+  return (hour > 0) ? `${hour}h${minute}m` : `${minute}m`
+}
+
 const CourseInfo = (props) => {
+
   return <View style={[styles.description, props.containerStyle]}>
     <Text style={props.titleStyle}>
       {props.title}
@@ -11,10 +22,10 @@ const CourseInfo = (props) => {
       {props.author}
     </Text>
     <Text style={styles.darkText}>
-      {`${props.level} . ${props.released} . ${props.duration}`}
+      {`${props.level} . ${Moment(props.released).format("MMM yyyy")} . ${convertHour(props.duration)}`}
     </Text>
     <View>
-      <Rating/>
+      <Rating value={props.rate}/>
     </View>
   </View>
 };

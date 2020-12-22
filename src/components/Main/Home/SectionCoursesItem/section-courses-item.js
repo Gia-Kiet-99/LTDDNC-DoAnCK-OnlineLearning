@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {TouchableOpacity, Text, Image, View, StyleSheet} from 'react-native';
+import {TouchableOpacity, Image, View, StyleSheet, ActivityIndicator} from 'react-native';
 import CourseInfo from "../../../Common/course-info";
 import {ScreenName} from "../../../../globals/constants";
+import {apiGetCourseInstructor} from "../../../../core/services/course-service";
 
 const Separator = () => {
   return (
@@ -11,47 +12,52 @@ const Separator = () => {
 
 const SectionCoursesItem = (props) => {
   // const [shouldNavigate, setShouldNavigate] = useState(false)
+  const [isLoading, setLoading] = useState(true)
+  const [courseAuthor, setCourseAuthor] = useState("")
+
+  useEffect(() => {
+    apiGetCourseInstructor(props.item.instructorId)
+      .then((response) => {
+        if(response.status === 200){
+          setCourseAuthor(response.data.payload.name)
+        }
+      })
+      .catch(error => {
+        throw new Error(error)
+      })
+      .finally(()=>{
+        setLoading(false)
+      })
+  })
 
   const ItemPressed = () => {
-    // return props.navigation.navigate("CourseDetailStackNavigator",
-    //   {
-    //     screen: "CourseDetail",
-    //     params: {
-    //       courseId: props.item.id
-    //     }
-    //   })
-    // setShouldNavigate(true)
-    props.navigation.navigate(ScreenName.courseDetail, {
-      courseId: props.item.id
-    })
+    // props.navigation.navigate(ScreenName.courseDetail, {
+    //   courseId: props.item.id
+    // })
   }
 
-  // useEffect(() => {
-  //   console.log("shouldNavigate")
-  //   if(shouldNavigate) {
-  //     props.navigation.navigate(ScreenName.courseDetail, {
-  //       courseId: props.item.id
-  //     })
-  //   }
-  // }, [shouldNavigate])
-
-  return (
-    <TouchableOpacity
-      style={styles.container}
-      onPress={ItemPressed}>
-      <View style={styles.content}>
-        <Image style={styles.image} source={props.item.image}/>
-        <Separator/>
-        <CourseInfo
-          containerStyle={courseInfoStyle.container}
-          title={props.item.title}
-          author={props.item.authorName}
-          level={props.item.level}
-          released={props.item.released}
-          duration={props.item.duration}/>
-      </View>
-    </TouchableOpacity>
-  );
+  return <View>
+    {/*{isLoading? (*/}
+    {/*  <ActivityIndicator size='large' color="#2980b9"/>*/}
+    {/*): (*/}
+      <TouchableOpacity
+        style={styles.container}
+        onPress={ItemPressed}>
+        <View style={styles.content}>
+          <Image style={styles.image} source={{uri: props.item.imageUrl}}/>
+          <Separator/>
+          <CourseInfo
+            containerStyle={courseInfoStyle.container}
+            title={props.item.title}
+            author={courseAuthor}
+            level={props.item.level}
+            released={props.item.createdAt}
+            duration={props.item.totalHours}
+            rate={props.item.ratedNumber}/>
+        </View>
+      </TouchableOpacity>
+    {/*)}*/}
+  </View>
 };
 
 const courseInfoStyle = StyleSheet.create({

@@ -4,45 +4,8 @@ import {NavigatorName, ScreenName} from "../../../globals/constants";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {getAuthTokenFromStorage} from "../../../core/services/async-storage-service";
 
-// class SplashScreen extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {loading: 0}
-//     }
-
-// componentDidMount() {
-//     // console.log("didMount")
-//     this.timer = setInterval(() => {
-//         let newLoadingValue = this.state.loading + 1
-//         this.setState({loading: newLoadingValue})
-//     }, 20);
-// }
-//
-// componentDidUpdate(prevProps, prevState, snapshot) {
-//     // console.log("didUpdate")
-//     if(this.state.loading >= 100) {
-//         clearInterval(this.timer)
-//         // this.props.navigation.navigate(NavigatorName.authenticationStack)
-//         this.props.navigation.reset({
-//             index: 0,
-//             routes: [{ name: NavigatorName.authenticationStack }],
-//         });
-//     }
-// }
-//
-// componentWillUnmount() {
-//     clearInterval(this.timer);
-// }
 const SplashScreen = (props) => {
   const authContext = useContext(AuthenticationContext)
-  // const [isAuthenticated, setAuthenticated] = useState(false)
-  //
-  // const checkAvailableToken = async () => {
-  //   const savedToken = await getAuthTokenFromStorage()
-  //   if (savedToken != null) {
-  //     setAuthenticated(true)
-  //   }
-  // }
 
   useEffect(() => {
     getAuthTokenFromStorage().then(response => {
