@@ -21,22 +21,3 @@ export const apiGetUserInfo = async (token) => {
     },
   })
 }
-
-export const apiGetFavoriteCourses = (token) => {
-  // axios.create({
-  //   method: 'get',
-  //   url: 'user/get-favorite-courses',
-  //   headers: {
-  //     "Authorization": token
-  //   }
-  // })
-  return instance.get(
-    "/user/get-favorite-courses",
-    {
-      headers: {
-        "Authorization": `Bearer ${token}`
-      },
-    },
-  )
-
-}

@@ -13,12 +13,12 @@ const Section = (props) => {
                 navigation={props.navigation}
                 kind={props.kind}
                 title={props.title}
-                list={props.list}
+                // list={props.list}
                 showButton={props.showSeeAllButton}/>
             <SectionList
                 navigation={props.navigation}
                 kind={props.kind}
-                list={props.list}/>
+                /*list={props.list}*//>
         </View>
     );
 };

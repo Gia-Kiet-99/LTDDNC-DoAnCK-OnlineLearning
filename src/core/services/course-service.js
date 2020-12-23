@@ -17,3 +17,20 @@ export const apiGetCourseInstructor = async (instructorId) => {
   return await instance.get(url)
 }
 
+export const apiGetLearningCourse = async () => {
+  return await instance.get("/user/get-process-courses")
+}
+
+export const apiGetFavoriteCourses = () => {
+  return instance.get(
+    "/user/get-favorite-courses",
+  )
+}
+
+export const apiGetCourseInfo = async (courseId) => {
+  return await instance.get("/course/get-course-info",{
+    params: {
+      id: courseId
+    }
+  })
+}

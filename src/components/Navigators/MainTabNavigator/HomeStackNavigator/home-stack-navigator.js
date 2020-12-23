@@ -15,16 +15,6 @@ const Stack = createStackNavigator();
 const HomeStackNavigator = (props) => {
   return (
     <Stack.Navigator initalRouteName={Home}>
-
-      {/*<Stack.Screen*/}
-      {/*  name={NavigatorName.courseDetailStack}*/}
-      {/*  component={CourseDetailStackNavigator}*/}
-      {/*  options={{headerShown: false}}/>*/}
-
-      {/*<Stack.Screen*/}
-      {/*  name={NavigatorName.channelDetailStack}*/}
-      {/*  component={ChannelDetailStackNavigator}*/}
-      {/*  options={{headerShown: false}}/>*/}
       <Stack.Screen name={ScreenName.home} component={Home} options={{headerShown: false}}/>
       <Stack.Screen name={ScreenName.channelDetail} component={ChannelDetail} options={{headerShown: true}}/>
       <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
@@ -33,7 +23,6 @@ const HomeStackNavigator = (props) => {
       <Stack.Screen name={ScreenName.setting} component={Setting}/>
       <Stack.Screen name={ScreenName.profile} component={Profile}/>
     </Stack.Navigator>
-  );
-};
+  );};
 
 export default HomeStackNavigator;

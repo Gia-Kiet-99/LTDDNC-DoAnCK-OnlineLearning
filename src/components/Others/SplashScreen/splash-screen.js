@@ -11,7 +11,7 @@ const SplashScreen = (props) => {
     getAuthTokenFromStorage().then(token => {
       if (token != null) {
         authContext.getUserInfo(token).then(() => {
-          console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
+          // console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
           if (authContext.loginBySavedToken === false) {
             props.navigation.reset({
               index: 0,

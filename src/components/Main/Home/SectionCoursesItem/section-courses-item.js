@@ -31,9 +31,9 @@ const SectionCoursesItem = (props) => {
   })
 
   const ItemPressed = () => {
-    // props.navigation.navigate(ScreenName.courseDetail, {
-    //   courseId: props.item.id
-    // })
+    props.navigation.navigate(ScreenName.courseDetail, {
+      courseId: props.item.id
+    })
   }
 
   return <View>

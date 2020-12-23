@@ -34,7 +34,7 @@ export const logOut = (dispatch) => async () => {
 }
 
 export const getUserInfo = (dispatch, setLoginBySavedToken) => async (token) => {
-  console.log("getUserInfo")
+  // console.log("getUserInfo")
   try {
     const response = await apiGetUserInfo(token)
     // console.log("getUserInfo response",response)

@@ -12,14 +12,14 @@ export const reducer = (prevState, action) => {
   // console.log("AuthenticationReducer", action)
   switch (action.type) {
     case LOGIN_SUCCEEDED:
-      // setTokenToHeader(action.data.token)
+      setTokenToHeader(action.data.token)
       return {...prevState, isAuthenticated: true, token: action.data.token, userInfo: action.data.userInfo}
     case LOGIN_FAILED:
       return {...prevState, isAuthenticated: false}
     case LOG_OUT:
       return {...initialState}
     case GET_USER_INFO_SUCCEEDED:
-      // setTokenToHeader(action.data.token)
+      setTokenToHeader(action.data.token)
       return {...prevState, isAuthenticated: true, token: action.data.token, userInfo: action.data.payload}
     case GET_USER_INFO_FAILED:
       // console.log("prevState: ", prevState)

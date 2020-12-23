@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import {
   Image,
   StyleSheet,
@@ -6,7 +6,9 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
-  Modal, TextInput,
+  Modal,
+  TextInput,
+  ActivityIndicator,
 } from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
@@ -22,176 +24,206 @@ import {NavigatorName, ScreenName} from "../../../globals/constants";
 import AuthorButton from "./AuthorButton/author-button";
 import {AuthorContext} from "../../../provider/author-provider";
 import CourseInfo from "./CourseInfo/course-info";
+import {apiGetCourseInfo} from "../../../core/services/course-service";
+import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 
 const CourseDetail = (props) => {
   /* use context */
-  const {getCourseFromId} = useContext(CourseContext)
-  const {addChannel, addCourseToChannel, getPrivateChannelNames} = useContext(ChannelContext)
-  const {authentication} = useContext(AuthenticationContext)
-  const {getAuthorById} = useContext(AuthorContext)
+  // const {getCourseFromId} = useContext(CourseContext)
+  // const {addChannel, addCourseToChannel, getPrivateChannelNames} = useContext(ChannelContext)
+  // const {authentication} = useContext(AuthenticationContext)
+  // const {getAuthorById} = useContext(AuthorContext)
 
   /* get course id */
   const courseId = props.route.params.courseId
   /* get course data from id */
-  const item = getCourseFromId(courseId)
-  const channelNames = getPrivateChannelNames()
+  // const item = getCourseFromId(courseId)
+  // const channelNames = getPrivateChannelNames()
 
   /* use state */
-  const [scrollView, setScrollView] = useState(null)
-  const [modalVisible, setModalVisible] = useState(false)
-  const [creationModalVisible, setCreationModalVisible] = useState(false)
-  const [newChannelName, setNewChannelName] = useState("")
+  // const [isLoading, setLoading] = useState(true)
+  const [courseInfo, setCourseInfo] = useState(null)
+  const [loadStatus, setLoadStatus] = useState(LOADING)
+  // const [scrollView, setScrollView] = useState(null)
+  // const [modalVisible, setModalVisible] = useState(false)
+  // const [creationModalVisible, setCreationModalVisible] = useState(false)
+  // const [newChannelName, setNewChannelName] = useState("")
+
+  /* use effect */
+  useEffect(() => {
+    apiGetCourseInfo(courseId).then((response) => {
+      if (response.status === 200) {
+        setCourseInfo(response.data.payload)
+        setLoadStatus(LOAD_SUCCEEDED)
+      } else {
+        setLoadStatus(LOAD_FAILED)
+      }
+    }).catch((e) => {
+      setLoadStatus(LOAD_FAILED)
+      throw new Error(e)
+    })
+  }, [])
 
   /* function */
-  const onLessonItemPressed = () => {
-    scrollView.scrollTo({x: 0, y: 0, animated: true})
-  }
-  const onAuthorButtonPressed = () => {
-    let authorItem = getAuthorById(item.authorId)
-    // props.navigation?.navigate(NavigatorName.authorDetailStack,
-    //   {
-    //     screen: ScreenName.authorDetail,
-    //     params: {
-    //       data: authorItem
-    //     }
-    //   })
-    props.navigation.navigate(ScreenName.authorDetail, {
-      data: authorItem,
-    })
-  }
-  const showListChannelModal = () => {
-    setModalVisible(true)
-  }
-  const hideListChannelModal = () => {
-    setModalVisible(false)
-  }
-  const showCreationModal = () => {
-    setCreationModalVisible(true);
-  }
-  const hideCreationModal = () => {
-    setCreationModalVisible(false)
-  }
-  const renderCurrentChannel = (channelNames) => {
-    return channelNames.map(item => <ModalButtonItem key={item.id} item={item}/>)
-  }
-  const onCreateChannelPressed = () => {
-    hideListChannelModal()
-    showCreationModal()
-  }
-  const createNewChannel = () => {
-    hideCreationModal();
-    if (newChannelName !== "") {
-      addChannel(newChannelName, authentication.user.username, item)
-    }
-  }
-  const addCurrentCourseToChannel = (selectedChannel) => {
-    hideListChannelModal()
-    addCourseToChannel(selectedChannel.id, item)
-  }
+  // const onLessonItemPressed = () => {
+  //   scrollView.scrollTo({x: 0, y: 0, animated: true})
+  // }
+  // const onAuthorButtonPressed = () => {
+  //   let authorItem = getAuthorById(item.authorId)
+  //   // props.navigation?.navigate(NavigatorName.authorDetailStack,
+  //   //   {
+  //   //     screen: ScreenName.authorDetail,
+  //   //     params: {
+  //   //       data: authorItem
+  //   //     }
+  //   //   })
+  //   props.navigation.navigate(ScreenName.authorDetail, {
+  //     data: authorItem,
+  //   })
+  // }
+  // const showListChannelModal = () => {
+  //   setModalVisible(true)
+  // }
+  // const hideListChannelModal = () => {
+  //   setModalVisible(false)
+  // }
+  // const showCreationModal = () => {
+  //   setCreationModalVisible(true);
+  // }
+  // const hideCreationModal = () => {
+  //   setCreationModalVisible(false)
+  // }
+  // const renderCurrentChannel = (channelNames) => {
+  //   return channelNames.map(item => <ModalButtonItem key={item.id} item={item}/>)
+  // }
+  // const onCreateChannelPressed = () => {
+  //   hideListChannelModal()
+  //   showCreationModal()
+  // }
+  // const createNewChannel = () => {
+  //   hideCreationModal();
+  //   if (newChannelName !== "") {
+  //     addChannel(newChannelName, authentication.user.username, item)
+  //   }
+  // }
+  // const addCurrentCourseToChannel = (selectedChannel) => {
+  //   hideListChannelModal()
+  //   addCourseToChannel(selectedChannel.id, item)
+  // }
 
   /* internal component */
-  const CourseIntro = () => {
-    return <View style={styles.courseIntro}>
-      <CourseInfo data={item} onAuthorButtonPress={onAuthorButtonPressed}/>
-      <CourseButton item={item} showListChannelModal={showListChannelModal}/>
-      <Description/>
-
-      <TouchableOpacity style={styles.largeButton}>
-        <Image style={{height: 25, width: 25, marginRight: 8}}
-               source={require('../../../../assets/check.png')}/>
-        <Text>Take a learning check</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.largeButton}
-        onPress={() => props.navigation.push("CourseDetail", {item: item})}>
-        <Image style={{height: 25, width: 25, marginRight: 8}}
-               source={require('../../../../assets/folder.png')}/>
-        <Text>View related paths & courses</Text>
-      </TouchableOpacity>
-
-    </View>
-  }
-  const ModalButtonItem = ({item}) => {
-    return (
-      <TouchableOpacity
-        style={styles.modalButton}
-        onPress={() => addCurrentCourseToChannel(item)}>
-        <Ionicons name="md-wifi" size={24} color="#34495e"/>
-        <Text style={styles.modalText}>{item.name}</Text>
-      </TouchableOpacity>
-    )
-  }
+  // const CourseIntro = () => {
+  //   return <View style={styles.courseIntro}>
+  //     <CourseInfo data={item} onAuthorButtonPress={onAuthorButtonPressed}/>
+  //     <CourseButton item={item} showListChannelModal={showListChannelModal}/>
+  //     <Description/>
+  //
+  //     <TouchableOpacity style={styles.largeButton}>
+  //       <Image style={{height: 25, width: 25, marginRight: 8}}
+  //              source={require('../../../../assets/check.png')}/>
+  //       <Text>Take a learning check</Text>
+  //     </TouchableOpacity>
+  //     <TouchableOpacity
+  //       style={styles.largeButton}
+  //       onPress={() => props.navigation.push("CourseDetail", {item: item})}>
+  //       <Image style={{height: 25, width: 25, marginRight: 8}}
+  //              source={require('../../../../assets/folder.png')}/>
+  //       <Text>View related paths & courses</Text>
+  //     </TouchableOpacity>
+  //
+  //   </View>
+  // }
+  // const ModalButtonItem = ({item}) => {
+  //   return (
+  //     <TouchableOpacity
+  //       style={styles.modalButton}
+  //       onPress={() => addCurrentCourseToChannel(item)}>
+  //       <Ionicons name="md-wifi" size={24} color="#34495e"/>
+  //       <Text style={styles.modalText}>{item.name}</Text>
+  //     </TouchableOpacity>
+  //   )
+  // }
 
   console.log("Course Detail")
-  return (
-    <CourseDetailContext.Provider value={{item, onLessonItemPressed}}>
-      {/*<StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>*/}
-      <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={hideListChannelModal}>
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalTitle}>
-                Add to channel
-              </Text>
-              <TouchableOpacity
-                style={styles.modalButton}
-                onPress={onCreateChannelPressed}>
-                <Feather name="plus" size={24} color="#34495e"/>
-                <Text style={styles.modalText}>Create new channel</Text>
-              </TouchableOpacity>
-              {renderCurrentChannel(channelNames)}
-            </View>
-          </View>
-        </Modal>
+  return <View style={styles.container}>
+    {/*// <CourseDetailContext.Provider value={{item, onLessonItemPressed}}>*/}
+    {/*<StatusBar translucent={true} backgroundColor="transparent" barStyle="dark-content"/>*/}
 
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={creationModalVisible}
-          onRequestClose={hideCreationModal}>
-          <View style={styles.centeredView}>
-            <View style={{...styles.modalView, paddingVertical: 0}}>
-              <Text style={{...styles.modalTitle, paddingHorizontal: 0}}>Create new channel</Text>
-              <TextInput
-                placeholder="Enter new channel"
-                autoFocus={true}
-                selectionColor={'#888'}
-                style={styles.channelTextInput}
-                onChangeText={text => setNewChannelName(text)}
-                defaultValue={newChannelName}/>
-              <View style={styles.cancelOkButtonContainer}>
-                <TouchableOpacity
-                  style={styles.cancelOkButton}
-                  onPress={hideCreationModal}>
-                  <Text style={styles.cancelOkText}>Cancel</Text>
-                </TouchableOpacity>
-                <View style={{borderLeftColor: "lightgray", borderLeftWidth: 0.5, height: "100%"}}/>
-                <TouchableOpacity
-                  style={styles.cancelOkButton}
-                  onPress={createNewChannel}>
-                  <Text style={styles.cancelOkText}>OK</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
-        </Modal>
+    {/*<Modal*/}
+    {/*  animationType="slide"*/}
+    {/*  transparent={true}*/}
+    {/*  visible={modalVisible}*/}
+    {/*  onRequestClose={hideListChannelModal}>*/}
+    {/*  <View style={styles.centeredView}>*/}
+    {/*    <View style={styles.modalView}>*/}
+    {/*      <Text style={styles.modalTitle}>*/}
+    {/*        Add to channel*/}
+    {/*      </Text>*/}
+    {/*      <TouchableOpacity*/}
+    {/*        style={styles.modalButton}*/}
+    {/*        onPress={onCreateChannelPressed}>*/}
+    {/*        <Feather name="plus" size={24} color="#34495e"/>*/}
+    {/*        <Text style={styles.modalText}>Create new channel</Text>*/}
+    {/*      </TouchableOpacity>*/}
+    {/*      {renderCurrentChannel(channelNames)}*/}
+    {/*    </View>*/}
+    {/*  </View>*/}
+    {/*</Modal>*/}
 
-        <View style={styles.content}>
-          <VideoPlayer navigation={props.navigation}/>
-          <ScrollView
-            ref={ref => setScrollView(ref)}
-            showsVerticalScrollIndicator={false}>
-            <CourseIntro/>
-            <LessonTabNavigator/>
-          </ScrollView>
-        </View>
+    {/*<Modal*/}
+    {/*  animationType="slide"*/}
+    {/*  transparent={true}*/}
+    {/*  visible={creationModalVisible}*/}
+    {/*  onRequestClose={hideCreationModal}>*/}
+    {/*  <View style={styles.centeredView}>*/}
+    {/*    <View style={{...styles.modalView, paddingVertical: 0}}>*/}
+    {/*      <Text style={{...styles.modalTitle, paddingHorizontal: 0}}>Create new channel</Text>*/}
+    {/*      <TextInput*/}
+    {/*        placeholder="Enter new channel"*/}
+    {/*        autoFocus={true}*/}
+    {/*        selectionColor={'#888'}*/}
+    {/*        style={styles.channelTextInput}*/}
+    {/*        onChangeText={text => setNewChannelName(text)}*/}
+    {/*        defaultValue={newChannelName}/>*/}
+    {/*      <View style={styles.cancelOkButtonContainer}>*/}
+    {/*        <TouchableOpacity*/}
+    {/*          style={styles.cancelOkButton}*/}
+    {/*          onPress={hideCreationModal}>*/}
+    {/*          <Text style={styles.cancelOkText}>Cancel</Text>*/}
+    {/*        </TouchableOpacity>*/}
+    {/*        <View style={{borderLeftColor: "lightgray", borderLeftWidth: 0.5, height: "100%"}}/>*/}
+    {/*        <TouchableOpacity*/}
+    {/*          style={styles.cancelOkButton}*/}
+    {/*          onPress={createNewChannel}>*/}
+    {/*          <Text style={styles.cancelOkText}>OK</Text>*/}
+    {/*        </TouchableOpacity>*/}
+    {/*      </View>*/}
+    {/*    </View>*/}
+    {/*  </View>*/}
+    {/*</Modal>*/}
+
+    {loadStatus === LOADING ? (
+      <View style={{justifyContent: 'center', flex: 1}}>
+        <ActivityIndicator size="large" color="#2980b9"/>
       </View>
-    </CourseDetailContext.Provider>
-  )
+    ) : (loadStatus === LOAD_SUCCEEDED ? (
+        <View style={styles.content}>
+          <VideoPlayer uri={courseInfo.promoVidUrl} navigation={props.navigation}/>
+          {/*<ScrollView*/}
+          {/*  ref={ref => setScrollView(ref)}*/}
+          {/*  showsVerticalScrollIndicator={false}>*/}
+          {/*  <CourseIntro/>*/}
+          {/*  <LessonTabNavigator/>*/}
+          {/*</ScrollView>*/}
+        </View>
+      ) : (
+        <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+          <Text>Oops... Something went wrong</Text>
+        </View>
+      )
+    )}
+  </View>
+  // </CourseDetailContext.Provider>
 }
 
 export const CourseDetailContext = createContext()

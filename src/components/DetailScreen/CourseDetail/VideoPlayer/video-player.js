@@ -8,11 +8,13 @@ const VideoPlayer = (props) => {
   const goBack = () => {
     props.navigation.goBack();
   }
+
+  // console.log("VideoPlayer", props.url)
   return (
     <View style={styles.container}>
       <Video
         // ref={(ref) => setPlayer(ref)}
-        source={{uri: 'https://www.w3schools.com/html/mov_bbb.mp4'}}
+        source={{uri: props.uri}}
         rate={1.0}
         volume={1.0}
         isMuted={false}
