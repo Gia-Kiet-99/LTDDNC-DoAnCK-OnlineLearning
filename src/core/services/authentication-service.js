@@ -14,6 +14,7 @@ export const apiSendEmail = (email) => {
 }
 
 export const apiGetUserInfo = async (token) => {
+  // console.log("apiGetUserInfo")
   return await instance.get("/user/me",{
     headers: {
       "Authorization": `Bearer ${token}`

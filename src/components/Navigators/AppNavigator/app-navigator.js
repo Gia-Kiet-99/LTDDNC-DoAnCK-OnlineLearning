@@ -5,34 +5,11 @@ import SplashScreen from "../../Others/SplashScreen/splash-screen";
 import AuthenticationStackNavigator from "../AuthenticationNavigator/authentication-stack-navigator";
 import MainTabNavigator from "../MainTabNavigator/main-tab-navigator";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
-import {getAuthTokenFromStorage} from "../../../core/services/async-storage-service";
 
 const Stack = createStackNavigator()
 
 const AppNavigator = () => {
   const {state} = useContext(AuthenticationContext)
-
-  // const savedToken = getAuthTokenFromStorage();
-  // console.log("AppNavigator", savedToken)
-
-  // const renderUI = async () => {
-  //   const savedToken = await getAuthTokenFromStorage();
-  //   if(savedToken != null) {
-  //     return (
-  //       <>
-  //         <Stack.Screen name={ScreenName.splash} options={{headerShown: false}}>
-  //           {props => <SplashScreen {...props} extraData={savedToken} />}
-  //         </Stack.Screen>
-  //         <Stack.Screen name={NavigatorName.mainTab} component={MainTabNavigator}
-  //                       options={{headerShown: false}}/>
-  //       </>
-  //     )
-  //   } else {
-  //
-  //   }
-  //
-  //
-  // };
 
   return (
     <Stack.Navigator initialRouteName={ScreenName.splash}>

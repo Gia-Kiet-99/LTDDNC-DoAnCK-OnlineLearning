@@ -8,15 +8,17 @@ const SplashScreen = (props) => {
   const authContext = useContext(AuthenticationContext)
 
   useEffect(() => {
-    getAuthTokenFromStorage().then(response => {
-      if (response != null) {
-        authContext.getUserInfo(response).then()
-        if (authContext.isAuthenticated === false) {
-          props.navigation.reset({
-            index: 0,
-            routes: [{name: NavigatorName.authenticationStack}]
-          })
-        }
+    getAuthTokenFromStorage().then(token => {
+      if (token != null) {
+        authContext.getUserInfo(token).then(() => {
+          console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
+          if (authContext.loginBySavedToken === false) {
+            props.navigation.reset({
+              index: 0,
+              routes: [{name: NavigatorName.authenticationStack}]
+            })
+          }
+        })
       } else {
         props.navigation.reset({
           index: 0,

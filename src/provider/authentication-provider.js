@@ -18,16 +18,9 @@ export const init = () => {
 }
 
 const AuthenticationProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState, init);
-  const [forgotPasswordState, setForgotPasswordState] = useState(false);
-
-  // useEffect(() => {
-  //   if(state.isAuthenticated){
-  //     saveAuthToken(state.token).then()
-  //   } else {
-  //     removeAuthToken().then();
-  //   }
-  // }, [state.isAuthenticated])
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [forgotPasswordState, setForgotPasswordState] = useState(false)
+  const [loginBySavedToken, setLoginBySavedToken] = useState()
 
   const forgotPassword = (email) => {
     apiSendEmail(email).then((response) => {
@@ -45,8 +38,9 @@ const AuthenticationProvider = (props) => {
         state,
         login: login(dispatch),
         logout: logOut(dispatch),
-        getUserInfo: getUserInfo(dispatch),
-        forgotPassword
+        getUserInfo: getUserInfo(dispatch, setLoginBySavedToken),
+        forgotPassword,
+        loginBySavedToken
         /*forgotPassword: forgotPassword(dispatch)*/
       }}>
       {props.children}

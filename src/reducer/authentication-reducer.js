@@ -11,8 +11,6 @@ import {setTokenToHeader} from "../core/configuration/axios-config";
 export const reducer = (prevState, action) => {
   // console.log("AuthenticationReducer", action)
   switch (action.type) {
-    // case AUTHENTICATING:
-    //   return {...prevState, isAuthenticating: true}
     case LOGIN_SUCCEEDED:
       // setTokenToHeader(action.data.token)
       return {...prevState, isAuthenticated: true, token: action.data.token, userInfo: action.data.userInfo}
@@ -24,9 +22,8 @@ export const reducer = (prevState, action) => {
       // setTokenToHeader(action.data.token)
       return {...prevState, isAuthenticated: true, token: action.data.token, userInfo: action.data.payload}
     case GET_USER_INFO_FAILED:
+      // console.log("prevState: ", prevState)
       return {...prevState}
-    // case RESET:
-    //   return init(action.initialState)
     default:
       throw new Error();
   }

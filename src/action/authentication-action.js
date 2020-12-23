@@ -33,15 +33,23 @@ export const logOut = (dispatch) => async () => {
   dispatch({type: LOG_OUT, initialState: initialState})
 }
 
-export const getUserInfo = (dispatch) => async (token) => {
+export const getUserInfo = (dispatch, setLoginBySavedToken) => async (token) => {
+  console.log("getUserInfo")
   try {
     const response = await apiGetUserInfo(token)
-    if(response.status === 200) {
+    // console.log("getUserInfo response",response)
+    if (response.status === 200) {
+      // console.log("getUserInfo: true")
+      setLoginBySavedToken(true)
       dispatch({type: GET_USER_INFO_SUCCEEDED, data: {...response.data, token: token}})
     } else {
+      // console.log("getUserInfo: false")
+      setLoginBySavedToken(false)
       dispatch({type: GET_USER_INFO_FAILED})
     }
   } catch (e) {
+    // console.log("error apiGetUserInfo: ", e)
+    setLoginBySavedToken(false)
     dispatch({type: GET_USER_INFO_FAILED})
   }
 }
