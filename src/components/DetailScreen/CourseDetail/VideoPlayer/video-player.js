@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {Video} from "expo-av";
 import {MaterialIcons} from '@expo/vector-icons';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 
 const VideoPlayer = (props) => {
-  const [player, setPlayer] = useState(null)
+  const player = useRef(null)
   const goBack = () => {
     props.navigation.goBack();
   }
@@ -13,14 +13,14 @@ const VideoPlayer = (props) => {
   return (
     <View style={styles.container}>
       <Video
-        // ref={(ref) => setPlayer(ref)}
+        ref={player}
         source={{uri: props.uri}}
         rate={1.0}
         volume={1.0}
         isMuted={false}
         useNativeControls={true}
-        // usePoster={true}
-        // posterSource={require('../../../../../assets/girl.jpg')}
+        usePoster={true}
+        posterSource={require('../../../../../assets/girl.jpg')}
         resizeMode={Video.RESIZE_MODE_COVER}
         shouldPlay={false}
         isLooping={false}

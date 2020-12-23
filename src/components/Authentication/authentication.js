@@ -5,7 +5,7 @@ import {AppThemeContext, themes} from "../../provider/theme-provider";
 
 const Authentication = (props) => {
     console.log("Authentication")
-    const {theme, toggleTheme} = useContext(AppThemeContext)
+    // const {theme, toggleTheme} = useContext(AppThemeContext)
 
     const onSignInPressed = () => {
         return props.navigation.navigate(ScreenName.login)
@@ -15,7 +15,7 @@ const Authentication = (props) => {
     }
 
     return (
-        <View style={[styles.container, theme]}>
+        <View style={[styles.container, /*theme*/]}>
             <View style={styles.imageWrapper}>
                 <Image style={styles.image} source={require('../../../assets/logo-with-name.png')}/>
             </View>
@@ -30,7 +30,7 @@ const Authentication = (props) => {
                 <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Subscribe to Pluralsight</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.transparentButton]}
-                              onPress={() => toggleTheme()}
+                              /*onPress={() => toggleTheme()}*/
             >
                 <Text style={[styles.buttonText, {color: '#2e97ff'}]}>Explore without a subscription</Text>
             </TouchableOpacity>

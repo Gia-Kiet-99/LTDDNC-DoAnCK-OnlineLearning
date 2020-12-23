@@ -7,7 +7,12 @@ import ChannelSectionItem from "../Main/Home/ChannelSectionItem/channel-section-
 import {listName} from "../../globals/constants";
 import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item";
 import {AuthenticationContext} from "../../provider/authentication-provider";
-import {apiGetLearningCourse, apiGetRecommendCourse, apiGetTopRateCourses} from "../../core/services/course-service";
+import {
+  apiGetCourseInfo,
+  apiGetLearningCourse,
+  apiGetRecommendCourse,
+  apiGetTopRateCourses
+} from "../../core/services/course-service";
 
 const SectionList = (props) => {
 
@@ -17,21 +22,7 @@ const SectionList = (props) => {
   const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    switch (props.kind){
-      case listName.course:
-        apiGetLearningCourse()
-          .then((response) => {
-            if (response.status === 200) {
-              setListData(response.data.payload)
-            }
-          })
-          .catch(error => {
-            throw new Error(error)
-          })
-          .finally(() => {
-            setLoading(false)
-          })
-        break;
+    switch (props.kind) {
       case listName.continueCourse:
         apiGetLearningCourse()
           .then((response) => {
@@ -47,9 +38,10 @@ const SectionList = (props) => {
           })
         break;
       case listName.recommendCourse:
-        apiGetRecommendCourse(state.userInfo.id, 10, 1)
+        apiGetRecommendCourse(state.userInfo.id, 2, 1)
           .then((response) => {
             if (response.status === 200) {
+              // console.log("Recommend courses: ", response.data.payload)
               setListData(response.data.payload)
             }
           })
@@ -91,11 +83,12 @@ const SectionList = (props) => {
         <ActivityIndicator size="large" color="#2980b9"/>
       </View>
     ) : (
-      <FlatList data={listData}
-                renderItem={renderListItem}
-                horizontal={true}
-                keyExtractor={item => item.id}
-                showsHorizontalScrollIndicator={false}/>
+      <FlatList
+        data={listData}
+        renderItem={renderListItem}
+        horizontal={true}
+        keyExtractor={item => item.id}
+        showsHorizontalScrollIndicator={false}/>
     )}
   </View>
 };

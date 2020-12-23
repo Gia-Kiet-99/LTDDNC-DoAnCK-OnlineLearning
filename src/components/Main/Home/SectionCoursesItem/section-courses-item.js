@@ -18,14 +18,14 @@ const SectionCoursesItem = (props) => {
   useEffect(() => {
     apiGetCourseInstructor(props.item.instructorId)
       .then((response) => {
-        if(response.status === 200){
+        if (response.status === 200) {
           setCourseAuthor(response.data.payload.name)
         }
       })
       .catch(error => {
         throw new Error(error)
       })
-      .finally(()=>{
+      .finally(() => {
         setLoading(false)
       })
   })
@@ -40,22 +40,22 @@ const SectionCoursesItem = (props) => {
     {/*{isLoading? (*/}
     {/*  <ActivityIndicator size='large' color="#2980b9"/>*/}
     {/*): (*/}
-      <TouchableOpacity
-        style={styles.container}
-        onPress={ItemPressed}>
-        <View style={styles.content}>
-          <Image style={styles.image} source={{uri: props.item.imageUrl}}/>
-          <Separator/>
-          <CourseInfo
-            containerStyle={courseInfoStyle.container}
-            title={props.item.title}
-            author={courseAuthor}
-            level={props.item.level}
-            released={props.item.createdAt}
-            duration={props.item.totalHours}
-            rate={props.item.ratedNumber}/>
-        </View>
-      </TouchableOpacity>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={ItemPressed}>
+      <View style={styles.content}>
+        <Image style={styles.image} source={{uri: props.item.imageUrl}}/>
+        <Separator/>
+        <CourseInfo
+          containerStyle={courseInfoStyle.container}
+          title={props.item.title}
+          author={courseAuthor}
+          level={props.item.level}
+          released={props.item.createdAt}
+          duration={props.item.totalHours}
+          rate={props.item.ratedNumber}/>
+      </View>
+    </TouchableOpacity>
     {/*)}*/}
   </View>
 };

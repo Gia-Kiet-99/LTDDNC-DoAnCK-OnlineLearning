@@ -34,3 +34,15 @@ export const apiGetCourseInfo = async (courseId) => {
     }
   })
 }
+
+export const apiGetCourseDetailByIds = async (courseId, userId) => {
+  return await instance.get(`/course/get-course-detail/${courseId}/${userId}`)
+}
+
+export const apiGetCourseDetailWithLesson = async (courseId) => {
+  return await instance.get(`/course/detail-with-lesson/${courseId}`)
+}
+
+export const apiGetPaymentInfo = async (courseId) => {
+  return await instance.get(`/payment/get-course-info/${courseId}`)
+}

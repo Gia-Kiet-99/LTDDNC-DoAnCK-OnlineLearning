@@ -24,11 +24,12 @@ import {NavigatorName, ScreenName} from "../../../globals/constants";
 import AuthorButton from "./AuthorButton/author-button";
 import {AuthorContext} from "../../../provider/author-provider";
 import CourseInfo from "./CourseInfo/course-info";
-import {apiGetCourseInfo} from "../../../core/services/course-service";
+import {apiGetCourseDetailByIds, apiGetCourseInfo, apiGetPaymentInfo} from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 
 const CourseDetail = (props) => {
   /* use context */
+  const authContext = useContext(AuthenticationContext)
   // const {getCourseFromId} = useContext(CourseContext)
   // const {addChannel, addCourseToChannel, getPrivateChannelNames} = useContext(ChannelContext)
   // const {authentication} = useContext(AuthenticationContext)
@@ -44,6 +45,7 @@ const CourseDetail = (props) => {
   // const [isLoading, setLoading] = useState(true)
   const [courseInfo, setCourseInfo] = useState(null)
   const [loadStatus, setLoadStatus] = useState(LOADING)
+  const [isPaid, setPaid] = useState(false)
   // const [scrollView, setScrollView] = useState(null)
   // const [modalVisible, setModalVisible] = useState(false)
   // const [creationModalVisible, setCreationModalVisible] = useState(false)
@@ -51,18 +53,53 @@ const CourseDetail = (props) => {
 
   /* use effect */
   useEffect(() => {
-    apiGetCourseInfo(courseId).then((response) => {
+    apiGetPaymentInfo(courseId).then(response => {
       if (response.status === 200) {
-        setCourseInfo(response.data.payload)
-        setLoadStatus(LOAD_SUCCEEDED)
+        // console.log("didUserBuyCourse", response.data.didUserBuyCourse)
+        if (response.data.didUserBuyCourse === true) {
+          setPaid(true)
+        } else {
+          setPaid(false)
+          setLoadStatus(LOAD_SUCCEEDED)
+        }
       } else {
         setLoadStatus(LOAD_FAILED)
       }
-    }).catch((e) => {
+    }).catch(() => {
       setLoadStatus(LOAD_FAILED)
-      throw new Error(e)
+      throw new Error()
     })
   }, [])
+
+
+  useEffect(() => {
+    if (isPaid === true) {
+      apiGetCourseDetailByIds(courseId, authContext.state.userInfo.id)
+        .then(response => {
+          if (response.status === 200) {
+            setCourseInfo(response.data.payload)
+            setLoadStatus(LOAD_SUCCEEDED)
+          }
+        })
+        .catch(() => {
+          setLoadStatus(LOAD_FAILED)
+          throw new Error()
+        })
+    }
+  }, [isPaid])
+
+  //   apiGetCourseInfo(courseId).then((response) => {
+  //     if (response.status === 200) {
+  //       setCourseInfo(response.data.payload)
+  //       setLoadStatus(LOAD_SUCCEEDED)
+  //     } else {
+  //       setLoadStatus(LOAD_FAILED)
+  //     }
+  //   }).catch((e) => {
+  //     setLoadStatus(LOAD_FAILED)
+  //     throw new Error(e)
+  //   })
+  // }, [])
 
   /* function */
   // const onLessonItemPressed = () => {
@@ -144,6 +181,37 @@ const CourseDetail = (props) => {
   //   )
   // }
 
+  const renderUI = () => {
+    if (loadStatus === LOADING) {
+      return <View style={{justifyContent: 'center', flex: 1}}>
+        <ActivityIndicator size="large" color="#2980b9"/>
+      </View>
+    } else if (loadStatus === LOAD_SUCCEEDED) {
+      if (isPaid === false) {
+        return <View style={styles.content}>
+          {/*<VideoPlayer uri={courseInfo.promoVidUrl} navigation={props.navigation}/>*/}
+          <TouchableOpacity>
+            <Text>Enroll</Text>
+          </TouchableOpacity>
+        </View>
+      } else {
+        return <View style={styles.content}>
+          <VideoPlayer uri={courseInfo.promoVidUrl} navigation={props.navigation}/>
+          {/*<ScrollView*/}
+          {/*  ref={ref => setScrollView(ref)}*/}
+          {/*  showsVerticalScrollIndicator={false}>*/}
+          {/*  <CourseIntro/>*/}
+          {/*  <LessonTabNavigator/>*/}
+          {/*</ScrollView>*/}
+        </View>
+      }
+    } else {
+      return <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
+        <Text>Oops... Something went wrong</Text>
+      </View>
+    }
+  }
+
   console.log("Course Detail")
   return <View style={styles.container}>
     {/*// <CourseDetailContext.Provider value={{item, onLessonItemPressed}}>*/}
@@ -202,26 +270,36 @@ const CourseDetail = (props) => {
     {/*  </View>*/}
     {/*</Modal>*/}
 
-    {loadStatus === LOADING ? (
-      <View style={{justifyContent: 'center', flex: 1}}>
-        <ActivityIndicator size="large" color="#2980b9"/>
-      </View>
-    ) : (loadStatus === LOAD_SUCCEEDED ? (
-        <View style={styles.content}>
-          <VideoPlayer uri={courseInfo.promoVidUrl} navigation={props.navigation}/>
-          {/*<ScrollView*/}
-          {/*  ref={ref => setScrollView(ref)}*/}
-          {/*  showsVerticalScrollIndicator={false}>*/}
-          {/*  <CourseIntro/>*/}
-          {/*  <LessonTabNavigator/>*/}
-          {/*</ScrollView>*/}
-        </View>
-      ) : (
-        <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
-          <Text>Oops... Something went wrong</Text>
-        </View>
-      )
-    )}
+    {renderUI()}
+
+    {/*{loadStatus === LOADING ? (*/}
+    {/*  <View style={{justifyContent: 'center', flex: 1}}>*/}
+    {/*    <ActivityIndicator size="large" color="#2980b9"/>*/}
+    {/*  </View>*/}
+    {/*) : (loadStatus === LOAD_SUCCEEDED ? (*/}
+    {/*    isPaid ? (*/}
+    {/*      <View style={styles.content}>*/}
+    {/*        <VideoPlayer uri={courseInfo.promoVidUrl} navigation={props.navigation}/>*/}
+    {/*        /!*<ScrollView*!/*/}
+    {/*        /!*  ref={ref => setScrollView(ref)}*!/*/}
+    {/*        /!*  showsVerticalScrollIndicator={false}>*!/*/}
+    {/*        /!*  <CourseIntro/>*!/*/}
+    {/*        /!*  <LessonTabNavigator/>*!/*/}
+    {/*        /!*</ScrollView>*!/*/}
+    {/*      </View>*/}
+    {/*    ) : (*/}
+    {/*      <View style={styles.content}>*/}
+    {/*        <TouchableOpacity>*/}
+    {/*          <Text>Enroll</Text>*/}
+    {/*        </TouchableOpacity>*/}
+    {/*      </View>*/}
+    {/*    )*/}
+    {/*  ) : (*/}
+    {/*    <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>*/}
+    {/*      <Text>Oops... Something went wrong</Text>*/}
+    {/*    </View>*/}
+    {/*  )*/}
+    {/*)}*/}
   </View>
   // </CourseDetailContext.Provider>
 }

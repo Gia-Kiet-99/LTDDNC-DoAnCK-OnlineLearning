@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {NavigatorName, ScreenName} from "../../../globals/constants";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
-import {getAuthTokenFromStorage} from "../../../core/services/async-storage-service";
+import {getAuthTokenFromStorage, removeAuthToken} from "../../../core/services/async-storage-service";
 
 const SplashScreen = (props) => {
   const authContext = useContext(AuthenticationContext)
@@ -13,6 +13,7 @@ const SplashScreen = (props) => {
         authContext.getUserInfo(token).then(() => {
           // console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
           if (authContext.loginBySavedToken === false) {
+            removeAuthToken().then()
             props.navigation.reset({
               index: 0,
               routes: [{name: NavigatorName.authenticationStack}]
