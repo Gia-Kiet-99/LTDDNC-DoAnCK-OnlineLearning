@@ -10,19 +10,23 @@ import ChannelDetailStackNavigator from "../ChannelDetailStackNavigator/channel-
 import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import ChannelDetail from "../../../DetailScreen/ChannelDetail/channel-detail";
 import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
+import ListProvider from "../../../../provider/list-provider";
 
 const Stack = createStackNavigator();
 const HomeStackNavigator = (props) => {
   return (
-    <Stack.Navigator initalRouteName={Home}>
-      <Stack.Screen name={ScreenName.home} component={Home} options={{headerShown: false}}/>
-      <Stack.Screen name={ScreenName.channelDetail} component={ChannelDetail} options={{headerShown: true}}/>
-      <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
-      <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
-      <Stack.Screen name={NavigatorName.listStack} component={ListStack} options={{headerShown: false}}/>
-      <Stack.Screen name={ScreenName.setting} component={Setting}/>
-      <Stack.Screen name={ScreenName.profile} component={Profile}/>
-    </Stack.Navigator>
-  );};
+    <ListProvider>
+      <Stack.Navigator initalRouteName={Home}>
+        <Stack.Screen name={ScreenName.home} component={Home} options={{headerShown: false}}/>
+        <Stack.Screen name={ScreenName.channelDetail} component={ChannelDetail} options={{headerShown: true}}/>
+        <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
+        <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
+        <Stack.Screen name={NavigatorName.listStack} component={ListStack} options={{headerShown: false}}/>
+        <Stack.Screen name={ScreenName.setting} component={Setting}/>
+        <Stack.Screen name={ScreenName.profile} component={Profile}/>
+      </Stack.Navigator>
+    </ListProvider>
+  );
+};
 
 export default HomeStackNavigator;

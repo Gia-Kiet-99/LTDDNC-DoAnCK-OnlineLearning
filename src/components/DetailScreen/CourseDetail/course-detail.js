@@ -1,15 +1,5 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {
-  Image,
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Modal,
-  TextInput,
-  ActivityIndicator,
-} from 'react-native';
+import {Image, StyleSheet, View, Text, ScrollView, TouchableOpacity, Modal, TextInput, ActivityIndicator, Button, Alert,} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
@@ -24,26 +14,28 @@ import {NavigatorName, ScreenName} from "../../../globals/constants";
 import AuthorButton from "./AuthorButton/author-button";
 import {AuthorContext} from "../../../provider/author-provider";
 import CourseInfo from "./CourseInfo/course-info";
-import {apiGetCourseDetailByIds, apiGetCourseInfo, apiGetPaymentInfo} from "../../../core/services/course-service";
+import {apiEnrollCourse, apiGetCourseDetailByIds, apiGetCourseInfo, apiGetPaymentInfo} from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
+import {ListContext} from "../../../provider/list-provider";
 
 const CourseDetail = (props) => {
   /* use context */
   const authContext = useContext(AuthenticationContext)
+  const listContext = useContext(ListContext)
   // const {getCourseFromId} = useContext(CourseContext)
   // const {addChannel, addCourseToChannel, getPrivateChannelNames} = useContext(ChannelContext)
   // const {authentication} = useContext(AuthenticationContext)
   // const {getAuthorById} = useContext(AuthorContext)
 
   /* get course id */
-  const courseId = props.route.params.courseId
+  const courseInfo = props.route.params.data
   /* get course data from id */
   // const item = getCourseFromId(courseId)
   // const channelNames = getPrivateChannelNames()
 
   /* use state */
   // const [isLoading, setLoading] = useState(true)
-  const [courseInfo, setCourseInfo] = useState(null)
+  const [courseDetail, setCourseDetail] = useState(null)
   const [loadStatus, setLoadStatus] = useState(LOADING)
   const [isPaid, setPaid] = useState(false)
   // const [scrollView, setScrollView] = useState(null)
@@ -53,11 +45,11 @@ const CourseDetail = (props) => {
 
   /* use effect */
   useEffect(() => {
-    apiGetPaymentInfo(courseId).then(response => {
+    apiGetPaymentInfo(courseInfo.id).then(response => {
       if (response.status === 200) {
         // console.log("didUserBuyCourse", response.data.didUserBuyCourse)
         if (response.data.didUserBuyCourse === true) {
-          setPaid(true)
+          setPaid(true) //-> run useEffect isPaid
         } else {
           setPaid(false)
           setLoadStatus(LOAD_SUCCEEDED)
@@ -71,14 +63,15 @@ const CourseDetail = (props) => {
     })
   }, [])
 
-
   useEffect(() => {
     if (isPaid === true) {
-      apiGetCourseDetailByIds(courseId, authContext.state.userInfo.id)
+      apiGetCourseDetailByIds(courseInfo.id, authContext.state.userInfo.id)
         .then(response => {
           if (response.status === 200) {
-            setCourseInfo(response.data.payload)
+            setCourseDetail(response.data.payload)
             setLoadStatus(LOAD_SUCCEEDED)
+          } else {
+            setLoadStatus(LOAD_FAILED)
           }
         })
         .catch(() => {
@@ -181,6 +174,28 @@ const CourseDetail = (props) => {
   //   )
   // }
 
+  const enrollCourse = async () => {
+    if (coursePrice > 0) {
+      Alert.alert("Payment", "This course is not free")
+    } else {
+      //api payment course
+      setLoadStatus(LOADING)
+      try {
+        const response = await apiEnrollCourse(courseInfo.id)
+        if (response.status === 200) {
+          setPaid(true)
+          // setLoadStatus(LOAD_SUCCEEDED)
+          listContext.setShouldUpdateList(true)
+        } else {
+          setLoadStatus(LOAD_FAILED)
+        }
+      } catch (e) {
+        setLoadStatus(LOAD_FAILED)
+      }
+    }
+  }
+
+  const coursePrice = (courseInfo.price !== undefined) ? courseInfo.price : courseInfo.coursePrice
   const renderUI = () => {
     if (loadStatus === LOADING) {
       return <View style={{justifyContent: 'center', flex: 1}}>
@@ -188,15 +203,13 @@ const CourseDetail = (props) => {
       </View>
     } else if (loadStatus === LOAD_SUCCEEDED) {
       if (isPaid === false) {
-        return <View style={styles.content}>
-          {/*<VideoPlayer uri={courseInfo.promoVidUrl} navigation={props.navigation}/>*/}
-          <TouchableOpacity>
-            <Text>Enroll</Text>
-          </TouchableOpacity>
+        return <View style={{...styles.content, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>{`Price: ${coursePrice}$`}</Text>
+          <Button onPress={enrollCourse} title="Enroll me"/>
         </View>
       } else {
         return <View style={styles.content}>
-          <VideoPlayer uri={courseInfo.promoVidUrl} navigation={props.navigation}/>
+          <VideoPlayer uri={courseDetail.promoVidUrl} navigation={props.navigation}/>
           {/*<ScrollView*/}
           {/*  ref={ref => setScrollView(ref)}*/}
           {/*  showsVerticalScrollIndicator={false}>*/}

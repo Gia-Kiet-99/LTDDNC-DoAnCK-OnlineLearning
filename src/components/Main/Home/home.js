@@ -5,7 +5,6 @@ import {listName, titleName} from "../../../globals/constants";
 import ActionBar from "../../Common/action-bar";
 import {CourseContext} from "../../../provider/course-provider";
 import {ChannelContext} from "../../../provider/channel-provider";
-import {apiGetFavoriteCourses} from "../../../core/services/authentication-service";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {apiGetRecommendCourse, apiGetTopRateCourses} from "../../../core/services/course-service";
 

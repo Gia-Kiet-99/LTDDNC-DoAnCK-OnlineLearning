@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {createContext, useContext, useEffect, useState} from 'react';
 import {StyleSheet, ScrollView, View, Text, TouchableOpacity, FlatList, ActivityIndicator} from 'react-native';
 import PathsSectionItem from "../Main/Browse/PathsSectionItem/paths-section-item";
 import SectionCoursesItem from "../Main/Home/SectionCoursesItem/section-courses-item";
@@ -13,14 +13,21 @@ import {
   apiGetRecommendCourse,
   apiGetTopRateCourses
 } from "../../core/services/course-service";
+import {ListContext} from "../../provider/list-provider";
 
 const SectionList = (props) => {
-
+  /* Use context */
   const {state} = useContext(AuthenticationContext)
 
+  /* Use state */
   const [listData, setListData] = useState(null)
   const [isLoading, setLoading] = useState(true)
+  /**
+   * shouldUpdateList is state of SectionListContext: it tells us whether continue learning list should update
+   * */
+  const listContext = useContext(ListContext)
 
+  /* Use effect */
   useEffect(() => {
     switch (props.kind) {
       case listName.continueCourse:
@@ -38,7 +45,7 @@ const SectionList = (props) => {
           })
         break;
       case listName.recommendCourse:
-        apiGetRecommendCourse(state.userInfo.id, 2, 1)
+        apiGetRecommendCourse(state.userInfo.id, 20, 1)
           .then((response) => {
             if (response.status === 200) {
               // console.log("Recommend courses: ", response.data.payload)
@@ -57,8 +64,9 @@ const SectionList = (props) => {
     }
     //get top-rate courses
 
-  }, [])
+  }, [listContext.shouldUpdateList])
 
+  /* Render list item */
   const renderListItem = ({item}) => {
     switch (props.kind) {
       case listName.path:
@@ -78,19 +86,19 @@ const SectionList = (props) => {
   }
 
   return <View style={styles.container}>
-    {isLoading ? (
-      <View style={{justifyContent: 'center', flex: 1}}>
-        <ActivityIndicator size="large" color="#2980b9"/>
-      </View>
-    ) : (
-      <FlatList
-        data={listData}
-        renderItem={renderListItem}
-        horizontal={true}
-        keyExtractor={item => item.id}
-        showsHorizontalScrollIndicator={false}/>
-    )}
-  </View>
+      {isLoading ? (
+        <View style={{justifyContent: 'center', flex: 1}}>
+          <ActivityIndicator size="large" color="#2980b9"/>
+        </View>
+      ) : (
+        <FlatList
+          data={listData}
+          renderItem={renderListItem}
+          horizontal={true}
+          keyExtractor={item => item.id}
+          showsHorizontalScrollIndicator={false}/>
+      )}
+    </View>
 };
 
 const styles = StyleSheet.create({

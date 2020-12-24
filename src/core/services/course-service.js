@@ -46,3 +46,9 @@ export const apiGetCourseDetailWithLesson = async (courseId) => {
 export const apiGetPaymentInfo = async (courseId) => {
   return await instance.get(`/payment/get-course-info/${courseId}`)
 }
+
+export const apiEnrollCourse = async (courseId) => {
+  return await instance.post('/payment/get-free-courses', {
+    courseId: courseId
+  })
+}
