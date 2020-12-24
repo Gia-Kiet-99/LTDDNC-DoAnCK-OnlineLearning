@@ -2,15 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Moment from 'moment'
 import Rating from "./rating";
-
-const convertHour = (hours) => {
-  let hour = 0
-  while ((hours -= 1) >= 0) {
-    hour++
-  }
-  let minute = Math.floor((hours + 1) * 60);
-  return (hour > 0) ? `${hour}h${minute}m` : `${minute}m`
-}
+import {convertHour} from "../../core/utils/date-format";
 
 const CourseInfo = (props) => {
 

@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {NavigatorName, ScreenName} from "../../../globals/constants";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
-import {getAuthTokenFromStorage, removeAuthToken} from "../../../core/services/async-storage-service";
+import {getAuthTokenFromStorage, removeAuthToken} from "../../../core/utils/async-storage-service";
 
 const SplashScreen = (props) => {
   const authContext = useContext(AuthenticationContext)

@@ -2,7 +2,7 @@ import React, {createContext, useEffect, useReducer, useState} from 'react';
 import {reducer} from "../reducer/authentication-reducer";
 import {getUserInfo, login, logOut} from "../action/authentication-action";
 import {apiSendEmail} from "../core/services/authentication-service";
-import {removeAuthToken, saveAuthToken} from "../core/services/async-storage-service";
+import {removeAuthToken, saveAuthToken} from "../core/utils/async-storage-service";
 
 const AuthenticationContext = createContext();
 

@@ -3,6 +3,8 @@ import {Image, View, StyleSheet} from "react-native";
 
 const Rating = (props) => {
 
+  const ratingValue = Math.round(props.value)
+
   const renderRate = (value) => {
     let ratingImages = []
     for (let i = 0; i < 5; i++) {
@@ -24,7 +26,7 @@ const Rating = (props) => {
 
   return (
     <View style={{flex: 1, flexDirection: 'row', paddingVertical: 5}}>
-      {renderRate(props.value)}
+      {renderRate(ratingValue)}
     </View>
   )
 }

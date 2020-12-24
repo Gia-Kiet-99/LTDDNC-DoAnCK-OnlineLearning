@@ -7,11 +7,7 @@ const Description = (props) => {
   return (
     <View style={(isExpanded === true) ? styles.description : styles.briefDescription}>
       <View style={styles.desWrapper}>
-        <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex incidunt distinctio veniam vero
-          vel ratione! Maiores nihil veritatis nulla doloremque quidem minus, enim, praesentium quasi repellat
-          saepe temporibus perspiciatis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quae ex
-          incidunt distinctio veniam vero vel ratione! Maiores nihil veritatis nulla doloremque quidem minus,
-          enim, praesentium quasi repellat saepe temporibus perspiciatis.</Text>
+        <Text>{`${props.content.description}`}</Text>
       </View>
       <TouchableOpacity
         activeOpacity={0.5}

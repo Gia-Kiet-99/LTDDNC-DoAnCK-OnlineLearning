@@ -38,7 +38,7 @@ const CourseDetail = (props) => {
   const [courseDetail, setCourseDetail] = useState(null)
   const [loadStatus, setLoadStatus] = useState(LOADING)
   const [isPaid, setPaid] = useState(false)
-  // const [scrollView, setScrollView] = useState(null)
+  const [scrollView, setScrollView] = useState(null)
   // const [modalVisible, setModalVisible] = useState(false)
   // const [creationModalVisible, setCreationModalVisible] = useState(false)
   // const [newChannelName, setNewChannelName] = useState("")
@@ -142,27 +142,46 @@ const CourseDetail = (props) => {
   // }
 
   /* internal component */
-  // const CourseIntro = () => {
-  //   return <View style={styles.courseIntro}>
-  //     <CourseInfo data={item} onAuthorButtonPress={onAuthorButtonPressed}/>
-  //     <CourseButton item={item} showListChannelModal={showListChannelModal}/>
-  //     <Description/>
-  //
-  //     <TouchableOpacity style={styles.largeButton}>
-  //       <Image style={{height: 25, width: 25, marginRight: 8}}
-  //              source={require('../../../../assets/check.png')}/>
-  //       <Text>Take a learning check</Text>
-  //     </TouchableOpacity>
-  //     <TouchableOpacity
-  //       style={styles.largeButton}
-  //       onPress={() => props.navigation.push("CourseDetail", {item: item})}>
-  //       <Image style={{height: 25, width: 25, marginRight: 8}}
-  //              source={require('../../../../assets/folder.png')}/>
-  //       <Text>View related paths & courses</Text>
-  //     </TouchableOpacity>
-  //
-  //   </View>
-  // }
+  const CourseIntro = () => {
+    return <View style={styles.courseIntro}>
+      <CourseInfo
+        title={courseDetail.title}
+        status={courseDetail.status}
+        released={courseDetail.createdAt}
+        duration={courseDetail.totalHours}
+        rating={courseDetail.averagePoint}
+        authorInfo={{
+          /**
+           * Hiện tại chưa lấy được thông tin người dạy thông qua id
+           * nên lúc bấm AuthorButton nên truyền cả courseDetail.instructorqua màn hình AuthorDetail
+           */
+          authorId: courseDetail.instructor.id,
+          authorName: courseDetail.instructor.name,
+          authorAvatar: courseDetail.instructor.avatar
+        }}
+        /*onAuthorButtonPress={onAuthorButtonPressed}*//>
+      <CourseButton /*item={item} showListChannelModal={showListChannelModal}*//>
+      <Description content={{
+        description: courseDetail.description,
+        requirement: courseDetail.requirement,
+        learnWhat: courseDetail.learnWhat
+      }}/>
+
+      <TouchableOpacity style={styles.largeButton}>
+        <Image style={{height: 25, width: 25, marginRight: 8}}
+               source={require('../../../../assets/check.png')}/>
+        <Text>Take a learning check</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.largeButton}
+        /*onPress={() => props.navigation.push("CourseDetail", {item: item})}*/>
+        <Image style={{height: 25, width: 25, marginRight: 8}}
+               source={require('../../../../assets/folder.png')}/>
+        <Text>View related paths & courses</Text>
+      </TouchableOpacity>
+
+    </View>
+  }
   // const ModalButtonItem = ({item}) => {
   //   return (
   //     <TouchableOpacity
@@ -210,12 +229,12 @@ const CourseDetail = (props) => {
       } else {
         return <View style={styles.content}>
           <VideoPlayer uri={courseDetail.promoVidUrl} navigation={props.navigation}/>
-          {/*<ScrollView*/}
-          {/*  ref={ref => setScrollView(ref)}*/}
-          {/*  showsVerticalScrollIndicator={false}>*/}
-          {/*  <CourseIntro/>*/}
-          {/*  <LessonTabNavigator/>*/}
-          {/*</ScrollView>*/}
+          <ScrollView
+            ref={ref => setScrollView(ref)}
+            showsVerticalScrollIndicator={false}>
+            <CourseIntro/>
+            {/*<LessonTabNavigator/>*/}
+          </ScrollView>
         </View>
       }
     } else {

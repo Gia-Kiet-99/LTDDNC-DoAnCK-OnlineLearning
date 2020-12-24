@@ -8,7 +8,7 @@ function AuthorButton(props) {
       style={styles.authorWrapper}
       onPress={props.onPress}
     >
-      <Image style={styles.avatar} source={data.authorAvatar}/>
+      <Image style={styles.avatar} source={{uri: data.authorAvatar}}/>
       <Text>{data.authorName}</Text>
     </TouchableOpacity>
   )

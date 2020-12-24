@@ -3,28 +3,28 @@ import {Alert, Image, Text, TouchableOpacity, View, StyleSheet} from 'react-nati
 import {CourseContext} from "../../../../provider/course-provider";
 
 function CourseButton(props) {
-  const item = props.item
+  // const item = props.item
   // console.log("CourseButton", item)
 
-  const {updateCourseList} = useContext(CourseContext)
-  const [isBookmarked, setIsBookmarked] = useState(item.isFavorite)
-  const [isDownloaded, setIsDownloaded] = useState(item.isDownload)
+  // const {updateCourseList} = useContext(CourseContext)
+  const [isFavorite, setFavorite] = useState(false)
+  const [isDownloaded, setIsDownloaded] = useState(false)
 
-  useEffect(() => {
-    if (item.isFavorite !== isBookmarked) {
-      item.isFavorite = isBookmarked
-      updateCourseList(item.id, item)
-    }
-  }, [isBookmarked])
-  useEffect(() => {
-    if (item.isDownload !== isDownloaded) {
-      item.isDownload = isDownloaded
-      updateCourseList(item.id, item)
-    }
-  }, [isDownloaded])
+  // useEffect(() => {
+  //   if (item.isFavorite !== isFavorite) {
+  //     item.isFavorite = isFavorite
+  //     updateCourseList(item.id, item)
+  //   }
+  // }, [isFavorite])
+  // useEffect(() => {
+  //   if (item.isDownload !== isDownloaded) {
+  //     item.isDownload = isDownloaded
+  //     updateCourseList(item.id, item)
+  //   }
+  // }, [isDownloaded])
 
-  const onBookmarkButtonPressed = () => {
-    setIsBookmarked(!isBookmarked)
+  const onFavoriteButtonPressed = () => {
+    setFavorite(!isFavorite)
   }
   const onDownloadButtonPressed = () => {
     if (isDownloaded === true) {
@@ -51,21 +51,21 @@ function CourseButton(props) {
     <View style={styles.buttonViewGroup}>
       <TouchableOpacity
         style={styles.button}
-        onPress={onBookmarkButtonPressed}>
+        onPress={onFavoriteButtonPressed}>
         <View style={styles.imageWrapper}>
           <Image
             style={styles.buttonImage}
-            source={(isBookmarked === true) ?
-              require('../../../../../assets/bookmarked-icon.png') :
-              require('../../../../../assets/bookmark-icon.png')}/>
+            source={(isFavorite === true) ?
+              require('../../../../../assets/like-blue.png') :
+              require('../../../../../assets/like.png')}/>
         </View>
         <Text style={styles.buttonText}>
-          {(isBookmarked === true) ? 'Bookmarked' : 'Bookmark'}
+          {(isFavorite === true) ? 'Liked' : 'Like'}
         </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={props.showListChannelModal}
+        /*onPress={props.showListChannelModal}*/
         style={[styles.button, {marginHorizontal: 10}]}>
         <View style={styles.imageWrapper}>
           <Image
