@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {StyleSheet, Image, Text, TouchableOpacity, View} from 'react-native';
 import Menu, {MenuItem} from "react-native-material-menu";
+import {convertHourToHHmmSS} from "../../../../core/utils/date-format";
 
 const SectionListHeader = (props) => {
-    const header = props.section;
+    // const header = props.section;
     const [menu,setMenu] = useState(null);
 
     const showMenu = () => {
@@ -16,7 +17,7 @@ const SectionListHeader = (props) => {
             <View style={styles.fakeImage}/>
             <View style={styles.lessonInfo}>
                 <Text>{props.title}</Text>
-                <Text>{props.totalDuration}</Text>
+                <Text>{convertHourToHHmmSS(props.totalDuration)}</Text>
             </View>
             <TouchableOpacity style={styles.menuWrapper} onPress={showMenu}>
                 <Menu

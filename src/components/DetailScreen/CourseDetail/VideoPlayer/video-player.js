@@ -28,7 +28,7 @@ const VideoPlayer = (props) => {
       />
       <TouchableOpacity
         style={styles.closeButton}
-        onPress={() => props.navigation.goBack()}
+        onPress={goBack}
       >
         <MaterialIcons name="keyboard-arrow-down" size={50} color="#95a5a6"/>
       </TouchableOpacity>

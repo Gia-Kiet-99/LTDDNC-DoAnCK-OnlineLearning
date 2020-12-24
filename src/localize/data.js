@@ -274,87 +274,87 @@ export const lessons = [
       }
     ]
   },
-  {
-    id: "2",
-    title: "Designing and Planning Our App",
-    totalDuration: "33:43",
-    data: [
-      {
-        id: "2.1",
-        title: "Introduction",
-        duration: "4:05"
-      },
-      {
-        id: "2.2",
-        title: "Our App - The high-level view",
-        duration: "0:57"
-      },
-      {
-        id: "2.3",
-        title: "Our App - Some long-term plans",
-        duration: "3:01"
-      },
-      {
-        id: "2.4",
-        title: "Rough design of our app starting point",
-        duration: "2:35"
-      }
-    ]
-  },
-  {
-    id: "3",
-    title: "Understanding Activities and Activity Layout Interface",
-    totalDuration: "33:43",
-    data: [
-      {
-        id: "3.1",
-        title: "Introduction",
-        duration: "4:05"
-      },
-      {
-        id: "3.2",
-        title: "What is an Activity?",
-        duration: "0:57"
-      },
-      {
-        id: "3.3",
-        title: "Activity UI",
-        duration: "3:01"
-      },
-      {
-        id: "3.4",
-        title: "Layout Classes",
-        duration: "2:35"
-      }
-    ]
-  },
-  {
-    id: "4",
-    title: "Working with Activities",
-    totalDuration: "33:43",
-    data: [
-      {
-        id: "4.1",
-        title: "Introduction",
-        duration: "4:05"
-      },
-      {
-        id: "4.2",
-        title: "Activity Interaction",
-        duration: "0:57"
-      },
-      {
-        id: "4.3",
-        title: "Creating the NoteListActivity",
-        duration: "3:01"
-      },
-      {
-        id: "4.4",
-        title: "Handling ListView Selection with an Anonymous Class",
-        duration: "2:35"
-      }
-    ]
-  },
+  // {
+  //   id: "2",
+  //   title: "Designing and Planning Our App",
+  //   totalDuration: "33:43",
+  //   data: [
+  //     {
+  //       id: "2.1",
+  //       title: "Introduction",
+  //       duration: "4:05"
+  //     },
+  //     {
+  //       id: "2.2",
+  //       title: "Our App - The high-level view",
+  //       duration: "0:57"
+  //     },
+  //     {
+  //       id: "2.3",
+  //       title: "Our App - Some long-term plans",
+  //       duration: "3:01"
+  //     },
+  //     {
+  //       id: "2.4",
+  //       title: "Rough design of our app starting point",
+  //       duration: "2:35"
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: "3",
+  //   title: "Understanding Activities and Activity Layout Interface",
+  //   totalDuration: "33:43",
+  //   data: [
+  //     {
+  //       id: "3.1",
+  //       title: "Introduction",
+  //       duration: "4:05"
+  //     },
+  //     {
+  //       id: "3.2",
+  //       title: "What is an Activity?",
+  //       duration: "0:57"
+  //     },
+  //     {
+  //       id: "3.3",
+  //       title: "Activity UI",
+  //       duration: "3:01"
+  //     },
+  //     {
+  //       id: "3.4",
+  //       title: "Layout Classes",
+  //       duration: "2:35"
+  //     }
+  //   ]
+  // },
+  // {
+  //   id: "4",
+  //   title: "Working with Activities",
+  //   totalDuration: "33:43",
+  //   data: [
+  //     {
+  //       id: "4.1",
+  //       title: "Introduction",
+  //       duration: "4:05"
+  //     },
+  //     {
+  //       id: "4.2",
+  //       title: "Activity Interaction",
+  //       duration: "0:57"
+  //     },
+  //     {
+  //       id: "4.3",
+  //       title: "Creating the NoteListActivity",
+  //       duration: "3:01"
+  //     },
+  //     {
+  //       id: "4.4",
+  //       title: "Handling ListView Selection with an Anonymous Class",
+  //       duration: "2:35"
+  //     }
+  //   ]
+  // },
 ]
 export const channels = [
   {

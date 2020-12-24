@@ -28,7 +28,7 @@ export const apiGetFavoriteCourses = () => {
 }
 
 export const apiGetCourseInfo = async (courseId) => {
-  return await instance.get("/course/get-course-info",{
+  return await instance.get("/course/get-course-info", {
     params: {
       id: courseId
     }
@@ -52,3 +52,14 @@ export const apiEnrollCourse = async (courseId) => {
     courseId: courseId
   })
 }
+
+export const apiSubmitReview = async (courseId, formalityPoint, contentPoint, presentationPoint, content) => {
+  return await instance.post("/course/rating-course", {
+    courseId: courseId,
+    formalityPoint: formalityPoint,
+    contentPoint: content,
+    presentationPoint: presentationPoint,
+    content: content
+  })
+}
+

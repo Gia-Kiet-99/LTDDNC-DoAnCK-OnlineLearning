@@ -1,5 +1,17 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import {Image, StyleSheet, View, Text, ScrollView, TouchableOpacity, Modal, TextInput, ActivityIndicator, Button, Alert,} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  TextInput,
+  ActivityIndicator,
+  Button,
+  Alert,
+} from 'react-native';
 import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
@@ -14,7 +26,12 @@ import {NavigatorName, ScreenName} from "../../../globals/constants";
 import AuthorButton from "./AuthorButton/author-button";
 import {AuthorContext} from "../../../provider/author-provider";
 import CourseInfo from "./CourseInfo/course-info";
-import {apiEnrollCourse, apiGetCourseDetailByIds, apiGetCourseInfo, apiGetPaymentInfo} from "../../../core/services/course-service";
+import {
+  apiEnrollCourse,
+  apiGetCourseDetailByIds,
+  apiGetCourseInfo,
+  apiGetPaymentInfo
+} from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 import {ListContext} from "../../../provider/list-provider";
 
@@ -228,12 +245,15 @@ const CourseDetail = (props) => {
         </View>
       } else {
         return <View style={styles.content}>
-          <VideoPlayer uri={courseDetail.promoVidUrl} navigation={props.navigation}/>
-          <ScrollView
-            ref={ref => setScrollView(ref)}
-            showsVerticalScrollIndicator={false}>
+          <VideoPlayer
+            uri={courseDetail.promoVidUrl}
+            navigation={props.navigation}/>
+          <ScrollView ref={ref => setScrollView(ref)}
+                      showsVerticalScrollIndicator={false}>
             <CourseIntro/>
-            {/*<LessonTabNavigator/>*/}
+            <LessonTabNavigator
+              section={courseDetail.section}
+              ratingList={courseDetail.ratings.ratingList}/>
           </ScrollView>
         </View>
       }
