@@ -4,7 +4,7 @@ import {AuthenticationContext} from "../../../../../provider/authentication-prov
 
 function CommentListHeader(props) {
   const authContext = useContext(AuthenticationContext)
-  const [comment, setComment] = useState("")
+  // const [comment, setComment] = useState("")
 
   return (
     <View style={styles.container}>

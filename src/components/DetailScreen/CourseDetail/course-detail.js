@@ -252,6 +252,7 @@ const CourseDetail = (props) => {
                       showsVerticalScrollIndicator={false}>
             <CourseIntro/>
             <LessonTabNavigator
+              courseId={courseDetail.id}
               section={courseDetail.section}
               ratingList={courseDetail.ratings.ratingList}/>
           </ScrollView>

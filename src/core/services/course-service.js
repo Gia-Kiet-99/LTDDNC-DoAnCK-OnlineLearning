@@ -57,7 +57,7 @@ export const apiSubmitReview = async (courseId, formalityPoint, contentPoint, pr
   return await instance.post("/course/rating-course", {
     courseId: courseId,
     formalityPoint: formalityPoint,
-    contentPoint: content,
+    contentPoint: contentPoint,
     presentationPoint: presentationPoint,
     content: content
   })

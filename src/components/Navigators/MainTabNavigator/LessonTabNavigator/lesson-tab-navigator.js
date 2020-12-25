@@ -24,13 +24,14 @@ const Tab = createMaterialTopTabNavigator();
 const LessonTabNavigator = (props) => {
   const courseSection = props.section
   const ratingList = props.ratingList
+  const courseId = props.courseId
 
   return (
     <Tab.Navigator>
       <Tab.Screen name="Contents" component={LessonList}
                   initialParams={{courseSection: courseSection}}/>
       <Tab.Screen name="Reviews" component={CommentList}
-                  initialParams={{ratingList: ratingList}}/>
+                  initialParams={{ratingList: ratingList, courseId: courseId}}/>
     </Tab.Navigator>
   )
 };

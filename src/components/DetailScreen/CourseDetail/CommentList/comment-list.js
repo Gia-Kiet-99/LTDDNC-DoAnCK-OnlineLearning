@@ -6,12 +6,14 @@ import CommentListHeader from "./commentListHeader/comment-list-header";
 import {Rating} from "react-native-ratings";
 import {AuthenticationContext} from "../../../../provider/authentication-provider";
 import {apiSubmitReview} from "../../../../core/services/course-service";
-import {INITIAL_LOAD_STATE, LOAD_SUCCEEDED, LOADING} from "../../../../core/configuration/loading-config";
+import {INITIAL_LOAD_STATE, LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../../core/configuration/loading-config";
 
 function CommentList(props) {
-  const ratingList = props.route.params?.ratingList
+  let ratingList = props.route.params?.ratingList
+  const courseId = props.route.params?.courseId
+
   /* Use context */
-  // const authContext = useContext(AuthenticationContext)
+  const authContext = useContext(AuthenticationContext)
 
   /* Use state */
   const [reviewModalVisible, setReviewModalVisible] = useState(false)
@@ -19,11 +21,16 @@ function CommentList(props) {
   const [formalityPoint, setFormalityPoint] = useState(0)
   const [contentPoint, setContentPoint] = useState(0)
   const [presentationPoint, setPresentationPoint] = useState(0)
-  const [loading, setLoading] = useState(INITIAL_LOAD_STATE)
+  // const [loading, setLoading] = useState(INITIAL_LOAD_STATE)
   const [refreshList, setRefreshList] = useState(false)
+  const [shouldSendReview, setShouldSendReview] = useState(false)
 
   /* Use effect */
-  // useEffect()
+  useEffect(() => {
+    if (shouldSendReview === true) {
+      sendReview()
+    }
+  }, [shouldSendReview])
 
   /* Function */
   const renderItem = ({item}) => {
@@ -49,19 +56,56 @@ function CommentList(props) {
   }
   const sendReview = () => {
     if (formalityPoint > 0 || contentPoint > 0 || presentationPoint > 0 || comment !== "") {
-      apiSubmitReview(ratingList.courseId, formalityPoint, contentPoint, presentationPoint, comment)
+      apiSubmitReview(courseId, formalityPoint, contentPoint, presentationPoint, comment)
         .then(response => {
           if (response.status === 200) {
-            Alert.alert("Successfully")
+            // Alert.alert("Successfully")
+
             //api get your review
             //update list review
+            updateReviewList()
+            setRefreshList(true)
           }
         }).catch(e => {
         throw new Error()
+      }).finally(() => {
+        hideReviewModal()
+        setShouldSendReview(false)
       })
+    } else {
+      hideReviewModal()
+      Alert.alert("Submit", "failed")
     }
   }
+  const updateReviewList = () => {
+    let rating = {
+      id: `${courseId}${authContext.state.userInfo.id}123`,
+      userId: authContext.state.userInfo.id,
+      courseId: courseId,
+      content: comment,
+      averagePoint: (formalityPoint + contentPoint + presentationPoint) / 3,
+      user: {
+        avatar: authContext.state.userInfo.avatar,
+        name: authContext.state.userInfo.name
+      }
+    }
 
+    // const isExists = ratingList.some(object => object.userId === ratingList.userId)
+    // if(isExists) {
+    //
+    // }
+    let isExists = false
+    for (let i = 0; i < ratingList.length; i++) {
+      if(ratingList[i].userId === rating.userId) {
+        ratingList[i] = rating
+        isExists = true
+        break
+      }
+    }
+    if(!isExists) {
+      ratingList.unshift(rating)
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -81,7 +125,7 @@ function CommentList(props) {
                 <Text style={styles.ratingText}>Formality point</Text>
                 <Rating
                   imageSize={18}
-                  startingValue={0}
+                  startingValue={formalityPoint}
                   fractions={0}
                   onFinishRating={formalityRatingCompleted}
                 />
@@ -91,7 +135,7 @@ function CommentList(props) {
                 <Rating
                   imageSize={18}
                   fractions={0}
-                  startingValue={0}
+                  startingValue={contentPoint}
                   onFinishRating={contentRatingCompleted}
                 />
               </View>
@@ -100,7 +144,7 @@ function CommentList(props) {
                 <Rating
                   imageSize={18}
                   fractions={0}
-                  startingValue={0}
+                  startingValue={presentationPoint}
                   onFinishRating={presentationRatingCompleted}
                 />
               </View>
@@ -114,12 +158,6 @@ function CommentList(props) {
               onChangeText={(text) => setComment(text)}
               placeholder="Write comment"
               value={comment}/>
-            {/*<TouchableOpacity*/}
-            {/*  // onPress={props.onSendButtonPressed}*/}
-            {/*  style={styles.sendButton}>*/}
-            {/*  <Image style={styles.sendImage}*/}
-            {/*         source={require("../../../../../assets/right-arrow.png")}/>*/}
-            {/*</TouchableOpacity>*/}
 
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
@@ -129,11 +167,10 @@ function CommentList(props) {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.modalButton}
-                onPress={sendReview}>
+                onPress={() => setShouldSendReview(true)}>
                 <Text style={{...styles.modalText, color: '#2980b9'}}>Submit</Text>
               </TouchableOpacity>
             </View>
-
           </View>
         </View>
       </Modal>
