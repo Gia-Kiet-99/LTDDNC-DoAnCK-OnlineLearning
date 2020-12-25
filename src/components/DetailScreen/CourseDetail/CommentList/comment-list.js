@@ -96,13 +96,13 @@ function CommentList(props) {
     // }
     let isExists = false
     for (let i = 0; i < ratingList.length; i++) {
-      if(ratingList[i].userId === rating.userId) {
+      if (ratingList[i].userId === rating.userId) {
         ratingList[i] = rating
         isExists = true
         break
       }
     }
-    if(!isExists) {
+    if (!isExists) {
       ratingList.unshift(rating)
     }
   }
@@ -168,7 +168,10 @@ function CommentList(props) {
               <TouchableOpacity
                 style={styles.modalButton}
                 onPress={() => setShouldSendReview(true)}>
-                <Text style={{...styles.modalText, color: '#2980b9'}}>Submit</Text>
+                <Text style={{
+                  ...styles.modalText, fontWeight: 'bold',
+                  color: '#2980b9'
+                }}>Submit</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -229,7 +232,7 @@ const styles = StyleSheet.create({
   modalText: {
     fontSize: 16,
     marginLeft: 8,
-    color: '#555'
+    color: '#555',
   },
   modalTitle: {
     alignItems: 'center',

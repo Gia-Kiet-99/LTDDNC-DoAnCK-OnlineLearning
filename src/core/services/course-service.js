@@ -63,3 +63,34 @@ export const apiSubmitReview = async (courseId, formalityPoint, contentPoint, pr
   })
 }
 
+export const apiGetLastUpdateLesson = async (courseId) => {
+  return await instance.get(`/course/last-watched-lesson/${courseId}`)
+}
+
+export const apiGetLessonUrlAndDuration = async (courseId, lessonId) => {
+  return await instance.get(`/lesson/video/${courseId}/${lessonId}`)
+}
+
+export const apiLikeCourse = async (courseId) => {
+  return await instance.post('/user/like-course', {
+    courseId: courseId
+  })
+}
+
+export const apiGetLikeStatus = async (courseId) => {
+  return await instance.get(`/user/get-course-like-status/${courseId}`)
+}
+
+export const apiGetNewReleaseCourse = async (limit, page) => {
+  return await instance.post('/course/top-new', {
+    limit: limit,
+    page: page
+  })
+}
+
+export const apiGetTopSellCourse = async (limit, page) => {
+  return await instance.post('/course/top-sell', {
+    limit: limit,
+    page: page
+  })
+}

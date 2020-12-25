@@ -3,7 +3,7 @@ import {Dimensions, View, Text, StyleSheet} from 'react-native';
 import SearchResultList from "./SearchResultList/search-result-list";
 import {SceneMap, TabView} from "react-native-tab-view";
 import StudyList from "../../List/StudyList/study-list";
-import {listName} from "../../../globals/constants";
+import {listType} from "../../../globals/constants";
 
 {/*<SearchResultList/>*/
 }
@@ -17,13 +17,13 @@ const Search = (props) => {
   ])
 
   const CourseRoute = () => {
-    return <StudyList kind={listName.course} style={{paddingHorizontal: 15}}/>
+    return <StudyList kind={listType.course} style={{paddingHorizontal: 15}}/>
   }
   const PathRoute = () => {
-    return <StudyList kind={listName.path} style={{paddingHorizontal: 15}}/>
+    return <StudyList kind={listType.path} style={{paddingHorizontal: 15}}/>
   }
   const AuthorRoute = () => {
-    return <StudyList kind={listName.author} style={{paddingHorizontal: 15}}/>
+    return <StudyList kind={listType.author} style={{paddingHorizontal: 15}}/>
   }
 
   return (

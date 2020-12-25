@@ -1,10 +1,10 @@
 import React from 'react'
-import {ScrollView, View} from 'react-native'
+import {ScrollView, View, StyleSheet} from 'react-native'
 import ImageButton from "../../../Common/image-button";
-import {ImageButtonType} from "../../../../globals/constants";
+import {ImageButtonType, listType} from "../../../../globals/constants";
 import {titles} from "../../../../localize/data";
 
-function Recommend(props) {
+function Recommend() {
   const renderImageButtonList = (list) => {
     return list.map((item) => (
       <ImageButton
@@ -21,26 +21,20 @@ function Recommend(props) {
   return (
     <View>
       <ImageButton
-        type={ImageButtonType.course}
+        type={listType.newReleaseCourse}
         data={{
           title: 'New\nRelease',
           source: require('../../../../../assets/background-image.jpg')
         }}
-        style={{
-          marginTop: 10,
-          marginHorizontal: 10,
-        }}/>
+        style={styles.imageButton}/>
 
       <ImageButton
-        type={ImageButtonType.course}
+        type={listType.topSellCourse}
         data={{
-          title: 'Recommended\nfor you',
+          title: 'Top sell',
           source: require('../../../../../assets/background4.jpg')
         }}
-        style={{
-          marginTop: 10,
-          marginHorizontal: 10
-        }}/>
+        style={styles.imageButton}/>
 
       <ScrollView
         horizontal={true} showsHorizontalScrollIndicator={false}
@@ -57,5 +51,12 @@ function Recommend(props) {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  imageButton: {
+    marginTop: 10,
+    marginHorizontal: 10,
+  }
+})
 
 export default Recommend;

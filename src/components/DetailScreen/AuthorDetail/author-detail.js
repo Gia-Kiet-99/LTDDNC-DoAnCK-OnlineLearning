@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import StudyList from "../../List/StudyList/study-list";
-import {listName} from "../../../globals/constants";
+import {listType} from "../../../globals/constants";
 import {CourseContext} from "../../../provider/course-provider";
 import AuthorListHeader from "./ListHeader/author-list-header";
 
@@ -19,7 +19,7 @@ const AuthorDetail = (props) => {
   return (
     <View style={styles.container}>
       <StudyList
-        kind={listName.authorCourse}
+        kind={listType.authorCourse}
         navigation={props.navigation}
         data={courses}
         listHeaderComponent={

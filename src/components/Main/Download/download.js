@@ -2,25 +2,26 @@ import React, {useContext} from 'react';
 import {StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import StudyList from "../../List/StudyList/study-list";
 import ActionBar from "../../Common/action-bar";
-import {listName, titleName} from "../../../globals/constants";
+import {listType, titleName} from "../../../globals/constants";
 import {CourseContext} from "../../../provider/course-provider";
 
 
 const Download = (props) => {
-  const {getDownloadedCourses, removeAllDownloadedCourses} = useContext(CourseContext)
-  const data = getDownloadedCourses()
+  console.log("Download")
+  // const {getDownloadedCourses, removeAllDownloadedCourses} = useContext(CourseContext)
+  // const data = getDownloadedCourses()
 
-  const onRemoveAllButtonClick = () => {
-    if (data && data.length > 0) {
-      removeAllDownloadedCourses()
-    }
-  }
+  // const onRemoveAllButtonClick = () => {
+  //   if (data && data.length > 0) {
+  //     removeAllDownloadedCourses()
+  //   }
+  // }
 
   const DownloadHeader = () => {
     return (
       <View style={styles.overView}>
-        <Text style={styles.text}>{`${data.length} courses`}</Text>
-        <TouchableOpacity style={styles.button} onPress={onRemoveAllButtonClick}>
+        <Text style={styles.text}>0 courses</Text>
+        <TouchableOpacity style={styles.button}>
           <Text style={[styles.text, {color: '#2e97ff'}]}>REMOVE ALL</Text>
         </TouchableOpacity>
       </View>
@@ -32,10 +33,10 @@ const Download = (props) => {
       <ActionBar title={titleName.download} navigation={props.navigation}/>
       <View style={styles.content}>
         <DownloadHeader/>
-        <StudyList kind={listName.download}
-                   style={styles.courseList}
-                   navigation={props.navigation}
-                   data={data}/>
+        {/*<StudyList kind={listName.download}*/}
+        {/*           style={styles.courseList}*/}
+        {/*           navigation={props.navigation}*/}
+        {/*           data={data}/>*/}
       </View>
     </View>
   );

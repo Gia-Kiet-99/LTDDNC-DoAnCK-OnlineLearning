@@ -1,4 +1,4 @@
-export const listName = {
+export const listType = {
   course: "course-list",
   favoriteCourse: "favorite-course-list",
   path: "path-list",
@@ -10,7 +10,9 @@ export const listName = {
   pathCourse: "path-course-list",
   authorCourse: "author-course-list",
   continueCourse: "continue-learning-course",
-  recommendCourse: "recommend-course"
+  recommendCourse: "recommend-course",
+  newReleaseCourse: "new-release",
+  topSellCourse: "top-sell-course"
 }
 
 export const titleName = {
@@ -61,5 +63,7 @@ export const NavigatorName = {
 
 export const ImageButtonType = {
   course: "course-list",
-  general: "all-list"
+  general: "all-list",
+  newReleaseCourse: "new-release",
+  recommendCourse: 'recommend-course'
 }

@@ -3,13 +3,12 @@ import {Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import {convertHourToHHmmSS} from "../../../../core/utils/date-format";
 
 const ListLessonItem = (props) => {
-  // const {onLessonItemPressed} = useContext(CourseDetailContext)
   const lessonInfo = props.item
   // console.log("lessons: ", lessonInfo)
   return (
     <TouchableOpacity
       style={styles.itemContainer}
-      /*onPress={() => onLessonItemPressed()}*/>
+      onPress={() => props.onLessonItemPressed(lessonInfo.id)}>
       <Image style={styles.icon} source={require('../../../../../assets/gray-dot.png')}/>
       <Text style={{flex: 1, marginLeft: 10}}>{lessonInfo.name}</Text>
       <Text>{convertHourToHHmmSS(lessonInfo.hours)}</Text>

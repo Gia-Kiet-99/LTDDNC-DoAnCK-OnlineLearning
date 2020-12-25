@@ -1,56 +1,27 @@
 import React from 'react';
-import {StyleSheet, Text, ImageBackground, Pressable} from 'react-native';
-import {ImageButtonType, listName, ScreenName, NavigatorName} from "../../globals/constants";
-import {shouldUseNativeDriver} from "react-native-web/dist/vendor/react-native/Animated/NativeAnimatedHelper";
+import {StyleSheet, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
+import {ImageButtonType, ScreenName} from "../../globals/constants";
 
 const ImageButton = (props) => {
   const navigation = useNavigation()
 
-  const onPressed = () => {
-    switch (props.type) {
-      case ImageButtonType.course:
-        // return props.navigation.navigate(NavigatorName.listStack,
-        //   {
-        //     screen: ScreenName.studyList,
-        //     params: {
-        //       title: props.data.title,
-        //       kind: listName.course,
-        //       style: {
-        //         marginHorizontal: 15
-        //       },
-        //     }
-        //   })
-        return navigation.navigate(ScreenName.studyList,
-          {
-            title: props.data.title,
-            kind: listName.course,
-            style: {
-              marginHorizontal: 15
-            },
-          })
-      case ImageButtonType.general:
-        // return props.navigation.navigate(NavigatorName.fieldDetailStack,
-        //   {
-        //     screen: ScreenName.fieldDetail,
-        //     params: {
-        //       field: props.data.title
-        //     }
-        //   })
-        return navigation.navigate(ScreenName.fieldDetail,
-          {
-            field: props.data.title
-          })
-    }
+  const onImageButtonPressed = () => {
+    navigation.navigate(ScreenName.studyList, {
+      type: props.type,
+      title: props.data.title
+    })
   }
 
   return (
-    <ImageBackground style={[styles.button, props.style]}
-                     source={props.data.source}>
-      <Pressable style={styles.touch}
-                 onPress={onPressed}>
+    <ImageBackground
+      style={[styles.button, props.style]}
+      source={props.data.source}>
+      <TouchableOpacity
+        onPress={onImageButtonPressed}
+        style={styles.touch}>
         <Text style={[styles.text, props.titleStyle]}>{props.data.title.toUpperCase()}</Text>
-      </Pressable>
+      </TouchableOpacity>
     </ImageBackground>
   );
 };

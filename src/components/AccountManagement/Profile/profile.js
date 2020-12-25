@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
   activityInsight: {},
   image: {
     height: 80,
-    width: 80
+    width: 80,
+    borderRadius: 80/2
   },
   username: {
     fontSize: 20,

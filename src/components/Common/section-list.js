@@ -4,7 +4,7 @@ import PathsSectionItem from "../Main/Browse/PathsSectionItem/paths-section-item
 import SectionCoursesItem from "../Main/Home/SectionCoursesItem/section-courses-item";
 import AuthorSectionItem from "../Main/Browse/AuthorSectionItem/author-section-item";
 import ChannelSectionItem from "../Main/Home/ChannelSectionItem/channel-section-item";
-import {listName} from "../../globals/constants";
+import {listType} from "../../globals/constants";
 import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item";
 import {AuthenticationContext} from "../../provider/authentication-provider";
 import {
@@ -30,7 +30,7 @@ const SectionList = (props) => {
   /* Use effect */
   useEffect(() => {
     switch (props.kind) {
-      case listName.continueCourse:
+      case listType.continueCourse:
         apiGetLearningCourse()
           .then((response) => {
             if (response.status === 200) {
@@ -44,7 +44,7 @@ const SectionList = (props) => {
             setLoading(false)
           })
         break;
-      case listName.recommendCourse:
+      case listType.recommendCourse:
         apiGetRecommendCourse(state.userInfo.id, 20, 1)
           .then((response) => {
             if (response.status === 200) {
@@ -69,18 +69,18 @@ const SectionList = (props) => {
   /* Render list item */
   const renderListItem = ({item}) => {
     switch (props.kind) {
-      case listName.path:
+      case listType.path:
         return <PathsSectionItem key={item.id} item={item} navigation={props.navigation}/>
-      case listName.course:
-      case listName.favoriteCourse:
-      case listName.continueCourse:
-      case listName.recommendCourse:
+      case listType.course:
+      case listType.favoriteCourse:
+      case listType.continueCourse:
+      case listType.recommendCourse:
         return <SectionCoursesItem key={item.id} item={item} navigation={props.navigation}/>
-      case listName.author:
+      case listType.author:
         return <AuthorSectionItem key={item.id} item={item} navigation={props.navigation}/>
-      case listName.channel:
+      case listType.channel:
         return <ChannelSectionItem key={item.id} item={item} navigation={props.navigation}/>
-      case listName.popularSkill:
+      case listType.popularSkill:
         return <SkillSectionItem key={item.id} item={item} navigation={props.navigation}/>
     }
   }

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import SearchResultList from "../../../../Main/Search/SearchResultList/search-result-list";
 import StudyList from "../../../../List/StudyList/study-list";
-import {listName} from "../../../../../globals/constants";
+import {listType} from "../../../../../globals/constants";
 import {SearchBar} from "react-native-elements";
 import {View, StyleSheet} from "react-native";
 
@@ -28,7 +28,7 @@ const SearchTabNavigator = (props) => {
           name="CourseResult"
           component={StudyList}
           initialParams={{
-            kind: listName.course,
+            kind: listType.course,
             style: {
               paddingHorizontal: 15
             },
@@ -38,7 +38,7 @@ const SearchTabNavigator = (props) => {
           name="PathResult"
           component={StudyList}
           initialParams={{
-            kind: listName.path,
+            kind: listType.path,
             style: {
               paddingHorizontal: 15
             },
@@ -48,7 +48,7 @@ const SearchTabNavigator = (props) => {
           name="AuthorResult"
           component={StudyList}
           initialParams={{
-            kind: listName.author,
+            kind: listType.author,
             style: {
               paddingHorizontal: 15
             },

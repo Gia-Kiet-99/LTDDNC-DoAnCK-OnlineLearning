@@ -4,30 +4,29 @@ import SectionHeader from "./section-header";
 import SectionList from "./section-list";
 
 
-
 const Section = (props) => {
 
-    return (
-        <View style={styles.container}>
-            <SectionHeader
-                navigation={props.navigation}
-                kind={props.kind}
-                title={props.title}
-                // list={props.list}
-                showButton={props.showSeeAllButton}/>
-            <SectionList
-                navigation={props.navigation}
-                kind={props.kind}
-                /*list={props.list}*//>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <SectionHeader
+        navigation={props.navigation}
+        kind={props.kind}
+        title={props.title}
+        // list={props.list}
+        showButton={props.showSeeAllButton}/>
+      <SectionList
+        navigation={props.navigation}
+        kind={props.kind}
+        /*list={props.list}*//>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 30,
-        backgroundColor: 'transparent'
-    }
+  container: {
+    marginTop: 30,
+    backgroundColor: 'transparent'
+  }
 })
 
 export default Section;

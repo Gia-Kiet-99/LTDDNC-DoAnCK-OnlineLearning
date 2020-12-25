@@ -13,8 +13,6 @@ const Stack = createStackNavigator()
 const DownloadStackNavigator = (props) => {
   return (
     <Stack.Navigator initialRouteName="Download">
-      {/*<Stack.Screen name="CourseDetailStackNavigator" component={CourseDetailStackNavigator}*/}
-      {/*              options={{headerShown: false}}/>*/}
 
       <Stack.Screen name={ScreenName.download} component={Download} options={{headerShown: false}}/>
       <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>

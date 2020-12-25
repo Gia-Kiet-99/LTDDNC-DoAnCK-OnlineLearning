@@ -26,51 +26,15 @@ const BrowseStackNavigator = (props) => {
         <Stack.Screen name={ScreenName.browse} component={Browse} options={{headerShown: false}}/>
         <Stack.Screen name={ScreenName.setting} component={Setting}/>
         <Stack.Screen name={ScreenName.profile} component={Profile}/>
-        {/*<Stack.Screen*/}
-        {/*  name={NavigatorName.pathDetailStack}*/}
-        {/*  component={PathDetailStackNavigator}*/}
-        {/*  options={{headerShown: false}}/>*/}
-        <Stack.Screen
-          name={ScreenName.pathDetail}
-          component={PathDetail}
-          options={{headerShown: true}}/>
-        {/*<Stack.Screen*/}
-        {/*  name={NavigatorName.authorDetailStack}*/}
-        {/*  component={AuthorDetailStackNavigator}*/}
-        {/*  options={{headerShown: false}}/>*/}
+        <Stack.Screen name={ScreenName.pathDetail} component={PathDetail} options={{headerShown: true}}/>
         <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
         <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
-        {/*<Stack.Screen*/}
-        {/*  name={NavigatorName.skillStack}*/}
-        {/*  component={SkillStackNavigator}*/}
-        {/*  options={{headerShown: false}}/>*/}
-        <Stack.Screen name={ScreenName.skillDetail}
-                      component={SkillDetail}
-                      options={
-                        ({route}) => ({title: route.params.item.skill})
-                      }/>
-        {/*<Stack.Screen*/}
-        {/*  name={NavigatorName.fieldDetailStack}*/}
-        {/*  component={FieldDetailStackNavigator}*/}
-        {/*  options={{headerShown: false}}/>*/}
-        <Stack.Screen name={ScreenName.fieldDetail}
-                      component={FieldDetail}
-                      options={
-                        ({route}) => ({title: route.params.field})
-                      }/>
-
-        {/*<Stack.Screen*/}
-        {/*  name={NavigatorName.listStack}*/}
-        {/*  component={ListStack}*/}
-        {/*  options={{*/}
-        {/*    headerShown: false*/}
-        {/*  }}/>*/}
-        <Stack.Screen
-          name={ScreenName.studyList}
-          component={StudyList}
-          options={({route}) => ({
-            title: route.params.title
-          })}/>
+        <Stack.Screen name={ScreenName.skillDetail} component={SkillDetail} options={
+          ({route}) => ({title: route.params.item.skill})}/>
+        <Stack.Screen name={ScreenName.fieldDetail} component={FieldDetail} options={
+          ({route}) => ({title: route.params.field})}/>
+        <Stack.Screen name={ScreenName.studyList} component={StudyList} options={({route}) => ({
+          title: route.params.title})}/>
       </Stack.Navigator>
     </PathProvider>
   );

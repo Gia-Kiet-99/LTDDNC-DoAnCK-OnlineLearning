@@ -5,6 +5,7 @@ import Rating from "./rating";
 import {convertHour} from "../../core/utils/date-format";
 
 const CourseInfo = (props) => {
+  // const status = props.status.toLowerCase()
 
   return <View style={[styles.description, props.containerStyle]}>
     <Text style={props.titleStyle}>
@@ -14,7 +15,7 @@ const CourseInfo = (props) => {
       {props.author}
     </Text>
     <Text style={styles.darkText}>
-      {`${props.level} . ${Moment(props.released).format("MMM yyyy")} . ${convertHour(props.duration)}`}
+      {`${props.status} . ${Moment(props.released).format("MMM yyyy")} . ${convertHour(props.duration)}`}
     </Text>
     <View>
       <Rating value={props.rate}/>

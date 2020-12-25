@@ -59,14 +59,14 @@ const MainTabNavigator = (props) => {
               name="HomeStackNavigator"
               component={HomeStackNavigator}
               options={{title: "Home"}}/>
-            {/*<Tab.Screen*/}
-            {/*  name="DownloadStackNavigator"*/}
-            {/*  component={DownloadStackNavigator}*/}
-            {/*  options={{title: "Download"}}/>*/}
-            {/*<Tab.Screen*/}
-            {/*  name="BrowseStackNavigator"*/}
-            {/*  component={BrowseStackNavigator}*/}
-            {/*  options={{title: "Browse"}}/>*/}
+            <Tab.Screen
+              name="DownloadStackNavigator"
+              component={DownloadStackNavigator}
+              options={{title: "Download"}}/>
+            <Tab.Screen
+              name="BrowseStackNavigator"
+              component={BrowseStackNavigator}
+              options={{title: "Browse"}}/>
             {/*<Tab.Screen*/}
             {/*  name="SearchStackNavigator"*/}
             {/*  component={SearchStackNavigator}*/}

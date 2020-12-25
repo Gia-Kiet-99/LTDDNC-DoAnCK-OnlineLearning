@@ -1,30 +1,51 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Alert, Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native'
 import {CourseContext} from "../../../../provider/course-provider";
+import {apiGetLikeStatus, apiLikeCourse} from "../../../../core/services/course-service";
 
 function CourseButton(props) {
-  // const item = props.item
-  // console.log("CourseButton", item)
-
-  // const {updateCourseList} = useContext(CourseContext)
+  const courseId = props.courseId
+  /* Use state */
   const [isFavorite, setFavorite] = useState(false)
   const [isDownloaded, setIsDownloaded] = useState(false)
+  const [isLoading, setLoading] = useState(true)
 
-  // useEffect(() => {
-  //   if (item.isFavorite !== isFavorite) {
-  //     item.isFavorite = isFavorite
-  //     updateCourseList(item.id, item)
-  //   }
-  // }, [isFavorite])
-  // useEffect(() => {
-  //   if (item.isDownload !== isDownloaded) {
-  //     item.isDownload = isDownloaded
-  //     updateCourseList(item.id, item)
-  //   }
-  // }, [isDownloaded])
+  /* Use effect */
+  useEffect(() => {
+    if (isLoading) {
+      getLikeStatus(courseId)
+    }
+  }, [isLoading])
+
+  /* Function */
+  const getLikeStatus = (courseId) => {
+    apiGetLikeStatus(courseId)
+      .then(response => {
+        if (response.status === 200) {
+          setFavorite(response.data.likeStatus)
+        }
+      })
+      .catch(e => {
+        throw new Error()
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+  const toggleLikeStatus = (courseId) => {
+    apiLikeCourse(courseId)
+      .then(response => {
+        if (response.status === 200) {
+          setFavorite(!isFavorite)
+        }
+      })
+      .catch(e => {
+        throw new Error()
+      })
+  }
 
   const onFavoriteButtonPressed = () => {
-    setFavorite(!isFavorite)
+    toggleLikeStatus(courseId)
   }
   const onDownloadButtonPressed = () => {
     if (isDownloaded === true) {

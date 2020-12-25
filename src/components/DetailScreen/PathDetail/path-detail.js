@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {listName} from "../../../globals/constants";
+import {listType} from "../../../globals/constants";
 import StudyList from "../../List/StudyList/study-list";
 import {CourseContext} from "../../../provider/course-provider";
 import PathListHeader from "./PathListHeader/path-list-header";
@@ -17,7 +17,7 @@ const PathDetail = (props) => {
   return (
     <View style={styles.container}>
       <StudyList
-        kind={listName.pathCourse}
+        kind={listType.pathCourse}
         style={{marginTop: 0}}
         navigation={props.navigation}
         data={courses}

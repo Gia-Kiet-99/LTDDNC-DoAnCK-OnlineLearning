@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ChannelInfo from "../../Common/channel-info";
 import StudyList from "../../List/StudyList/study-list";
-import {listName} from "../../../globals/constants";
+import {listType} from "../../../globals/constants";
 import {ChannelContext} from "../../../provider/channel-provider";
 
 const ChannelDetail = (props) => {
@@ -70,7 +70,7 @@ const ChannelDetail = (props) => {
         <View style={styles.container}>
             <StudyList
                 navigation={props.navigation}
-                kind={listName.channelCourse}
+                kind={listType.channelCourse}
                 style={{marginTop: 0}}
                 data={item.courses}
                 listHeaderComponent={renderListHeaderComponent}

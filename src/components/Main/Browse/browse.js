@@ -3,7 +3,7 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 import ImageButton from "../../Common/image-button";
 import Section from "../../Common/section";
 import ActionBar from "../../Common/action-bar";
-import {ImageButtonType, listName, titleName} from "../../../globals/constants";
+import {ImageButtonType, listType, titleName} from "../../../globals/constants";
 import {authors, paths, skills, titles} from "../../../localize/data";
 import {PathContext} from "../../../provider/path-provider";
 import Recommend from "./Recommend/recommend";
@@ -11,25 +11,25 @@ import Recommend from "./Recommend/recommend";
 
 const Browse = (props) => {
   console.log("Browse")
-  const {pathList} = useContext(PathContext)
+  // const {pathList} = useContext(PathContext)
 
   const renderSection = (title, kind, list) => {
     if (list && list.length > 0) {
       switch (kind) {
-        case listName.path:
+        case listType.path:
           return <Section
             kind={kind}
             title={title}
             list={list}
             showSeeAllButton={true}
             navigation={props.navigation}/>
-        case listName.author:
+        case listType.author:
           return <Section
             kind={kind}
             title={title}
             list={list}
             navigation={props.navigation}/>
-        case listName.popularSkill:
+        case listType.popularSkill:
           return <Section
             kind={kind}
             title={title}
@@ -48,9 +48,9 @@ const Browse = (props) => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
         <Recommend/>
 
-        {renderSection("Popular Skills", listName.popularSkill, skills)}
-        {renderSection("Paths", listName.path, pathList)}
-        {renderSection("Top authors", listName.author, authors)}
+        {/*{renderSection("Popular Skills", listName.popularSkill, skills)}*/}
+        {/*{renderSection("Paths", listName.path, pathList)}*/}
+        {/*{renderSection("Top authors", listName.author, authors)}*/}
 
       </ScrollView>
     </View>

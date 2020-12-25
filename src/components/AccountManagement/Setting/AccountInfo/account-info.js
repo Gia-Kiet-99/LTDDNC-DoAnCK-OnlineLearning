@@ -46,7 +46,8 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 48,
-    width: 48
+    width: 48,
+    borderRadius: 48/2
   },
   buttonText: {
     fontSize: 18

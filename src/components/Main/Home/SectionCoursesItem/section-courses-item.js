@@ -50,7 +50,7 @@ const SectionCoursesItem = (props) => {
           containerStyle={courseInfoStyle.container}
           title={props.item.title}
           author={courseAuthor}
-          level={props.item.level}
+          status={props.item.status}
           released={props.item.createdAt}
           duration={props.item.totalHours}
           rate={props.item.ratedNumber}/>
