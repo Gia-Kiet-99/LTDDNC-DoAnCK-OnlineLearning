@@ -2,12 +2,12 @@ import React from 'react'
 import {Image, Text, View, StyleSheet} from 'react-native'
 
 function AuthorInfo(props) {
-  const data = props.data
+  const authorInfo = props.authorInfo
   return (
     <View style={styles.authorInfo}>
-      <Image style={styles.avatar} source={data.authorAvatar}/>
-      <Text style={styles.authorName}>{data.authorName}</Text>
-      <Text style={{marginTop: 5}}>Pluralsight Author</Text>
+      <Image style={styles.avatar} source={{uri: authorInfo.avatar}}/>
+      <Text style={styles.authorName}>{authorInfo.name}</Text>
+      <Text style={{marginTop: 5}}>KLearn Author</Text>
     </View>
   )
 }

@@ -98,3 +98,7 @@ export const apiGetTopSellCourse = async (limit, page) => {
 export const apiGetAuthorList = async () => {
   return instance.get('/instructor')
 }
+
+export const apiGetInstructorDetailInfo = async (instructorId) => {
+  return instance.get(`/instructor/detail/${instructorId}`)
+}

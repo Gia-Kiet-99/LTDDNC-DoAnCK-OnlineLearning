@@ -10,6 +10,7 @@ import SearchStackNavigator from "./SearchStackNavigator/search-stack-navigator"
 import CourseProvider from "../../../provider/course-provider";
 import ChannelProvider from "../../../provider/channel-provider";
 import AuthorProvider from "../../../provider/author-provider";
+import ListProvider from "../../../provider/list-provider";
 
 const Tab = createBottomTabNavigator()
 
@@ -37,44 +38,40 @@ const MainTabNavigatorScreenOptions = ({route}) => ({
 
 const MainTabNavigator = (props) => {
   return (
-    <CourseProvider>
-      <ChannelProvider>
-        <AuthorProvider>
-          <Tab.Navigator
-            initialRouteName="HomeStackNavigator"
-            screenOptions={MainTabNavigatorScreenOptions}
-            backBehavior="initialRoute"
-            tabBarOptions={{
-              keyboardHidesTabBar: true,
-              activeTintColor: '#3498db',
-              inactiveTintColor: 'gray',
-              labelStyle: {
-                fontSize: 12,
-              },
-              style: {
-                height: 50
-              },
-            }}>
-            <Tab.Screen
-              name="HomeStackNavigator"
-              component={HomeStackNavigator}
-              options={{title: "Home"}}/>
-            <Tab.Screen
-              name="DownloadStackNavigator"
-              component={DownloadStackNavigator}
-              options={{title: "Download"}}/>
-            <Tab.Screen
-              name="BrowseStackNavigator"
-              component={BrowseStackNavigator}
-              options={{title: "Browse"}}/>
-            {/*<Tab.Screen*/}
-            {/*  name="SearchStackNavigator"*/}
-            {/*  component={SearchStackNavigator}*/}
-            {/*  options={{title: "Search"}}/>*/}
-          </Tab.Navigator>
-        </AuthorProvider>
-      </ChannelProvider>
-    </CourseProvider>
+    <ListProvider>
+      <Tab.Navigator
+        initialRouteName="HomeStackNavigator"
+        screenOptions={MainTabNavigatorScreenOptions}
+        backBehavior="initialRoute"
+        tabBarOptions={{
+          keyboardHidesTabBar: true,
+          activeTintColor: '#3498db',
+          inactiveTintColor: 'gray',
+          labelStyle: {
+            fontSize: 12,
+          },
+          style: {
+            height: 50
+          },
+        }}>
+        <Tab.Screen
+          name="HomeStackNavigator"
+          component={HomeStackNavigator}
+          options={{title: "Home"}}/>
+        <Tab.Screen
+          name="DownloadStackNavigator"
+          component={DownloadStackNavigator}
+          options={{title: "Download"}}/>
+        <Tab.Screen
+          name="BrowseStackNavigator"
+          component={BrowseStackNavigator}
+          options={{title: "Browse"}}/>
+        {/*<Tab.Screen*/}
+        {/*  name="SearchStackNavigator"*/}
+        {/*  component={SearchStackNavigator}*/}
+        {/*  options={{title: "Search"}}/>*/}
+      </Tab.Navigator>
+    </ListProvider>
   )
 };
 

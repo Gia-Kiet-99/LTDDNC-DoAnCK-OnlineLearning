@@ -6,10 +6,10 @@ const AuthorSectionItem = (props) => {
   const item = props.item
 
   const onItemPressed = () => {
-    // props.navigation.navigate(ScreenName.authorDetail,
-    //   {
-    //     data: item,
-    //   })
+    props.navigation.navigate(ScreenName.authorDetail,
+      {
+        authorId: item.id
+      })
   }
 
   return (
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   },
   content: {
     width: 90,
+    alignItems: 'center'
     // height: 150
   },
   description: {
@@ -48,9 +49,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    height: 90,
-    width: '100%',
-    borderRadius: 90/2
+    height: 75,
+    width: 75,
+    borderRadius: 75/2
   },
   text: {
     fontSize: 16,

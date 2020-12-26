@@ -6,20 +6,19 @@ import Moment from "moment";
 import {convertHour} from "../../../../core/utils/date-format";
 
 function CourseInfo(props) {
-  // const data = props.data
-  // console.log(props.rating)
+
   return <View>
     <Text style={{fontSize: 24}}>
-      {props.title}
+      {props.courseInfo.title}
     </Text>
     <AuthorButton
       data={props.authorInfo}
-      /*onPress={props.onAuthorButtonPress}*//>
+      navigation={props.navigation}/>
     <View style={{flexDirection: 'row', marginTop: 10}}>
       <Text style={{color: 'gray', marginRight: 10, fontSize: 13}}>
-        {`${props.status} . ${Moment(props.released).format("MMM yyyy")} . ${convertHour(props.duration)}`}
+        {`${props.courseInfo.status} . ${Moment(props.courseInfo.released).format("MMM yyyy")} . ${convertHour(props.courseInfo.duration)}`}
       </Text>
-      <Rating value={props.rating}/>
+      <Rating value={props.courseInfo.rating}/>
     </View>
   </View>
 }

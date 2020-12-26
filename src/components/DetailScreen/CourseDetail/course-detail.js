@@ -92,11 +92,13 @@ const CourseDetail = (props) => {
   const CourseIntro = () => {
     return <View style={styles.courseIntro}>
       <CourseInfo
-        title={courseDetail.title}
-        status={courseDetail.status}
-        released={courseDetail.createdAt}
-        duration={courseDetail.totalHours}
-        rating={courseDetail.averagePoint}
+        courseInfo={{
+          title: courseDetail.title,
+          status: courseDetail.status,
+          released: courseDetail.createdAt,
+          duration: courseDetail.totalHours,
+          rating: courseDetail.averagePoint
+        }}
         authorInfo={{
           /**
            * Hiện tại chưa lấy được thông tin người dạy thông qua id
@@ -107,7 +109,8 @@ const CourseDetail = (props) => {
           authorName: courseDetail.instructor.name,
           authorAvatar: courseDetail.instructor.avatar
         }}
-        /*onAuthorButtonPress={onAuthorButtonPressed}*//>
+        navigation={props.navigation}/>
+
       <CourseButton courseId={courseDetail.id}/>
       <Description content={{
         description: courseDetail.description,

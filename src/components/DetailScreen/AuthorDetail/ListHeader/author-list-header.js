@@ -9,7 +9,7 @@ function AuthorListHeader(props) {
   return (
     <View>
       {/*Author info*/}
-      <AuthorInfo data={props.data}/>
+      <AuthorInfo authorInfo={props.authorInfo}/>
       {/*Follow button*/}
       <TouchableOpacity
         activeOpacity={0.5}
@@ -23,10 +23,13 @@ function AuthorListHeader(props) {
       <Text style={{textAlign: 'center', marginTop: 10, fontSize: 12}}>Follow to be notified when new
         courses are published.</Text>
       {/*Author description*/}
-      <Description/>
+      <View>
+        <Text></Text>
+      </View>
+
       {/*Link to fb, instagram, twitter,...*/}
       <AuthorContact/>
-      <Text style={{marginTop: 35, fontSize: 16}}>Course</Text>
+      <Text style={{marginTop: 35, fontSize: 16, fontWeight: 'bold'}}>Courses</Text>
     </View>
   )
 }

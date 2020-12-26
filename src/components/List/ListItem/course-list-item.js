@@ -5,9 +5,10 @@ import {ScreenName} from "../../../globals/constants";
 
 const CourseListItem = (props) => {
   const item = props.item
+  // const authorName =
 
   const onPressListItem = () => {
-    props.navigation.navigate(ScreenName.courseDetail, {
+    props.navigation.push(ScreenName.courseDetail, {
       data: props.item
     })
   }
@@ -24,7 +25,7 @@ const CourseListItem = (props) => {
         containerStyle={courseInfoStyle.container}
         titleStyle={courseInfoStyle.largerTitle}
         title={item.title}
-        author={item["instructor.user.name"]}
+        author={(props.authorName === undefined) ? item["instructor.user.name"] : props.authorName}
         status={item.status}
         released={item.createdAt}
         duration={item.totalHours}
