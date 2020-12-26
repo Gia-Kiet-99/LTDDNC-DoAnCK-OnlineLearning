@@ -1,49 +1,58 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, FlatList, SafeAreaView, View, ActivityIndicator, Text} from 'react-native';
+import {StyleSheet, FlatList, View, ActivityIndicator, Text} from 'react-native';
 import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
 import {apiGetNewReleaseCourse, apiGetTopSellCourse} from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 import {listType} from "../../../globals/constants";
+import LoadIndicator from "../../Common/load-indicator";
 
 
 const StudyList = (props) => {
   console.log("StudyList")
   const type = props.route.params.type
+  let getDataFromApi
   let limit = 10
   let page = 1
 
   /* Use state */
   const [loading, setLoading] = useState(LOADING)
-  const [listData, setListData] = useState(null)
+  const [listData, setListData] = useState([])
   /**
    * canRefreshList is state that show us if there is no course to reach
-   * when we fetched all course from api
+   * (false when we fetched all course from api)
    * */
-  const [canRefreshList, setRefreshList] = useState(true)
+  const [canRefreshList, setRefreshList] = useState(false)
 
   /* Use effect */
   useEffect(() => {
+    checkListType(type)
     if (loading === LOADING) {
-      switch (type) {
-        case listType.newReleaseCourse:
-          getNewReleaseCourse(limit, page)
-          break
-        case listType.topSellCourse:
-          getTopSellCourse(limit, page)
-          break
-        default:
-          throw new Error()
-      }
+      getDataFromApi()
     }
   }, [loading])
 
   /* Function */
-  const getNewReleaseCourse = (limit, page) => {
+  const checkListType = (type) => {
+    switch (type) {
+      case listType.newReleaseCourse:
+        // getNewReleaseCourse(limit, page)
+        getDataFromApi = getNewReleaseCourse
+        break
+      case listType.topSellCourse:
+        // getTopSellCourse(limit, page)
+        getDataFromApi = getTopSellCourse
+        break
+      default:
+        throw new Error()
+    }
+  }
+  const getNewReleaseCourse = () => {
+    console.log("getNewReleaseCourse")
     apiGetNewReleaseCourse(limit, page)
       .then(response => {
         if (response.status === 200) {
-          setListData(response.data.payload)
+          setListData(listData.concat(response.data.payload))
           setLoading(LOAD_SUCCEEDED)
         } else {
           setLoading(LOAD_FAILED)
@@ -53,12 +62,15 @@ const StudyList = (props) => {
         setLoading(LOAD_FAILED)
         throw new Error()
       })
+      .finally(() => {
+        setRefreshList(false)
+      })
   }
-  const getTopSellCourse = (limit, page) => {
+  const getTopSellCourse = () => {
     apiGetTopSellCourse(limit, page)
       .then(response => {
         if (response.status === 200) {
-          setListData(response.data.payload)
+          setListData(listData.concat(response.data.payload))
           setLoading(LOAD_SUCCEEDED)
         } else {
           setLoading(LOAD_FAILED)
@@ -68,25 +80,17 @@ const StudyList = (props) => {
         setLoading(LOAD_FAILED)
         throw new Error()
       })
+      .finally(() => {
+        setRefreshList(false)
+      })
   }
   const loadMoreCourses = () => {
-    // switch (type) {
-    //   case listType.newReleaseCourse:
-    //     page++
-    //     getNewReleaseCourse(limit, page)
-    //     break
-    //   case listType.topSellCourse:
-    //     page++
-    //     getTopSellCourse(limit, page)
-    //     break
-    //   default:
-    //     throw new Error()
-    // }
     console.log("onEndReach")
+    // setRefreshList(true)
+    // page++
+    // getDataFromApi()
   }
-  const renderCourseItem = ({item}) => (
-    <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
-  )
+
 
   // const renderPathItem = ({item}) => (
   //   <PathListItem key={item.id} item={item} navigation={props.navigation}/>
@@ -172,6 +176,18 @@ const StudyList = (props) => {
   //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
   //     }
   // }
+
+  /* Render function */
+  const renderCourseItem = ({item}) => (
+    <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
+  )
+  const renderListFooter = () => {
+    if (canRefreshList) {
+      return <LoadIndicator/>
+    } else {
+      return <View/>
+    }
+  }
   const renderUI = () => {
     switch (loading) {
       case LOADING:
@@ -180,14 +196,16 @@ const StudyList = (props) => {
         </View>
       case LOAD_SUCCEEDED:
         return <FlatList
-          // refreshing={true}
-          onEndReachedThreshold={2}
+          // refreshing={false}
+          // onRefresh={getDataFromApi}
+          onEndReachedThreshold={0}
           onEndReached={loadMoreCourses}
           showsVerticalScrollIndicator={false}
           data={listData}
           renderItem={renderCourseItem}
           keyExtractor={(item) => (item.id)}
-          ItemSeparatorComponent={() => <ListItemSeparator/>}/>
+          ListFooterComponent={renderListFooter}
+          ItemSeparatorComponent={ListItemSeparator}/>
       case LOAD_FAILED:
         return <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
           <Text>Oops... Something went wrong</Text>

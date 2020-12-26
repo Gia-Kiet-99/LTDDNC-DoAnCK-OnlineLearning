@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
-import {ImageButtonType, ScreenName} from "../../globals/constants";
+import {ScreenName} from "../../globals/constants";
 
 const ImageButton = (props) => {
   const navigation = useNavigation()

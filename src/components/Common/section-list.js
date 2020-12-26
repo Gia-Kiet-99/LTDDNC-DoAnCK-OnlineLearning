@@ -8,6 +8,7 @@ import {listType} from "../../globals/constants";
 import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item";
 import {AuthenticationContext} from "../../provider/authentication-provider";
 import {
+  apiGetAuthorList,
   apiGetCourseInfo,
   apiGetLearningCourse,
   apiGetRecommendCourse,
@@ -58,12 +59,24 @@ const SectionList = (props) => {
           .finally(() => {
             setLoading(false)
           })
-        break;
+        break
+      case listType.author:
+        apiGetAuthorList()
+          .then(response => {
+            if (response.status === 200) {
+              setListData(response.data.payload)
+            }
+          })
+          .catch(error => {
+            throw new Error(error)
+          })
+          .finally(() => {
+            setLoading(false)
+          })
+        break
       default:
         throw new Error("invalid list kind")
     }
-    //get top-rate courses
-
   }, [listContext.shouldUpdateList])
 
   /* Render list item */
@@ -86,19 +99,19 @@ const SectionList = (props) => {
   }
 
   return <View style={styles.container}>
-      {isLoading ? (
-        <View style={{justifyContent: 'center', flex: 1}}>
-          <ActivityIndicator size="large" color="#2980b9"/>
-        </View>
-      ) : (
-        <FlatList
-          data={listData}
-          renderItem={renderListItem}
-          horizontal={true}
-          keyExtractor={item => item.id}
-          showsHorizontalScrollIndicator={false}/>
-      )}
-    </View>
+    {isLoading ? (
+      <View style={{justifyContent: 'center', flex: 1}}>
+        <ActivityIndicator size="large" color="#2980b9"/>
+      </View>
+    ) : (
+      <FlatList
+        data={listData}
+        renderItem={renderListItem}
+        horizontal={true}
+        keyExtractor={item => item.id}
+        showsHorizontalScrollIndicator={false}/>
+    )}
+  </View>
 };
 
 const styles = StyleSheet.create({

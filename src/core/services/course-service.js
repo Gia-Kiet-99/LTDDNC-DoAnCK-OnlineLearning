@@ -94,3 +94,7 @@ export const apiGetTopSellCourse = async (limit, page) => {
     page: page
   })
 }
+
+export const apiGetAuthorList = async () => {
+  return instance.get('/instructor')
+}

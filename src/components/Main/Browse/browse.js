@@ -3,7 +3,7 @@ import {View, ScrollView, StyleSheet} from 'react-native';
 import ImageButton from "../../Common/image-button";
 import Section from "../../Common/section";
 import ActionBar from "../../Common/action-bar";
-import {ImageButtonType, listType, titleName} from "../../../globals/constants";
+import {ImageButtonType, listType as listName, listType, titleName} from "../../../globals/constants";
 import {authors, paths, skills, titles} from "../../../localize/data";
 import {PathContext} from "../../../provider/path-provider";
 import Recommend from "./Recommend/recommend";
@@ -13,31 +13,28 @@ const Browse = (props) => {
   console.log("Browse")
   // const {pathList} = useContext(PathContext)
 
-  const renderSection = (title, kind, list) => {
-    if (list && list.length > 0) {
-      switch (kind) {
-        case listType.path:
-          return <Section
-            kind={kind}
-            title={title}
-            list={list}
-            showSeeAllButton={true}
-            navigation={props.navigation}/>
-        case listType.author:
-          return <Section
-            kind={kind}
-            title={title}
-            list={list}
-            navigation={props.navigation}/>
-        case listType.popularSkill:
-          return <Section
-            kind={kind}
-            title={title}
-            list={list}
-            navigation={props.navigation}/>
-        default:
-          return <View/>
-      }
+  const renderSection = (title, kind) => {
+    switch (kind) {
+      case listType.path:
+        return <Section
+          kind={kind}
+          title={title}
+          // list={list}
+          showSeeAllButton={true}
+          navigation={props.navigation}/>
+      case listType.author:
+        return <Section
+          kind={kind}
+          title={title}
+          navigation={props.navigation}/>
+      case listType.popularSkill:
+        return <Section
+          kind={kind}
+          title={title}
+          // list={list}
+          navigation={props.navigation}/>
+      default:
+        return <View/>
     }
   }
 
@@ -50,7 +47,7 @@ const Browse = (props) => {
 
         {/*{renderSection("Popular Skills", listName.popularSkill, skills)}*/}
         {/*{renderSection("Paths", listName.path, pathList)}*/}
-        {/*{renderSection("Top authors", listName.author, authors)}*/}
+        {renderSection("Top authors", listType.author)}
 
       </ScrollView>
     </View>

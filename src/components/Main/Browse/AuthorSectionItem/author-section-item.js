@@ -6,17 +6,10 @@ const AuthorSectionItem = (props) => {
   const item = props.item
 
   const onItemPressed = () => {
-    // return props.navigation?.navigate(NavigatorName.authorDetailStack,
+    // props.navigation.navigate(ScreenName.authorDetail,
     //   {
-    //     screen: ScreenName.authorDetail,
-    //     params: {
-    //       data: item
-    //     }
+    //     data: item,
     //   })
-    props.navigation.navigate(ScreenName.authorDetail,
-      {
-        data: item,
-      })
   }
 
   return (
@@ -25,10 +18,10 @@ const AuthorSectionItem = (props) => {
       onPress={onItemPressed}>
 
       <View style={styles.content}>
-        <Image style={styles.image} source={item.authorAvatar}/>
+        <Image style={styles.image} source={{uri: item["user.avatar"]}}/>
         <View style={styles.description}>
           <Text style={styles.text}>
-            {item.authorName}
+            {item["user.name"]}
           </Text>
         </View>
       </View>

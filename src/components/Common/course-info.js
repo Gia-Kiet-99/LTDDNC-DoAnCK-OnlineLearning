@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Moment from 'moment'
 import Rating from "./rating";
 import {convertHour} from "../../core/utils/date-format";
 
 const CourseInfo = (props) => {
-  // const status = props.status.toLowerCase()
 
   return <View style={[styles.description, props.containerStyle]}>
     <Text style={props.titleStyle}>
