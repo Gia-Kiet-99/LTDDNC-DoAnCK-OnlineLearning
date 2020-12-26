@@ -15,13 +15,13 @@ const Browse = (props) => {
 
   const renderSection = (title, kind) => {
     switch (kind) {
-      case listType.path:
-        return <Section
-          kind={kind}
-          title={title}
-          // list={list}
-          showSeeAllButton={true}
-          navigation={props.navigation}/>
+      // case listType.path:
+      //   return <Section
+      //     kind={kind}
+      //     title={title}
+      //     // list={list}
+      //     showSeeAllButton={true}
+      //     navigation={props.navigation}/>
       case listType.author:
         return <Section
           kind={kind}
@@ -45,7 +45,7 @@ const Browse = (props) => {
       <ScrollView showsVerticalScrollIndicator={false} style={styles.content}>
         <Recommend/>
 
-        {/*{renderSection("Popular Skills", listName.popularSkill, skills)}*/}
+        {renderSection("Popular Skills", listType.popularSkill)}
         {/*{renderSection("Paths", listName.path, pathList)}*/}
         {renderSection("Top authors", listType.author)}
 

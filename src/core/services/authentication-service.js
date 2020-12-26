@@ -2,8 +2,8 @@ import instance from "../configuration/axios-config";
 
 export const apiLogin = async (username, password) => {
   return await instance.post("/user/login", {
-    email: "kietdg99@gmail.com",
-    password: "123456789"
+    email: username,
+    password: password
   });
 }
 

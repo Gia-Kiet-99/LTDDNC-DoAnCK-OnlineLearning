@@ -96,9 +96,53 @@ export const apiGetTopSellCourse = async (limit, page) => {
 }
 
 export const apiGetAuthorList = async () => {
-  return instance.get('/instructor')
+  return await instance.get('/instructor')
 }
 
 export const apiGetInstructorDetailInfo = async (instructorId) => {
-  return instance.get(`/instructor/detail/${instructorId}`)
+  return await instance.get(`/instructor/detail/${instructorId}`)
+}
+
+export const apiGetCategoryList = async () => {
+  return await instance.get('/category/all')
+}
+
+export const apiGetCategoryDetail = async (categoryId) => {
+  return instance.post('/course/search', {
+    keyword: "",
+    opt: {
+      sort: {
+        attribute: "price",
+        rule: "ASC"
+      },
+      category: [
+        categoryId,
+      ],
+      time: [
+        {
+          min: 0,
+          max: 1
+        },
+        {
+          min: 3,
+          max: 6
+        }
+      ],
+      price: [
+        {
+          max: 0
+        },
+        {
+          min: 0,
+          max: 200000
+        },
+        {
+          min: 500000,
+          max: 1000000
+        }
+      ]
+    },
+    limit: 20,
+    offset: 1
+  })
 }

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image, ActivityIndicator} from 'react-native';
+import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image, ActivityIndicator, Alert} from 'react-native';
 import buttonStyles from "../styles/button-styles";
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
@@ -25,8 +25,12 @@ const Login = (props) => {
   // console.log("InitialState", authContext.state)
 
   const onLogin = () => {
-    setOnLogin(true)
-    authContext.login(username, password)
+    if (username !== "" && password !== "") {
+      setOnLogin(true)
+      authContext.login(username, password)
+    } else {
+      Alert.alert("Login", "Please enter username and password")
+    }
   }
   const onForgetPasswordPressed = () => {
     return props.navigation.navigate(ScreenName.forgetPassword)

@@ -8,7 +8,7 @@ import {listType} from "../../globals/constants";
 import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item";
 import {AuthenticationContext} from "../../provider/authentication-provider";
 import {
-  apiGetAuthorList,
+  apiGetAuthorList, apiGetCategoryDetail, apiGetCategoryList,
   apiGetCourseInfo,
   apiGetLearningCourse,
   apiGetRecommendCourse,
@@ -68,6 +68,20 @@ const SectionList = (props) => {
             }
           })
           .catch(error => {
+            throw new Error(error)
+          })
+          .finally(() => {
+            setLoading(false)
+          })
+        break
+      case listType.popularSkill:
+        apiGetCategoryList()
+          .then(response => {
+            if (response.status === 200) {
+              setListData(response.data.payload)
+            }
+          })
+          .catch(e => {
             throw new Error(error)
           })
           .finally(() => {
