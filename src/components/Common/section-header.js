@@ -7,11 +7,7 @@ const SectionHeader = (props) => {
     props.navigation.navigate(ScreenName.studyList,
       {
         title: props.title,
-        kind: props.kind,
-        data: props.list,
-        style: {
-          marginHorizontal: 15
-        }
+        type: props.kind,
       }
     )
   )

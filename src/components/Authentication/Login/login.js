@@ -6,6 +6,7 @@ import textInputStyles from "../styles/text-input-styles";
 import {ScreenName} from "../../../globals/constants";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {AppThemeContext} from "../../../provider/theme-provider";
+import LoadIndicator from "../../Common/load-indicator";
 
 // props.navigation.navigate(NavigatorName.mainTab)
 // props.navigation.reset({
@@ -19,14 +20,22 @@ const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isOnLogin, setOnLogin] = useState(false)
+  // const [message, setMessage] = useState("");
 
   const {theme} = useContext(AppThemeContext)
 
-  // console.log("InitialState", authContext.state)
+  /* Use effect */
+  useEffect(() => {
+    if(authContext.state.message !== "") {
+      setOnLogin(false);
+      // Alert.alert(authContext.state.message);
+    }
+  }, [authContext.state.message])
 
   const onLogin = () => {
-    if (username !== "" && password !== "") {
+    if (username.trim() !== "" && password.trim() !== "") {
       setOnLogin(true)
+      authContext.clearMessage();
       authContext.login(username, password)
     } else {
       Alert.alert("Login", "Please enter username and password")
@@ -38,66 +47,72 @@ const Login = (props) => {
   const onSubscribePressed = () => {
     return props.navigation.navigate(ScreenName.register)
   }
-  const renderLoginStatus = (authentication) => {
-    if (authentication && authentication.status === 404) {
-      return <Text style={{fontWeight: 'bold', color: '#34495e'}}>{authentication.errorString}</Text>
+  const renderLoginStatus = (message) => {
+    if (isOnLogin) {
+      return <LoadIndicator/>
+    } else {
+      if (message !== "") {
+        return <Text style={{fontWeight: 'bold', color: '#34495e'}}>{message}</Text>
+      } else {
+        return <View/>
+      }
     }
   }
 
   return (
     <View style={[styles.container, theme]}>
-      {isOnLogin ?
-        (
-          <ActivityIndicator size="large" color="#2980b9"/>
-        ) :
-        (
-          <View>
-            <View style={styles.imageWrapper}>
-              <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
-            </View>
-            <View style={{marginTop: 10}}>
-              <Text style={textStyles.labelText}>Username (or email)</Text>
-              <TextInput
-                selectionColor={'#888'}
-                style={[textInputStyles.textInput, styles.username]}
-                onChangeText={(text) => setUsername(text)}
-                defaultValue={username}/>
-            </View>
+      {/*<View>*/}
+      <View style={styles.imageWrapper}>
+        <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
+      </View>
+      <View style={{marginTop: 10}}>
+        <Text style={textStyles.labelText}>Username (or email)</Text>
+        <TextInput
+          // blurOnSubmit={true}
+          textContentType="emailAddress"
+          keyboardType="email-address"
+          selectionColor={'#888'}
+          style={[textInputStyles.textInput, styles.username]}
+          onChangeText={(text) => setUsername(text)}
+          defaultValue={username}/>
+      </View>
 
-            <View>
-              <Text style={[textStyles.labelText, {marginTop: 10}]}>Password</Text>
-              <TextInput selectionColor={'#888'} style={textInputStyles.textInput}
-                         secure={true}
-                         secureTextEntry={true}
-                         onChangeText={(text) => setPassword(text)}
-                         defaultValue={password}
-              />
-            </View>
+      <View>
+        <Text style={[textStyles.labelText, {marginTop: 10}]}>Password</Text>
+        <TextInput selectionColor={'#888'} style={textInputStyles.textInput}
+                   secure={true}
+                   secureTextEntry={true}
+                   onChangeText={(text) => setPassword(text)}
+                   defaultValue={password}
+        />
+      </View>
 
-            <View style={{alignItems: 'center', marginVertical: 10}}>
-              {/*{renderLoginStatus(authentication)}*/}
-            </View>
+      <View style={{alignItems: 'center', marginVertical: 10}}>
+        {renderLoginStatus(authContext.state.message)}
+        {/*{isOnLogin ? (<LoadIndicator/>) : (*/}
+        {/*  <Text style={{fontWeight: 'bold', color: '#34495e'}}>{authContext.state.message}</Text>)}*/}
+      </View>
 
-            <TouchableOpacity onPress={onLogin} activeOpacity={0.5}
-                              style={[buttonStyles.button, buttonStyles.loginButton]}>
+      <TouchableOpacity onPress={onLogin} activeOpacity={0.5}
+                        style={[buttonStyles.button, buttonStyles.loginButton]}>
 
-              <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
-            </TouchableOpacity>
+        <Text style={[textStyles.buttonText, {color: '#fff'}]}>Sign in</Text>
+      </TouchableOpacity>
 
-            <TouchableOpacity onPress={onForgetPasswordPressed} style={styles.forgotButton}>
-              <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
-            </TouchableOpacity>
+      <TouchableOpacity onPress={onForgetPasswordPressed} style={styles.forgotButton}>
+        <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
+      </TouchableOpacity>
 
-            <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
-              <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
-            </TouchableOpacity>
+      <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
+        <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
+      </TouchableOpacity>
 
-            <TouchableOpacity onPress={onSubscribePressed}
-                              style={[buttonStyles.button, buttonStyles.transparentButton]}>
-              <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+      <TouchableOpacity onPress={onSubscribePressed}
+                        style={[buttonStyles.button, buttonStyles.transparentButton]}>
+        <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
+      </TouchableOpacity>
+      {/*</View>*/}
+
     </View>
   );
 };

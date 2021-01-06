@@ -1,8 +1,5 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
-import Section from "../../Common/section";
-import {listType} from "../../../globals/constants";
-import {authors, channels, courses, paths} from "../../../localize/data";
+import {FlatList, View} from 'react-native';
 
 const SkillDetail = (props) => {
   // const skill = props.route?.params?.item.skill;
@@ -10,7 +7,7 @@ const SkillDetail = (props) => {
   // console.log(props)
 
   return <View>
-
+    {/*<FlatList data={} renderItem={}/>*/}
   </View>
     // <ScrollView>
     //   <Section navigation={props.navigation} kind={listType.path}

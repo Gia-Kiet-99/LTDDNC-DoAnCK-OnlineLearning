@@ -1,5 +1,6 @@
 import {initialState} from "../provider/authentication-provider";
 import {
+  CLEAR_MESSAGE,
   GET_USER_INFO_FAILED,
   GET_USER_INFO_SUCCEEDED,
   LOG_OUT,
@@ -13,9 +14,15 @@ export const reducer = (prevState, action) => {
   switch (action.type) {
     case LOGIN_SUCCEEDED:
       setTokenToHeader(action.data.token)
-      return {...prevState, isAuthenticated: true, token: action.data.token, userInfo: action.data.userInfo}
+      return {
+        ...prevState,
+        isAuthenticated: true,
+        token: action.data.token,
+        userInfo: action.data.userInfo,
+        message: action.data.message
+      }
     case LOGIN_FAILED:
-      return {...prevState, isAuthenticated: false}
+      return {...prevState, isAuthenticated: false, message: action.data.messageError}
     case LOG_OUT:
       return {...initialState}
     case GET_USER_INFO_SUCCEEDED:
@@ -24,6 +31,8 @@ export const reducer = (prevState, action) => {
     case GET_USER_INFO_FAILED:
       // console.log("prevState: ", prevState)
       return {...prevState}
+    case CLEAR_MESSAGE:
+      return {...prevState, message: ""}
     default:
       throw new Error();
   }

@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useReducer, useState} from 'react';
 import {reducer} from "../reducer/authentication-reducer";
-import {getUserInfo, login, logOut} from "../action/authentication-action";
+import {clearMessage, getUserInfo, login, logOut} from "../action/authentication-action";
 import {apiSendEmail} from "../core/services/authentication-service";
 import {removeAuthToken, saveAuthToken} from "../core/utils/async-storage-service";
 
@@ -10,7 +10,7 @@ export const initialState = {
   isAuthenticated: false,
   userInfo: "",
   token: "",
-  errorMessage: ""
+  message: ""
 }
 
 export const init = () => {
@@ -39,6 +39,7 @@ const AuthenticationProvider = (props) => {
         login: login(dispatch),
         logout: logOut(dispatch),
         getUserInfo: getUserInfo(dispatch, setLoginBySavedToken),
+        clearMessage: clearMessage(dispatch),
         forgotPassword,
         loginBySavedToken
         /*forgotPassword: forgotPassword(dispatch)*/

@@ -15,18 +15,18 @@ axios.defaults.timeout = 10000;
 const Stack = createStackNavigator();
 
 export default function App() {
-    return (
-        <AppThemeProvider>
-            <AuthenticationProvider>
-                <NavigationContainer theme={DefaultTheme}>
-                    <Stack.Navigator>
-                        <Stack.Screen name={NavigatorName.appStack} component={AppNavigator}
-                                      options={{headerShown: false}}/>
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </AuthenticationProvider>
-        </AppThemeProvider>
-    );
+  return (
+    <AppThemeProvider>
+      <AuthenticationProvider>
+        <NavigationContainer theme={DefaultTheme}>
+          <Stack.Navigator>
+            <Stack.Screen name={NavigatorName.appStack} component={AppNavigator}
+                          options={{headerShown: false}}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AuthenticationProvider>
+    </AppThemeProvider>
+  );
 }
 
 

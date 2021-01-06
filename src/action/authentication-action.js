@@ -10,6 +10,7 @@ export const AUTHENTICATING = "AUTHENTICATING"
 export const RESET = "RESET"
 export const GET_USER_INFO_SUCCEEDED = "GET_USER_INFO_SUCCEEDED"
 export const GET_USER_INFO_FAILED = "GET_USER_INFO_FAILED"
+export const CLEAR_MESSAGE = "CLEAR_MESSAGE"
 
 export const login = (dispatch) => async (username, password) => {
   try {
@@ -21,10 +22,10 @@ export const login = (dispatch) => async (username, password) => {
       await saveAuthToken(token)
       dispatch({type: LOGIN_SUCCEEDED, data: response.data})
     } else {
-      dispatch({type: LOGIN_FAILED})
+      dispatch({type: LOGIN_FAILED, data: {messageError: "Username or password is incorrect"}})
     }
   } catch (error) {
-    dispatch({type: LOGIN_FAILED})
+    dispatch({type: LOGIN_FAILED, data: {messageError: "Username or password is incorrect"}})
   }
 }
 
@@ -53,3 +54,8 @@ export const getUserInfo = (dispatch, setLoginBySavedToken) => async (token) => 
     dispatch({type: GET_USER_INFO_FAILED})
   }
 }
+
+export const clearMessage = (dispatch) => () => {
+  dispatch({type: CLEAR_MESSAGE})
+}
+

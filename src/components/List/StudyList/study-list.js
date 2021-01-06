@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, FlatList, View, ActivityIndicator, Text} from 'react-native';
 import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
-import {apiGetNewReleaseCourse, apiGetTopSellCourse} from "../../../core/services/course-service";
+import {apiGetLearningCourse, apiGetNewReleaseCourse, apiGetTopSellCourse} from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 import {listType} from "../../../globals/constants";
 import LoadIndicator from "../../Common/load-indicator";
@@ -43,9 +43,28 @@ const StudyList = (props) => {
         // getTopSellCourse(limit, page)
         getDataFromApi = getTopSellCourse
         break
+      case listType.continueCourse:
+        getDataFromApi = getContinueCourses
+        break
       default:
         throw new Error()
     }
+  }
+  const getContinueCourses = () => {
+    console.log("getContinueCourses")
+    apiGetLearningCourse().then(response => {
+      if (response.stack === 200) {
+        setListData(listData.concat(response.data.payload))
+        setLoading(LOAD_SUCCEEDED)
+      } else {
+        setLoading(LOAD_FAILED)
+      }
+    }).catch(err => {
+      setLoading(LOAD_FAILED)
+      throw new Error()
+    }).finally(() => {
+      setRefreshList(false)
+    })
   }
   const getNewReleaseCourse = () => {
     console.log("getNewReleaseCourse")

@@ -11,6 +11,7 @@ import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import ChannelDetail from "../../../DetailScreen/ChannelDetail/channel-detail";
 import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
 import ListProvider from "../../../../provider/list-provider";
+import StudyList from "../../../List/StudyList/study-list";
 
 const Stack = createStackNavigator();
 const HomeStackNavigator = (props) => {
@@ -21,7 +22,9 @@ const HomeStackNavigator = (props) => {
         <Stack.Screen name={ScreenName.channelDetail} component={ChannelDetail} options={{headerShown: true}}/>
         <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
         <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
-        <Stack.Screen name={NavigatorName.listStack} component={ListStack} options={{headerShown: false}}/>
+        {/*<Stack.Screen name={NavigatorName.listStack} component={ListStack} options={{headerShown: false}}/>*/}
+        <Stack.Screen name={ScreenName.studyList} component={StudyList} options={
+          ({route}) => ({title: route.params.title})}/>
         <Stack.Screen name={ScreenName.setting} component={Setting}/>
         <Stack.Screen name={ScreenName.profile} component={Profile}/>
       </Stack.Navigator>
