@@ -40,9 +40,12 @@ const Search = () => {
     }
   }, [status])
 
-  const handleSubmitPressed = () => {
-    // Alert.alert("Search", keyword)
+  const handleSubmitKeyword = () => {
     setStatus(SHOW_LOADING)
+  }
+  const onHistoryItemPressed = (keyword) => {
+    setKeyword(keyword)
+    handleSubmitKeyword()
   }
   const onSearchFocus = () => {
     setStatus(SHOW_HISTORY)
@@ -50,7 +53,7 @@ const Search = () => {
   const renderUI = () => {
     switch (status) {
       case SHOW_HISTORY:
-        return <SearchHistoryList/>
+        return <SearchHistoryList onHistoryItemPressed={onHistoryItemPressed}/>
       case SHOW_RESULT:
         return <SearchTabNavigator data={searchResult}/>
       case SHOW_LOADING:
@@ -68,7 +71,7 @@ const Search = () => {
         onChangeText={(keyword) => setKeyword(keyword)}
         value={keyword}
         returnKeyType="search"
-        onSubmitEditing={handleSubmitPressed}
+        onSubmitEditing={handleSubmitKeyword}
         autoFocus={true}
         onFocus={onSearchFocus}
       />

@@ -35,7 +35,9 @@ function SearchHistoryList(props) {
     </View>
   }
   const renderListItem = ({item}) => {
-    return <TouchableOpacity style={styles.listItemContainer}>
+    return <TouchableOpacity
+      onPress={() => props.onHistoryItemPressed(item.content)}
+      style={styles.listItemContainer}>
       <Image style={styles.itemImage} source={require("../../../../../assets/recent.png")}/>
       <Text style={styles.itemText}>{item.content}</Text>
     </TouchableOpacity>
