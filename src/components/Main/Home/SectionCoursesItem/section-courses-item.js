@@ -11,30 +11,35 @@ const Separator = () => {
 }
 
 const SectionCoursesItem = (props) => {
+  const item = props.item
   // const [shouldNavigate, setShouldNavigate] = useState(false)
   const [isLoading, setLoading] = useState(true)
   const [courseAuthor, setCourseAuthor] = useState("")
 
   useEffect(() => {
-    apiGetCourseInstructor(props.item.instructorId)
-      .then((response) => {
-        if (response.status === 200) {
-          setCourseAuthor(response.data.payload.name)
-        }
-      })
-      .catch(error => {
-        throw new Error(error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  })
+    if (isLoading) {
+      apiGetCourseInstructor(props.item.instructorId)
+        .then((response) => {
+          if (response.status === 200) {
+            setCourseAuthor(response.data.payload.name)
+          }
+        })
+        .catch(error => {
+          throw new Error(error)
+        })
+        .finally(() => {
+          setLoading(false)
+        })
+    }
+  }, [isLoading])
 
   const ItemPressed = () => {
     props.navigation.navigate(ScreenName.courseDetail, {
       data: props.item
     })
   }
+
+  const averagePoint = Math.round((item.formalityPoint + item.contentPoint + item.presentationPoint) / 3)
 
   return <View>
     {/*{isLoading? (*/}
@@ -48,12 +53,12 @@ const SectionCoursesItem = (props) => {
         <Separator/>
         <CourseInfo
           containerStyle={courseInfoStyle.container}
-          title={props.item.title}
+          title={item.title}
           author={courseAuthor}
-          status={props.item.status}
-          released={props.item.createdAt}
-          duration={props.item.totalHours}
-          rate={props.item.ratedNumber}/>
+          status={item.status}
+          released={item.createdAt}
+          duration={item.totalHours}
+          rate={averagePoint}/>
       </View>
     </TouchableOpacity>
     {/*)}*/}

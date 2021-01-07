@@ -1,7 +1,6 @@
 import {apiGetUserInfo, apiLogin} from "../core/services/authentication-service";
 import {initialState} from "../provider/authentication-provider";
 import {removeAuthToken, saveAuthToken} from "../core/utils/async-storage-service";
-import {setTokenToHeader} from "../core/configuration/axios-config";
 
 export const LOGIN_SUCCEEDED = "LOGIN_SUCCEEDED"
 export const LOGIN_FAILED = "LOGIN_FAILED"

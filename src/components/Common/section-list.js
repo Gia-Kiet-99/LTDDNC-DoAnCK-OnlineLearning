@@ -15,6 +15,7 @@ import {
   apiGetTopRateCourses
 } from "../../core/services/course-service";
 import {ListContext} from "../../provider/list-provider";
+import LearningSectionItem from "../Main/Home/SectionCoursesItem/learning-section-item";
 
 const SectionList = (props) => {
   /* Use context */
@@ -101,6 +102,7 @@ const SectionList = (props) => {
       case listType.course:
       case listType.favoriteCourse:
       case listType.continueCourse:
+        return <LearningSectionItem key={item.id} item={item} navigation={props.navigation}/>
       case listType.recommendCourse:
         return <SectionCoursesItem key={item.id} item={item} navigation={props.navigation}/>
       case listType.author:

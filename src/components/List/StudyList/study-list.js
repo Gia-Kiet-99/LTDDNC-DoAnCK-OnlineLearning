@@ -1,19 +1,30 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {StyleSheet, FlatList, View, ActivityIndicator, Text} from 'react-native';
 import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
-import {apiGetLearningCourse, apiGetNewReleaseCourse, apiGetTopSellCourse} from "../../../core/services/course-service";
+import {
+  apiGetLearningCourse,
+  apiGetNewReleaseCourse,
+  apiGetRecommendCourse,
+  apiGetTopSellCourse
+} from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 import {listType} from "../../../globals/constants";
 import LoadIndicator from "../../Common/load-indicator";
+import LearningListItem from "../ListItem/learning-list-item";
+import {AuthenticationContext} from "../../../provider/authentication-provider";
+import RecommendListItem from "../ListItem/recommend-list-item";
 
 
 const StudyList = (props) => {
   console.log("StudyList")
   const type = props.route.params.type
   let getDataFromApi
-  let limit = 10
+  let limit = 100
   let page = 1
+
+  /* Use context */
+  const authContext = useContext(AuthenticationContext);
 
   /* Use state */
   const [loading, setLoading] = useState(LOADING)
@@ -46,14 +57,33 @@ const StudyList = (props) => {
       case listType.continueCourse:
         getDataFromApi = getContinueCourses
         break
+      case listType.recommendCourse:
+        getDataFromApi = getRecommendCourses
+        break
       default:
         throw new Error()
     }
   }
+  const getRecommendCourses = () => {
+    console.log("getRecommendCourses")
+    apiGetRecommendCourse(authContext.state.userInfo.id, limit, page).then(response => {
+      if(response.status === 200) {
+        setListData(listData.concat(response.data.payload))
+        setLoading(LOAD_SUCCEEDED)
+      } else {
+        setLoading(LOAD_FAILED)
+      }
+    }).catch(err => {
+      setLoading(LOAD_FAILED)
+      throw new Error()
+    }).finally(() => {
+      setRefreshList(false)
+    })
+  }
   const getContinueCourses = () => {
     console.log("getContinueCourses")
     apiGetLearningCourse().then(response => {
-      if (response.stack === 200) {
+      if (response.status === 200) {
         setListData(listData.concat(response.data.payload))
         setLoading(LOAD_SUCCEEDED)
       } else {
@@ -107,19 +137,12 @@ const StudyList = (props) => {
     console.log("onEndReach")
     // setRefreshList(true)
     // page++
+    // checkListType(type);
+    // console.log("Limit: ", limit)
+    // console.log("Page: ", page)
+    // console.log("getDataFromApi: ", getDataFromApi);
     // getDataFromApi()
   }
-
-
-  // const renderPathItem = ({item}) => (
-  //   <PathListItem key={item.id} item={item} navigation={props.navigation}/>
-  // )
-  // const renderAuthorItem = ({item}) => (
-  //   <AuthorListItem key={item.id} item={item} navigation={props.navigation}/>
-  // )
-  // const renderChannelIem = ({item}) => (
-  //   <ChannelListItem key={item.id} item={item} navigation={props.navigation}/>
-  // )
 
   /* render list base on "" */
   // const renderList = () => {
@@ -197,9 +220,16 @@ const StudyList = (props) => {
   // }
 
   /* Render function */
-  const renderCourseItem = ({item}) => (
-    <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
-  )
+  const renderCourseItem = ({item}) => {
+    switch (type) {
+      case listType.continueCourse:
+        return <LearningListItem key={item.id} item={item} navigation={props.navigation}/>
+      case listType.recommendCourse:
+        return <RecommendListItem key={item.id} item={item} navigation={props.navigation}/>
+      default:
+        return <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
+    }
+  }
   const renderListFooter = () => {
     if (canRefreshList) {
       return <LoadIndicator/>

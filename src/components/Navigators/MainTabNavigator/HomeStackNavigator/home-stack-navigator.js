@@ -16,7 +16,7 @@ import StudyList from "../../../List/StudyList/study-list";
 const Stack = createStackNavigator();
 const HomeStackNavigator = (props) => {
   return (
-    <ListProvider>
+    // <ListProvider>
       <Stack.Navigator initalRouteName={Home}>
         <Stack.Screen name={ScreenName.home} component={Home} options={{headerShown: false}}/>
         <Stack.Screen name={ScreenName.channelDetail} component={ChannelDetail} options={{headerShown: true}}/>
@@ -28,7 +28,7 @@ const HomeStackNavigator = (props) => {
         <Stack.Screen name={ScreenName.setting} component={Setting}/>
         <Stack.Screen name={ScreenName.profile} component={Profile}/>
       </Stack.Navigator>
-    </ListProvider>
+    // </ListProvider>
   );
 };
 
