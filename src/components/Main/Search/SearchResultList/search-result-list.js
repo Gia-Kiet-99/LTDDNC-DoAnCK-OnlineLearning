@@ -9,18 +9,18 @@ import {results} from "../../../../localize/data";
 const SearchResultList = (props) => {
 
   const showResultDetail = (title) => {
-    if (props.navigation !== undefined) {
-      switch (title) {
-        case 'Courses':
-          return props.navigation.navigate("CourseResult");
-        case 'Paths':
-          return props.navigation.navigate("PathResult");
-        case 'Authors':
-          return props.navigation.navigate("AuthorResult");
-        default:
-          return props.navigation.navigate("AuthorResult");
-      }
-    }
+    // if (props.navigation !== undefined) {
+    //   switch (title) {
+    //     case 'Courses':
+    //       return props.navigation.navigate("CourseResult");
+    //     case 'Paths':
+    //       return props.navigation.navigate("PathResult");
+    //     case 'Authors':
+    //       return props.navigation.navigate("AuthorResult");
+    //     default:
+    //       return props.navigation.navigate("AuthorResult");
+    //   }
+    // }
   }
 
   const SectionHeader = (props) => (
@@ -50,16 +50,16 @@ const SearchResultList = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <SectionList
-        sections={results}
-        keyExtractor={(item, index) => item + index}
-        renderItem={renderSectionListItem}
-        renderSectionHeader={renderSectionHeader}
-        showsVerticalScrollIndicator={false}
-        ItemSeparatorComponent={() => <ListItemSeparator/>}
-        SectionSeparatorComponent={() => <ListItemSeparator/>}
-        // stickySectionHeadersEnabled={true}
-      />
+      {/*<SectionList*/}
+      {/*  sections={results}*/}
+      {/*  keyExtractor={(item, index) => item + index}*/}
+      {/*  renderItem={renderSectionListItem}*/}
+      {/*  renderSectionHeader={renderSectionHeader}*/}
+      {/*  showsVerticalScrollIndicator={false}*/}
+      {/*  ItemSeparatorComponent={() => <ListItemSeparator/>}*/}
+      {/*  SectionSeparatorComponent={() => <ListItemSeparator/>}*/}
+      {/*  // stickySectionHeadersEnabled={true}*/}
+      {/*/>*/}
     </SafeAreaView>
   );
 };

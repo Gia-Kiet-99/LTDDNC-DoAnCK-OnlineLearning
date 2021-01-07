@@ -66,10 +66,10 @@ const MainTabNavigator = (props) => {
           name="BrowseStackNavigator"
           component={BrowseStackNavigator}
           options={{title: "Browse"}}/>
-        {/*<Tab.Screen*/}
-        {/*  name="SearchStackNavigator"*/}
-        {/*  component={SearchStackNavigator}*/}
-        {/*  options={{title: "Search"}}/>*/}
+        <Tab.Screen
+          name="SearchStackNavigator"
+          component={SearchStackNavigator}
+          options={{title: "Search"}}/>
       </Tab.Navigator>
     </ListProvider>
   )

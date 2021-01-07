@@ -1,10 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
 import SearchTabNavigator from "./SearchTabNavigator/search-tab-navigator";
-import PathDetailStackNavigator from "../BrowseStackNavigator/PathDetailStackNavigator/path-detail-stack-navigator";
-import AuthorDetailStackNavigator from "../AuthorDetailStackNavigator/author-detail-stack-navigator";
-import CourseDetailStackNavigator from "../CourseDetailStackNavigator/course-detail-stack-navigator";
-import {NavigatorName} from "../../../../globals/constants";
+import {NavigatorName, ScreenName} from "../../../../globals/constants";
+import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
+import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
 
 const Stack = createStackNavigator();
 
@@ -15,18 +14,16 @@ const SearchStackNavigator = (props) => {
         name={NavigatorName.searchTab}
         component={SearchTabNavigator}
         options={{headerShown: false}}/>
-      <Stack.Screen
-        name={NavigatorName.courseDetailStack}
-        component={CourseDetailStackNavigator}
-        options={{headerShown: false}}/>
-      <Stack.Screen
-        name={NavigatorName.pathDetailStack}
-        component={PathDetailStackNavigator}
-        options={{headerShown: false}}/>
-      <Stack.Screen
-        name={NavigatorName.authorDetailStack}
-        component={AuthorDetailStackNavigator}
-        options={{headerShown: false}}/>
+      <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
+      <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
+      {/*<Stack.Screen*/}
+      {/*  name={NavigatorName.pathDetailStack}*/}
+      {/*  component={PathDetailStackNavigator}*/}
+      {/*  options={{headerShown: false}}/>*/}
+      {/*<Stack.Screen*/}
+      {/*  name={NavigatorName.authorDetailStack}*/}
+      {/*  component={AuthorDetailStackNavigator}*/}
+      {/*  options={{headerShown: false}}/>*/}
     </Stack.Navigator>
   );
 };

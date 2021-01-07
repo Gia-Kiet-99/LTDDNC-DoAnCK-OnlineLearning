@@ -108,7 +108,7 @@ export const apiGetCategoryList = async () => {
 }
 
 export const apiGetCategoryDetail = async (categoryId) => {
-  return instance.post('/course/search', {
+  return await instance.post('/course/search', {
     keyword: "",
     opt: {
       sort: {
