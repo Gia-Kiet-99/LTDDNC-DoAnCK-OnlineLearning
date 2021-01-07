@@ -146,3 +146,30 @@ export const apiGetCategoryDetail = async (categoryId) => {
     offset: 1
   })
 }
+
+export const apiGetCoursesByCategory = async (categoryId) => {
+  return await instance.post('/course/search', {
+    keyword: "",
+    opt: {
+      sort: {
+        attribute: "price",
+        rule: "ASC"
+      },
+      category: [
+        categoryId,
+      ],
+      time: [
+        {
+          min: 0
+        }
+      ],
+      price: [
+        {
+          min: 0
+        }
+      ]
+    },
+    limit: 100,
+    offset: 1
+  })
+}

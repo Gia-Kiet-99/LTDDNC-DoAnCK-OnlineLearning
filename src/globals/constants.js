@@ -12,7 +12,8 @@ export const listType = {
   continueCourse: "continue-learning-course",
   recommendCourse: "recommend-course",
   newReleaseCourse: "new-release",
-  topSellCourse: "top-sell-course"
+  topSellCourse: "top-sell-course",
+  categoryCourses: "category-course"
 }
 
 export const titleName = {

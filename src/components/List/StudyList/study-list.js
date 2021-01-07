@@ -1,8 +1,9 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {StyleSheet, FlatList, View, ActivityIndicator, Text} from 'react-native';
 import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
 import {
+  apiGetCoursesByCategory,
   apiGetLearningCourse,
   apiGetNewReleaseCourse,
   apiGetRecommendCourse,
@@ -10,7 +11,6 @@ import {
 } from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 import {listType} from "../../../globals/constants";
-import LoadIndicator from "../../Common/load-indicator";
 import LearningListItem from "../ListItem/learning-list-item";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import RecommendListItem from "../ListItem/recommend-list-item";
@@ -19,6 +19,7 @@ import RecommendListItem from "../ListItem/recommend-list-item";
 const StudyList = (props) => {
   console.log("StudyList")
   const type = props.route.params.type
+  const categoryId = props.route?.params?.categoryId
   let getDataFromApi
   let limit = 100
   let page = 1
@@ -33,7 +34,7 @@ const StudyList = (props) => {
    * canRefreshList is state that show us if there is no course to reach
    * (false when we fetched all course from api)
    * */
-  const [canRefreshList, setRefreshList] = useState(false)
+  // const [canRefreshList, setRefreshList] = useState(false)
 
   /* Use effect */
   useEffect(() => {
@@ -60,14 +61,33 @@ const StudyList = (props) => {
       case listType.recommendCourse:
         getDataFromApi = getRecommendCourses
         break
+      case listType.categoryCourses:
+        getDataFromApi = getCategoryCourses
+        break
       default:
         throw new Error()
     }
   }
+  const getCategoryCourses = () => {
+    console.log("getCategoryCourses")
+    apiGetCoursesByCategory(categoryId).then(response => {
+      if (response.status === 200) {
+        setListData(listData.concat(response.data.payload.rows))
+        setLoading(LOAD_SUCCEEDED)
+      } else {
+        setLoading(LOAD_FAILED)
+      }
+    }).catch(err => {
+      setLoading(LOAD_FAILED)
+      throw new Error()
+    }).finally(() => {
+      // setRefreshList(false)
+    })
+  }
   const getRecommendCourses = () => {
     console.log("getRecommendCourses")
     apiGetRecommendCourse(authContext.state.userInfo.id, limit, page).then(response => {
-      if(response.status === 200) {
+      if (response.status === 200) {
         setListData(listData.concat(response.data.payload))
         setLoading(LOAD_SUCCEEDED)
       } else {
@@ -77,7 +97,7 @@ const StudyList = (props) => {
       setLoading(LOAD_FAILED)
       throw new Error()
     }).finally(() => {
-      setRefreshList(false)
+      // setRefreshList(false)
     })
   }
   const getContinueCourses = () => {
@@ -93,7 +113,7 @@ const StudyList = (props) => {
       setLoading(LOAD_FAILED)
       throw new Error()
     }).finally(() => {
-      setRefreshList(false)
+      // setRefreshList(false)
     })
   }
   const getNewReleaseCourse = () => {
@@ -112,7 +132,7 @@ const StudyList = (props) => {
         throw new Error()
       })
       .finally(() => {
-        setRefreshList(false)
+        // setRefreshList(false)
       })
   }
   const getTopSellCourse = () => {
@@ -130,7 +150,7 @@ const StudyList = (props) => {
         throw new Error()
       })
       .finally(() => {
-        setRefreshList(false)
+        // setRefreshList(false)
       })
   }
   const loadMoreCourses = () => {
@@ -144,81 +164,6 @@ const StudyList = (props) => {
     // getDataFromApi()
   }
 
-  /* render list base on "" */
-  // const renderList = () => {
-  //     switch () {
-  //         case listName.course:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={courseList}
-  //                              ListHeaderComponent={listHeaderComponent}
-  //                              renderItem={renderCourseItem}
-  //                              keyExtractor={(item) => (item.id)}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.channelCourse:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={props.data}
-  //                              ListHeaderComponent={listHeaderComponent}
-  //                              renderItem={renderCourseItem}
-  //                              keyExtractor={(item) => (item.id)}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.favoriteCourse:
-  //             let favoriteCourses = getFavoriteCourses()
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={favoriteCourses}
-  //                              renderItem={renderCourseItem}
-  //                              ListHeaderComponent={listHeaderComponent}
-  //                              keyExtractor={(item) => (item.id)}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.pathCourse:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={props.data}
-  //                              renderItem={renderCourseItem}
-  //                              ListHeaderComponent={listHeaderComponent}
-  //                              keyExtractor={(item) => (item.id)}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.authorCourse:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={props.data}
-  //                              renderItem={renderCourseItem}
-  //                              ListHeaderComponent={listHeaderComponent}
-  //                              keyExtractor={(item) => (item.id)}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.download:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={props.data}
-  //                              // extraData={downloadedList}
-  //                              renderItem={renderCourseItem}
-  //                              keyExtractor={item => item.id}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.path:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={paths}
-  //                              renderItem={renderPathItem}
-  //                              keyExtractor={item => item.id}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.author:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={authors}
-  //                              renderItem={renderAuthorItem}
-  //                              keyExtractor={item => item.id}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         case listName.channel:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={props.route.params.data}
-  //                              ListHeaderComponent={props.listHeaderComponent}
-  //                              ListHeaderComponentStyle={props.listHeaderComponentStyle}
-  //                              renderItem={renderChannelIem}
-  //                              keyExtractor={item => item.id}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //         default:
-  //             return <FlatList showsVerticalScrollIndicator={false}
-  //                              data={courseList}
-  //                              renderItem={renderCourseItem}
-  //                              keyExtractor={item => item.id}
-  //                              ItemSeparatorComponent={() => <ListItemSeparator/>}/>
-  //     }
-  // }
-
   /* Render function */
   const renderCourseItem = ({item}) => {
     switch (type) {
@@ -230,13 +175,13 @@ const StudyList = (props) => {
         return <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
     }
   }
-  const renderListFooter = () => {
-    if (canRefreshList) {
-      return <LoadIndicator/>
-    } else {
-      return <View/>
-    }
-  }
+  // const renderListFooter = () => {
+  //   if (canRefreshList) {
+  //     return <LoadIndicator/>
+  //   } else {
+  //     return <View/>
+  //   }
+  // }
   const renderUI = () => {
     switch (loading) {
       case LOADING:
@@ -253,7 +198,7 @@ const StudyList = (props) => {
           data={listData}
           renderItem={renderCourseItem}
           keyExtractor={(item) => (item.id)}
-          ListFooterComponent={renderListFooter}
+          // ListFooterComponent={renderListFooter}
           ItemSeparatorComponent={ListItemSeparator}/>
       case LOAD_FAILED:
         return <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>

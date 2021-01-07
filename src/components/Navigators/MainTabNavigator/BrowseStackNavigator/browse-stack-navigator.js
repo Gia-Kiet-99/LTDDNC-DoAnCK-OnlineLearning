@@ -25,7 +25,7 @@ const BrowseStackNavigator = (props) => {
         <Stack.Screen name={ScreenName.courseDetail} component={CourseDetail} options={{headerShown: false}}/>
         <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
         <Stack.Screen name={ScreenName.skillDetail} component={SkillDetail} options={
-          ({route}) => ({title: route.params.item.skill})}/>
+          ({route}) => ({title: route.params.categoryName})}/>
         <Stack.Screen name={ScreenName.fieldDetail} component={FieldDetail} options={
           ({route}) => ({title: route.params.field})}/>
         <Stack.Screen name={ScreenName.studyList} component={StudyList} options={

@@ -1,13 +1,15 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {ScreenName} from "../../../../globals/constants";
+import {listType, ScreenName} from "../../../../globals/constants";
 
 const SkillSectionItem = (props) => {
 
   const onItemPressed = () => {
-      // props.navigation.navigate(ScreenName.skillDetail, {
-      //   categoryId: props.item.id
-      // })
+      props.navigation.navigate(ScreenName.studyList, {
+        categoryId: props.item.id,
+        title: props.item.name,
+        type: listType.categoryCourses
+      })
   }
 
   return (

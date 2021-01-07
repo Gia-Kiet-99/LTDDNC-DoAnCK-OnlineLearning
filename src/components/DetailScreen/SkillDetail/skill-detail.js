@@ -1,28 +1,29 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, View} from 'react-native';
+import {LOADING} from "../../../core/configuration/loading-config";
+import {apiGetCoursesByCategory} from "../../../core/services/course-service";
 
 const SkillDetail = (props) => {
-  // const skill = props.route?.params?.item.skill;
-  // const skill = props.route.params.item.skill;
-  // console.log(props)
+  console.log("SkillDetail")
+  const skillId = props.route.params.categoryId;
+
+  /* Use state */
+  const [loading, setLoading] = useState(LOADING)
+
+  /* Use effect */
+  useEffect(() => {
+    if (loading === LOADING) {
+      apiGetCoursesByCategory(skillId).then(response => {
+        if(response.status === 200) {
+
+        }
+      })
+    }
+  }, [loading])
 
   return <View>
     {/*<FlatList data={} renderItem={}/>*/}
   </View>
-    // <ScrollView>
-    //   <Section navigation={props.navigation} kind={listType.path}
-    //            title={`Paths in ${skill}`} list={paths} showSeeAllButton={false}/>
-    //
-    //   <Section navigation={props.navigation} kind={listType.course}
-    //            title={`New in ${skill}`} list={courses} showSeeAllButton={true}/>
-    //
-    //   <Section navigation={props.navigation} kind={listType.course}
-    //            title={`Trending in ${skill}`} list={courses} showSeeAllButton={true}/>
-    //
-    //   <Section navigation={props.navigation} kind={listType.author}
-    //            title={'Top authors'} list={authors} showSeeAllButton={false}/>
-    //
-    // </ScrollView>
 };
 
 export default SkillDetail;

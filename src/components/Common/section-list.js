@@ -8,11 +8,10 @@ import {listType} from "../../globals/constants";
 import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item";
 import {AuthenticationContext} from "../../provider/authentication-provider";
 import {
-  apiGetAuthorList, apiGetCategoryDetail, apiGetCategoryList,
-  apiGetCourseInfo,
+  apiGetAuthorList,
+  apiGetCategoryList,
   apiGetLearningCourse,
   apiGetRecommendCourse,
-  apiGetTopRateCourses
 } from "../../core/services/course-service";
 import {ListContext} from "../../provider/list-provider";
 import LearningSectionItem from "../Main/Home/SectionCoursesItem/learning-section-item";

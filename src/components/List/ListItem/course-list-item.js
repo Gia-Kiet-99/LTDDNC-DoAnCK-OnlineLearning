@@ -21,11 +21,12 @@ const CourseListItem = (props) => {
       <View style={styles.imageWrapper}>
         <Image style={styles.image} source={{uri: item.imageUrl}}/>
       </View>
+      {/*item["instructor.user.name"]*/}
       <CourseInfo
         containerStyle={courseInfoStyle.container}
         titleStyle={courseInfoStyle.largerTitle}
         title={item.title}
-        author={(props.authorName === undefined) ? item["instructor.user.name"] : props.authorName}
+        author={(props.authorName !== undefined) ? props.authorName : ((item.name !== undefined) ? item.name : item["instructor.user.name"])}
         status={item.status}
         released={item.createdAt}
         duration={item.totalHours}
