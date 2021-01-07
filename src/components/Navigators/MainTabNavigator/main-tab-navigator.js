@@ -2,14 +2,10 @@ import React from 'react';
 import HomeStackNavigator from "./HomeStackNavigator/home-stack-navigator";
 import DownloadStackNavigator from "./DownloadStackNavigator/download-stack-navigator";
 import Browse from "../../Main/Browse/browse";
-import Search from "../../Main/Search/search";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {Ionicons} from "@expo/vector-icons";
 import BrowseStackNavigator from "./BrowseStackNavigator/browse-stack-navigator";
 import SearchStackNavigator from "./SearchStackNavigator/search-stack-navigator";
-import CourseProvider from "../../../provider/course-provider";
-import ChannelProvider from "../../../provider/channel-provider";
-import AuthorProvider from "../../../provider/author-provider";
 import ListProvider from "../../../provider/list-provider";
 
 const Tab = createBottomTabNavigator()
@@ -36,7 +32,7 @@ const MainTabNavigatorScreenOptions = ({route}) => ({
   },
 })
 
-const MainTabNavigator = (props) => {
+const MainTabNavigator = () => {
   return (
     <ListProvider>
       <Tab.Navigator

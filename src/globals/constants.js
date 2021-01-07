@@ -25,7 +25,8 @@ export const titleName = {
   download: "Download",
   continueLearning: "Continue learning",
   recommendCourse: "Recommend courses",
-
+  course: "Courses",
+  author: "Authors"
 }
 
 export const ScreenName = {
@@ -46,6 +47,7 @@ export const ScreenName = {
   profile: "Profile",
   pathDetail: "PathDetail",
   skillDetail: "SkillDetail",
+  search: "Search"
 }
 
 export const NavigatorName = {
@@ -67,4 +69,10 @@ export const ImageButtonType = {
   general: "all-list",
   newReleaseCourse: "new-release",
   recommendCourse: 'recommend-course'
+}
+
+export const TabName = {
+  courseResult: "CourseResult",
+  authorResult: "AuthorResult",
+  allResult: "AllResult"
 }

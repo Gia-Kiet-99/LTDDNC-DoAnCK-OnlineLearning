@@ -3,20 +3,12 @@ import {View, TouchableOpacity, Text, Image, StyleSheet} from 'react-native';
 import {NavigatorName, ScreenName} from "../../../globals/constants";
 
 const AuthorListItem = (props) => {
+  const item = props.item
 
   const onItemPressed = () => {
-    // if (props.navigation !== undefined) {
-    //   props.navigation.navigate(NavigatorName.authorDetailStack,
-    //     {
-    //       screen: ScreenName.authorDetail,
-    //       params: {
-    //         data: props.item
-    //       }
-    //     })
-    // }
     props.navigation.navigate(ScreenName.authorDetail,
       {
-        data: props.item,
+        authorId: item.id,
       })
   }
 
@@ -24,10 +16,10 @@ const AuthorListItem = (props) => {
     <TouchableOpacity
       style={styles.container}
       onPress={onItemPressed}>
-      <Image style={styles.avatar} source={props.item.authorAvatar}/>
+      <Image style={styles.avatar} source={{uri: item.avatar}}/>
       <View style={styles.description}>
-        <Text style={styles.name}>{props.item.authorName}</Text>
-        <Text style={styles.courseNumber}>{props.item.numberOfCourses} Courses</Text>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.courseNumber}>{`${item.numcourses} Courses`}</Text>
       </View>
     </TouchableOpacity>
   );

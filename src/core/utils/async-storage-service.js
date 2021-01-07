@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const AUTH_STATE_KEY = "@key_authentication_state"
+// export const AUTH_STATE_KEY = "@key_authentication_state"
 export const TOKEN_KEY = "@key_token"
 
 export const saveAuthToken = async (token) => {
