@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, StyleSheet, View, Image} from 'react-native'
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../../core/configuration/loading-config";
-import {apiGetSearchHistory} from "../../../../core/services/search-service";
+import {apiDeleteSearchHistory, apiGetSearchHistory} from "../../../../core/services/search-service";
+import {AntDesign} from '@expo/vector-icons';
 
 function SearchHistoryList(props) {
   console.log("SearchHistoryList")
@@ -26,12 +27,29 @@ function SearchHistoryList(props) {
     }
   }, [loading])
 
+  const onDeleteHistoryButtonPressed = (item) => {
+    setData(data.filter(history => history.id !== item.id))
+    deleteSearchHistory(item.id);
+  }
+  const deleteSearchHistory = (historyId) => {
+    apiDeleteSearchHistory(historyId).then(response => {
+      if (response.status === 200) {
+        console.log("Delete history successfully")
+      } else {
+        console.log("Delete history failed")
+      }
+    }).catch(e => {
+      console.log("Error deleteSearchHistory: ", e.toString());
+    })
+  }
+
   const renderListHeader = () => {
     return <View style={styles.listHeaderContainer}>
       <Text style={styles.headerText}>Recent searches</Text>
       <TouchableOpacity>
         <Text style={{...styles.headerText, color: '#2980b9', fontWeight: 'bold'}}>CLEAR ALL</Text>
       </TouchableOpacity>
+
     </View>
   }
   const renderListItem = ({item}) => {
@@ -39,7 +57,12 @@ function SearchHistoryList(props) {
       onPress={() => props.onHistoryItemPressed(item.content)}
       style={styles.listItemContainer}>
       <Image style={styles.itemImage} source={require("../../../../../assets/recent.png")}/>
-      <Text style={styles.itemText}>{item.content}</Text>
+      <Text style={{...styles.itemText, flex: 1}}>{item.content}</Text>
+      <TouchableOpacity
+        onPress={() => onDeleteHistoryButtonPressed(item)}
+        style={styles.deleteButton}>
+        <AntDesign name="close" size={20} color="black"/>
+      </TouchableOpacity>
     </TouchableOpacity>
   }
   const renderUI = () => {
@@ -66,7 +89,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     paddingVertical: 20
   },
   listItemContainer: {
@@ -74,6 +97,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 10,
+    paddingHorizontal: 15
   },
   headerText: {
     fontSize: 16,
@@ -85,6 +109,9 @@ const styles = StyleSheet.create({
   itemImage: {
     height: 20,
     width: 20
+  },
+  deleteButton: {
+    alignSelf: 'flex-end',
   }
 })
 

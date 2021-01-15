@@ -5,6 +5,10 @@ export const apiGetSearchHistory = async () => {
   return await instance.get('/course/search-history')
 }
 
+export const apiDeleteSearchHistory = async (historyId) => {
+  return await instance.delete(`/course/delete-search-history/${historyId}`)
+}
+
 export const apiGetSearchResultV2 = async (keyword) => {
   const token = await getAuthTokenFromStorage()
   return await instance.post('/course/searchV2', {
