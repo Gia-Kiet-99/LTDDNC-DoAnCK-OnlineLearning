@@ -18,6 +18,8 @@
     "axios": "^0.21.0",
     "expo": "~39.0.2",
     "expo-av": "~8.6.0",
+    "expo-cli": "^4.0.17",
+    "expo-file-system": "^9.2.0",
     "expo-status-bar": "~1.0.2",
     "moment": "^2.29.1",
     "react": "16.13.1",

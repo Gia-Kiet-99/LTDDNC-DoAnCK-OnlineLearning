@@ -1,9 +1,8 @@
 import React, {useContext} from 'react';
-import {StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import StudyList from "../../List/StudyList/study-list";
+import {Button, PermissionsAndroid, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ActionBar from "../../Common/action-bar";
-import {listType, titleName} from "../../../globals/constants";
-import {CourseContext} from "../../../provider/course-provider";
+import {titleName} from "../../../globals/constants";
+
 
 
 const Download = (props) => {
@@ -27,6 +26,10 @@ const Download = (props) => {
       </View>
     )
   }
+
+  // const testDown = async () => {
+  //   await apiDownloadCourse()
+  // }
   return (
     <View style={styles.container}>
       {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content' animated={true}/>*/}
@@ -38,6 +41,7 @@ const Download = (props) => {
         {/*           navigation={props.navigation}*/}
         {/*           data={data}/>*/}
       </View>
+      {/*<Button title={'test download'} onPress={testDown}/>*/}
     </View>
   );
 };
