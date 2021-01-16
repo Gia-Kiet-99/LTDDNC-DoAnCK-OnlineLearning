@@ -10,11 +10,10 @@ import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
 import StudyList from "../../../List/StudyList/study-list";
 import SkillDetail from "../../../DetailScreen/SkillDetail/skill-detail";
-import FieldDetail from "../../../DetailScreen/FieldDetail/field-detail";
 
 const Stack = createStackNavigator()
 
-const BrowseStackNavigator = (props) => {
+const BrowseStackNavigator = () => {
   return (
     <PathProvider>
       <Stack.Navigator initialRouteName={ScreenName.browse}>
@@ -26,8 +25,8 @@ const BrowseStackNavigator = (props) => {
         <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
         <Stack.Screen name={ScreenName.skillDetail} component={SkillDetail} options={
           ({route}) => ({title: route.params.categoryName})}/>
-        <Stack.Screen name={ScreenName.fieldDetail} component={FieldDetail} options={
-          ({route}) => ({title: route.params.field})}/>
+        {/*<Stack.Screen name={ScreenName.fieldDetail} component={FieldDetail} options={*/}
+        {/*  ({route}) => ({title: route.params.field})}/>*/}
         <Stack.Screen name={ScreenName.studyList} component={StudyList} options={
           ({route}) => ({title: route.params.title})}/>
       </Stack.Navigator>

@@ -1,5 +1,4 @@
 import {apiGetUserInfo, apiLogin} from "../core/services/authentication-service";
-import {initialState} from "../provider/authentication-provider";
 import {removeAuthToken, saveAuthToken} from "../core/utils/async-storage-service";
 
 export const LOGIN_SUCCEEDED = "LOGIN_SUCCEEDED"
@@ -30,7 +29,7 @@ export const login = (dispatch) => async (username, password) => {
 
 export const logOut = (dispatch) => async () => {
   await removeAuthToken()
-  dispatch({type: LOG_OUT, initialState: initialState})
+  dispatch({type: LOG_OUT})
 }
 
 export const getUserInfo = (dispatch, setLoginBySavedToken) => async (token) => {

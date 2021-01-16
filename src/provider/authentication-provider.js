@@ -1,24 +1,24 @@
-import React, {createContext, useEffect, useReducer, useState} from 'react';
+import React, {createContext, useReducer, useState} from 'react';
 import {reducer} from "../reducer/authentication-reducer";
 import {clearMessage, getUserInfo, login, logOut} from "../action/authentication-action";
 import {apiSendEmail} from "../core/services/authentication-service";
-import {removeAuthToken, saveAuthToken} from "../core/utils/async-storage-service";
+import {authInitialState} from "../localize/data";
 
 const AuthenticationContext = createContext();
 
-export const initialState = {
-  isAuthenticated: false,
-  userInfo: "",
-  token: "",
-  message: ""
-}
+// export const initialState = {
+//   isAuthenticated: false,
+//   userInfo: "",
+//   token: "",
+//   message: ""
+// }
 
 export const init = () => {
-    return {...initialState}
+    return {...authInitialState}
 }
 
 const AuthenticationProvider = (props) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, authInitialState);
   const [forgotPasswordState, setForgotPasswordState] = useState(false)
   const [loginBySavedToken, setLoginBySavedToken] = useState()
 

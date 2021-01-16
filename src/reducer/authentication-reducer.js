@@ -1,4 +1,3 @@
-import {initialState} from "../provider/authentication-provider";
 import {
   CLEAR_MESSAGE,
   GET_USER_INFO_FAILED,
@@ -8,6 +7,7 @@ import {
   LOGIN_SUCCEEDED
 } from "../action/authentication-action";
 import {setTokenToHeader} from "../core/configuration/axios-config";
+import {authInitialState} from "../localize/data";
 
 export const reducer = (prevState, action) => {
   // console.log("AuthenticationReducer", action)
@@ -24,7 +24,7 @@ export const reducer = (prevState, action) => {
     case LOGIN_FAILED:
       return {...prevState, isAuthenticated: false, message: action.data.messageError}
     case LOG_OUT:
-      return {...initialState}
+      return {...authInitialState}
     case GET_USER_INFO_SUCCEEDED:
       setTokenToHeader(action.data.token)
       return {...prevState, isAuthenticated: true, token: action.data.token, userInfo: action.data.payload}

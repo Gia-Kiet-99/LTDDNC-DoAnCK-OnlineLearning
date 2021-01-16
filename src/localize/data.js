@@ -735,3 +735,10 @@ export const courses = [
     lessons: lessons,
   },
 ]
+
+export const authInitialState = {
+  isAuthenticated: false,
+  userInfo: "",
+  token: "",
+  message: ""
+}

@@ -29,31 +29,3 @@ export const removeAuthToken = async () => {
     console.log("AsyncStorageService/removeAuthToken", e)
   }
 }
-
-// export const saveAuthState = async (authState) => {
-//   try {
-//     const jsonValue = JSON.stringify(authState);
-//     await AsyncStorage.setItem(AUTH_STATE_KEY, jsonValue)
-//     console.log("Save successfully", jsonValue)
-//   } catch (e) {
-//     console.log("AsyncStorageService/saveAuthState", e)
-//   }
-// }
-//
-// export const getAuthState = async () => {
-//   try {
-//     const jsonValue = await AsyncStorage.getItem(AUTH_STATE_KEY)
-//     return jsonValue != null ? JSON.parse(jsonValue) : null
-//   } catch(e) {
-//     console.log("AsyncStorageService/getAuthState", e)
-//   }
-// }
-//
-// export const removeAuthState = async () => {
-//   try {
-//     await AsyncStorage.removeItem(AUTH_STATE_KEY)
-//     console.log("AsyncStorageService/removeAuthState: successfully")
-//   } catch(e) {
-//     console.log("AsyncStorageService/removeAuthState", e)
-//   }
-// }

@@ -1,8 +1,5 @@
 import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
-import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
-import AuthorDetailStackNavigator from "../AuthorDetailStackNavigator/author-detail-stack-navigator";
-import {NavigatorName, ScreenName} from "../../../../globals/constants";
 
 const Stack = createStackNavigator();
 
