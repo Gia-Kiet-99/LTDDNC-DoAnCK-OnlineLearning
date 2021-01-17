@@ -184,7 +184,6 @@ const CourseDetail = (props) => {
             lessonInfo={lessonInfo}
             navigation={props.navigation}/>
 
-
           <ScrollView /*ref={ref => setScrollView(ref)}*/
             showsVerticalScrollIndicator={false}>
             <CourseIntro/>
