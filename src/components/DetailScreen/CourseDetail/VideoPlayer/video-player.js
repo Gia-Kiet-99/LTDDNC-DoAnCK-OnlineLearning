@@ -56,9 +56,9 @@ const VideoPlayer = (props) => {
           style={styles.player}
         />
       }
-    } /*else {
+    } else {
       return <View style={{height: 200}}/>
-    }*/
+    }
   }
 
   return (

@@ -1,12 +1,17 @@
-import React, {useContext} from 'react';
-import {Button, PermissionsAndroid, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useRef} from 'react';
+import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ActionBar from "../../Common/action-bar";
 import {titleName} from "../../../globals/constants";
-
-
+import {Video} from "expo-av";
+import * as FileSystem from 'expo-file-system'
+import {deleteDownloadCourse} from "../../../core/services/download-service";
 
 const Download = (props) => {
   console.log("Download")
+
+  /* Use state */
+  const player = useRef(null)
+
   // const {getDownloadedCourses, removeAllDownloadedCourses} = useContext(CourseContext)
   // const data = getDownloadedCourses()
 
@@ -27,21 +32,37 @@ const Download = (props) => {
     )
   }
 
-  // const testDown = async () => {
-  //   await apiDownloadCourse()
-  // }
+  const testDown = async () => {
+    // console.log(FileSystem.documentDirectory)
+    // console.log(await FileSystem.readDirectoryAsync(FileSystem.documentDirectory))
+    await deleteDownloadCourse()
+  }
   return (
     <View style={styles.container}>
       {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content' animated={true}/>*/}
       <ActionBar title={titleName.download} navigation={props.navigation}/>
       <View style={styles.content}>
         <DownloadHeader/>
-        {/*<StudyList kind={listName.download}*/}
-        {/*           style={styles.courseList}*/}
-        {/*           navigation={props.navigation}*/}
-        {/*           data={data}/>*/}
+
+        {/*<View style={{height: 200}}>*/}
+        {/*  <Video*/}
+        {/*    ref={player}*/}
+        {/*    source={{uri: 'file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540anonymous%252Fklearn-de610623-1976-499a-9a4d-03b236b550e5/small.mp4'}}*/}
+        {/*    // source={{uri: 'http://techslides.com/demos/sample-videos/small.mp4'}}*/}
+        {/*    rate={1.0}*/}
+        {/*    volume={1.0}*/}
+        {/*    isMuted={false}*/}
+        {/*    useNativeControls={true}*/}
+        {/*    usePoster={true}*/}
+        {/*    // posterSource={require('../../../../../assets/girl.jpg')}*/}
+        {/*    resizeMode={Video.RESIZE_MODE_CONTAIN}*/}
+        {/*    shouldPlay={false}*/}
+        {/*    isLooping={false}*/}
+        {/*    style={{flex: 1}}*/}
+        {/*  />*/}
+        {/*</View>*/}
       </View>
-      {/*<Button title={'test download'} onPress={testDown}/>*/}
+      <Button title={'test download'} onPress={testDown}/>
     </View>
   );
 };

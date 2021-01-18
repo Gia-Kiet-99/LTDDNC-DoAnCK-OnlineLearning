@@ -76,3 +76,22 @@ export const TabName = {
   authorResult: "AuthorResult",
   allResult: "AllResult"
 }
+
+/* ----------------- state -------------------*/
+export const INITIAL_DOWNLOAD_STATE = "INITIAL_DOWNLOAD_STATE"
+export const DOWNLOADING_STATE = "DOWNLOADING"
+export const DOWNLOADED_STATE = "DOWNLOADED"
+
+/* ---------- reducer initial state ----------*/
+export const downloadInitialState = {
+  downloadState: INITIAL_DOWNLOAD_STATE,
+  count: 0,
+  progress: 0
+}
+
+/* -------------- action state -------------- */
+export const ACTION_DOWNLOADING = "ACTION_DOWNLOADING"
+export const ACTION_DOWNLOADED = "ACTION_DOWNLOADED"
+export const ACTION_PROGRESS = "ACTION_PROGRESS"
+export const ACTION_COUNT = "ACTION_COUNT"
+export const ACTION_RESET_DOWNLOAD_STATE = "RESET_DOWNLOAD_STATE"

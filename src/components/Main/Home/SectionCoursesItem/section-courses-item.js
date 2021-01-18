@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {TouchableOpacity, Image, View, StyleSheet, ActivityIndicator} from 'react-native';
+import {TouchableOpacity, Image, View, StyleSheet} from 'react-native';
 import CourseInfo from "../../../Common/course-info";
 import {ScreenName} from "../../../../globals/constants";
 import {apiGetCourseInstructor} from "../../../../core/services/course-service";
@@ -12,7 +12,6 @@ const Separator = () => {
 
 const SectionCoursesItem = (props) => {
   const item = props.item
-  // const [shouldNavigate, setShouldNavigate] = useState(false)
   const [isLoading, setLoading] = useState(true)
   const [courseAuthor, setCourseAuthor] = useState("")
 
@@ -42,9 +41,6 @@ const SectionCoursesItem = (props) => {
   const averagePoint = Math.round((item.formalityPoint + item.contentPoint + item.presentationPoint) / 3)
 
   return <View>
-    {/*{isLoading? (*/}
-    {/*  <ActivityIndicator size='large' color="#2980b9"/>*/}
-    {/*): (*/}
     <TouchableOpacity
       style={styles.container}
       onPress={ItemPressed}>

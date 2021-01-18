@@ -1,5 +1,4 @@
 import axios from "axios";
-import {getAuthTokenFromStorage} from "../utils/async-storage-service";
 
 const instance = axios.create({
   baseURL: 'http://api.dev.letstudy.org',

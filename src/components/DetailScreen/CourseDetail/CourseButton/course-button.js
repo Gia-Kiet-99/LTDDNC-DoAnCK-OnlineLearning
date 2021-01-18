@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Alert, Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native'
-import {CourseContext} from "../../../../provider/course-provider";
 import {apiGetLikeStatus, apiLikeCourse} from "../../../../core/services/course-service";
+import DownloadButton from "./DownloadButton/download-button";
 
 function CourseButton(props) {
   const courseId = props.courseId
@@ -26,7 +26,7 @@ function CourseButton(props) {
         }
       })
       .catch(e => {
-        throw new Error()
+        console.error(e)
       })
       .finally(() => {
         setLoading(false)
@@ -40,7 +40,7 @@ function CourseButton(props) {
         }
       })
       .catch(e => {
-        throw new Error()
+        console.error(e)
       })
   }
 
@@ -98,21 +98,23 @@ function CourseButton(props) {
         </Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={onDownloadButtonPressed}>
-        <View style={styles.imageWrapper}>
-          {
-            isDownloaded ?
-              <Image style={styles.buttonImage} source={require('../../../../../assets/downloaded.png')}/>
-              :
-              <Image style={styles.buttonImage} source={require('../../../../../assets/download.png')}/>
-          }
-        </View>
-        <Text style={styles.buttonText}>
-          {isDownloaded ? "Downloaded" : "Download"}
-        </Text>
-      </TouchableOpacity>
+      {/*<TouchableOpacity*/}
+      {/*  style={styles.button}*/}
+      {/*  onPress={onDownloadButtonPressed}>*/}
+      {/*  <View style={styles.imageWrapper}>*/}
+      {/*    {*/}
+      {/*      isDownloaded ?*/}
+      {/*        <Image style={styles.buttonImage} source={require('../../../../../assets/downloaded.png')}/>*/}
+      {/*        :*/}
+      {/*        <Image style={styles.buttonImage} source={require('../../../../../assets/download.png')}/>*/}
+      {/*    }*/}
+      {/*  </View>*/}
+      {/*  <Text style={styles.buttonText}>*/}
+      {/*    {isDownloaded ? "Downloaded" : "Download"}*/}
+      {/*  </Text>*/}
+      {/*</TouchableOpacity>*/}
+
+      <DownloadButton courseDetail={props.courseDetail}/>
     </View>
   )
 }

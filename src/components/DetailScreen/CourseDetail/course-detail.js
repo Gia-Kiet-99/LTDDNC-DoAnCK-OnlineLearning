@@ -10,30 +10,21 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import Rating from "../../Common/rating";
 import VideoPlayer from "./VideoPlayer/video-player";
 import LessonTabNavigator from "../../Navigators/MainTabNavigator/LessonTabNavigator/lesson-tab-navigator";
-import {CourseContext} from "../../../provider/course-provider";
-import {ChannelContext} from "../../../provider/channel-provider";
-import {Feather} from '@expo/vector-icons';
-import {Ionicons} from '@expo/vector-icons';
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import Description from "../../Common/description";
 import CourseButton from "./CourseButton/course-button";
-import {NavigatorName, ScreenName} from "../../../globals/constants";
-import AuthorButton from "./AuthorButton/author-button";
-import {AuthorContext} from "../../../provider/author-provider";
 import CourseInfo from "./CourseInfo/course-info";
 import {
   apiEnrollCourse,
   apiGetCourseDetailByIds,
-  apiGetCourseInfo, apiGetLessonUrlAndDuration,
+  apiGetLessonUrlAndDuration,
   apiGetPaymentInfo
 } from "../../../core/services/course-service";
 import {LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../core/configuration/loading-config";
 import {ListContext} from "../../../provider/list-provider";
-import YoutubeIframe from "react-native-youtube-iframe";
-import WebView from "react-native-webview";
+import {isCourseDownloaded} from "../../../core/utils/async-storage-service";
 
 const CourseDetail = (props) => {
   /* use context */
@@ -111,7 +102,7 @@ const CourseDetail = (props) => {
         }}
         navigation={props.navigation}/>
 
-      <CourseButton courseId={courseDetail.id}/>
+      <CourseButton courseId={courseDetail.id} courseDetail={courseDetail}/>
       <Description content={{
         description: courseDetail.description,
         requirement: courseDetail.requirement,
@@ -153,17 +144,26 @@ const CourseDetail = (props) => {
     }
   }
 
-  const onLessonItemPressed = (lessonId) => {
-    //get video url and pass to VideoPlayer
+  const onLessonItemPressed = async (lessonId) => {
     console.log("onLessonItemPressed")
-    apiGetLessonUrlAndDuration(courseDetail.id, lessonId).then(response => {
-      if (response.status === 200) {
-        console.log("VideoInfo", response.data)
-        setLessonInfo(response.data.payload)
+    const downloadCourse = await isCourseDownloaded(courseDetail.id)
+    if (downloadCourse) {
+      console.log("isCourseDownloaded", downloadCourse)
+      const lesson = downloadCourse.lessons.find(object => object.id === lessonId)
+      if (lesson) {
+        setLessonInfo(lesson)
       }
-    }).catch(e => {
-      throw new Error()
-    })
+    } else {
+      //get video url and pass to VideoPlayer
+      apiGetLessonUrlAndDuration(courseDetail.id, lessonId).then(response => {
+        if (response.status === 200) {
+          console.log("VideoInfo", response.data)
+          setLessonInfo(response.data.payload)
+        }
+      }).catch(e => {
+        console.error(e)
+      })
+    }
   }
 
   const coursePrice = (courseInfo.price !== undefined) ? courseInfo.price : courseInfo.coursePrice

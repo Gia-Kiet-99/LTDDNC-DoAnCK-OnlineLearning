@@ -1,12 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {View, StyleSheet, FlatList, Modal, Text, TouchableOpacity, Alert, TextInput, Image, Button} from 'react-native'
+import {View, StyleSheet, FlatList, Modal, Text, TouchableOpacity, Alert, TextInput} from 'react-native'
 import CommentListItem from "./CommentListItem/comment-list-item";
 import ListItemSeparator from "../../../Common/list-item-separator";
 import CommentListHeader from "./commentListHeader/comment-list-header";
 import {Rating} from "react-native-ratings";
 import {AuthenticationContext} from "../../../../provider/authentication-provider";
 import {apiSubmitReview} from "../../../../core/services/course-service";
-import {INITIAL_LOAD_STATE, LOAD_FAILED, LOAD_SUCCEEDED, LOADING} from "../../../../core/configuration/loading-config";
 
 function CommentList(props) {
   let ratingList = props.route.params?.ratingList
@@ -67,7 +66,7 @@ function CommentList(props) {
             setRefreshList(true)
           }
         }).catch(e => {
-        throw new Error()
+        console.error(e)
       }).finally(() => {
         hideReviewModal()
         setShouldSendReview(false)

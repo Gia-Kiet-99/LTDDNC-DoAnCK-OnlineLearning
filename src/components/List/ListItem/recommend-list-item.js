@@ -62,9 +62,7 @@ function RecommendListItem(props) {
   }
 
   return <View>
-    {/*{loading === LOADING ? (<View style={{height: 0}}/>) : (*/}
     {renderUI()}
-    {/*)}*/}
   </View>
 }
 
