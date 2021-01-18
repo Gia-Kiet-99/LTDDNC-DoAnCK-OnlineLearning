@@ -71,13 +71,17 @@ function DownloadButton(props) {
     let course = {
       id: courseDetail.id,
       title: courseDetail.title,
-      averagePoint: courseDetail.averagePoint,
+      // averagePoint: courseDetail.averagePoint,
+      formalityPoint: courseDetail.formalityPoint,
+      contentPoint: courseDetail.contentPoint,
+      presentationPoint: courseDetail.presentationPoint,
       authorName: courseDetail.instructor.name,
       status: courseDetail.status,
       createdAt: courseDetail.createdAt,
       totalHours: courseDetail.totalHours,
       imageUrl: courseDetail.imageUrl,
-      videoNumber: courseDetail.videoNumber
+      videoNumber: courseDetail.videoNumber,
+      price: courseDetail.price
     }
     // console.log(result)
     let lessons = []

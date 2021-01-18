@@ -1,68 +1,84 @@
-import React, {useRef} from 'react';
-import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {Alert, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ActionBar from "../../Common/action-bar";
 import {titleName} from "../../../globals/constants";
-import {Video} from "expo-av";
-import * as FileSystem from 'expo-file-system'
-import {deleteDownloadCourse} from "../../../core/services/download-service";
+import {
+  getDownloadedListFromStorage,
+} from "../../../core/utils/async-storage-service";
+import CourseListItem from "../../List/ListItem/course-list-item";
+import {deleteAllCourses} from "../../../core/services/download-service";
 
 const Download = (props) => {
   console.log("Download")
 
   /* Use state */
-  const player = useRef(null)
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [refreshing, setRefreshing] = React.useState(false);
 
-  // const {getDownloadedCourses, removeAllDownloadedCourses} = useContext(CourseContext)
-  // const data = getDownloadedCourses()
+  /* Use effect */
+  useEffect(() => {
+    if (loading) {
+      getDownloadedListFromStorage().then(data => {
+        setData(data)
+        setLoading(false)
+      })
+    }
+  }, [loading])
 
-  // const onRemoveAllButtonClick = () => {
-  //   if (data && data.length > 0) {
-  //     removeAllDownloadedCourses()
-  //   }
-  // }
-
-  const DownloadHeader = () => {
-    return (
-      <View style={styles.overView}>
-        <Text style={styles.text}>0 courses</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={[styles.text, {color: '#2e97ff'}]}>REMOVE ALL</Text>
-        </TouchableOpacity>
-      </View>
+  /* Internal function */
+  const handleRemoveAll = async () => {
+    await deleteAllCourses()
+    setData([])
+  }
+  const onRemoveAllButtonClick = () => {
+    Alert.alert(
+      "Remove download",
+      "Remove all courses?",
+      [
+        {
+          text: "OK",
+          onPress: handleRemoveAll
+        },
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        }
+      ], {cancelable: true}
     )
   }
-
-  const testDown = async () => {
-    // console.log(FileSystem.documentDirectory)
-    // console.log(await FileSystem.readDirectoryAsync(FileSystem.documentDirectory))
-    await deleteDownloadCourse()
+  const renderItem = ({item}) => {
+    return <CourseListItem key={item.id} item={item} authorName={item.authorName} navigation={props.navigation}/>
   }
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    getDownloadedListFromStorage().then(data => {
+      setData(data)
+      setRefreshing(false)
+    })
+  }, [refreshing])
+
   return (
     <View style={styles.container}>
       {/*<StatusBar translucent={false} backgroundColor="white" barStyle='dark-content' animated={true}/>*/}
       <ActionBar title={titleName.download} navigation={props.navigation}/>
-      <View style={styles.content}>
-        <DownloadHeader/>
-
-        {/*<View style={{height: 200}}>*/}
-        {/*  <Video*/}
-        {/*    ref={player}*/}
-        {/*    source={{uri: 'file:///data/user/0/host.exp.exponent/files/ExperienceData/%2540anonymous%252Fklearn-de610623-1976-499a-9a4d-03b236b550e5/small.mp4'}}*/}
-        {/*    // source={{uri: 'http://techslides.com/demos/sample-videos/small.mp4'}}*/}
-        {/*    rate={1.0}*/}
-        {/*    volume={1.0}*/}
-        {/*    isMuted={false}*/}
-        {/*    useNativeControls={true}*/}
-        {/*    usePoster={true}*/}
-        {/*    // posterSource={require('../../../../../assets/girl.jpg')}*/}
-        {/*    resizeMode={Video.RESIZE_MODE_CONTAIN}*/}
-        {/*    shouldPlay={false}*/}
-        {/*    isLooping={false}*/}
-        {/*    style={{flex: 1}}*/}
-        {/*  />*/}
-        {/*</View>*/}
-      </View>
-      <Button title={'test download'} onPress={testDown}/>
+      {loading ? <View/> :
+        <View style={styles.content}>
+          <View style={styles.overView}>
+            <Text style={styles.text}>{`${data.length} courses`}</Text>
+            <TouchableOpacity style={styles.button} onPress={onRemoveAllButtonClick}>
+              <Text style={[styles.text, {color: '#2e97ff'}]}>REMOVE ALL</Text>
+            </TouchableOpacity>
+          </View>
+          <FlatList
+            data={data}
+            keyExtractor={item => item.id}
+            renderItem={renderItem}
+            refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+          />
+        </View>
+      }
     </View>
   );
 };
@@ -78,6 +94,7 @@ const styles = StyleSheet.create({
   },
   overView: {
     marginTop: 25,
+    marginBottom: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
