@@ -1,6 +1,6 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
-import {NavigatorName, ScreenName} from "../../../globals/constants";
+import {NavigatorName} from "../../../globals/constants";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {getAuthTokenFromStorage, removeAuthToken} from "../../../core/utils/async-storage-service";
 

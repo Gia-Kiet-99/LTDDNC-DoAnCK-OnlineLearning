@@ -19,18 +19,18 @@ const AccountInfo = (props) => {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Account</Text>
-      </TouchableOpacity>
+      {/*<TouchableOpacity style={styles.button}>*/}
+      {/*  <Text style={styles.buttonText}>Account</Text>*/}
+      {/*</TouchableOpacity>*/}
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Subscription</Text>
-        <Text style={{fontSize: 13, color: 'gray'}}>Pluralsight One Code.org (Limited Library) (Free)</Text>
-      </TouchableOpacity>
+      {/*<TouchableOpacity style={styles.button}>*/}
+      {/*  <Text style={styles.buttonText}>Subscription</Text>*/}
+      {/*  <Text style={{fontSize: 13, color: 'gray'}}>Pluralsight One Code.org (Limited Library) (Free)</Text>*/}
+      {/*</TouchableOpacity>*/}
 
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Communication Preferences</Text>
-      </TouchableOpacity>
+      {/*<TouchableOpacity style={styles.button}>*/}
+      {/*  <Text style={styles.buttonText}>Communication Preferences</Text>*/}
+      {/*</TouchableOpacity>*/}
     </View>
   )
 }

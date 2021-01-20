@@ -1,6 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {View, Image, Text, StyleSheet, ActivityIndicator, TouchableOpacity} from 'react-native';
+import React, {useContext} from 'react';
+import {View, Image, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {AuthenticationContext} from "../../../provider/authentication-provider";
+import {FontAwesome5} from '@expo/vector-icons';
+import {ScreenName} from "../../../globals/constants";
+import {Ionicons} from '@expo/vector-icons';
 
 const info = {
   username: 'Kiet Dinh',
@@ -15,20 +18,24 @@ const Profile = (props) => {
   console.log("Profile")
   const {state} = useContext(AuthenticationContext)
 
-  // const [isLoading, setLoading] = useState(true);
+  const onEditButtonPressed = () => {
+    props.navigation.navigate(ScreenName.editing)
+  }
+  const onChangePasswordPressed = () => {
+    props.navigation.navigate(ScreenName.changePassword)
+  }
 
-  return <View style={styles.container}>
-    {/*{isLoading ?*/}
-    {/*  (*/}
-    {/*    <View>*/}
-    {/*      <ActivityIndicator color="red"/>*/}
-    {/*    </View>*/}
-    {/*  ) :*/}
-    {/*  (*/}
-    {/*    <View>*/}
+  return <ScrollView style={styles.container}>
     <View style={styles.mainInfo}>
       <Image style={styles.image} source={{uri: state.userInfo.avatar}}/>
-      <Text style={styles.username}>{state.userInfo.name}</Text>
+      <View style={styles.userInfo}>
+        <Text style={styles.username}>{state.userInfo.name}</Text>
+        <Text style={styles.smallText}>{state.userInfo.email}</Text>
+        <Text style={styles.smallText}>{state.userInfo.phone}</Text>
+      </View>
+      {/*<TouchableOpacity onPress={onEditButtonPressed}>*/}
+      {/*  <FontAwesome5 name="edit" size={18} color="#2980b9"/>*/}
+      {/*</TouchableOpacity>*/}
     </View>
 
     <View style={styles.activityInsight}>
@@ -49,10 +56,18 @@ const Profile = (props) => {
         <Text style={{fontSize: 20}}>{info.mostViewedSubject}</Text>
       </View>
     </View>
-  </View>
-  // )}
-  // </View>
 
+    <View style={styles.buttonGroup}>
+      <TouchableOpacity style={styles.button} onPress={onEditButtonPressed}>
+        <FontAwesome5 name="edit" size={16} color="#fff"/>
+        <Text style={styles.buttonText}>Update account</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={onChangePasswordPressed}>
+        <Image source={require('../../../../assets/lock.png')} style={{width: 16, height: 16}}/>
+        <Text style={styles.buttonText}>Change password</Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
 };
 
 const styles = StyleSheet.create({
@@ -64,16 +79,40 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+  userInfo: {
+    marginLeft: 15,
+    flex: 1
+  },
   activityInsight: {},
   image: {
     height: 80,
     width: 80,
-    borderRadius: 80/2
+    borderRadius: 80 / 2
   },
   username: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: 15
+  },
+  smallText: {
+    fontSize: 13
+  },
+  buttonGroup: {
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20
+  },
+  button: {
+    // flex: 1,
+    flexDirection: 'row',
+    borderRadius: 3,
+    padding: 10,
+    backgroundColor: '#2980b9'
+  },
+  buttonText: {
+    textAlign: 'center',
+    marginLeft: 5,
+    color: '#fff'
   }
 })
 

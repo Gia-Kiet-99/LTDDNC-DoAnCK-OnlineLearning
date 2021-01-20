@@ -47,7 +47,9 @@ export const ScreenName = {
   profile: "Profile",
   pathDetail: "PathDetail",
   skillDetail: "SkillDetail",
-  search: "Search"
+  search: "Search",
+  editing: "Editing",
+  changePassword: "ChangePassword"
 }
 
 export const NavigatorName = {

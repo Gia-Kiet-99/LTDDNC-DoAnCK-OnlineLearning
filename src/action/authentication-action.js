@@ -9,6 +9,9 @@ export const RESET = "RESET"
 export const GET_USER_INFO_SUCCEEDED = "GET_USER_INFO_SUCCEEDED"
 export const GET_USER_INFO_FAILED = "GET_USER_INFO_FAILED"
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE"
+export const UPDATE_USER_INFO_SUCCEEDED = "UPDATE_USER_INFO_SUCCEEDED"
+export const UPDATE_USER_INFO_FAILED = "UPDATE_USER_INFO_FAILED"
+export const NOTIFY_MESSAGE = "NOTIFY_MESSAGE"
 
 export const login = (dispatch) => async (username, password) => {
   try {
@@ -55,5 +58,13 @@ export const getUserInfo = (dispatch, setLoginBySavedToken) => async (token) => 
 
 export const clearMessage = (dispatch) => () => {
   dispatch({type: CLEAR_MESSAGE})
+}
+
+export const updateUserInfo = (dispatch) => (userInfo) => {
+  dispatch({type: UPDATE_USER_INFO_SUCCEEDED, data: userInfo})
+}
+
+export const notifyErrorMessage = (dispatch) => (errorMessage) => {
+  dispatch({type: NOTIFY_MESSAGE, data: errorMessage})
 }
 

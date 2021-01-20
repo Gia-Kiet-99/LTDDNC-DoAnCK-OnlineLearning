@@ -10,6 +10,7 @@ import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
 import StudyList from "../../../List/StudyList/study-list";
 import SkillDetail from "../../../DetailScreen/SkillDetail/skill-detail";
+import Editing from "../../../AccountManagement/Editing/editing";
 
 const Stack = createStackNavigator()
 
@@ -25,10 +26,9 @@ const BrowseStackNavigator = () => {
         <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
         <Stack.Screen name={ScreenName.skillDetail} component={SkillDetail} options={
           ({route}) => ({title: route.params.categoryName})}/>
-        {/*<Stack.Screen name={ScreenName.fieldDetail} component={FieldDetail} options={*/}
-        {/*  ({route}) => ({title: route.params.field})}/>*/}
         <Stack.Screen name={ScreenName.studyList} component={StudyList} options={
           ({route}) => ({title: route.params.title})}/>
+        <Stack.Screen name={ScreenName.editing} component={Editing}/>
       </Stack.Navigator>
     </PathProvider>
   );
