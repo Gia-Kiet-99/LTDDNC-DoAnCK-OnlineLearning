@@ -103,13 +103,13 @@ const Login = (props) => {
         <Text style={buttonStyles.needHelpButton}>Forgot password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>
-        <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>
-      </TouchableOpacity>
+      {/*<TouchableOpacity style={[buttonStyles.button, buttonStyles.transparentButton]}>*/}
+      {/*  <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Use Single Sign-On</Text>*/}
+      {/*</TouchableOpacity>*/}
 
       <TouchableOpacity onPress={onSubscribePressed}
                         style={[buttonStyles.button, buttonStyles.transparentButton]}>
-        <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to PluralSight</Text>
+        <Text style={[textStyles.buttonText, {color: '#2e97ff'}]}>Subscribe to KLearn</Text>
       </TouchableOpacity>
       {/*</View>*/}
 

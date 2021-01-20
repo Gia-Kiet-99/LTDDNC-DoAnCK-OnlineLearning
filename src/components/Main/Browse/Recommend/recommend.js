@@ -36,18 +36,18 @@ function Recommend() {
         }}
         style={styles.imageButton}/>
 
-      <ScrollView
-        horizontal={true} showsHorizontalScrollIndicator={false}
-        style={{marginTop: 10, marginHorizontal: 10}}>
-        <View>
-          <View style={{flexDirection: 'row'}}>
-            {renderImageButtonList(titles.slice(0, titles.length / 2))}
-          </View>
-          <View style={{flexDirection: 'row', marginTop: 5}}>
-            {renderImageButtonList(titles.slice(titles.length / 2, titles.length))}
-          </View>
-        </View>
-      </ScrollView>
+      {/*<ScrollView*/}
+      {/*  horizontal={true} showsHorizontalScrollIndicator={false}*/}
+      {/*  style={{marginTop: 10, marginHorizontal: 10}}>*/}
+      {/*  <View>*/}
+      {/*    <View style={{flexDirection: 'row'}}>*/}
+      {/*      {renderImageButtonList(titles.slice(0, titles.length / 2))}*/}
+      {/*    </View>*/}
+      {/*    <View style={{flexDirection: 'row', marginTop: 5}}>*/}
+      {/*      {renderImageButtonList(titles.slice(titles.length / 2, titles.length))}*/}
+      {/*    </View>*/}
+      {/*  </View>*/}
+      {/*</ScrollView>*/}
     </View>
   )
 }

@@ -15,3 +15,18 @@ export const apiChangePassword = async (userId, oldPassword, newPassword) => {
     newPass: newPassword
   })
 }
+
+export const apiRegisterAccount = async (email, phone, password) => {
+  return await instance.post('/user/register', {
+    username: "",
+    email: email,
+    phone: phone,
+    password: password
+  })
+}
+
+export const apiSendActivationEmail = async (email) => {
+  return await instance.post('/user/send-activate-email', {
+    email: email
+  })
+}

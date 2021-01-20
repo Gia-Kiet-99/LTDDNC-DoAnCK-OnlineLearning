@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {NavigatorName} from "../../../globals/constants";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
@@ -6,28 +6,35 @@ import {getAuthTokenFromStorage, removeAuthToken} from "../../../core/utils/asyn
 
 const SplashScreen = (props) => {
   const authContext = useContext(AuthenticationContext)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    getAuthTokenFromStorage().then(token => {
-      if (token != null) {
-        authContext.getUserInfo(token).then(() => {
-          // console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
-          if (authContext.loginBySavedToken === false) {
-            removeAuthToken().then()
-            props.navigation.reset({
-              index: 0,
-              routes: [{name: NavigatorName.authenticationStack}]
-            })
-          }
-        })
-      } else {
-        props.navigation.reset({
-          index: 0,
-          routes: [{name: NavigatorName.authenticationStack}]
-        })
-      }
-    })
-  })
+    if (loading) {
+      getAuthTokenFromStorage().then(token => {
+        if (token != null) {
+          authContext.getUserInfo(token).then(() => {
+            // console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
+            if (authContext.loginBySavedToken === false) {
+              removeAuthToken().then()
+              props.navigation.reset({
+                index: 0,
+                routes: [{name: NavigatorName.authenticationStack}]
+              })
+            }
+          })
+        } else {
+          props.navigation.reset({
+            index: 0,
+            routes: [{name: NavigatorName.authenticationStack}]
+          })
+        }
+      }).catch(e => {
+        console.log(e)
+      }).finally(() => {
+        setLoading(false)
+      })
+    }
+  }, [loading])
 
   return <View style={styles.container}>
     <View style={{flex: 1, justifyContent: 'center'}}>
