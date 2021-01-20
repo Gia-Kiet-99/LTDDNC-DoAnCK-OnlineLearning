@@ -1,85 +1,85 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet, TouchableOpacity, View, TextInput, Image, Button, ActivityIndicator} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  TextInput,
+  Image,
+  Button,
+  ActivityIndicator,
+  Alert
+} from 'react-native';
 import textInputStyles from "../styles/text-input-styles";
 import {apiSendEmail} from "../../../core/services/authentication-service";
 import {ScreenName} from "../../../globals/constants";
+import LoadIndicator from "../../Common/load-indicator";
 
 const ForgetPassword = (props) => {
   const [email, setEmail] = useState("")
-  const [status, setStatus] = useState("NOT_SEND_EMAIL")
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState("")
 
+  const validateEmail = (email) => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(email)) {
+      return true
+    } else {
+      setMessage("Invalid email")
+      return false
+    }
+  }
   const sendEmail = () => {
-    if (email !== "") {
-      setStatus("EMAIL_SENDING")
+    if (validateEmail(email)) {
+      setMessage("")
+      setLoading(true)
       apiSendEmail(email).then((response) => {
         if (response.status === 200) {
-          setStatus("EMAIL_SENT")
-        } else {
-          setStatus("SENT_EMAIL_FAILED")
+          Alert.alert("", "Email has been sent")
         }
-      }).catch(() => {
-        setStatus("SENT_EMAIL_FAILED")
+      }).catch((e) => {
+        console.error(e)
+        Alert.alert("", "Error")
+      }).finally(() => {
+        setLoading(false)
       })
     }
   }
-
-  const renderUI = () => {
-    switch (status) {
-      case "NOT_SEND_EMAIL":
-        return <View>
-          <View style={styles.imageWrapper}>
-            <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
-          </View>
-          <TextInput
-            blurOnSubmit={true}
-            textContentType="emailAddress"
-            keyboardType="email-address"
-            defaultValue={email}
-            onChangeText={(text) => setEmail(text)}
-            placeholder='Enter your email'
-            selectionColor={'#888'}
-            style={textInputStyles.textInput}/>
-          <TouchableOpacity
-            onPress={sendEmail}
-            style={[styles.button, styles.loginButton]}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
+  const renderMessage = (message) => {
+    if (message) {
+      return <View style={styles.messageWrapper}>
+        <Text style={styles.message}>{message}</Text>
+      </View>
+    } else {
+      if (loading) {
+        return <View style={{paddingVertical: 5}}>
+          <LoadIndicator/>
         </View>
-      case "EMAIL_SENDING":
-        return <View>
-          <ActivityIndicator size="large" color="#2980b9"/>
-        </View>
-      case "EMAIL_SENT":
-        return <View>
-          <Text>Send email successfully</Text>
-          <Button
-            onPress={() => props.navigation.navigate(ScreenName.authentication)}
-            title="return"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-      case "SENT_EMAIL_FAILED":
-        return <View>
-          <Text>Send email failed</Text>
-          <Button
-            onPress={() => props.navigation.navigate(ScreenName.authentication)}
-            title="return"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </View>
-      default:
-        return <View style={styles.centered}>
-          <Text>Something went wrong</Text>
-        </View>
+      }
+      return <View/>
     }
   }
 
-  // console.log("ForgetPassword")
   return (
     <View style={styles.container}>
-      {renderUI()}
+      <View style={styles.imageWrapper}>
+        <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
+      </View>
+      <TextInput
+        blurOnSubmit={true}
+        textContentType="emailAddress"
+        keyboardType="email-address"
+        defaultValue={email}
+        onChangeText={(text) => setEmail(text)}
+        placeholder='Enter your email'
+        selectionColor={'#888'}
+        style={textInputStyles.textInput}/>
+      {renderMessage(message)}
+      <TouchableOpacity
+        onPress={sendEmail}
+        style={[styles.button, styles.loginButton]}>
+        <Text style={styles.buttonText}>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -105,8 +105,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 10,
     padding: 10,
-    borderRadius: 3,
-
+    borderRadius: 3
   },
 
   loginButton: {
@@ -130,6 +129,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold'
+  },
+  messageWrapper: {
+    marginVertical: 5,
+    alignItems: 'center'
+  },
+  message: {
+    fontWeight: 'bold',
+    color: '#34495e'
   }
 
 })

@@ -7,8 +7,8 @@ export const apiLogin = async (username, password) => {
   });
 }
 
-export const apiSendEmail = (email) => {
-  return instance.post("/user/forget-pass/send-email", {
+export const apiSendEmail = async (email) => {
+  return await instance.post("/user/forget-pass/send-email", {
     email: email
   })
 }
