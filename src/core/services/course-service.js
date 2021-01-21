@@ -25,10 +25,8 @@ export const apiGetLearningCourse = async () => {
   return await instance.get("/user/get-process-courses")
 }
 
-export const apiGetFavoriteCourses = () => {
-  return instance.get(
-    "/user/get-favorite-courses",
-  )
+export const apiGetFavoriteCourses = async () => {
+  return await instance.get("/user/get-favorite-courses")
 }
 
 export const apiGetCourseInfo = async (courseId) => {

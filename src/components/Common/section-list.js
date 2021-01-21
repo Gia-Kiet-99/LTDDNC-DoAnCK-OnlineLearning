@@ -1,5 +1,5 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {StyleSheet, ScrollView, View, Text, TouchableOpacity, FlatList, ActivityIndicator} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {StyleSheet, View, FlatList, ActivityIndicator} from 'react-native';
 import PathsSectionItem from "../Main/Browse/PathsSectionItem/paths-section-item";
 import SectionCoursesItem from "../Main/Home/SectionCoursesItem/section-courses-item";
 import AuthorSectionItem from "../Main/Browse/AuthorSectionItem/author-section-item";
@@ -9,12 +9,13 @@ import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item
 import {AuthenticationContext} from "../../provider/authentication-provider";
 import {
   apiGetAuthorList,
-  apiGetCategoryList,
+  apiGetCategoryList, apiGetCourseDetailByIds, apiGetFavoriteCourses,
   apiGetLearningCourse,
   apiGetRecommendCourse,
 } from "../../core/services/course-service";
 import {ListContext} from "../../provider/list-provider";
 import LearningSectionItem from "../Main/Home/SectionCoursesItem/learning-section-item";
+import FavoriteSectionItem from "../Main/Home/SectionCoursesItem/favorite-section-item";
 
 const SectionList = (props) => {
   /* Use context */
@@ -30,68 +31,102 @@ const SectionList = (props) => {
 
   /* Use effect */
   useEffect(() => {
-    switch (props.kind) {
-      case listType.continueCourse:
-        apiGetLearningCourse()
-          .then((response) => {
-            if (response.status === 200) {
-              setListData(response.data.payload)
-            }
-          })
-          .catch(error => {
-            throw new Error(error)
-          })
-          .finally(() => {
-            setLoading(false)
-          })
-        break;
-      case listType.recommendCourse:
-        apiGetRecommendCourse(state.userInfo.id, 20, 1)
-          .then((response) => {
-            if (response.status === 200) {
-              // console.log("Recommend courses: ", response.data.payload)
-              setListData(response.data.payload)
-            }
-          })
-          .catch(error => {
-            throw new Error(error)
-          })
-          .finally(() => {
-            setLoading(false)
-          })
-        break
-      case listType.author:
-        apiGetAuthorList()
-          .then(response => {
-            if (response.status === 200) {
-              setListData(response.data.payload)
-            }
-          })
-          .catch(error => {
-            throw new Error(error)
-          })
-          .finally(() => {
-            setLoading(false)
-          })
-        break
-      case listType.popularSkill:
-        apiGetCategoryList()
-          .then(response => {
-            if (response.status === 200) {
-              setListData(response.data.payload)
-            }
-          })
-          .catch(e => {
-            throw new Error(error)
-          })
-          .finally(() => {
-            setLoading(false)
-          })
-        break
-      default:
-        throw new Error("invalid list kind")
+    if (isLoading) {
+      switch (props.kind) {
+        case listType.continueCourse:
+          apiGetLearningCourse()
+            .then((response) => {
+              if (response.status === 200) {
+                setListData(response.data.payload)
+              }
+            })
+            .catch(error => {
+              throw new Error(error)
+            })
+            .finally(() => {
+              setLoading(false)
+            })
+          break;
+        case listType.recommendCourse:
+          apiGetRecommendCourse(state.userInfo.id, 20, 1)
+            .then((response) => {
+              if (response.status === 200) {
+                // console.log("Recommend courses: ", response.data.payload)
+                setListData(response.data.payload)
+              }
+            })
+            .catch(error => {
+              throw new Error(error)
+            })
+            .finally(() => {
+              setLoading(false)
+            })
+          break
+        case listType.author:
+          apiGetAuthorList()
+            .then(response => {
+              if (response.status === 200) {
+                setListData(response.data.payload)
+              }
+            })
+            .catch(error => {
+              throw new Error(error)
+            })
+            .finally(() => {
+              setLoading(false)
+            })
+          break
+        case listType.popularSkill:
+          apiGetCategoryList()
+            .then(response => {
+              if (response.status === 200) {
+                setListData(response.data.payload)
+              }
+            })
+            .catch(e => {
+              throw new Error(error)
+            })
+            .finally(() => {
+              setLoading(false)
+            })
+          break
+        case listType.favoriteCourse:
+          getFavoriteCourses()
+          break
+        default:
+          throw new Error("invalid list kind")
+      }
     }
-  }, [listContext.shouldUpdateList])
+  }, [listContext.shouldUpdateList, isLoading])
+
+  /* Internal function */
+  const getFavoriteDetail = (rawFavoriteList) => {
+    let list = []
+    for (let i = 0; i < rawFavoriteList.length; i++) {
+      apiGetCourseDetailByIds(rawFavoriteList[i].id, state.userInfo.id).then(r => {
+        if (r.status === 200) {
+          console.log("OKE")
+          list.push(r.data.payload)
+        }
+      }).catch(e => {
+        console.error(e)
+      }).finally(() => {
+        if (i === rawFavoriteList.length - 1) {
+          setListData(list)
+          setLoading(false)
+        }
+      })
+    }
+  }
+  const getFavoriteCourses = () => {
+    apiGetFavoriteCourses().then(response => {
+      if (response.status === 200) {
+        getFavoriteDetail(response.data.payload)
+      }
+    }).catch(e => {
+      console.error(e)
+    })
+  }
 
   /* Render list item */
   const renderListItem = ({item}) => {
@@ -99,7 +134,6 @@ const SectionList = (props) => {
       case listType.path:
         return <PathsSectionItem key={item.id} item={item} navigation={props.navigation}/>
       case listType.course:
-      case listType.favoriteCourse:
       case listType.continueCourse:
         return <LearningSectionItem key={item.id} item={item} navigation={props.navigation}/>
       case listType.recommendCourse:
@@ -110,6 +144,8 @@ const SectionList = (props) => {
         return <ChannelSectionItem key={item.id} item={item} navigation={props.navigation}/>
       case listType.popularSkill:
         return <SkillSectionItem key={item.id} item={item} navigation={props.navigation}/>
+      case listType.favoriteCourse:
+        return <FavoriteSectionItem key={item.id} item={item} navigation={props.navigation}/>
     }
   }
 

@@ -47,6 +47,10 @@ const Home = (props) => {
                title={titleName.continueLearning}
                showSeeAllButton={true}/>
 
+      <Section navigation={props.navigation} kind={listType.favoriteCourse}
+               title={titleName.favoriteCourse}
+               showSeeAllButton={true}/>
+
       <Section navigation={props.navigation} kind={listType.recommendCourse}
                title={titleName.recommendCourse}
                showSeeAllButton={true}/>

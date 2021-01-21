@@ -26,7 +26,8 @@ export const titleName = {
   continueLearning: "Continue learning",
   recommendCourse: "Recommend courses",
   course: "Courses",
-  author: "Authors"
+  author: "Authors",
+  favoriteCourse: "Favorite courses"
 }
 
 export const ScreenName = {

@@ -3,7 +3,8 @@ import {StyleSheet, FlatList, View, ActivityIndicator, Text} from 'react-native'
 import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
 import {
-  apiGetCoursesByCategory,
+  apiGetCourseDetailByIds,
+  apiGetCoursesByCategory, apiGetFavoriteCourses,
   apiGetLearningCourse,
   apiGetNewReleaseCourse,
   apiGetRecommendCourse,
@@ -14,6 +15,7 @@ import {listType} from "../../../globals/constants";
 import LearningListItem from "../ListItem/learning-list-item";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import RecommendListItem from "../ListItem/recommend-list-item";
+import FavoriteListItem from "../ListItem/favorite-list-item";
 
 
 const StudyList = (props) => {
@@ -64,9 +66,39 @@ const StudyList = (props) => {
       case listType.categoryCourses:
         getDataFromApi = getCategoryCourses
         break
+      case listType.favoriteCourse:
+        getDataFromApi = getFavoriteCourses
+        break
       default:
         throw new Error()
     }
+  }
+  const getFavoriteCourses = () => {
+    console.log("getFavoriteCourses")
+    apiGetFavoriteCourses().then(response => {
+      if (response.status === 200) {
+        let list = []
+        const rawFavoriteList = response.data.payload
+        for (let i = 0; i < rawFavoriteList.length; i++) {
+          apiGetCourseDetailByIds(rawFavoriteList[i].id, authContext.state.userInfo.id).then(r => {
+            if (r.status === 200) {
+              console.log("OKE")
+              list.push(r.data.payload)
+            }
+          }).catch(e => {
+            console.error(e)
+          }).finally(() => {
+            if (i === rawFavoriteList.length - 1) {
+              setListData(listData.concat(list))
+              setLoading(LOAD_SUCCEEDED)
+            }
+          })
+        }
+      }
+    }).catch(e => {
+      console.error(e)
+      setLoading(LOAD_FAILED)
+    })
   }
   const getCategoryCourses = () => {
     console.log("getCategoryCourses")
@@ -171,17 +203,12 @@ const StudyList = (props) => {
         return <LearningListItem key={item.id} item={item} navigation={props.navigation}/>
       case listType.recommendCourse:
         return <RecommendListItem key={item.id} item={item} navigation={props.navigation}/>
+      case listType.favoriteCourse:
+        return <FavoriteListItem key={item.id} item={item} navigation={props.navigation}/>
       default:
         return <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
     }
   }
-  // const renderListFooter = () => {
-  //   if (canRefreshList) {
-  //     return <LoadIndicator/>
-  //   } else {
-  //     return <View/>
-  //   }
-  // }
   const renderUI = () => {
     switch (loading) {
       case LOADING:
@@ -192,13 +219,12 @@ const StudyList = (props) => {
         return <FlatList
           // refreshing={false}
           // onRefresh={getDataFromApi}
-          onEndReachedThreshold={0}
-          onEndReached={loadMoreCourses}
+          // onEndReachedThreshold={0}
+          // onEndReached={loadMoreCourses}
           showsVerticalScrollIndicator={false}
           data={listData}
           renderItem={renderCourseItem}
           keyExtractor={(item) => (item.id)}
-          // ListFooterComponent={renderListFooter}
           ItemSeparatorComponent={ListItemSeparator}/>
       case LOAD_FAILED:
         return <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
