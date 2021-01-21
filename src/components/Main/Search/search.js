@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import SearchHistoryList from "./SearchHistoryList/search-history-list";
 import {SearchBar} from "react-native-elements";
 import SearchTabNavigator

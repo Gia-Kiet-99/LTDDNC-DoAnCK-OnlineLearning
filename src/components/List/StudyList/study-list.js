@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {StyleSheet, FlatList, View, ActivityIndicator, Text} from 'react-native';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {StyleSheet, FlatList, View, ActivityIndicator, Text, RefreshControl} from 'react-native';
 import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
 import {
@@ -32,6 +32,7 @@ const StudyList = (props) => {
   /* Use state */
   const [loading, setLoading] = useState(LOADING)
   const [listData, setListData] = useState([])
+  const [refreshing, setRefreshing] = React.useState(false);
   /**
    * canRefreshList is state that show us if there is no course to reach
    * (false when we fetched all course from api)
@@ -209,6 +210,16 @@ const StudyList = (props) => {
         return <CourseListItem key={item.id} item={item} navigation={props.navigation}/>
     }
   }
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    //do nothing
+    checkListType(type)
+    if (loading === LOADING) {
+      getDataFromApi()
+      setRefreshing(false)
+    }
+  }, [refreshing])
+  
   const renderUI = () => {
     switch (loading) {
       case LOADING:
@@ -225,6 +236,7 @@ const StudyList = (props) => {
           data={listData}
           renderItem={renderCourseItem}
           keyExtractor={(item) => (item.id)}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
           ItemSeparatorComponent={ListItemSeparator}/>
       case LOAD_FAILED:
         return <View style={{justifyContent: 'center', flex: 1, alignItems: 'center'}}>
