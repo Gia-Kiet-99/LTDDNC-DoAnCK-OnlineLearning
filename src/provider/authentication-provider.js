@@ -5,20 +5,12 @@ import {
   getUserInfo,
   login,
   logOut,
-  notifyErrorMessage,
   updateUserInfo
 } from "../action/authentication-action";
 import {apiSendEmail} from "../core/services/authentication-service";
 import {authInitialState} from "../localize/data";
 
 const AuthenticationContext = createContext();
-
-// export const initialState = {
-//   isAuthenticated: false,
-//   userInfo: "",
-//   token: "",
-//   message: ""
-// }
 
 export const init = () => {
     return {...authInitialState}
@@ -51,7 +43,7 @@ const AuthenticationProvider = (props) => {
         loginBySavedToken,
         /*forgotPassword: forgotPassword(dispatch)*/
         updateUserInfo: updateUserInfo(dispatch),
-        notifyErrorMessage: notifyErrorMessage(dispatch)
+        // notifyErrorMessage: notifyErrorMessage(dispatch)
       }}>
       {props.children}
     </AuthenticationContext.Provider>

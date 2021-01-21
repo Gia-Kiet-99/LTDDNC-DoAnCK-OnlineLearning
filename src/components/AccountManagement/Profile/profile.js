@@ -3,7 +3,6 @@ import {View, Image, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {FontAwesome5} from '@expo/vector-icons';
 import {ScreenName} from "../../../globals/constants";
-import {Ionicons} from '@expo/vector-icons';
 
 const info = {
   username: 'Kiet Dinh',
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
     // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: 20
+    marginTop: 30
   },
   button: {
     // flex: 1,

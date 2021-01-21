@@ -33,11 +33,11 @@ export const reducer = (prevState, action) => {
     case CLEAR_MESSAGE:
       return {...prevState, message: ""}
     case UPDATE_USER_INFO_SUCCEEDED:
-      return {...prevState, userInfo: action.data, message: "Successfully"}
+      return {...prevState, userInfo: action.data}
     case UPDATE_USER_INFO_FAILED:
-      return {...prevState, message: "Failed"}
-    case NOTIFY_MESSAGE:
-      return {...prevState, message: action.data}
+      return {...prevState}
+    // case NOTIFY_MESSAGE:
+    //   return {...prevState, message: action.data}
     default:
       throw new Error();
   }

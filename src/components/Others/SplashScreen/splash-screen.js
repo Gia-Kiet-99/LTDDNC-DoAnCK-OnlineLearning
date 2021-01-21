@@ -5,6 +5,7 @@ import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {getAuthTokenFromStorage, removeAuthToken} from "../../../core/utils/async-storage-service";
 
 const SplashScreen = (props) => {
+  console.log("SplashScreen")
   const authContext = useContext(AuthenticationContext)
   const [loading, setLoading] = useState(true)
 
