@@ -24,16 +24,36 @@ function SearchResultList(props) {
         console.log("Error SearchResultList/renderListItem: type value not found")
     }
   }
+  const renderUI = (results) => {
+    console.log(results)
+    if (results.data.length > 0) {
+      return <View style={{flex: 1}}>
+        <Text style={styles.text}>{`${results.totalInPage} Results`}</Text>
+        <FlatList
+          data={results.data}
+          renderItem={renderListItem}
+          keyExtractor={item => item.id}
+          ItemSeparatorComponent={ListItemSeparator}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    } else {
+      return <View style={{alignItems: 'center', marginTop: 20}}>
+        <Text>No result found</Text>
+      </View>
+    }
+  }
 
   return <View style={styles.container}>
-    <Text style={styles.text}>{`${results.totalInPage} Results`}</Text>
-    <FlatList
-      data={results.data}
-      renderItem={renderListItem}
-      keyExtractor={item => item.id}
-      ItemSeparatorComponent={ListItemSeparator}
-      showsVerticalScrollIndicator={false}
-    />
+    {renderUI(results)}
+    {/*<Text style={styles.text}>{`${results.totalInPage} Results`}</Text>*/}
+    {/*<FlatList*/}
+    {/*  data={results.data}*/}
+    {/*  renderItem={renderListItem}*/}
+    {/*  keyExtractor={item => item.id}*/}
+    {/*  ItemSeparatorComponent={ListItemSeparator}*/}
+    {/*  showsVerticalScrollIndicator={false}*/}
+    {/*/>*/}
   </View>
 }
 

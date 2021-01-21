@@ -219,7 +219,7 @@ const StudyList = (props) => {
       setRefreshing(false)
     }
   }, [refreshing])
-  
+
   const renderUI = () => {
     switch (loading) {
       case LOADING:

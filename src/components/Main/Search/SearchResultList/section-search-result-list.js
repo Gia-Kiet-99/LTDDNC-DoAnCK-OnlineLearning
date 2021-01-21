@@ -43,10 +43,12 @@ const SectionSearchResultList = (props) => {
         return <CourseListItem item={item} navigation={props.navigation} style={{paddingHorizontal: 15}}/>
     }
   }
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <SectionList
+  const checkResult = (results) => {
+    return results.find(obj => obj.data.length > 0)
+  }
+  const renderUI = (results) => {
+    if (checkResult(results)) {
+      return <SectionList
         sections={results}
         keyExtractor={(item, index) => item + index}
         renderItem={renderSectionListItem}
@@ -56,7 +58,17 @@ const SectionSearchResultList = (props) => {
         SectionSeparatorComponent={ListItemSeparator}
         // stickySectionHeadersEnabled={true}
       />
-    </SafeAreaView>
+    } else {
+      return <View style={{alignItems: 'center', marginTop: 20}}>
+        <Text>No result found</Text>
+      </View>
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      {renderUI(results)}
+    </View>
   );
 };
 
