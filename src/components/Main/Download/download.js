@@ -37,11 +37,11 @@ const Download = (props) => {
       "Remove all courses?",
       [
         {
-          text: "OK",
+          text: "Yes",
           onPress: handleRemoveAll
         },
         {
-          text: "Cancel",
+          text: "No",
           onPress: () => console.log("Cancel Pressed"),
           style: "cancel"
         }

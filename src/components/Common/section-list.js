@@ -9,7 +9,7 @@ import SkillSectionItem from "../Main/Browse/SkillSectionItem/skill-section-item
 import {AuthenticationContext} from "../../provider/authentication-provider";
 import {
   apiGetAuthorList,
-  apiGetCategoryList, apiGetCourseDetailByIds, apiGetFavoriteCourses,
+  apiGetCategoryList, apiGetFavoriteCourses,
   apiGetLearningCourse,
   apiGetRecommendCourse,
 } from "../../core/services/course-service";
@@ -32,101 +32,127 @@ const SectionList = (props) => {
   /* Use effect */
   useEffect(() => {
     if (isLoading) {
-      switch (props.kind) {
-        case listType.continueCourse:
-          apiGetLearningCourse()
-            .then((response) => {
-              if (response.status === 200) {
-                setListData(response.data.payload)
-              }
-            })
-            .catch(error => {
-              throw new Error(error)
-            })
-            .finally(() => {
-              setLoading(false)
-            })
-          break;
-        case listType.recommendCourse:
-          apiGetRecommendCourse(state.userInfo.id, 20, 1)
-            .then((response) => {
-              if (response.status === 200) {
-                // console.log("Recommend courses: ", response.data.payload)
-                setListData(response.data.payload)
-              }
-            })
-            .catch(error => {
-              throw new Error(error)
-            })
-            .finally(() => {
-              setLoading(false)
-            })
-          break
-        case listType.author:
-          apiGetAuthorList()
-            .then(response => {
-              if (response.status === 200) {
-                setListData(response.data.payload)
-              }
-            })
-            .catch(error => {
-              throw new Error(error)
-            })
-            .finally(() => {
-              setLoading(false)
-            })
-          break
-        case listType.popularSkill:
-          apiGetCategoryList()
-            .then(response => {
-              if (response.status === 200) {
-                setListData(response.data.payload)
-              }
-            })
-            .catch(e => {
-              throw new Error(error)
-            })
-            .finally(() => {
-              setLoading(false)
-            })
-          break
-        case listType.favoriteCourse:
-          getFavoriteCourses()
-          break
-        default:
-          throw new Error("invalid list kind")
-      }
+      loadData(props.kind)
     }
-  }, [listContext.shouldUpdateList, isLoading])
+  }, [isLoading])
+  useEffect(() => {
+    if (listContext.shouldUpdateList) {
+      loadData(props.kind)
+      listContext.setShouldUpdateList(false)
+    }
+  }, [listContext.shouldUpdateList])
+
+  /* Function */
+  const loadData = (type) => {
+    switch (type) {
+      case listType.continueCourse:
+        apiGetLearningCourse()
+          .then((response) => {
+            if (response.status === 200) {
+              setListData(response.data.payload)
+            }
+          })
+          .catch(error => {
+            throw new Error(error)
+          })
+          .finally(() => {
+            setLoading(false)
+          })
+        break;
+      case listType.recommendCourse:
+        apiGetRecommendCourse(state.userInfo.id, 20, 1)
+          .then((response) => {
+            if (response.status === 200) {
+              // console.log("Recommend courses: ", response.data.payload)
+              setListData(response.data.payload)
+            }
+          })
+          .catch(error => {
+            throw new Error(error)
+          })
+          .finally(() => {
+            setLoading(false)
+          })
+        break
+      case listType.author:
+        apiGetAuthorList()
+          .then(response => {
+            if (response.status === 200) {
+              setListData(response.data.payload)
+            }
+          })
+          .catch(error => {
+            throw new Error(error)
+          })
+          .finally(() => {
+            setLoading(false)
+          })
+        break
+      case listType.popularSkill:
+        apiGetCategoryList()
+          .then(response => {
+            if (response.status === 200) {
+              setListData(response.data.payload)
+            }
+          })
+          .catch(e => {
+            console.error(e)
+          })
+          .finally(() => {
+            setLoading(false)
+          })
+        break
+      case listType.favoriteCourse:
+        apiGetFavoriteCourses().then(response => {
+          if (response.status === 200) {
+            // getFavoriteDetail(response.data.payload)
+            setListData(response.data.payload)
+          }
+        }).catch(e => {
+          console.error(e)
+        }).finally(() => {
+          setLoading(false)
+        })
+
+        break
+      default:
+        throw new Error("invalid list kind")
+    }
+  }
 
   /* Internal function */
-  const getFavoriteDetail = (rawFavoriteList) => {
-    let list = []
-    for (let i = 0; i < rawFavoriteList.length; i++) {
-      apiGetCourseDetailByIds(rawFavoriteList[i].id, state.userInfo.id).then(r => {
-        if (r.status === 200) {
-          console.log("OKE")
-          list.push(r.data.payload)
-        }
-      }).catch(e => {
-        console.error(e)
-      }).finally(() => {
-        if (i === rawFavoriteList.length - 1) {
-          setListData(list)
-          setLoading(false)
-        }
-      })
-    }
-  }
-  const getFavoriteCourses = () => {
-    apiGetFavoriteCourses().then(response => {
-      if (response.status === 200) {
-        getFavoriteDetail(response.data.payload)
-      }
-    }).catch(e => {
-      console.error(e)
-    })
-  }
+  // const getFavoriteDetail = (rawFavoriteList) => {
+  //   let list = []
+  //   if (rawFavoriteList.length > 0) {
+  //     for (let i = 0; i < rawFavoriteList.length; i++) {
+  //       apiGetCourseDetailByIds(rawFavoriteList[i].id, state.userInfo.id).then(r => {
+  //         if (r.status === 200) {
+  //           console.log("OKE")
+  //           list.push(r.data.payload)
+  //         }
+  //       }).catch(e => {
+  //         console.error(e)
+  //       }).finally(() => {
+  //         if (i === rawFavoriteList.length - 1) {
+  //           setListData(list)
+  //           setLoading(false)
+  //         }
+  //       })
+  //     }
+  //   } else {
+  //     setLoading(false)
+  //   }
+  // }
+  // const getFavoriteCourses = () => {
+  //   apiGetFavoriteCourses().then(response => {
+  //     if (response.status === 200) {
+  //       // getFavoriteDetail(response.data.payload)
+  //       setListData(listData.concat(response.data.payload))
+  //     }
+  //   }).catch(e => {
+  //     console.error(e)
+  //   })
+  // }
 
   /* Render list item */
   const renderListItem = ({item}) => {

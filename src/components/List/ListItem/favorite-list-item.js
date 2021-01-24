@@ -1,11 +1,10 @@
 import React from 'react'
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native'
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {ScreenName} from "../../../globals/constants";
-import CourseInfo from "../../Common/course-info";
+import Rating from "../../Common/rating";
 
 function FavoriteListItem(props) {
   const item = props.item
-  // const authorName =
 
   const onPressListItem = () => {
     props.navigation.push(ScreenName.courseDetail, {
@@ -18,33 +17,23 @@ function FavoriteListItem(props) {
       onPress={onPressListItem}>
 
       <View style={styles.imageWrapper}>
-        <Image style={styles.image} source={{uri: item.imageUrl}}/>
+        <Image style={styles.image} source={{uri: item.courseImage}}/>
       </View>
-      {/*item["instructor.user.name"]*/}
-      <CourseInfo
-        containerStyle={courseInfoStyle.container}
-        titleStyle={courseInfoStyle.largerTitle}
-        title={item.title}
-        author={item.instructor.name}
-        status={item.status}
-        released={item.createdAt}
-        duration={item.totalHours}
-        rate={item.averagePoint}
-        style={{fontSize: 16}}/>
+      <View style={styles.description}>
+        <Text>
+          {item.courseTitle}
+        </Text>
+        <Text style={styles.darkText}>
+          {item.instructorName}
+        </Text>
+        <View>
+          <Rating value={item.courseAveragePoint}/>
+        </View>
+      </View>
 
-      {/*<MenuButton item={item}/>*/}
     </TouchableOpacity>
   );
 }
-
-const courseInfoStyle = StyleSheet.create({
-  container: {
-    marginLeft: 10,
-  },
-  largerTitle: {
-    fontSize: 16,
-  }
-})
 
 const styles = StyleSheet.create({
   container: {
@@ -60,6 +49,19 @@ const styles = StyleSheet.create({
   image: {
     height: '100%',
     width: '100%',
+    // marginLeft: 10,
+  },
+  description: {
+    flex: 1,
+    paddingVertical: 5,
+    marginLeft: 10
+  },
+  title: {
+    // fontSize: 14
+  },
+  darkText: {
+    fontSize: 12,
+    color: 'gray'
   },
 })
 

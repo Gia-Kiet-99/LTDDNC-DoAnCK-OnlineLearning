@@ -7,35 +7,30 @@ import {getAuthTokenFromStorage, removeAuthToken} from "../../../core/utils/asyn
 const SplashScreen = (props) => {
   console.log("SplashScreen")
   const authContext = useContext(AuthenticationContext)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (loading) {
-      getAuthTokenFromStorage().then(token => {
-        if (token != null) {
-          authContext.getUserInfo(token).then(() => {
-            // console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
-            if (authContext.loginBySavedToken === false) {
-              removeAuthToken().then()
-              props.navigation.reset({
-                index: 0,
-                routes: [{name: NavigatorName.authenticationStack}]
-              })
-            }
-          })
-        } else {
-          props.navigation.reset({
-            index: 0,
-            routes: [{name: NavigatorName.authenticationStack}]
-          })
-        }
-      }).catch(e => {
-        console.log(e)
-      }).finally(() => {
-        setLoading(false)
-      })
-    }
-  }, [loading])
+    getAuthTokenFromStorage().then(token => {
+      if (token != null) {
+        authContext.getUserInfo(token).then(() => {
+          // console.log("loginBySavedToken value: ", authContext.loginBySavedToken)
+          if (authContext.loginBySavedToken === false) {
+            removeAuthToken().then()
+            props.navigation.reset({
+              index: 0,
+              routes: [{name: NavigatorName.authenticationStack}]
+            })
+          }
+        })
+      } else {
+        props.navigation.reset({
+          index: 0,
+          routes: [{name: NavigatorName.authenticationStack}]
+        })
+      }
+    }).catch(e => {
+      console.log(e)
+    })
+  })
 
   return <View style={styles.container}>
     <View style={{flex: 1, justifyContent: 'center'}}>

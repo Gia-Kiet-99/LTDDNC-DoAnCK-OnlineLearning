@@ -65,13 +65,27 @@ function DownloadButton(props) {
       return null;
     }
   }
+  const isYoutubeLink = async () => {
+    try {
+      const response = await apiGetLessonUrlAndDuration(courseDetail.id, courseDetail.section[0].data[0].id)
+      if (response.status === 200) {
+        console.log("IsYoutubeLink: ", response.data.payload.videoUrl.includes("youtube.com"))
+        return response.data.payload.videoUrl.includes("youtube.com");
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
   const handleDownload = async () => {
+    if (await isYoutubeLink()) {
+      Alert.alert("", "Downloading youtube video is not supported")
+      return
+    }
     dispatch({type: ACTION_DOWNLOADING})
     // console.log(courseDetail)
     let course = {
       id: courseDetail.id,
       title: courseDetail.title,
-      // averagePoint: courseDetail.averagePoint,
       formalityPoint: courseDetail.formalityPoint,
       contentPoint: courseDetail.contentPoint,
       presentationPoint: courseDetail.presentationPoint,
@@ -120,6 +134,8 @@ function DownloadButton(props) {
       }
     } catch (e) {
       console.error(e)
+      dispatch({type: ACTION_RESET_DOWNLOAD_STATE})
+      Alert.alert("Download", "Failed")
     }
   }
   const removeDownload = async () => {
@@ -170,7 +186,7 @@ function DownloadButton(props) {
         }
       </View>
       <Text style={styles.buttonText}>
-        {state.downloadState === DOWNLOADING_STATE ? `Downloading ${state.count}/${courseDetail.videoNumber}` : (
+        {state.downloadState === DOWNLOADING_STATE ? `Progress ${state.count}/${courseDetail.videoNumber}` : (
           state.downloadState === DOWNLOADED_STATE ? 'Downloaded' : 'Download'
         )}
       </Text>

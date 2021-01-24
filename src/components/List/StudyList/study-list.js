@@ -3,7 +3,6 @@ import {StyleSheet, FlatList, View, ActivityIndicator, Text, RefreshControl} fro
 import CourseListItem from "../ListItem/course-list-item";
 import ListItemSeparator from "../../Common/list-item-separator";
 import {
-  apiGetCourseDetailByIds,
   apiGetCoursesByCategory, apiGetFavoriteCourses,
   apiGetLearningCourse,
   apiGetNewReleaseCourse,
@@ -78,23 +77,10 @@ const StudyList = (props) => {
     console.log("getFavoriteCourses")
     apiGetFavoriteCourses().then(response => {
       if (response.status === 200) {
-        let list = []
-        const rawFavoriteList = response.data.payload
-        for (let i = 0; i < rawFavoriteList.length; i++) {
-          apiGetCourseDetailByIds(rawFavoriteList[i].id, authContext.state.userInfo.id).then(r => {
-            if (r.status === 200) {
-              console.log("OKE")
-              list.push(r.data.payload)
-            }
-          }).catch(e => {
-            console.error(e)
-          }).finally(() => {
-            if (i === rawFavoriteList.length - 1) {
-              setListData(listData.concat(list))
-              setLoading(LOAD_SUCCEEDED)
-            }
-          })
-        }
+        setListData(listData.concat(response.data.payload))
+        setLoading(LOAD_SUCCEEDED)
+      } else {
+        setLoading(LOAD_FAILED)
       }
     }).catch(e => {
       console.error(e)
@@ -112,7 +98,7 @@ const StudyList = (props) => {
       }
     }).catch(err => {
       setLoading(LOAD_FAILED)
-      throw new Error()
+      console.error(err)
     }).finally(() => {
       // setRefreshList(false)
     })
@@ -128,7 +114,7 @@ const StudyList = (props) => {
       }
     }).catch(err => {
       setLoading(LOAD_FAILED)
-      throw new Error()
+      console.error(err)
     }).finally(() => {
       // setRefreshList(false)
     })
@@ -144,7 +130,7 @@ const StudyList = (props) => {
       }
     }).catch(err => {
       setLoading(LOAD_FAILED)
-      throw new Error()
+      console.error(err)
     }).finally(() => {
       // setRefreshList(false)
     })
@@ -162,7 +148,7 @@ const StudyList = (props) => {
       })
       .catch(e => {
         setLoading(LOAD_FAILED)
-        throw new Error()
+        console.error(e)
       })
       .finally(() => {
         // setRefreshList(false)
@@ -180,21 +166,11 @@ const StudyList = (props) => {
       })
       .catch(e => {
         setLoading(LOAD_FAILED)
-        throw new Error()
+        console.error(e)
       })
       .finally(() => {
         // setRefreshList(false)
       })
-  }
-  const loadMoreCourses = () => {
-    console.log("onEndReach")
-    // setRefreshList(true)
-    // page++
-    // checkListType(type);
-    // console.log("Limit: ", limit)
-    // console.log("Page: ", page)
-    // console.log("getDataFromApi: ", getDataFromApi);
-    // getDataFromApi()
   }
 
   /* Render function */

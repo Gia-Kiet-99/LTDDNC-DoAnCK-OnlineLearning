@@ -1,7 +1,7 @@
 import React from 'react'
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native'
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {ScreenName} from "../../../../globals/constants";
-import CourseInfo from "../../../Common/course-info";
+import Rating from "../../../Common/rating";
 
 const Separator = () => {
   return (
@@ -23,31 +23,27 @@ function FavoriteSectionItem(props) {
       style={styles.container}
       onPress={ItemPressed}>
       <View style={styles.content}>
-        <Image style={styles.image} source={{uri: props.item.imageUrl}}/>
+        <Image style={styles.image} source={{uri: item.courseImage}}/>
         <Separator/>
-        <CourseInfo
-          containerStyle={courseInfoStyle.container}
-          title={item.title}
-          author={item.instructor.name}
-          status={item.status}
-          released={item.createdAt}
-          duration={item.totalHours}
-          rate={item.averagePoint}/>
+        <View style={styles.description}>
+          <Text>
+            {item.courseTitle}
+          </Text>
+          <Text style={styles.darkText}>
+            {item.instructorName}
+          </Text>
+          {/*<Text style={styles.darkText}>*/}
+          {/*  {`${props.status} . ${Moment(props.released).format("MMM yyyy")} . ${convertHour(props.duration)}`}*/}
+          {/*</Text>*/}
+          <View>
+            <Rating value={item.courseAveragePoint}/>
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   </View>
 
 }
-
-const courseInfoStyle = StyleSheet.create({
-  container: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  largerTitle: {
-    fontSize: 16,
-  }
-})
 
 const styles = StyleSheet.create({
   container: {
@@ -77,7 +73,20 @@ const styles = StyleSheet.create({
   courseInfo: {
     paddingHorizontal: 10,
     paddingVertical: 5,
-  }
+  },
+  description: {
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    // backgroundColor: 'pink'
+  },
+  title: {
+    // fontSize: 14
+  },
+  darkText: {
+    fontSize: 12,
+    color: 'gray'
+  },
 })
 
 export default FavoriteSectionItem;
