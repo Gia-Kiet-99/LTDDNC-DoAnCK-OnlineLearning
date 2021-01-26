@@ -11,6 +11,7 @@ import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
 import StudyList from "../../../List/StudyList/study-list";
 import SkillDetail from "../../../DetailScreen/SkillDetail/skill-detail";
 import Editing from "../../../AccountManagement/Editing/editing";
+import ChangePassword from "../../../AccountManagement/ChangePassword/change-password";
 
 const Stack = createStackNavigator()
 
@@ -28,7 +29,8 @@ const BrowseStackNavigator = () => {
           ({route}) => ({title: route.params.categoryName})}/>
         <Stack.Screen name={ScreenName.studyList} component={StudyList} options={
           ({route}) => ({title: route.params.title})}/>
-        <Stack.Screen name={ScreenName.editing} component={Editing}/>
+        <Stack.Screen name={ScreenName.editing} component={Editing} options={{title: "Update account"}}/>
+        <Stack.Screen name={ScreenName.changePassword} component={ChangePassword} options={{title: "Change password"}}/>
       </Stack.Navigator>
     </PathProvider>
   );

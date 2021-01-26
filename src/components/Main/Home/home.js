@@ -7,13 +7,13 @@ import ActionBar from "../../Common/action-bar";
 const Home = (props) => {
   console.log("Home")
 
-  const renderContinueLearningSection = () => {
-    // if (favoriteCourses && favoriteCourses.length > 0) {
-    return <Section navigation={props.navigation} kind={listType.continueCourse}
-                    title={titleName.continueLearning}
-                    showSeeAllButton={true}/>
-    // }
-  }
+  // const renderContinueLearningSection = () => {
+  //   // if (favoriteCourses && favoriteCourses.length > 0) {
+  //   return <Section navigation={props.navigation} kind={listType.continueCourse}
+  //                   title={titleName.continueLearning}
+  //                   showSeeAllButton={true}/>
+  //   // }
+  // }
   // const renderChannelsSection = (channels, title) => {
   //   if (channels && channels.length > 0) {
   //     return <Section navigation={props.navigation} kind={listName.channel}
@@ -21,21 +21,15 @@ const Home = (props) => {
   //                     showSeeAllButton={true}/>
   //   }
   // }
-  const renderCourseListSection = (list) => {
-    if (list && list.length > 0) {
-      return <Section navigation={props.navigation} kind={listType.continueCourse}
-                      title={'Course list'} list={list}
-                      showSeeAllButton={true}/>
-    }
-  }
+  // const renderCourseListSection = (list) => {
+  //   if (list && list.length > 0) {
+  //     return <Section navigation={props.navigation} kind={listType.continueCourse}
+  //                     title={'Course list'} list={list}
+  //                     showSeeAllButton={true}/>
+  //   }
+  // }
 
   return <View style={styles.container}>
-    {/*{isLoading ? (*/}
-    {/*  <View style={{justifyContent: 'center', flex: 1}}>*/}
-    {/*    <ActivityIndicator size="large" color="#2980b9"/>*/}
-    {/*  </View>*/}
-    {/*) : (*/}
-    {/*  <View>*/}
     <StatusBar translucent={false} backgroundColor="transparent" barStyle="dark-content"/>
     <ActionBar title={titleName.home} navigation={props.navigation}/>
     <ScrollView showsVerticalScrollIndicator={false} style={styles.listSection}>
@@ -55,20 +49,8 @@ const Home = (props) => {
                title={titleName.recommendCourse}
                showSeeAllButton={true}/>
 
-
-      {/*{renderContinueLearningSection(favoriteCourses)}*/}
-      {/*{renderChannelsSection(getPublicChannels(), "Channels")}*/}
-
-      {/*{renderContinueLearningSection()}*/}
-
-      {/*{renderChannelsSection(getPrivateChannels(), "My Channels")}*/}
-
     </ScrollView>
   </View>
-  {/*)}*/
-  }
-  {/*</View>*/
-  }
 };
 
 const styles = StyleSheet.create({

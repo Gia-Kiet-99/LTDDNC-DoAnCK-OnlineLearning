@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from "@react-navigation/stack";
-import {NavigatorName, ScreenName} from "../../../../globals/constants";
+import {ScreenName} from "../../../../globals/constants";
 import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
 import Search from "../../../Main/Search/search";

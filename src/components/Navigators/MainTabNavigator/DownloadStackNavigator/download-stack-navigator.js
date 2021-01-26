@@ -7,6 +7,7 @@ import {ScreenName} from "../../../../globals/constants";
 import CourseDetail from "../../../DetailScreen/CourseDetail/course-detail";
 import AuthorDetail from "../../../DetailScreen/AuthorDetail/author-detail";
 import Editing from "../../../AccountManagement/Editing/editing";
+import ChangePassword from "../../../AccountManagement/ChangePassword/change-password";
 
 const Stack = createStackNavigator()
 
@@ -18,7 +19,8 @@ const DownloadStackNavigator = (props) => {
       <Stack.Screen name={ScreenName.authorDetail} component={AuthorDetail} options={{title: "Author"}}/>
       <Stack.Screen name={ScreenName.setting} component={Setting}/>
       <Stack.Screen name={ScreenName.profile} component={Profile}/>
-      <Stack.Screen name={ScreenName.editing} component={Editing}/>
+      <Stack.Screen name={ScreenName.editing} component={Editing} options={{title: "Update account"}}/>
+      <Stack.Screen name={ScreenName.changePassword} component={ChangePassword} options={{title: "Change password"}}/>
     </Stack.Navigator>
   );
 };

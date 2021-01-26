@@ -41,7 +41,7 @@ function CourseButton(props) {
       .then(response => {
         if (response.status === 200) {
           setFavorite(!isFavorite)
-          // listContext.setShouldUpdateList(true)
+          listContext.setShouldUpdateList(true)
         }
       })
       .catch(e => {
