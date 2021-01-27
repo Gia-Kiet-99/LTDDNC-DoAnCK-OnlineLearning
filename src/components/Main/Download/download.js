@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {Alert, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ActionBar from "../../Common/action-bar";
 import {titleName} from "../../../globals/constants";
@@ -7,9 +7,12 @@ import {
 } from "../../../core/utils/async-storage-service";
 import CourseListItem from "../../List/ListItem/course-list-item";
 import {deleteAllCourses} from "../../../core/services/download-service";
+import {DownloadContext} from "../../../provider/download-provider";
 
 const Download = (props) => {
   console.log("Download")
+  /* Use context */
+  const downloadContext = useContext(DownloadContext)
 
   /* Use state */
   const [data, setData] = useState([])
@@ -25,6 +28,14 @@ const Download = (props) => {
       })
     }
   }, [loading])
+  useEffect(() => {
+    if (downloadContext.shouldUpdateDownloadList) {
+      getDownloadedListFromStorage().then(data => {
+        setData(data)
+        downloadContext.setShouldUpdateDownloadList(false)
+      })
+    }
+  }, [downloadContext.shouldUpdateDownloadList])
 
   /* Internal function */
   const handleRemoveAll = async () => {
@@ -32,21 +43,23 @@ const Download = (props) => {
     setData([])
   }
   const onRemoveAllButtonClick = () => {
-    Alert.alert(
-      "Remove download",
-      "Remove all courses?",
-      [
-        {
-          text: "Yes",
-          onPress: handleRemoveAll
-        },
-        {
-          text: "No",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        }
-      ], {cancelable: true}
-    )
+    if (data.length > 0) {
+      Alert.alert(
+        "Remove download",
+        "Remove all courses?",
+        [
+          {
+            text: "Yes",
+            onPress: handleRemoveAll
+          },
+          {
+            text: "No",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          }
+        ], {cancelable: true}
+      )
+    }
   }
   const renderItem = ({item}) => {
     return <CourseListItem key={item.id} item={item} authorName={item.authorName} navigation={props.navigation}/>
