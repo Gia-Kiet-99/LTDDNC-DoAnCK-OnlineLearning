@@ -16,25 +16,55 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [isOnLogin, setOnLogin] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const [message, setMessage] = useState("")
 
   const {theme} = useContext(AppThemeContext)
 
   /* Use effect */
   useEffect(() => {
-    if(authContext.state.message !== "") {
+    if (authContext.state.message !== "") {
       setOnLogin(false);
+      setMessage(authContext.state.message)
       // Alert.alert(authContext.state.message);
     }
   }, [authContext.state.message])
 
+  /* Function */
+  const validateEmail = (email) => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(email)) {
+      return true
+    } else {
+      setMessage("Invalid email")
+      return false
+    }
+  }
+  const validatePassword = (password) => {
+    if (password.length === 0) {
+      setMessage("Invalid password")
+      return false
+    } else {
+      return true
+    }
+  }
   const onLogin = () => {
-    if (username.trim() !== "" && password.trim() !== "") {
+    const isPasswordValid = validatePassword(password)
+    const isEmailValid = validateEmail(username)
+
+    if (isEmailValid && isPasswordValid) {
+      setMessage("")
       setOnLogin(true)
       authContext.clearMessage();
       authContext.login(username, password)
-    } else {
-      Alert.alert("Login", "Please enter username and password")
     }
+
+    // if (username.trim() !== "" && password.trim() !== "") {
+    //   setOnLogin(true)
+    //   authContext.clearMessage();
+    //   authContext.login(username, password)
+    // } else {
+    //   Alert.alert("Login", "Please enter username and password")
+    // }
   }
   const onForgetPasswordPressed = () => {
     return props.navigation.navigate(ScreenName.forgetPassword)
@@ -93,7 +123,7 @@ const Login = (props) => {
       </View>
 
       <View style={{alignItems: 'center', marginVertical: 10}}>
-        {renderLoginStatus(authContext.state.message)}
+        {renderLoginStatus(message)}
         {/*{isOnLogin ? (<LoadIndicator/>) : (*/}
         {/*  <Text style={{fontWeight: 'bold', color: '#34495e'}}>{authContext.state.message}</Text>)}*/}
       </View>
@@ -125,10 +155,8 @@ const Login = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     padding: "5%",
-
-    // backgroundColor: '#222'
   },
   username: {
     // backgroundColor: '#111',

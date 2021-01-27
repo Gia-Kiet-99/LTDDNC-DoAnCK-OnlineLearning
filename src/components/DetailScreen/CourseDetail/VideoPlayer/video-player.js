@@ -4,6 +4,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import WebView from "react-native-webview";
 import {apiGetLastWatchedLesson} from "../../../../core/services/course-service";
+import {isCourseDownloaded} from "../../../../core/utils/async-storage-service";
 
 const VideoPlayer = (props) => {
   const videoUrl = props.videoUrl
@@ -23,12 +24,19 @@ const VideoPlayer = (props) => {
   /* Use effect */
   useEffect(() => {
     if (videoUrl === undefined) {
-      apiGetLastWatchedLesson(courseId).then(response => {
-        if (response.status === 200) {
-          setUrl(response.data.payload.videoUrl)
+      isCourseDownloaded(courseId).then(downloadCourse => {
+        if (downloadCourse && downloadCourse.lessons.length > 0) {
+          console.log("isCourseDownloaded", downloadCourse)
+          setUrl(downloadCourse.lessons[0].videoUrl)
+        } else {
+          apiGetLastWatchedLesson(courseId).then(response => {
+            if (response.status === 200) {
+              setUrl(response.data.payload.videoUrl)
+            }
+          }).catch(e => {
+            console.error(e)
+          })
         }
-      }).catch(e => {
-        console.error(e)
       })
     } else {
       setUrl(videoUrl)
