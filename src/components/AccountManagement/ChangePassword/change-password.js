@@ -1,10 +1,11 @@
 import React, {useContext, useState} from 'react'
-import {Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import textInputStyles from "../../Authentication/styles/text-input-styles";
 import {apiChangePassword} from "../../../core/services/user-service";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
+import LoadIndicator from "../../Common/load-indicator";
 
-function ChangePassword(props) {
+function ChangePassword() {
   console.log("ChangePassword")
   /* Use context */
   const {state} = useContext(AuthenticationContext)
@@ -13,27 +14,74 @@ function ChangePassword(props) {
   const [currentPassword, setCurrentPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [message, setMessage] = useState("")
+  const [loading, setLoading] = useState(false)
 
+  /* Function */
+  const validatePassword = (password) => {
+    if (password.length < 6) {
+      setMessage("Password has at least 6 characters")
+      return false
+    } else {
+      return true
+    }
+  }
+  const validateConfirmPassword = (password, confirmPassword) => {
+    if (password === confirmPassword) {
+      return true
+    } else {
+      setMessage("Confirm password does not match")
+      return false
+    }
+  }
+  const renderMessage = (message) => {
+    if (message) {
+      return <View style={styles.messageWrapper}>
+        <Text style={styles.message}>{message}</Text>
+      </View>
+    } else {
+      if (loading) {
+        return <View style={{paddingVertical: 5}}>
+          <LoadIndicator/>
+        </View>
+      }
+      return <View/>
+    }
+  }
   const handleChangePassword = async () => {
+    setLoading(true)
     try {
       const response = await apiChangePassword(state.userInfo.id, currentPassword, newPassword)
       if (response.status === 200) {
-        Alert.alert("", "Password was changed")
+        // Alert.alert("", "Password was changed")
+        setMessage("Successfully")
         setCurrentPassword("")
         setNewPassword("")
         setConfirmPassword("")
       }
     } catch (e) {
       console.error(e)
-      Alert.alert("", "Change password failed")
+      // Alert.alert("", "Change password failed")
+      setMessage("Failed")
+    } finally {
+      setLoading(false)
     }
   }
   const onSubmitButtonPressed = async () => {
-    if (newPassword === confirmPassword) {
+    const isValidConfirmPassword = validateConfirmPassword(newPassword, confirmPassword)
+    const isValidNewPassword = validatePassword(newPassword)
+    const isValidCurrentPassword = validatePassword(currentPassword)
+
+    if (isValidConfirmPassword && isValidCurrentPassword && isValidNewPassword) {
+      setMessage("")
       await handleChangePassword()
-    } else {
-      Alert.alert("", "Confirm password does not match")
     }
+
+    // if (newPassword === confirmPassword) {
+    //   await handleChangePassword()
+    // } else {
+    //   Alert.alert("", "Confirm password does not match")
+    // }
   }
 
   return (
@@ -65,6 +113,7 @@ function ChangePassword(props) {
           onChangeText={text => setConfirmPassword(text)}
           style={textInputStyles.textInput}/>
       </View>
+      {renderMessage(message)}
       <TouchableOpacity
         onPress={onSubmitButtonPressed}
         style={[styles.button, styles.loginButton]}>
@@ -115,6 +164,14 @@ const styles = StyleSheet.create({
     color: '#fff',
     textAlign: 'center',
     fontWeight: 'bold'
+  },
+  messageWrapper: {
+    marginVertical: 5,
+    alignItems: 'center'
+  },
+  message: {
+    fontWeight: 'bold',
+    color: '#34495e'
   }
 
 })

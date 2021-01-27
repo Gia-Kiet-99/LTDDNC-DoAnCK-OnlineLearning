@@ -3,6 +3,7 @@ import {View, Image, Text, StyleSheet, TouchableOpacity, ScrollView} from 'react
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {FontAwesome5} from '@expo/vector-icons';
 import {ScreenName} from "../../../globals/constants";
+import Moment from "moment";
 
 const info = {
   username: 'Kiet Dinh',
@@ -38,22 +39,22 @@ const Profile = (props) => {
     </View>
 
     <View style={styles.activityInsight}>
-      <Text style={{fontSize: 16, fontWeight: 'bold', marginTop: 40}}>Activity insights (last 30 days)</Text>
+      <Text style={{fontSize: 16, fontWeight: 'bold', marginTop: 40}}>Activity insights</Text>
       <View style={{marginTop: '10%'}}>
-        <Text style={{color: 'gray'}}>TOTAL ACTIVE DAYS</Text>
+        <Text style={{color: 'gray'}}>ACTIVATION DATE</Text>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <Text style={{fontSize: 20}}>{info.totalActiveDays}</Text>
-          <Text style={{marginLeft: 10}}>{info.streak} day streak</Text>
+          <Text style={{fontSize: 18}}>{`${Moment(state.userInfo.createdAt).format("DD/MM/yyyy")}`}</Text>
+          {/*<Text style={{marginLeft: 10}}>{info.streak} day streak</Text>*/}
         </View>
       </View>
       <View style={{marginTop: 35}}>
         <Text style={{color: 'gray'}}>MOST ACTIVE TIME OF DAY</Text>
-        <Text style={{fontSize: 20}}>{info.mostActiveTimeOfDay}</Text>
+        <Text style={{fontSize: 18}}>{info.mostActiveTimeOfDay}</Text>
       </View>
-      <View style={{marginTop: 35}}>
-        <Text style={{color: 'gray'}}>MOST VIEWED SUBJECT</Text>
-        <Text style={{fontSize: 20}}>{info.mostViewedSubject}</Text>
-      </View>
+      {/*<View style={{marginTop: 35}}>*/}
+      {/*  <Text style={{color: 'gray'}}>MOST VIEWED SUBJECT</Text>*/}
+      {/*  <Text style={{fontSize: 20}}>{info.mostViewedSubject}</Text>*/}
+      {/*</View>*/}
     </View>
 
     <View style={styles.buttonGroup}>

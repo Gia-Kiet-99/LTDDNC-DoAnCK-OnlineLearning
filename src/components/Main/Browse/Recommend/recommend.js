@@ -5,26 +5,26 @@ import {ImageButtonType, listType} from "../../../../globals/constants";
 import {titles} from "../../../../localize/data";
 
 function Recommend() {
-  const renderImageButtonList = (list) => {
-    return list.map((item) => (
-      <ImageButton
-        key={item.id} data={item}
-        type={ImageButtonType.general}
-        titleStyle={{fontSize: 20}}
-        style={{
-          width: 175,
-          height: 80,
-          marginRight: 5,
-        }}/>
-    ))
-  }
+  // const renderImageButtonList = (list) => {
+  //   return list.map((item) => (
+  //     <ImageButton
+  //       key={item.id} data={item}
+  //       type={ImageButtonType.general}
+  //       titleStyle={{fontSize: 20}}
+  //       style={{
+  //         width: 175,
+  //         height: 80,
+  //         marginRight: 5,
+  //       }}/>
+  //   ))
+  // }
   return (
     <View>
       <ImageButton
         type={listType.newReleaseCourse}
         data={{
           title: 'New\nRelease',
-          source: require('../../../../../assets/background-image.jpg')
+          source: require('../../../../../assets/new-release.jpg')
         }}
         style={styles.imageButton}/>
 
@@ -32,7 +32,7 @@ function Recommend() {
         type={listType.topSellCourse}
         data={{
           title: 'Top sell',
-          source: require('../../../../../assets/background4.jpg')
+          source: require('../../../../../assets/top-sell.jpg')
         }}
         style={styles.imageButton}/>
 

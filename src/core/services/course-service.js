@@ -65,7 +65,7 @@ export const apiSubmitReview = async (courseId, formalityPoint, contentPoint, pr
   })
 }
 
-export const apiGetLastUpdateLesson = async (courseId) => {
+export const apiGetLastWatchedLesson = async (courseId) => {
   return await instance.get(`/course/last-watched-lesson/${courseId}`)
 }
 

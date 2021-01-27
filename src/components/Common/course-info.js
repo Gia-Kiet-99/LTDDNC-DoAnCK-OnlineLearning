@@ -14,7 +14,7 @@ const CourseInfo = (props) => {
       {props.author}
     </Text>
     <Text style={styles.darkText}>
-      {`${props.status} . ${Moment(props.released).format("MMM yyyy")} . ${convertHour(props.duration)}`}
+      {`${Moment(props.released).format("MMM yyyy")} . ${convertHour(props.duration)}`}
     </Text>
     <View>
       <Rating value={props.rate}/>

@@ -1,29 +1,48 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Video} from "expo-av";
 import {MaterialIcons} from '@expo/vector-icons';
-import {View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import WebView from "react-native-webview";
+import {apiGetLastWatchedLesson} from "../../../../core/services/course-service";
 
 const VideoPlayer = (props) => {
+  const videoUrl = props.videoUrl
+  const courseId = props.courseId
+
   const player = useRef(null)
+  const [url, setUrl] = useState(null)
 
-  const [playing, setPlaying] = useState(true);
-
-  const onStateChange = useCallback((state) => {
-    if (state === "ended") {
-      setPlaying(false);
-      Alert.alert("video has finished playing!");
+  // const [playing, setPlaying] = useState(true);
+  //
+  // const onStateChange = useCallback((state) => {
+  //   if (state === "ended") {
+  //     setPlaying(false);
+  //     Alert.alert("video has finished playing!");
+  //   }
+  // }, []);
+  /* Use effect */
+  useEffect(() => {
+    if (videoUrl === undefined) {
+      apiGetLastWatchedLesson(courseId).then(response => {
+        if (response.status === 200) {
+          setUrl(response.data.payload.videoUrl)
+        }
+      }).catch(e => {
+        console.error(e)
+      })
+    } else {
+      setUrl(videoUrl)
     }
-  }, []);
+  }, [videoUrl])
 
   const goBack = () => {
     props.navigation.goBack();
   }
   const renderVideoPlayer = (videoUrl) => {
-    if (videoUrl !== undefined) {
+    if (videoUrl) {
       if (videoUrl.includes("youtube.com")) {
         let uri = ""
-        let strings = ""
+        let strings
         if (videoUrl.includes("/embed/")) {
           strings = videoUrl.split("/")
         } else {
@@ -64,7 +83,7 @@ const VideoPlayer = (props) => {
   return (
     <View style={styles.container}>
 
-      {renderVideoPlayer(props.lessonInfo.videoUrl)}
+      {renderVideoPlayer(url)}
 
       <TouchableOpacity
         style={styles.closeButton}

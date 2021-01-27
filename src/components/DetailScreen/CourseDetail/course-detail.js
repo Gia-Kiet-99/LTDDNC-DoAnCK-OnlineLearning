@@ -72,9 +72,9 @@ const CourseDetail = (props) => {
             setLoadStatus(LOAD_FAILED)
           }
         })
-        .catch(() => {
+        .catch((e) => {
           setLoadStatus(LOAD_FAILED)
-          throw new Error()
+          console.error(e)
         })
     }
   }, [isPaid])
@@ -181,7 +181,8 @@ const CourseDetail = (props) => {
       } else {
         return <View style={styles.content}>
           <VideoPlayer
-            lessonInfo={lessonInfo}
+            courseId={courseDetail.id}
+            videoUrl={lessonInfo.videoUrl}
             navigation={props.navigation}/>
 
           <ScrollView /*ref={ref => setScrollView(ref)}*/

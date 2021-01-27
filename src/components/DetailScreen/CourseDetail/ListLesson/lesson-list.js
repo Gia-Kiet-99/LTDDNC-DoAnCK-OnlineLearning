@@ -1,9 +1,8 @@
-import React, {useContext} from 'react';
-import {FlatList, SafeAreaView, SectionList, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {SectionList, StyleSheet, View} from 'react-native';
 import ListLessonItem from "../ListLessonItem/list-lesson-item";
 import ListItemSeparator from "../../../Common/list-item-separator";
 import SectionListHeader from "../SectionListHeader/section-list-header";
-import {lessons} from "../../../../localize/data";
 
 const LessonList = (props) => {
   const onLessonItemPressed = props.route.params?.onLessonItemPressed
