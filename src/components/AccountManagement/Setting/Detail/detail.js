@@ -38,7 +38,7 @@ const Detail = (props) => {
 
       <View style={styles.button}>
         <Text style={styles.buttonText}>App version</Text>
-        <Text style={{fontSize: 13}}>2.38.0</Text>
+        <Text style={{fontSize: 13}}>1.0.0</Text>
       </View>
 
       <TouchableOpacity onPress={onSignOut} style={styles.signOutButton}>

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image, ActivityIndicator, Alert} from 'react-native';
+import {Text, View, TextInput, StyleSheet, TouchableOpacity, Image, Alert} from 'react-native';
 import buttonStyles from "../styles/button-styles";
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
@@ -7,12 +7,7 @@ import {ScreenName} from "../../../globals/constants";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import {AppThemeContext} from "../../../provider/theme-provider";
 import LoadIndicator from "../../Common/load-indicator";
-
-// props.navigation.navigate(NavigatorName.mainTab)
-// props.navigation.reset({
-//     index: 0,
-//     routes: [{ name: NavigatorName.mainTab }],
-// });
+import CheckBox from "@react-native-community/checkbox";
 
 const Login = (props) => {
   console.log("Login")
@@ -20,7 +15,7 @@ const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isOnLogin, setOnLogin] = useState(false)
-  // const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
 
   const {theme} = useContext(AppThemeContext)
 
@@ -81,10 +76,20 @@ const Login = (props) => {
         <Text style={[textStyles.labelText, {marginTop: 10}]}>Password</Text>
         <TextInput selectionColor={'#888'} style={textInputStyles.textInput}
                    secure={true}
-                   secureTextEntry={true}
+                   secureTextEntry={!showPassword}
                    onChangeText={(text) => setPassword(text)}
                    defaultValue={password}
         />
+      </View>
+
+      <View style={styles.checkBoxContainer}>
+        <CheckBox
+          value={showPassword}
+          onValueChange={setShowPassword}
+          tintColors={{true: '#2e97ff'}}
+          // style={styles.checkbox}
+        />
+        <Text>Show password</Text>
       </View>
 
       <View style={{alignItems: 'center', marginVertical: 10}}>
@@ -141,8 +146,11 @@ const styles = StyleSheet.create({
   },
   forgotButton: {
     // alignSelf: 'baseline',
-
   },
+  checkBoxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  }
 
 })
 

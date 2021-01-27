@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import {TouchableOpacity, Image, Text, View, StyleSheet, TextInput} from "react-native"
+import {TouchableOpacity, Image, Text, View, StyleSheet, TextInput, ScrollView} from "react-native"
 import textStyles from "../styles/text-styles";
 import textInputStyles from "../styles/text-input-styles";
 import buttonStyles from "../styles/button-styles";
 import {apiRegisterAccount} from "../../../core/services/user-service";
 import LoadIndicator from "../../Common/load-indicator";
 import {ScreenName} from "../../../globals/constants";
+import CheckBox from "@react-native-community/checkbox";
 
 const Register = (props) => {
   console.log("Register")
@@ -17,6 +18,7 @@ const Register = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   /* Internal function */
   const validateEmail = (email) => {
@@ -98,7 +100,7 @@ const Register = (props) => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.imageWrapper}>
         <Image style={styles.image} source={require('../../../../assets/logo-with-name.png')}/>
       </View>
@@ -132,7 +134,7 @@ const Register = (props) => {
           secure={true}
           defaultValue={password}
           onChangeText={text => setPassword(text)}
-          secureTextEntry={true}/>
+          secureTextEntry={!showPassword}/>
       </View>
 
       <View>
@@ -142,7 +144,16 @@ const Register = (props) => {
           defaultValue={confirmPassword}
           onChangeText={text => setConfirmPassword(text)}
           style={textInputStyles.textInput}
-          secure={true} secureTextEntry={true}/>
+          secure={true} secureTextEntry={!showPassword}/>
+      </View>
+      <View style={styles.checkBoxContainer}>
+        <CheckBox
+          value={showPassword}
+          onValueChange={setShowPassword}
+          tintColors={{true: '#2e97ff'}}
+          // style={styles.checkbox}
+        />
+        <Text>Show password</Text>
       </View>
       {renderMessage(message)}
       <TouchableOpacity activeOpacity={0.5}
@@ -150,14 +161,14 @@ const Register = (props) => {
                         onPress={onSubscribe}>
         <Text style={[textStyles.buttonText, {color: '#fff'}]}>Subscribe</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     padding: "5%",
   },
   imageWrapper: {
@@ -174,6 +185,11 @@ const styles = StyleSheet.create({
   message: {
     fontWeight: 'bold',
     color: '#34495e'
+  },
+  checkBoxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // backgroundColor: 'pink'
   }
 })
 

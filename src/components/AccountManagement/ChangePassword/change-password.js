@@ -4,6 +4,7 @@ import textInputStyles from "../../Authentication/styles/text-input-styles";
 import {apiChangePassword} from "../../../core/services/user-service";
 import {AuthenticationContext} from "../../../provider/authentication-provider";
 import LoadIndicator from "../../Common/load-indicator";
+import CheckBox from "@react-native-community/checkbox";
 
 function ChangePassword() {
   console.log("ChangePassword")
@@ -16,6 +17,7 @@ function ChangePassword() {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [message, setMessage] = useState("")
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   /* Function */
   const validatePassword = (password) => {
@@ -76,19 +78,13 @@ function ChangePassword() {
       setMessage("")
       await handleChangePassword()
     }
-
-    // if (newPassword === confirmPassword) {
-    //   await handleChangePassword()
-    // } else {
-    //   Alert.alert("", "Confirm password does not match")
-    // }
   }
 
   return (
     <View style={styles.container}>
       <View>
         <TextInput
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
           placeholder='Current password'
           selectionColor={'#888'}
           defaultValue={currentPassword}
@@ -97,7 +93,7 @@ function ChangePassword() {
       </View>
       <View>
         <TextInput
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
           placeholder='New password'
           selectionColor={'#888'}
           defaultValue={newPassword}
@@ -106,12 +102,21 @@ function ChangePassword() {
       </View>
       <View>
         <TextInput
-          secureTextEntry={true}
+          secureTextEntry={!showPassword}
           placeholder='Confirm new password'
           selectionColor={'#888'}
           defaultValue={confirmPassword}
           onChangeText={text => setConfirmPassword(text)}
           style={textInputStyles.textInput}/>
+      </View>
+      <View style={styles.checkBoxContainer}>
+        <CheckBox
+          value={showPassword}
+          onValueChange={setShowPassword}
+          tintColors={{true: '#2e97ff'}}
+          style={styles.checkbox}
+        />
+        <Text>Show password</Text>
       </View>
       {renderMessage(message)}
       <TouchableOpacity
@@ -172,6 +177,10 @@ const styles = StyleSheet.create({
   message: {
     fontWeight: 'bold',
     color: '#34495e'
+  },
+  checkBoxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 
 })
