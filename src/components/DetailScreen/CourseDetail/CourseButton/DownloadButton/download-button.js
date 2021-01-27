@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from 'react'
+import React, {useContext, useEffect, useReducer} from 'react'
 import {Image, Text, TouchableOpacity, View, StyleSheet, Alert} from 'react-native'
 import {
   ACTION_COUNT,
@@ -19,6 +19,7 @@ import {
   saveDownloadCourse
 } from "../../../../../core/utils/async-storage-service";
 import {deleteDownloadCourse} from "../../../../../core/services/download-service";
+import {DownloadContext} from "../../../../../provider/download-provider";
 
 const init = (downloadInitialState) => {
   return {...downloadInitialState}
@@ -26,6 +27,9 @@ const init = (downloadInitialState) => {
 
 function DownloadButton(props) {
   const courseDetail = props.courseDetail;
+
+  /* Use context */
+  const downloadContext = useContext(DownloadContext)
 
   /* Use reducer */
   const [state, dispatch] = useReducer(downloadReducer, downloadInitialState, init)
@@ -128,6 +132,7 @@ function DownloadButton(props) {
       if (result) {
         dispatch({type: ACTION_DOWNLOADED})
         Alert.alert("Download", "Successfully")
+        downloadContext.setShouldUpdateDownloadList(true)
       } else {
         dispatch({type: ACTION_RESET_DOWNLOAD_STATE})
         Alert.alert("Download", "Failed")
@@ -139,8 +144,10 @@ function DownloadButton(props) {
     }
   }
   const removeDownload = async () => {
-    await deleteDownloadCourse(courseDetail.id)
-    dispatch({type: ACTION_RESET_DOWNLOAD_STATE})
+    if (await deleteDownloadCourse(courseDetail.id)) {
+      dispatch({type: ACTION_RESET_DOWNLOAD_STATE})
+      downloadContext.setShouldUpdateDownloadList(true)
+    }
   }
   const onDownloadButtonPressed = async () => {
     switch (state.downloadState) {
